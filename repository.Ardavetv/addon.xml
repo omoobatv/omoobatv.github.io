@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.Ardavetv" name="Ardave TV" version="1.0.2" provider-name="omoba">
+<addon id="repository.Ardavetv" name="Ardave TV" version="1.0.3" provider-name="omoba">
     <extension point="xbmc.addon.repository" name="Ardave TV">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/omoobatv/repository.Ardavetv/master/zips/addons.xml</info>
@@ -16,6 +16,11 @@
             <checksum>https://raw.githubusercontent.com/cy4root2/plugins/master/addon.xml.md5</checksum>
             <datadir zip="true">https://raw.githubusercontent.com/cy4root2/plugins/master</datadir>
 		   </dir>
+       <dir>
+           <info compressed="false">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml</info>
+           <checksum>https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml.md5</checksum>
+           <datadir zip="true">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zip</datadir>
+       </dir>
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary>Ardave TV</summary>
