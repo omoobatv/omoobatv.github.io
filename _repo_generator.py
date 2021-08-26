@@ -217,3 +217,4 @@ class Generator:
 if __name__ == "__main__":
     for release in [r for r in KODI_VERSIONS if os.path.exists(r)]:
         Generator(release)
+        
