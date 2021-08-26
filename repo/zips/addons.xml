@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addons>
+<addon id="repository.Ardavetv" name="Ardave TV" version="2.0.7" provider-name="omoobatv">
+    <extension point="xbmc.addon.repository" name="Ardave TV">
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/repo/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/repo/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/repo/zips/</datadir>
+        </dir>
+        <dir>
+	          <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+	          <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+	          <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+        </dir>
+        <dir>
+			      <info compressed="false">https://raw.githubusercontent.com/cy4root2/plugins/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/cy4root2/plugins/master/addon.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/cy4root2/plugins/master</datadir>
+		   </dir>
+       <dir>
+           <info compressed="false">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml</info>
+           <checksum>https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml.md5</checksum>
+           <datadir zip="true">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zip</datadir>
+       </dir>
+       <dir>
+			    <info compressed="false">http://narcacist.com/_repo/addons.xml</info>
+			    <checksum>http://narcacist.com/_repo/addons.xml.md5</checksum>
+			    <datadir zip="true">http://narcacist.com/_repo/</datadir>
+		   </dir>
+      <dir>
+          <info compressed="false">https://diamondbuild.xyz/repository/diamond/diamond_build_repo/zips/addons.xml</info>
+          <checksum>https://diamondbuild.xyz/repository/diamond/diamond_build_repo/zips/addons.xml.md5</checksum>
+          <datadir zip="true">https://diamondbuild.xyz/repository/diamond/diamond_build_repo/zips/</datadir>
+      </dir>
+      <dir>
+         <info compressed="false">https://github.com/host505/repository.host505/raw/master/addons.xml</info>
+         <checksum>https://github.com/host505/repository.host505/raw/master/addons.xml.md5</checksum>
+         <datadir zip="true">https://raw.githubusercontent.com/host505/repository.host505/master/</datadir>
+    </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Ardave TV</summary>
+        <description>Anything Kodi</description>
+        <disclaimer></disclaimer>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
+
+<addon id="plugin.video.itv" name="ITV" version="3.0.0" provider-name="LittleWiz, Cowebtech">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+    <import addon="script.module.httplib2"/>
+    <import addon="script.module.beautifulsoup4" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension library="service.py" point="xbmc.service"  start="startup"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary>TV from ITV Hub</summary>
+    <description>This add-on enables the playing of Live and Catchup TV from ITV Hub (UK only)</description>
+    <news>Upgrade Python version to 3.0.0</news>
+    <disclaimer lang="en">This add-on is a front end to the ITV Hub website. It is not an official ITV product. A UK TV Licence is required to watch the live, catch-up, or on-demand TV content.</disclaimer>
+    <assets>
+      <icon>icon.png</icon>
+  </assets>
+  </extension>
+</addon>
+
+<addon id="plugin.video.naijaMovies" name="Nigerian Movies" version="3.0.0" provider-name="Abbey">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true"/>
+		<import addon="script.module.websocket" version="0.50.0"  optional="true"/>
+		<import addon="script.module.youtube.dl" optional="true"/>
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true"/>
+		<import addon="script.module.cloudscraper" optional="true"/>
+		<import addon="script.module.inputstreamhelper" optional="true"/>
+		<import addon="script.module.slproxy" optional="true"/>
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>Free Latest Nigerian Movies</summary>
+		<description>Watch Latest Nigerian Movies Both Yoruba and English. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon>
+
+<addon id="plugin.video.keepFit" name="Fitness Workout" version="3.0.0" provider-name="Abbey">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true"/>
+		<import addon="script.module.websocket" version="0.50.0"  optional="true"/>
+		<import addon="script.module.youtube.dl" optional="true"/>
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true"/>
+		<import addon="script.module.urlresolver" optional="true"/>
+		<import addon="script.module.cloudscraper" optional="true"/>
+		<import addon="script.module.inputstreamhelper" optional="true"/>
+		<import addon="script.module.slproxy" optional="true"/>
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>Free Fitness Workout</summary>
+		<description>Watch free fitness workout for both Men and Women. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon>
+
+<addon id="plugin.video.Alquran" name="Useful Duas" version="3.0.1" provider-name="Abbey">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true"/>
+		<import addon="script.module.websocket" version="0.50.0"  optional="true"/>
+		<import addon="script.module.youtube.dl" optional="true"/>
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true"/>
+		<import addon="script.module.cloudscraper" optional="true"/>
+		<import addon="script.module.inputstreamhelper" optional="true"/>
+		<import addon="script.module.slproxy" optional="true"/>
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>Listen to useful Quran Duas</summary>
+		<description>Listen to powerful Duas online, from protection to success, etc. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon>
+
+<addon id="plugin.video.naijaChurches" name="Naija Churches" version="3.0.0" provider-name="Abbey">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true"/>
+		<import addon="script.module.websocket" version="0.50.0"  optional="true"/>
+		<import addon="script.module.youtube.dl" optional="true"/>
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true"/>
+		<import addon="script.module.urlresolver" optional="true"/>
+		<import addon="script.module.cloudscraper" optional="true"/>
+		<import addon="script.module.inputstreamhelper" optional="true"/>
+		<import addon="script.module.slproxy" optional="true"/>
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>Free Fitness Workout</summary>
+		<description>Watch nigerian churches live. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon>
+</addons>
