@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="repository.Ardavetv" name="Ardave TV" version="2.0.2" provider-name="omoobatv">
+<addon id="repository.Ardavetv" name="Ardave TV" version="2.0.3" provider-name="omoobatv">
     <extension point="xbmc.addon.repository" name="omoobatv">
         <dir minversion="18.0.0" maxversion="18.9.9">
             <info compressed="false">https://raw.githubusercontent.com/omoobatv/repository.Ardavetv/master/leia/zips/addons.xml</info>
