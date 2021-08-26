@@ -1,3 +1,209 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
+<addon id="repository.Ardavetv" name="Ardave TV" version="3.0.1" provider-name="omoobatv">
+  <requires>
+		<import addon="xbmc.addon" version="12.0.0"/>
+	</requires>
+    <extension point="xbmc.addon.repository" name="Ardave TV">
+        <dir minversion="18.0.0" maxversion="18.9.9">
+            <info compressed="false">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/leia/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/leia/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/leia/zips/</datadir>
+        </dir>
+        <dir minversion="19.0.0">
+            <info compressed="false">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/matrix/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/matrix/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/matrix/zips/</datadir>
+        </dir>
+        <dir>
+	          <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+	          <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+	          <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+        </dir>
+        <dir>
+			      <info compressed="false">https://raw.githubusercontent.com/cy4root2/plugins/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/cy4root2/plugins/master/addon.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/cy4root2/plugins/master</datadir>
+		   </dir>
+       <dir>
+           <info compressed="false">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml</info>
+           <checksum>https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml.md5</checksum>
+           <datadir zip="true">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zip</datadir>
+       </dir>
+       <dir>
+			    <info compressed="false">http://narcacist.com/_repo/addons.xml</info>
+			    <checksum>http://narcacist.com/_repo/addons.xml.md5</checksum>
+			    <datadir zip="true">http://narcacist.com/_repo/</datadir>
+		   </dir>
+      <dir>
+          <info compressed="false">https://diamondbuild.xyz/repository/diamond/diamond_build_repo/zips/addons.xml</info>
+          <checksum>https://diamondbuild.xyz/repository/diamond/diamond_build_repo/zips/addons.xml.md5</checksum>
+          <datadir zip="true">https://diamondbuild.xyz/repository/diamond/diamond_build_repo/zips/</datadir>
+      </dir>
+      <dir>
+         <info compressed="false">https://github.com/host505/repository.host505/raw/master/addons.xml</info>
+         <checksum>https://github.com/host505/repository.host505/raw/master/addons.xml.md5</checksum>
+         <datadir zip="true">https://raw.githubusercontent.com/host505/repository.host505/master/</datadir>
+    </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Ardave TV</summary>
+        <description>Anything Kodi</description>
+        <disclaimer></disclaimer>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
+
+<addon id="plugin.video.itv" name="ITV" version="3.0.2" provider-name="LittleWiz, Cowebtech">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.httplib2"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.six" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension library="service.py" point="xbmc.service"  start="startup"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary>TV from ITV Hub</summary>
+    <description>This add-on enables the playing of Catchup TV from ITV Hub (UK only)</description>
+    <disclaimer lang="en">This add-on is a front end to the ITV Hub website. It is not an official ITV product. A UK TV Licence is required to watch the live, catch-up, or on-demand TV content.</disclaimer>
+    <assets>
+      <icon>icon.png</icon>
+  </assets>
+  </extension>
+</addon>
+
+<addon id="plugin.video.naijaMovies"
+       name="Nigerian Movies"
+       version="1.0.4"
+       provider-name="Prince Abiola Ogundipe">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="3.0.0"/>
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+  <provides>video</provides>
+<provides>audio</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Free Latest Nigerian Movies</summary>
+    <description lang="en">Watch Latest Nigerian Movies Both Yoruba and English. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the globe</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.Theradios"
+       name="Online Radios"
+       version="1.0.2"
+       provider-name="Prince Abiola Ogundipe">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="3.0.0"/>
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Online based radio stations</summary>
+    <description lang="en">All the contents of this Addon are legal, I do not host any file. they are from legit radio stations from around the globe</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.Naijahits"
+       name="Latest Naija Hits"
+       version="1.0"
+       provider-name="Prince Abiola Ogundipe">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="3.0.0"/>
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+  <provides>video</provides>
+<provides>audio</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Listen to Latest Naija Hits</summary>
+    <description lang="en">Listen to latest Nigeria hit songs. the contents of this Addon are legal, I do not host any file. they are from legit sources from around the globe</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.Alquran"
+       name="Useful Duas"
+       version="1.0.2"
+       provider-name="Prince Abiola Ogundipe">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="3.0.0"/>
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+  <provides>video</provides>
+<provides>audio</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Listen to useful Quran Duas</summary>
+    <description lang="en">Listen to powerful Duas online, from protection to success,  etc. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the globe</description>
+    <platform>all</platform>
+  </extension>
+</addon>
 </addons>
