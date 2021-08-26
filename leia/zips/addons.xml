@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addons>
+<addon id="repository.Ardavetv" name="Ardave TV" version="2.0.1" provider-name="omoobatv">
+    <extension point="xbmc.addon.repository" name="omoobatv">
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/omoobatv/repository.Ardavetv/master/repo/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/omoobatv/repository.Ardavetv/master/repo/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/omoobatv/repository.Ardavetv/master/repo/zips/</datadir>
+        </dir>
+        <dir minversion="18.0.0" maxversion="18.9.9">
+            <info compressed="false">https://raw.githubusercontent.com/omoobatv/repository.Ardavetv/master/leia/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/omoobatv/repository.Ardavetv/master/leia/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/omoobatv/repository.Ardavetv/master/leia/zips/</datadir>
+        </dir>
+
+        <dir minversion="19.0.0">
+            <info compressed="false">https://raw.githubusercontent.com/omoobatv/repository.Ardavetv/master/matrix/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/omoobatv/repository.Ardavetv/master/matrix/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/omoobatv/repository.Ardavetv/master/matrix/zips/</datadir>
+        </dir>
+
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Ardave TV</summary>
+        <description>Anything Kodi</description>
+        <disclaimer></disclaimer>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
+
+<addon id="plugin.video.naijaMovies"
+       name="Nigerian Movies"
+       version="1.0.6"
+       provider-name="Prince Abiola Ogundipe">
+  <requires>
+  <import addon="xbmc.python" version="2.20.0"/>
+	<import addon="script.module.t0mm0.common"/>
+    <import addon="script.module.beautifulsoup"/>
+    <import addon="script.module.simple.downloader"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="6.1.4"/>
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+    <import addon="script.common.plugin.cache"/>
+    <import addon="script.module.metahandler"/>
+
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+  <provides>video</provides>
+ <provides>audio</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Free Latest Nigerian Movies</summary>
+    <description lang="en">Watch Latest Nigerian Movies Both Yoruba and English. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the globe</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.Theradios"
+       name="Online Radios"
+       version="1.0.4"
+       provider-name="Prince Abiola Ogundipe">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="3.0.0"/>
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Online based radio stations</summary>
+    <description lang="en">All the contents of this Addon are legal, I do not host any file. they are from legit radio stations from around the globe</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.keepFit" name="Fitness Workout" version="1.1" provider-name="Prince Abiola Ogundipe">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="3.0.0"/>
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+  <provides>video</provides>
+<provides>audio</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Free Fitness Workout</summary>
+    <description lang="en">Watch free fitness workout for both Men and Women. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the globe</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.Alquran"
+       name="Useful Duas"
+       version="1.0.2"
+       provider-name="Prince Abiola Ogundipe">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.t0mm0.common" version="2.0.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" version="3.0.0"/>
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+  <provides>video</provides>
+<provides>audio</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Listen to useful Quran Duas</summary>
+    <description lang="en">Listen to powerful Duas online, from protection to success,  etc. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the globe</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.program.omobatvwizard" name="[COLOR limegreen][B]OmobaTV[/COLOR] Wizard[/B]" version="1.1" provider-name="OmobaTV">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0" />
+        <import addon="script.module.requests" />
+        <import addon="script.module.six" />
+    </requires>
+
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>executable</provides>
+    </extension>
+
+    <extension point="xbmc.service" library="startup.py" start="startup" />
+
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">[B][COLOR limegreen]OmobaTV[/COLOR] Wizard</summary>
+        <description lang="en">[COLOR limegreen]OmobaTV[/COLOR] Wizard offers many maintenance features and automated build installs from OmobaTV.</description>
+        <platform>all</platform>
+        <reuselanguageinvoker>false</reuselanguageinvoker>
+        <source>https://</source>
+        <news>
+         1.0.0
+         - Initial Commit
+        </news>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon>
+
+<addon id="plugin.video.naijaChurches" name="Naija Churches" version="3.0.0" provider-name="Abbey">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true"/>
+		<import addon="script.module.websocket" version="0.50.0"  optional="true"/>
+		<import addon="script.module.youtube.dl" optional="true"/>
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true"/>
+		<import addon="script.module.urlresolver" optional="true"/>
+		<import addon="script.module.cloudscraper" optional="true"/>
+		<import addon="script.module.inputstreamhelper" optional="true"/>
+		<import addon="script.module.slproxy" optional="true"/>
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>Free Fitness Workout</summary>
+		<description>Watch nigerian churches live. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon>
+</addons>

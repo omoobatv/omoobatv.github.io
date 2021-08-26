@@ -1,0 +1,20 @@
+V1.0
+Initial Release
+
+V1.0.1
+New Link Added
+
+V1.0.2
+Inbuilt Icon Images
+
+V1.0.3
+Inbuilt Favourite Images
+
+V1.0.4
+Inbuilt more icons
+
+V1.0.5
+Code clean up
+
+V1.0.6
+New icon

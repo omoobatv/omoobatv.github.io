@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<item>
+<title>Favourites</title>
+<link>http://ignoreme</link>
+<thumbnail>special://home/addons/plugin.video.naijaMovies/img/favorites.png</thumbnail>
+</item>
+
+<item>
+<title>Yoruba Movies</title>
+<link>http://ignoreme</link>
+<externallink>https://raw.githubusercontent.com/omoobatv/omobatv/master/submenu/naijamovies/naijamovies_yoruba</externallink>
+<thumbnail>special://home/addons/plugin.video.naijaMovies/img/Yorumovies.png</thumbnail>
+<info></info>
+</item>
+
+<item>
+<title>English Movies</title>
+<link>http://ignoreme</link>
+<externallink>https://raw.githubusercontent.com/omoobatv/omobatv/master/submenu/naijamovies/naijamovies_english</externallink>
+<thumbnail>special://home/addons/plugin.video.naijaMovies/img/englishmovies.png</thumbnail>
+<info></info>
+</item>
+
+<item>
+<title>Latest Events</title>
+<link>http://ignoreme</link>
+<externallink>https://raw.githubusercontent.com/omoobatv/omobatv/master/submenu/naijamovies/latest_events</externallink>
+<thumbnail>special://home/addons/plugin.video.naijaMovies/img/goldmynetv.jpg</thumbnail>
+<info></info>
+</item>
+
+</items>
