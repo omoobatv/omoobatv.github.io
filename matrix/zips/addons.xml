@@ -349,7 +349,7 @@ version 0.2.0
 	</extension>
 </addon>
 
-<addon id="plugin.program.omobatvwizard19" name="[COLOR limegreen]OmobaTV[/COLOR] Wizard" version="2.0.0" provider-name="OmobaTV">
+<addon id="plugin.program.omobatvwizard19" name="[COLOR limegreen]OmobaTV[/COLOR] Wizard" version="2.0.1" provider-name="OmobaTV">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="script.module.requests" />
@@ -371,12 +371,13 @@ version 0.2.0
         <reuselanguageinvoker>false</reuselanguageinvoker>
         <source>https://www.github.com/</source>
         <news>
-         2.0.0
+         2.0.1
+         - Fanart Updated
          - Initial Commit
         </news>
         <assets>
             <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
+            <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
 </addon>
@@ -398,6 +399,35 @@ version 0.2.0
 			<icon>icon.png</icon>
 		</assets>
 </extension>
+</addon>
+
+<addon id="plugin.video.Theradios" name="Online Radios" version="3.0.0" provider-name="Abbey">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true"/>
+		<import addon="script.module.websocket" version="0.50.0"  optional="true"/>
+		<import addon="script.module.youtube.dl" optional="true"/>
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true"/>
+		<import addon="script.module.cloudscraper" optional="true"/>
+		<import addon="script.module.inputstreamhelper" optional="true"/>
+		<import addon="script.module.slproxy" optional="true"/>
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>Online based radio stations</summary>
+		<description>All the contents of this Addon are legal, I do not host any file. they are from legit radio stations from around the globe</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
 </addon>
 
 <addon id="plugin.video.keepFit" name="Fitness Workout" version="3.0.0" provider-name="Abbey">
