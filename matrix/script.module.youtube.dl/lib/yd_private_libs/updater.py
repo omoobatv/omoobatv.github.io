@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
+import xbmcvfs
 from . import util
 
 LATEST_URL = 'https://yt-dl.org/latest/youtube-dl.tar.gz'
@@ -14,6 +15,7 @@ def set_youtube_dl_importPath():
     youtube_dl_path = os.path.join(util.PROFILE_PATH, 'youtube-dl')
     if not os.path.exists(youtube_dl_path):
         return
+    sys.path.insert(0, youtube_dl_path)
 
 
 def saveVersion(version):
@@ -24,12 +26,7 @@ def saveVersion(version):
 def updateCore(force=False):
     if not force:
         return
-    from kodi_six import xbmc
-    from kodi_six import xbmcvfs
-    try:
-        from xbmcvfs import translatePath as xbmcTranslatePath
-    except ImportError:
-        from xbmc import translatePath as xbmcTranslatePath
+    import xbmc
     import os
     if PY3:
         from urllib.request import urlretrieve
@@ -52,7 +49,7 @@ def updateCore(force=False):
 
     util.LOG('Updating youtube_dl core to new version: {0}'.format(newVersion))
 
-    profile = xbmcTranslatePath(util.ADDON.getAddonInfo('profile')).decode('utf-8')
+    profile = xbmcvfs.translatePath(util.ADDON.getAddonInfo('profile')).decode('utf-8')
     archivePath = os.path.join(profile, 'youtube_dl.tar.gz')
     extractedPath = os.path.join(profile, 'youtube-dl')
 

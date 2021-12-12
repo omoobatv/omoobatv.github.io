@@ -71,7 +71,7 @@ class JsonRAFifoQueue(object):
             json.dump(queue, f)
 
     def nextID(self, string):
-        ID = hashlib.md5(string).hexdigest() + str(time.time())
+        ID = hashlib.md5(string.encode('utf-8')).hexdigest() + str(time.time())
         return ID
 
     @_locking

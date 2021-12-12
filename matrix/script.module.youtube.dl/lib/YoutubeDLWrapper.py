@@ -59,7 +59,10 @@ except TypeError:
         class datetime(orig):
             @classmethod
             def strptime(cls, dstring, dformat):
-                return datetime(*(time.strptime(dstring, dformat)[0:6]))
+                try:
+                    return datetime.datetime(*(time.strptime(dstring, dformat)[0:6]))
+                except AttributeError:
+                    return datetime(*(time.strptime(dstring, dformat)[0:6]))
 
             def __repr__(self):
                 return 'datetime.' + orig.__repr__(self)
@@ -338,6 +341,10 @@ def _getYTDL():
 def download(info):
     from youtube_dl import downloader
     ytdl = _getYTDL()
+    name = ytdl.prepare_filename(info)
     if 'http_headers' not in info:
         info['http_headers'] = std_headers
-    return ytdl.process_info(info)
+    fd = downloader.get_suitable_downloader(info)(ytdl, ytdl.params)
+    for ph in ytdl._progress_hooks:
+        fd.add_progress_hook(ph)
+    return fd.download(name, info)

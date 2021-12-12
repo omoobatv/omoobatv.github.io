@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 import xbmc
 import xbmcvfs
-try:
-    from xbmcvfs import translatePath as xbmcTranslatePath
-except ImportError:
-    from xbmc import translatePath as xbmcTranslatePath
 import os
 import binascii
 import json
@@ -29,12 +25,11 @@ def safeDecode(enc_text):
 
 class ServiceControl(object):
     def download(self, info, path, duration):
-        addonPath = xbmcTranslatePath(util.ADDON.getAddonInfo('path')).decode('utf-8')
+        addonPath = xbmcvfs.translatePath(util.ADDON.getAddonInfo('path'))
         service = os.path.join(addonPath, 'service.py')
-        data = {'data': info, 'path': path, 'filename': filename, 'duration': duration}
-
+        data = {'data': info, 'path': path, 'duration': duration}
         dataJSON = json.dumps(data)
-        jsonqueue.XBMCJsonRAFifoQueue(util.QUEUE_FILE).push(binascii.hexlify(dataJSON))
+        jsonqueue.XBMCJsonRAFifoQueue(util.QUEUE_FILE).push(dataJSON)
         xbmc.executebuiltin('RunScript({0})'.format(service))
 
     def stopDownload(self):

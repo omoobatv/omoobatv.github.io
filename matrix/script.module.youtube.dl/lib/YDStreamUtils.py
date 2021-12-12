@@ -22,12 +22,7 @@ def showMessage(heading, line1, line2=None, line3=None, bg=False):
         icon = util.ADDON.getAddonInfo('icon')
         xbmcgui.Dialog().notification(heading, line1, icon=icon)
     else:
-        msg = line1
-        if line2:
-            msg = msg + ' ' + line2
-        if line3:
-            msg = msg + ' ' + line3
-        xbmcgui.Dialog().ok(heading, msg)
+        xbmcgui.Dialog().ok(heading, line1, line2, line3)
 
 
 class xbmcDialogProgressBase:
@@ -63,7 +58,7 @@ class xbmcDialogProgressBase:
         return self.start + int((pct / 100.0) * self.range)
 
     def create(self, heading, line1='', line2='', line3=''):
-        self.dialog.create(heading, ' '.join([line1, line2, line3]))
+        self.dialog.create(heading, line1, line2, line3)
 
     def update(self, pct, line1='', line2='', line3=''):
         if self._iscanceled():
@@ -105,7 +100,7 @@ class xbmcDialogProgress(xbmcDialogProgressBase):
         self.dialog = xbmcgui.DialogProgress()
 
     def _update(self, pct, line1, line2, line3):
-        self.dialog.update(pct, ' '.join([line1, line2, line3]))
+        self.dialog.update(pct, line1, line2, line3)
 
 
 class xbmcDialogProgressBG(xbmcDialogProgressBase):
@@ -201,9 +196,10 @@ def moveFile(file_path, dest_path, filename=None):
     destFilePath = os.path.join(dest_path, fname)
     if xbmcvfs.copy(file_path, destFilePath):
         xbmcvfs.delete(file_path)
-        return destFilePath
+        return True
 
-    return ''
+    return False
+
 
 def getDownloadPath(use_default=None):
     if use_default is None:
@@ -211,7 +207,7 @@ def getDownloadPath(use_default=None):
     path = util.getSetting('last_download_path', '')
     if path:
         if not use_default:
-            new = xbmcgui.Dialog().yesno(T(32005), T(32006) + ' ' + path + '. ' + T(32007), nolabel=T(32008), yeslabel=T(32009))
+            new = xbmcgui.Dialog().yesno(T(32005), T(32006), path, T(32007), T(32008), T(32009))
             if new:
                 path = ''
     if not path:
