@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.Ardavetv" name="Ardave TV" version="3.0.1" provider-name="omoobatv">
+<addon id="repository.Ardavetv" name="Ardave TV" version="3.0.3" provider-name="omoobatv">
   <requires>
 		<import addon="xbmc.addon" version="12.0.0"/>
 	</requires>
@@ -25,25 +25,10 @@
             <datadir zip="true">https://raw.githubusercontent.com/cy4root2/plugins/master</datadir>
 		   </dir>
        <dir>
-           <info compressed="false">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml</info>
-           <checksum>https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml.md5</checksum>
-           <datadir zip="true">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zip</datadir>
-       </dir>
-       <dir>
 			    <info compressed="false">http://narcacist.com/_repo/addons.xml</info>
 			    <checksum>http://narcacist.com/_repo/addons.xml.md5</checksum>
 			    <datadir zip="true">http://narcacist.com/_repo/</datadir>
 		   </dir>
-      <dir>
-          <info compressed="false">https://diamondbuild.xyz/repository/diamond/diamond_build_repo/zips/addons.xml</info>
-          <checksum>https://diamondbuild.xyz/repository/diamond/diamond_build_repo/zips/addons.xml.md5</checksum>
-          <datadir zip="true">https://diamondbuild.xyz/repository/diamond/diamond_build_repo/zips/</datadir>
-      </dir>
-      <dir>
-         <info compressed="false">https://github.com/host505/repository.host505/raw/master/addons.xml</info>
-         <checksum>https://github.com/host505/repository.host505/raw/master/addons.xml.md5</checksum>
-         <datadir zip="true">https://raw.githubusercontent.com/host505/repository.host505/master/</datadir>
-    </dir>
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary>Ardave TV</summary>

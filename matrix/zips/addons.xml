@@ -1,53 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <addons>
-<addon id="plugin.video.live.streamspro" name="LiveStreamsPro" version="3.0.0~alpha4" provider-name="gujal">
-	<requires>
-		<import addon="script.module.six" />
-		<import addon="script.module.kodi-six" />
-		<import addon="script.module.requests" optional="true"/>
-		<import addon="script.module.websocket" version="0.50.0"  optional="true"/>
-		<import addon="script.module.youtube.dl" optional="true"/>
-		<import addon="plugin.video.youtube" optional="true" />
-		<import addon="script.module.dateutil" optional="true" />
-		<import addon="script.module.resolveurl" optional="true"/>
-		<import addon="script.module.urlresolver" optional="true"/>
-		<import addon="script.module.cloudscraper" optional="true"/>
-		<import addon="script.module.inputstreamhelper" optional="true"/>
-		<import addon="script.module.slproxy" optional="true"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="default.py">
-		<provides>video</provides>
-	</extension>
-
-	<extension point="xbmc.addon.metadata">
-		<summary>livestreamspro- shamelessly forked from livestreams but added many things</summary>
-		<description>
-In addition to what livestreams allowed you to do, you can now,
-1. call regex in regex,
-2. multiple regex in page, regex in session, also htmlunescape responses
-3. create session from one regex and pass onto next in line
-4. save sessions to a file and open again later
-5. write python code in .py file, put in the profile directory and then call from your regex.
-6. use epoctime, guid and unpack as functions already defined.
-7. Use it to post values to the pages to get the proper responses
-8. support many headers, like origin, X-Requested-With
-9. you can now append cookies in response and then read in regex using includeheaders
-10. You can now link to another web url via your xml using externallink
-11. support for google captcha, now you can show and then post the text
-		</description>
-		<platform>all</platform>
-		<assets>
-			<icon>icon.png</icon>
-			<fanart>fanart.jpg</fanart>
-		</assets>
-	</extension>
+<addon id="plugin.audio.soundcloud" name="SoundCloud" version="4.0.0" provider-name="jaylinski">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.requests" version="2.22.0" />
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="addon.py">
+        <provides>audio</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="de_DE">SoundCloud – Musik- und Podcast-Streaming-Plattform</summary>
+        <summary lang="en_GB">SoundCloud – Music and podcast streaming platform</summary>
+        <description lang="de_DE">SoundCloud ist eine Musik- und Podcast-Streaming-Plattform, mit der Du Millionen von Songs aus der ganzen Welt anhören kannst.</description>
+		<description lang="en_GB">SoundCloud is a music and podcast streaming platform that lets you listen to millions of songs from around the world.</description>
+        <disclaimer lang="en_GB">This plugin is not official, approved or endorsed by SoundCloud.</disclaimer>
+        <platform>all</platform>
+        <license>MIT</license>
+        <forum>https://forum.kodi.tv/showthread.php?tid=206635</forum>
+        <website>https://soundcloud.com</website>
+        <source>https://github.com/jaylinski/kodi-addon-soundcloud</source>
+        <news>4.0.0 (2020-12-12)
+Added support for Kodi v19 (Matrix)
+        </news>
+        <assets>
+            <icon>resources/icon.png</icon>
+            <fanart>resources/fanart.jpg</fanart>
+        </assets>
+    </extension>
 </addon>
 
 <addon id="plugin.program.autocompletion" name="AutoCompletion for virtual keyboard" version="2.0.1" provider-name="Philipp Temminghoff (phil65), xulek, domb84">
     <requires>
-        <import addon="script.module.autocompletion" version="1.0.0"/>
+        <import addon="script.module.autocompletion" version="1.0.0" />
     </requires>
-    <extension point="xbmc.python.pluginsource" library="plugin.py"/>
+    <extension point="xbmc.python.pluginsource" library="plugin.py" />
     <extension point="xbmc.python.script" library="default.py">
         <provides>executable</provides>
     </extension>
@@ -59,332 +45,12 @@ In addition to what livestreams allowed you to do, you can now,
         <source>https://github.com/phil65/plugin.program.autocompletion</source>
         <assets>
             <icon>resources/icon.png</icon>
-            <!--            <fanart>resources/fanart.jpg</fanart>-->
-            <!--            <screenshot>resources/screenshot-01.jpg</screenshot>-->
-            <!--            <screenshot>resources/screenshot-02.jpg</screenshot>-->
-            <!--            <screenshot>resources/screenshot-03.jpg</screenshot>-->
+            
+            
+            
+            
         </assets>
     </extension>
-</addon>
-
-<addon id="plugin.video.youtube" name="YouTube" version="6.8.18~alpha6+matrix.1" provider-name="anxdpanic, bromix">
-  <requires>
-    <import addon="xbmc.python" version="3.0.0"/>
-    <import addon="script.module.six" version="1.11.0"/>
-    <import addon="script.module.requests" version="2.12.4"/>
-    <import addon="script.module.inputstreamhelper" version="0.2.2" optional="true"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="resources/lib/default.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.service" library="resources/lib/startup.py"/>
-  <extension point="xbmc.python.module" library="resources/lib/"/>
-  <extension point="xbmc.addon.metadata">
-    <news>
-[fix] Fix to_str |contrib: RNavega|
-[fix] Fix playback buffering |contrib: RNavega|
-[lang] translation updates from Weblate
-        </news>
-    <assets>
-      <icon>icon.png</icon>
-      <fanart>fanart.jpg</fanart>
-    </assets>
-    <platform>all</platform>
-    <license>GPL-2.0-only</license>
-    <forum>https://ytaddon.panicked.xyz/forum</forum>
-    <website>https://www.youtube.com</website>
-    <source>https://github.com/anxdpanic/plugin.video.youtube</source>
-    <reuselanguageinvoker>true</reuselanguageinvoker>
-    <summary lang="bg_BG">Добавка за YouTube</summary>
-    <summary lang="cs_CZ">Plugin pro YouTube</summary>
-    <summary lang="de_DE">Plugin für YouTube</summary>
-    <summary lang="el_GR">Πρόσθετο YouTube</summary>
-    <summary lang="en_GB">Plugin for YouTube</summary>
-    <summary lang="es_ES">Plugin para YouTube</summary>
-    <summary lang="es_MX">Plugin para YouTube</summary>
-    <summary lang="fr_FR">Plugin pour YouTube</summary>
-    <summary lang="he_IL">תוסף עבור YouTube</summary>
-    <summary lang="hu_HU">YouTube kiegészítő</summary>
-    <summary lang="it_IT">Plugin per YouTube</summary>
-    <summary lang="ko_KR">유튜브 플러그인</summary>
-    <summary lang="nb_NO">Tillegg for YouTube</summary>
-    <summary lang="pl_PL">Wtyczka YouTube</summary>
-    <summary lang="ru_RU">Видеодополнение YouTube</summary>
-    <summary lang="tr_TR">YouTube için eklenti</summary>
-    <summary lang="vi_VN">Plugin dành cho YouTube</summary>
-    <summary lang="zh_CN">YouTube附加元件</summary>
-    <summary lang="zh_TW">YouTube附加元件</summary>
-    <description lang="bg_BG">YouTube е един от най-големите уеб сайтове за споделяне на видео в целия свят.</description>
-    <description lang="cs_CZ">YouTube je jedna z největších webových stránek světa sdílející video.</description>
-    <description lang="de_DE">YouTube ist eines der größten Video-Sharing-Websites der Welt.</description>
-    <description lang="el_GR">Το YouTube είναι μία από τις μεγαλύτερες ιστοσελίδες διαμοιρασμού βίντεο στον κόσμο.</description>
-    <description lang="en_GB">YouTube is one of the biggest video-sharing websites of the world.</description>
-    <description lang="es_ES">YouTube es uno de los sitios web más grande del mundo para compartir vídeos.</description>
-    <description lang="es_MX">YouTube es uno de los más grandes sitios web de intercambio de videos del mundo.</description>
-    <description lang="fr_FR">YouTube est l'un des plus grands sites de partage vidéos du monde.</description>
-    <description lang="he_IL">YouTube הוא אחד מאתרי שיתוף הווידאו הגדולים בעולם.</description>
-    <description lang="hu_HU">A YouTube világ egyik legnagyobb videómegosztó weboldala.</description>
-    <description lang="it_IT">YouTube è uno dei più grandi siti web di condivisione video del mondo.</description>
-    <description lang="ko_KR">유튜브는 세상에서 가장 큰 동영상 공유 사이트 중의 하나입니다.</description>
-    <description lang="nb_NO">YouTube er en av verdens største nettsider for videodeling.</description>
-    <description lang="pl_PL">YouTube jest jednym z największych na świecie serwisów udostępniania wideo.</description>
-    <description lang="ru_RU">YouTube - популярнейший видеохостинговый сайт, предоставляющий пользователям услуги хранения, доставки и показа видео.</description>
-    <description lang="tr_TR">YouTube, dünya üzerindeki en büyük video paylaşma platformlarından birisidir.</description>
-    <description lang="vi_VN">YouTube là một trong những trang web chia sẻ video lớn nhất trên thế giới.</description>
-    <description lang="zh_CN">「Youtube」是全世界最大的影片分享網站</description>
-    <description lang="zh_TW">「Youtube」是全世界最大的影片分享網站</description>
-    <disclaimer lang="cs_CZ">Tento plugin není schválen společností Google</disclaimer>
-    <disclaimer lang="de_DE">Dieses Plugin ist nicht von Google befürwortet</disclaimer>
-    <disclaimer lang="el_GR">Η παρούσα μικροεφαρμογή δεν έχει υϊοθετηθεί από την Google</disclaimer>
-    <disclaimer lang="en_GB">This plugin is not endorsed by Google</disclaimer>
-    <disclaimer lang="es_ES">Este add-on no está respaldado por Google</disclaimer>
-    <disclaimer lang="es_MX">Este add-on no está respaldado por Google</disclaimer>
-    <disclaimer lang="it_IT">Questo plugin non è promosso da Google</disclaimer>
-    <disclaimer lang="ko_KR">이 플러그인은 Google의 허가를 받지 않았습니다</disclaimer>
-    <disclaimer lang="pl_PL">Ta wtyczka nie jest zatwierdzona przez Google</disclaimer>
-    <disclaimer lang="ru_RU">Плагин не поддерживается Google</disclaimer>
-    <disclaimer lang="tr_TR">Bu eklenti Google tarafından üretilmemiştir</disclaimer>
-    <disclaimer lang="vi_VN">Plugin này không được xác nhận bởi Google</disclaimer>
-    <disclaimer lang="zh_TW">此附加元件未由Google支持</disclaimer>
-  </extension>
-</addon>
-
-<addon id="plugin.video.venom" name="[COLOR red]Venom[/COLOR]" provider-name="Venom" version="6.5.6">
-	<requires>
-		<import addon="xbmc.python" version="3.0.0" />
-		<import addon="context.venom" />
-		<import addon="script.module.myaccounts" version="2.0.0" />
-		<import addon="script.module.fenomscrapers" version="2.0.2" />
-		<import addon="script.module.requests" />
-		<import addon="script.module.beautifulsoup4" />
-		<import addon="script.module.metahandler" optional="true" />
-		<import addon="plugin.video.youtube" optional="true" />
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="venom.py">
-		<provides>video</provides>
-	</extension>
-	<extension point="xbmc.service" library="service.py" start="startup" />
-	<extension point="xbmc.python.module" library="resources/lib/" />
-	<extension point="xbmc.addon.metadata">
-		<reuselanguageinvoker>true</reuselanguageinvoker>
-		<summary lang="en">[B][COLOR red]Venom[/COLOR][/B] - We do not host any of the contents streamed</summary>
-		<description lang="en">[B][COLOR red]Venom[/COLOR][/B][CR] This addon does not form part of the Kodi Media Centre. Please do not seek assistance with this addon from any of the Official Kodi Support Channels.[CR]The author does not host any of the content in this addon and takes no responsibility for content found</description>
-		<platform>all</platform>
-		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
-		<forum />
-		<website>https://github.com/123Venom/plugin.video.venom</website>
-		<source>https://github.com/123Venom/plugin.video.venom</source>
-		<disclaimer lang="en">The author of this addon does not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
-		<assets>
-			<icon>icon.png</icon>
-			<fanart>fanart.jpg</fanart>
-			<screenshot>resources/screenshots/screenshot001.jpg</screenshot>
-			<screenshot>resources/screenshots/screenshot002.jpg</screenshot>
-			<screenshot>resources/screenshots/screenshot003.jpg</screenshot>
-		</assets>
-		<news>
-[B][COLOR red]Update - v6.5.6 - April 09, 2022[/COLOR][/B]
-[COLOR yellow]--[/COLOR][I] Due to report of timeout error I've bumped the timeout value from 10 to 20 for fanarttv, tmdb, tvmaze, and trakt indexers.[/I]
-[COLOR yellow]--[/COLOR][I] Trakt scrobble reset has been moved to "[B]onAVStarted()[/B]" callback method due to a bug in the Kodi player "[B]onPlayBackEnded()[/B]" method being issued after the next playlist item already began playback.[/I]
-[COLOR yellow]--[/COLOR][I] Added the Source Select index number to the Resolve dialog. Now if a resolve failure occurs you'll know which item number the failure occurred on.[/I]
-[COLOR yellow]--[/COLOR][I] Added a new setting to the "[B]Trakt"[/B] category called [B]"Browse Progress - load all remaining episodes of series"[/B].  Please see the help file below the new setting for a detailed explanation on it's functionality.[/I]
-		</news>
-	</extension>
-</addon>
-
-<addon id="plugin.video.iptv.recorder" version="1.0" name="IPTV Recorder"
-  provider-name="primaeval, Chychy, Dob!, Publish3r">
-<requires>
-  <import addon="xbmc.python" version="3.0.0" />
-  <import addon="script.module.xbmcswift2" />
-  <import addon="script.module.requests" />
-  <import addon="script.module.chardet" />
-  <import addon="script.module.pytz" />
-  <import addon="script.module.kodi-six" />
-</requires>
-<extension point="xbmc.python.pluginsource" library="main.py">
-  <provides>video</provides>
-</extension>
-<extension point="xbmc.python.script" library="default.py">
-    <provides>executable</provides>
-</extension>
-<extension point="kodi.context.item">
-<menu id="kodi.core.main">
-  <item library="context.py">
-    <label>IPTV Recorder Timer</label>
-    <visible>Window.isActive(tvchannels)</visible>
-  </item>
-  <item library="contextEPG.py">
-    <label>Schedule IPTV Recorder</label>
-    <visible>Window.isActive(tvguide)</visible>
-  </item>
-</menu>
-</extension>
-<extension point="xbmc.service" library="server.py" start="login"/>
-<extension point="xbmc.addon.metadata">
-  <summary lang="en">Record from IPTV Simple Client or xmltv/m3u with ffmpeg.</summary>
-  <description lang="en">
-Set your recording path and ffmpeg location.
-On Android ffmpeg will be copied to /data/data to be runnable.
-Complex stream handling might need an extra script instead of ffmpeg.
-ffmpeg simply copies the stream into a transport stream container.
-</description>
-<disclaimer lang="en">Make sure recording streams is legal in your country.</disclaimer>
-<source>https://github.com/Dobi-Dev/plugin.video.iptv.recorder</source>
-<forum>https://forum.kodi.tv/showthread.php?tid=329991</forum>
-<language>en fr de</language>
-<news>
-version 0.2.0
-- Compatibility with Kodi Matrix.
-- Add some missing translations.
-- Improve "Sort Channels by" settings.
-- Add channel icon in the record list.
-- Improve encoding detection of the XML TV file.
-- Fix search input not supporting non ascii character.
-- Fix kodi crash on startup when user have rules to renew jobs.
-- Fix and improve "record and play" feature.
-- Reducing default startup time to 20 seconds.
-- Add error messag when trying to access database not created.
-- Exit the service smoothly and fastly if the user request Kodi to exit before the startup delay.
-</news>
-<assets>
-  <icon>icon.png</icon>
-  <screenshot>resources/screenshots/screenshot-00.jpg</screenshot>
-  <screenshot>resources/screenshots/screenshot-01.jpg</screenshot>
-  <screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
-</assets>
-</extension>
-</addon>
-
-<addon id="repository.Ardavetv" name="Ardave TV" version="3.0.2" provider-name="omoobatv">
-  <requires>
-		<import addon="xbmc.addon" version="12.0.0"/>
-	</requires>
-    <extension point="xbmc.addon.repository" name="Ardave TV">
-        <dir minversion="18.0.0" maxversion="18.9.9">
-            <info compressed="false">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/leia/zips/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/leia/zips/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/leia/zips/</datadir>
-        </dir>
-        <dir minversion="19.0.0">
-            <info compressed="false">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/matrix/zips/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/matrix/zips/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/matrix/zips/</datadir>
-        </dir>
-        <dir>
-	          <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
-	          <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
-	          <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
-        </dir>
-        <dir>
-			      <info compressed="false">https://raw.githubusercontent.com/cy4root2/plugins/master/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/cy4root2/plugins/master/addon.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/cy4root2/plugins/master</datadir>
-		   </dir>
-       <dir>
-			    <info compressed="false">http://narcacist.com/_repo/addons.xml</info>
-			    <checksum>http://narcacist.com/_repo/addons.xml.md5</checksum>
-			    <datadir zip="true">http://narcacist.com/_repo/</datadir>
-		   </dir>
-      <dir>
-          <info compressed="false">https://diamondbuild.xyz/repository/diamond/diamond_build_repo/zips/addons.xml</info>
-          <checksum>https://diamondbuild.xyz/repository/diamond/diamond_build_repo/zips/addons.xml.md5</checksum>
-          <datadir zip="true">https://diamondbuild.xyz/repository/diamond/diamond_build_repo/zips/</datadir>
-      </dir>
-      <dir>
-         <info compressed="false">https://github.com/host505/repository.host505/raw/master/addons.xml</info>
-         <checksum>https://github.com/host505/repository.host505/raw/master/addons.xml.md5</checksum>
-         <datadir zip="true">https://raw.githubusercontent.com/host505/repository.host505/master/</datadir>
-    </dir>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>Ardave TV</summary>
-        <description>Anything Kodi</description>
-        <disclaimer></disclaimer>
-        <platform>all</platform>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
-    </extension>
-</addon>
-
-<addon id="script.module.youtube.dl" name="youtube-dl Control" version="2021.12.03+matrix" provider-name="Rick Phillips (ruuk)">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0" />
-        <import addon="script.module.addon.signals" version="0.0.5+matrix.1"/>
-        <import addon="script.module.kodi-six" version="0.1.3"/>
-    </requires>
-    <extension point="xbmc.python.script" library="control.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="xbmc.python.module" library="lib" />
-    <extension point="xbmc.addon.metadata">
-        <platform>all</platform>
-        <summary lang="en_GB">Module providing access to youtube-dl video stream extraction</summary>
-        <description lang="en_GB">Module providing access to youtube-dl video stream extraction for hundreds of sites. Version is based on youtube-dl date version: YY.MDD.V where V is the addon specific sub-version. Also provides downloading with the option for background downloading with a queue and queue manager.</description>
-        <summary lang="el_EL">Βοηθητική μονάδα πρόσβασης στους επιλυτές youtube-dl για την εξαγωγή ροών βίντεο</summary>
-        <description lang="el_EL">Βοηθητική μονάδα πρόσβασης στους επιλυτές youtube-dl για την εξαγωγή ροών βίντεο από εκατοντάδες ιστότοπους. Η έκδοση βασίζεται στην έκδοση ημερομηνίας του youtube-dl: EE.MHH.EK όπου ΕΚ η υπό-έκδοση συγκεκριμένα για το πρόσθετο. Επιπλέον δίνει δυνατότητα μεταφόρτωσης στο παρασκήνιο με ουρά και διαχειριστή αυτής.</description>
-        <summary lang="es_ES">Módulo que proporciona acceso a YouTube-dl para la extracción de flujos de video</summary>
-        <description lang="es_ES">Módulo que proporciona acceso a YouTube-dl para la extracción de flujos de video de cientos de sitios. La versión está basada en la versión de fecha youtube-dl: YY.MDD.V donde V es la subversión específica del complemento. También permite descargas con la opción de descarga en segundo plano con una cola y un administrador de colas.</description>
-        <license>LGPL-2.1-only</license>
-        <forum>https://forum.kodi.tv/showthread.php?tid=200877</forum>
-        <source>https://github.com/ruuk/script.module.youtube.dl</source>
-        <assets>
-            <icon>icon.png</icon>
-        </assets>
-    </extension>
-</addon>
-
-<addon id="plugin.video.itv" name="ITV" version="3.0.0" provider-name="LittleWiz, Cowebtech">
-  <requires>
-    <import addon="xbmc.python" version="3.0.0"/>
-    <import addon="script.module.httplib2"/>
-    <import addon="script.module.beautifulsoup4" />
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension library="service.py" point="xbmc.service"  start="startup"/>
-  <extension point="xbmc.addon.metadata">
-    <platform>all</platform>
-    <summary>TV from ITV Hub</summary>
-    <description>This add-on enables the playing of Live and Catchup TV from ITV Hub (UK only)</description>
-    <news>Upgrade Python version to 3.0.0</news>
-    <disclaimer lang="en">This add-on is a front end to the ITV Hub website. It is not an official ITV product. A UK TV Licence is required to watch the live, catch-up, or on-demand TV content.</disclaimer>
-    <assets>
-      <icon>icon.png</icon>
-  </assets>
-  </extension>
-</addon>
-
-<addon id="plugin.video.naijaMovies" name="Nigerian Movies" version="3.0.0" provider-name="Abbey">
-	<requires>
-		<import addon="script.module.six" />
-		<import addon="script.module.kodi-six" />
-		<import addon="script.module.requests" optional="true"/>
-		<import addon="script.module.websocket" version="0.50.0"  optional="true"/>
-		<import addon="script.module.youtube.dl" optional="true"/>
-		<import addon="plugin.video.youtube" optional="true" />
-		<import addon="script.module.dateutil" optional="true" />
-		<import addon="script.module.resolveurl" optional="true"/>
-		<import addon="script.module.cloudscraper" optional="true"/>
-		<import addon="script.module.inputstreamhelper" optional="true"/>
-		<import addon="script.module.slproxy" optional="true"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="default.py">
-		<provides>video</provides>
-	</extension>
-
-	<extension point="xbmc.addon.metadata">
-		<summary>Free Latest Nigerian Movies</summary>
-		<description>Watch Latest Nigerian Movies Both Yoruba and English. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
-		<platform>all</platform>
-		<assets>
-			<icon>icon.png</icon>
-			<fanart>fanart.jpg</fanart>
-		</assets>
-	</extension>
 </addon>
 
 <addon id="plugin.program.omobatvwizard19" name="[COLOR limegreen]OmobaTV[/COLOR] Wizard" version="2.0.1" provider-name="OmobaTV">
@@ -420,23 +86,62 @@ version 0.2.0
     </extension>
 </addon>
 
-<addon id="script.webgrab" version="2.0.0+matrix" name="Webgrab+Plus Configurator" provider-name="primaeval,Abbey">
-<requires>
-  <import addon="xbmc.python" version="3.0.0"/>
-  <import addon="script.module.xbmcswift2"/>
-  <import addon="script.module.requests"/>
-</requires>
-<extension point="xbmc.python.pluginsource" library="main.py">
-  <provides>executable</provides>
-</extension>
-<extension point="xbmc.addon.metadata">
-  <summary lang="en">Webgrab+Plus Configurator</summary>
-  <description lang="en">Easily set up your Webgrab+Plus config and ini files.</description>
-  <disclaimer lang="en">.</disclaimer>
-  <assets>
+<addon id="plugin.video.Alquran" name="Useful Duas" version="3.0.1" provider-name="Abbey">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true" />
+		<import addon="script.module.websocket" version="0.50.0" optional="true" />
+		<import addon="script.module.youtube.dl" optional="true" />
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true" />
+		<import addon="script.module.cloudscraper" optional="true" />
+		<import addon="script.module.inputstreamhelper" optional="true" />
+		<import addon="script.module.slproxy" optional="true" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>Listen to useful Quran Duas</summary>
+		<description>Listen to powerful Duas online, from protection to success, etc. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
+		<platform>all</platform>
+		<assets>
 			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
 		</assets>
-</extension>
+	</extension>
+</addon>
+
+<addon id="plugin.video.Theradios" name="Online Radios" version="3.0.0" provider-name="Abbey">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true" />
+		<import addon="script.module.websocket" version="0.50.0" optional="true" />
+		<import addon="script.module.youtube.dl" optional="true" />
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true" />
+		<import addon="script.module.cloudscraper" optional="true" />
+		<import addon="script.module.inputstreamhelper" optional="true" />
+		<import addon="script.module.slproxy" optional="true" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>Online based radio stations</summary>
+		<description>All the contents of this Addon are legal, I do not host any file. they are from legit radio stations from around the globe</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
 </addon>
 
 <addon id="plugin.video.fen" name="Fen" provider-name="Tiki" version="2.6.13">
@@ -515,49 +220,105 @@ version 0.2.0
     </extension>
 </addon>
 
-<addon id="plugin.video.Theradios" name="Online Radios" version="3.0.0" provider-name="Abbey">
-	<requires>
-		<import addon="script.module.six" />
-		<import addon="script.module.kodi-six" />
-		<import addon="script.module.requests" optional="true"/>
-		<import addon="script.module.websocket" version="0.50.0"  optional="true"/>
-		<import addon="script.module.youtube.dl" optional="true"/>
-		<import addon="plugin.video.youtube" optional="true" />
-		<import addon="script.module.dateutil" optional="true" />
-		<import addon="script.module.resolveurl" optional="true"/>
-		<import addon="script.module.cloudscraper" optional="true"/>
-		<import addon="script.module.inputstreamhelper" optional="true"/>
-		<import addon="script.module.slproxy" optional="true"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="default.py">
-		<provides>video</provides>
-	</extension>
+<addon id="plugin.video.iptv.recorder" version="1.0" name="IPTV Recorder" provider-name="primaeval, Chychy, Dob!, Publish3r">
+<requires>
+  <import addon="xbmc.python" version="3.0.0" />
+  <import addon="script.module.xbmcswift2" />
+  <import addon="script.module.requests" />
+  <import addon="script.module.chardet" />
+  <import addon="script.module.pytz" />
+  <import addon="script.module.kodi-six" />
+</requires>
+<extension point="xbmc.python.pluginsource" library="main.py">
+  <provides>video</provides>
+</extension>
+<extension point="xbmc.python.script" library="default.py">
+    <provides>executable</provides>
+</extension>
+<extension point="kodi.context.item">
+<menu id="kodi.core.main">
+  <item library="context.py">
+    <label>IPTV Recorder Timer</label>
+    <visible>Window.isActive(tvchannels)</visible>
+  </item>
+  <item library="contextEPG.py">
+    <label>Schedule IPTV Recorder</label>
+    <visible>Window.isActive(tvguide)</visible>
+  </item>
+</menu>
+</extension>
+<extension point="xbmc.service" library="server.py" start="login" />
+<extension point="xbmc.addon.metadata">
+  <summary lang="en">Record from IPTV Simple Client or xmltv/m3u with ffmpeg.</summary>
+  <description lang="en">
+Set your recording path and ffmpeg location.
+On Android ffmpeg will be copied to /data/data to be runnable.
+Complex stream handling might need an extra script instead of ffmpeg.
+ffmpeg simply copies the stream into a transport stream container.
+</description>
+<disclaimer lang="en">Make sure recording streams is legal in your country.</disclaimer>
+<source>https://github.com/Dobi-Dev/plugin.video.iptv.recorder</source>
+<forum>https://forum.kodi.tv/showthread.php?tid=329991</forum>
+<language>en fr de</language>
+<news>
+version 0.2.0
+- Compatibility with Kodi Matrix.
+- Add some missing translations.
+- Improve "Sort Channels by" settings.
+- Add channel icon in the record list.
+- Improve encoding detection of the XML TV file.
+- Fix search input not supporting non ascii character.
+- Fix kodi crash on startup when user have rules to renew jobs.
+- Fix and improve "record and play" feature.
+- Reducing default startup time to 20 seconds.
+- Add error messag when trying to access database not created.
+- Exit the service smoothly and fastly if the user request Kodi to exit before the startup delay.
+</news>
+<assets>
+  <icon>icon.png</icon>
+  <screenshot>resources/screenshots/screenshot-00.jpg</screenshot>
+  <screenshot>resources/screenshots/screenshot-01.jpg</screenshot>
+  <screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
+</assets>
+</extension>
+</addon>
 
-	<extension point="xbmc.addon.metadata">
-		<summary>Online based radio stations</summary>
-		<description>All the contents of this Addon are legal, I do not host any file. they are from legit radio stations from around the globe</description>
-		<platform>all</platform>
-		<assets>
-			<icon>icon.png</icon>
-			<fanart>fanart.jpg</fanart>
-		</assets>
-	</extension>
+<addon id="plugin.video.itv" name="ITV" version="3.0.0" provider-name="LittleWiz, Cowebtech">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.beautifulsoup4" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension library="service.py" point="xbmc.service" start="startup" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary>TV from ITV Hub</summary>
+    <description>This add-on enables the playing of Live and Catchup TV from ITV Hub (UK only)</description>
+    <news>Upgrade Python version to 3.0.0</news>
+    <disclaimer lang="en">This add-on is a front end to the ITV Hub website. It is not an official ITV product. A UK TV Licence is required to watch the live, catch-up, or on-demand TV content.</disclaimer>
+    <assets>
+      <icon>icon.png</icon>
+  </assets>
+  </extension>
 </addon>
 
 <addon id="plugin.video.keepFit" name="Fitness Workout" version="3.0.0" provider-name="Abbey">
 	<requires>
 		<import addon="script.module.six" />
 		<import addon="script.module.kodi-six" />
-		<import addon="script.module.requests" optional="true"/>
-		<import addon="script.module.websocket" version="0.50.0"  optional="true"/>
-		<import addon="script.module.youtube.dl" optional="true"/>
+		<import addon="script.module.requests" optional="true" />
+		<import addon="script.module.websocket" version="0.50.0" optional="true" />
+		<import addon="script.module.youtube.dl" optional="true" />
 		<import addon="plugin.video.youtube" optional="true" />
 		<import addon="script.module.dateutil" optional="true" />
-		<import addon="script.module.resolveurl" optional="true"/>
-		<import addon="script.module.urlresolver" optional="true"/>
-		<import addon="script.module.cloudscraper" optional="true"/>
-		<import addon="script.module.inputstreamhelper" optional="true"/>
-		<import addon="script.module.slproxy" optional="true"/>
+		<import addon="script.module.resolveurl" optional="true" />
+		<import addon="script.module.urlresolver" optional="true" />
+		<import addon="script.module.cloudscraper" optional="true" />
+		<import addon="script.module.inputstreamhelper" optional="true" />
+		<import addon="script.module.slproxy" optional="true" />
 	</requires>
 	<extension point="xbmc.python.pluginsource" library="default.py">
 		<provides>video</provides>
@@ -574,7 +335,274 @@ version 0.2.0
 	</extension>
 </addon>
 
-<addon id="script.module.fenomscrapers" name="FenomScrapers Module" version="2.1.8" provider-name="Mr-Kodi">
+<addon id="plugin.video.live.streamspro" name="LiveStreamsPro" version="3.0.0~alpha4" provider-name="gujal">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true" />
+		<import addon="script.module.websocket" version="0.50.0" optional="true" />
+		<import addon="script.module.youtube.dl" optional="true" />
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true" />
+		<import addon="script.module.urlresolver" optional="true" />
+		<import addon="script.module.cloudscraper" optional="true" />
+		<import addon="script.module.inputstreamhelper" optional="true" />
+		<import addon="script.module.slproxy" optional="true" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>livestreamspro- shamelessly forked from livestreams but added many things</summary>
+		<description>
+In addition to what livestreams allowed you to do, you can now,
+1. call regex in regex,
+2. multiple regex in page, regex in session, also htmlunescape responses
+3. create session from one regex and pass onto next in line
+4. save sessions to a file and open again later
+5. write python code in .py file, put in the profile directory and then call from your regex.
+6. use epoctime, guid and unpack as functions already defined.
+7. Use it to post values to the pages to get the proper responses
+8. support many headers, like origin, X-Requested-With
+9. you can now append cookies in response and then read in regex using includeheaders
+10. You can now link to another web url via your xml using externallink
+11. support for google captcha, now you can show and then post the text
+		</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon>
+
+<addon id="plugin.video.naijaChurches" name="Naija Churches" version="3.0.0" provider-name="Abbey">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true" />
+		<import addon="script.module.websocket" version="0.50.0" optional="true" />
+		<import addon="script.module.youtube.dl" optional="true" />
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true" />
+		<import addon="script.module.urlresolver" optional="true" />
+		<import addon="script.module.cloudscraper" optional="true" />
+		<import addon="script.module.inputstreamhelper" optional="true" />
+		<import addon="script.module.slproxy" optional="true" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>Free Fitness Workout</summary>
+		<description>Watch nigerian churches live. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon>
+<addon id="plugin.video.naijaMovies" name="Nigerian Movies" version="3.0.0" provider-name="Abbey">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true" />
+		<import addon="script.module.websocket" version="0.50.0" optional="true" />
+		<import addon="script.module.youtube.dl" optional="true" />
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true" />
+		<import addon="script.module.cloudscraper" optional="true" />
+		<import addon="script.module.inputstreamhelper" optional="true" />
+		<import addon="script.module.slproxy" optional="true" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>Free Latest Nigerian Movies</summary>
+		<description>Watch Latest Nigerian Movies Both Yoruba and English. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon>
+
+<addon id="plugin.video.venom" name="[COLOR red]Venom[/COLOR]" provider-name="Venom" version="6.5.6">
+	<requires>
+		<import addon="xbmc.python" version="3.0.0" />
+		<import addon="context.venom" />
+		<import addon="script.module.myaccounts" version="2.0.0" />
+		<import addon="script.module.fenomscrapers" version="2.0.2" />
+		<import addon="script.module.requests" />
+		<import addon="script.module.beautifulsoup4" />
+		<import addon="script.module.metahandler" optional="true" />
+		<import addon="plugin.video.youtube" optional="true" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="venom.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.service" library="service.py" start="startup" />
+	<extension point="xbmc.python.module" library="resources/lib/" />
+	<extension point="xbmc.addon.metadata">
+		<reuselanguageinvoker>true</reuselanguageinvoker>
+		<summary lang="en">[B][COLOR red]Venom[/COLOR][/B] - We do not host any of the contents streamed</summary>
+		<description lang="en">[B][COLOR red]Venom[/COLOR][/B][CR] This addon does not form part of the Kodi Media Centre. Please do not seek assistance with this addon from any of the Official Kodi Support Channels.[CR]The author does not host any of the content in this addon and takes no responsibility for content found</description>
+		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+		<forum />
+		<website>https://github.com/123Venom/plugin.video.venom</website>
+		<source>https://github.com/123Venom/plugin.video.venom</source>
+		<disclaimer lang="en">The author of this addon does not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+			<screenshot>resources/screenshots/screenshot001.jpg</screenshot>
+			<screenshot>resources/screenshots/screenshot002.jpg</screenshot>
+			<screenshot>resources/screenshots/screenshot003.jpg</screenshot>
+		</assets>
+		<news>
+[B][COLOR red]Update - v6.5.6 - April 09, 2022[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Due to report of timeout error I've bumped the timeout value from 10 to 20 for fanarttv, tmdb, tvmaze, and trakt indexers.[/I]
+[COLOR yellow]--[/COLOR][I] Trakt scrobble reset has been moved to "[B]onAVStarted()[/B]" callback method due to a bug in the Kodi player "[B]onPlayBackEnded()[/B]" method being issued after the next playlist item already began playback.[/I]
+[COLOR yellow]--[/COLOR][I] Added the Source Select index number to the Resolve dialog. Now if a resolve failure occurs you'll know which item number the failure occurred on.[/I]
+[COLOR yellow]--[/COLOR][I] Added a new setting to the "[B]Trakt"[/B] category called [B]"Browse Progress - load all remaining episodes of series"[/B].  Please see the help file below the new setting for a detailed explanation on it's functionality.[/I]
+		</news>
+	</extension>
+</addon>
+
+<addon id="plugin.video.youtube" name="YouTube" version="6.8.18~alpha6+matrix.1" provider-name="anxdpanic, bromix">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+    <import addon="script.module.six" version="1.11.0" />
+    <import addon="script.module.requests" version="2.12.4" />
+    <import addon="script.module.inputstreamhelper" version="0.2.2" optional="true" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="resources/lib/default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.service" library="resources/lib/startup.py" />
+  <extension point="xbmc.python.module" library="resources/lib/" />
+  <extension point="xbmc.addon.metadata">
+    <news>
+[fix] Fix to_str |contrib: RNavega|
+[fix] Fix playback buffering |contrib: RNavega|
+[lang] translation updates from Weblate
+        </news>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
+    </assets>
+    <platform>all</platform>
+    <license>GPL-2.0-only</license>
+    <forum>https://ytaddon.panicked.xyz/forum</forum>
+    <website>https://www.youtube.com</website>
+    <source>https://github.com/anxdpanic/plugin.video.youtube</source>
+    <reuselanguageinvoker>true</reuselanguageinvoker>
+    <summary lang="bg_BG">Добавка за YouTube</summary>
+    <summary lang="cs_CZ">Plugin pro YouTube</summary>
+    <summary lang="de_DE">Plugin für YouTube</summary>
+    <summary lang="el_GR">Πρόσθετο YouTube</summary>
+    <summary lang="en_GB">Plugin for YouTube</summary>
+    <summary lang="es_ES">Plugin para YouTube</summary>
+    <summary lang="es_MX">Plugin para YouTube</summary>
+    <summary lang="fr_FR">Plugin pour YouTube</summary>
+    <summary lang="he_IL">תוסף עבור YouTube</summary>
+    <summary lang="hu_HU">YouTube kiegészítő</summary>
+    <summary lang="it_IT">Plugin per YouTube</summary>
+    <summary lang="ko_KR">유튜브 플러그인</summary>
+    <summary lang="nb_NO">Tillegg for YouTube</summary>
+    <summary lang="pl_PL">Wtyczka YouTube</summary>
+    <summary lang="ru_RU">Видеодополнение YouTube</summary>
+    <summary lang="tr_TR">YouTube için eklenti</summary>
+    <summary lang="vi_VN">Plugin dành cho YouTube</summary>
+    <summary lang="zh_CN">YouTube附加元件</summary>
+    <summary lang="zh_TW">YouTube附加元件</summary>
+    <description lang="bg_BG">YouTube е един от най-големите уеб сайтове за споделяне на видео в целия свят.</description>
+    <description lang="cs_CZ">YouTube je jedna z největších webových stránek světa sdílející video.</description>
+    <description lang="de_DE">YouTube ist eines der größten Video-Sharing-Websites der Welt.</description>
+    <description lang="el_GR">Το YouTube είναι μία από τις μεγαλύτερες ιστοσελίδες διαμοιρασμού βίντεο στον κόσμο.</description>
+    <description lang="en_GB">YouTube is one of the biggest video-sharing websites of the world.</description>
+    <description lang="es_ES">YouTube es uno de los sitios web más grande del mundo para compartir vídeos.</description>
+    <description lang="es_MX">YouTube es uno de los más grandes sitios web de intercambio de videos del mundo.</description>
+    <description lang="fr_FR">YouTube est l'un des plus grands sites de partage vidéos du monde.</description>
+    <description lang="he_IL">YouTube הוא אחד מאתרי שיתוף הווידאו הגדולים בעולם.</description>
+    <description lang="hu_HU">A YouTube világ egyik legnagyobb videómegosztó weboldala.</description>
+    <description lang="it_IT">YouTube è uno dei più grandi siti web di condivisione video del mondo.</description>
+    <description lang="ko_KR">유튜브는 세상에서 가장 큰 동영상 공유 사이트 중의 하나입니다.</description>
+    <description lang="nb_NO">YouTube er en av verdens største nettsider for videodeling.</description>
+    <description lang="pl_PL">YouTube jest jednym z największych na świecie serwisów udostępniania wideo.</description>
+    <description lang="ru_RU">YouTube - популярнейший видеохостинговый сайт, предоставляющий пользователям услуги хранения, доставки и показа видео.</description>
+    <description lang="tr_TR">YouTube, dünya üzerindeki en büyük video paylaşma platformlarından birisidir.</description>
+    <description lang="vi_VN">YouTube là một trong những trang web chia sẻ video lớn nhất trên thế giới.</description>
+    <description lang="zh_CN">「Youtube」是全世界最大的影片分享網站</description>
+    <description lang="zh_TW">「Youtube」是全世界最大的影片分享網站</description>
+    <disclaimer lang="cs_CZ">Tento plugin není schválen společností Google</disclaimer>
+    <disclaimer lang="de_DE">Dieses Plugin ist nicht von Google befürwortet</disclaimer>
+    <disclaimer lang="el_GR">Η παρούσα μικροεφαρμογή δεν έχει υϊοθετηθεί από την Google</disclaimer>
+    <disclaimer lang="en_GB">This plugin is not endorsed by Google</disclaimer>
+    <disclaimer lang="es_ES">Este add-on no está respaldado por Google</disclaimer>
+    <disclaimer lang="es_MX">Este add-on no está respaldado por Google</disclaimer>
+    <disclaimer lang="it_IT">Questo plugin non è promosso da Google</disclaimer>
+    <disclaimer lang="ko_KR">이 플러그인은 Google의 허가를 받지 않았습니다</disclaimer>
+    <disclaimer lang="pl_PL">Ta wtyczka nie jest zatwierdzona przez Google</disclaimer>
+    <disclaimer lang="ru_RU">Плагин не поддерживается Google</disclaimer>
+    <disclaimer lang="tr_TR">Bu eklenti Google tarafından üretilmemiştir</disclaimer>
+    <disclaimer lang="vi_VN">Plugin này không được xác nhận bởi Google</disclaimer>
+    <disclaimer lang="zh_TW">此附加元件未由Google支持</disclaimer>
+  </extension>
+</addon>
+
+<addon id="repository.Ardavetv" name="Ardave TV" version="3.0.3" provider-name="omoobatv">
+  <requires>
+		<import addon="xbmc.addon" version="12.0.0" />
+	</requires>
+    <extension point="xbmc.addon.repository" name="Ardave TV">
+        <dir minversion="18.0.0" maxversion="18.9.9">
+            <info compressed="false">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/leia/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/leia/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/leia/zips/</datadir>
+        </dir>
+        <dir minversion="19.0.0">
+            <info compressed="false">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/matrix/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/matrix/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/matrix/zips/</datadir>
+        </dir>
+        <dir>
+	          <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+	          <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+	          <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+        </dir>
+        <dir>
+			      <info compressed="false">https://raw.githubusercontent.com/cy4root2/plugins/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/cy4root2/plugins/master/addon.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/cy4root2/plugins/master</datadir>
+		   </dir>
+       <dir>
+			    <info compressed="false">http://narcacist.com/_repo/addons.xml</info>
+			    <checksum>http://narcacist.com/_repo/addons.xml.md5</checksum>
+			    <datadir zip="true">http://narcacist.com/_repo/</datadir>
+		   </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Ardave TV</summary>
+        <description>Anything Kodi</description>
+        <disclaimer />
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon><addon id="script.module.fenomscrapers" name="FenomScrapers Module" version="2.1.8" provider-name="Mr-Kodi">
 	<requires>
 		<import addon="xbmc.python" version="3.0.0" />
 		<import addon="script.module.requests" />
@@ -584,21 +612,21 @@ version 0.2.0
 		<provides>executable</provides>
 	</extension>
 	<extension point="xbmc.service" library="lib/service.py" start="startup" />
-	<extension point="xbmc.python.module" library="lib" /> <!-- Must be placed after xbmc.python.pluginsource, otherwise the addon does not show in the repository. -->
+	<extension point="xbmc.python.module" library="lib" /> 
 	<extension point="xbmc.addon.metadata">
 		<reuselanguageinvoker>false</reuselanguageinvoker>
 		<summary lang="en">FenomScrapers Module</summary>
 		<description>Scrape common video host for URL's to be playable in Kodi, simplifying addon development of video plugins requiring multi video hosts.</description>
 		<platform>all</platform>
 		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
-		<forum></forum>
+		<forum />
 		<website>https://github.com/Mr-Kodi/repository.fenomscrapers</website>
 		<source>https://github.com/Mr-Kodi/repository.fenomscrapers</source>
 		<disclaimer lang="en">The author is not responsible for the use of this addon. The author is not responsible for the content found using this addon. The author does not host or own any content found within this addon.[CR]The author is in no way affiliated with Kodi, Team Kodi, or the XBMC Foundation.[CR]This is a Non-profit resource, organized solely for educational purposes which is protected under the Fair-Use doctrine of the Copyright Act, Specifically section 107, which does promote freedom of expression, by permitting the unlicensed use of copyright-protected works.</disclaimer>
 		<assets>
 			<icon>icon.png</icon>
 			<fanart>fanart.png</fanart>
-			<screenshot></screenshot>
+			<screenshot />
 		</assets>
 		<news>
 [B][COLOR red]Update - v2.1.8 - April 07, 2022[/COLOR][/B]
@@ -606,35 +634,6 @@ version 0.2.0
 [COLOR yellow]--[/COLOR][I] Updated torrentinfo help file.[/I]
 [COLOR yellow]--[/COLOR][I] Small fix for BITSEARCH query results when an item might contain a new liked count mucking with the index.[/I]
 		</news>
-	</extension>
-</addon>
-
-<addon id="plugin.video.Alquran" name="Useful Duas" version="3.0.1" provider-name="Abbey">
-	<requires>
-		<import addon="script.module.six" />
-		<import addon="script.module.kodi-six" />
-		<import addon="script.module.requests" optional="true"/>
-		<import addon="script.module.websocket" version="0.50.0"  optional="true"/>
-		<import addon="script.module.youtube.dl" optional="true"/>
-		<import addon="plugin.video.youtube" optional="true" />
-		<import addon="script.module.dateutil" optional="true" />
-		<import addon="script.module.resolveurl" optional="true"/>
-		<import addon="script.module.cloudscraper" optional="true"/>
-		<import addon="script.module.inputstreamhelper" optional="true"/>
-		<import addon="script.module.slproxy" optional="true"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="default.py">
-		<provides>video</provides>
-	</extension>
-
-	<extension point="xbmc.addon.metadata">
-		<summary>Listen to useful Quran Duas</summary>
-		<description>Listen to powerful Duas online, from protection to success, etc. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
-		<platform>all</platform>
-		<assets>
-			<icon>icon.png</icon>
-			<fanart>fanart.jpg</fanart>
-		</assets>
 	</extension>
 </addon>
 
@@ -651,17 +650,17 @@ version 0.2.0
 		<platform>all</platform>
 		<summary lang="en">Downloads Artwork for TV shows, Movies and Music videos for addons and stores them in a local SQLITE database</summary>
 		<description lang="en">Queries, stores, and returns metadata for TV shows, Movies and Musicvideos. [CR]Sources:[CR]www.thetvdb.com[CR]www.themoviedb.org[CR]www.imdb.com[CR]www.omdbapi.com[CR]This product uses the TMDb API but is not endorsed or certified by TMDb.</description>
-		<disclaimer lang="en"></disclaimer>
-		<language></language>
+		<disclaimer lang="en" />
+		<language />
 		<license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-		<forum></forum>
-		<website></website>
-		<email></email>
-		<source></source>
+		<forum />
+		<website />
+		<email />
+		<source />
 		<assets>
 			<icon>icon.png</icon>
-			<fanart></fanart>
-			<screenshot></screenshot>
+			<fanart />
+			<screenshot />
 		</assets>
 		<news>
 [B]Version 5.0.1[/B]
@@ -670,62 +669,50 @@ version 0.2.0
 	</extension>
 </addon>
 
-<addon id="plugin.audio.soundcloud" name="SoundCloud" version="4.0.0" provider-name="jaylinski">
+<addon id="script.module.youtube.dl" name="youtube-dl Control" version="2021.12.03+matrix" provider-name="Rick Phillips (ruuk)">
     <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-        <import addon="script.module.requests" version="2.22.0"/>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.addon.signals" version="0.0.5+matrix.1" />
+        <import addon="script.module.kodi-six" version="0.1.3" />
     </requires>
-    <extension point="xbmc.python.pluginsource" library="addon.py">
-        <provides>audio</provides>
+    <extension point="xbmc.python.script" library="control.py">
+        <provides>executable</provides>
     </extension>
+    <extension point="xbmc.python.module" library="lib" />
     <extension point="xbmc.addon.metadata">
-        <summary lang="de_DE">SoundCloud – Musik- und Podcast-Streaming-Plattform</summary>
-        <summary lang="en_GB">SoundCloud – Music and podcast streaming platform</summary>
-        <description lang="de_DE">SoundCloud ist eine Musik- und Podcast-Streaming-Plattform, mit der Du Millionen von Songs aus der ganzen Welt anhören kannst.</description>
-		<description lang="en_GB">SoundCloud is a music and podcast streaming platform that lets you listen to millions of songs from around the world.</description>
-        <disclaimer lang="en_GB">This plugin is not official, approved or endorsed by SoundCloud.</disclaimer>
         <platform>all</platform>
-        <license>MIT</license>
-        <forum>https://forum.kodi.tv/showthread.php?tid=206635</forum>
-        <website>https://soundcloud.com</website>
-        <source>https://github.com/jaylinski/kodi-addon-soundcloud</source>
-        <news>4.0.0 (2020-12-12)
-Added support for Kodi v19 (Matrix)
-        </news>
+        <summary lang="en_GB">Module providing access to youtube-dl video stream extraction</summary>
+        <description lang="en_GB">Module providing access to youtube-dl video stream extraction for hundreds of sites. Version is based on youtube-dl date version: YY.MDD.V where V is the addon specific sub-version. Also provides downloading with the option for background downloading with a queue and queue manager.</description>
+        <summary lang="el_EL">Βοηθητική μονάδα πρόσβασης στους επιλυτές youtube-dl για την εξαγωγή ροών βίντεο</summary>
+        <description lang="el_EL">Βοηθητική μονάδα πρόσβασης στους επιλυτές youtube-dl για την εξαγωγή ροών βίντεο από εκατοντάδες ιστότοπους. Η έκδοση βασίζεται στην έκδοση ημερομηνίας του youtube-dl: EE.MHH.EK όπου ΕΚ η υπό-έκδοση συγκεκριμένα για το πρόσθετο. Επιπλέον δίνει δυνατότητα μεταφόρτωσης στο παρασκήνιο με ουρά και διαχειριστή αυτής.</description>
+        <summary lang="es_ES">Módulo que proporciona acceso a YouTube-dl para la extracción de flujos de video</summary>
+        <description lang="es_ES">Módulo que proporciona acceso a YouTube-dl para la extracción de flujos de video de cientos de sitios. La versión está basada en la versión de fecha youtube-dl: YY.MDD.V donde V es la subversión específica del complemento. También permite descargas con la opción de descarga en segundo plano con una cola y un administrador de colas.</description>
+        <license>LGPL-2.1-only</license>
+        <forum>https://forum.kodi.tv/showthread.php?tid=200877</forum>
+        <source>https://github.com/ruuk/script.module.youtube.dl</source>
         <assets>
-            <icon>resources/icon.png</icon>
-            <fanart>resources/fanart.jpg</fanart>
+            <icon>icon.png</icon>
         </assets>
     </extension>
 </addon>
 
-<addon id="plugin.video.naijaChurches" name="Naija Churches" version="3.0.0" provider-name="Abbey">
-	<requires>
-		<import addon="script.module.six" />
-		<import addon="script.module.kodi-six" />
-		<import addon="script.module.requests" optional="true"/>
-		<import addon="script.module.websocket" version="0.50.0"  optional="true"/>
-		<import addon="script.module.youtube.dl" optional="true"/>
-		<import addon="plugin.video.youtube" optional="true" />
-		<import addon="script.module.dateutil" optional="true" />
-		<import addon="script.module.resolveurl" optional="true"/>
-		<import addon="script.module.urlresolver" optional="true"/>
-		<import addon="script.module.cloudscraper" optional="true"/>
-		<import addon="script.module.inputstreamhelper" optional="true"/>
-		<import addon="script.module.slproxy" optional="true"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="default.py">
-		<provides>video</provides>
-	</extension>
-
-	<extension point="xbmc.addon.metadata">
-		<summary>Free Fitness Workout</summary>
-		<description>Watch nigerian churches live. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
-		<platform>all</platform>
-		<assets>
+<addon id="script.webgrab" version="2.0.0+matrix" name="Webgrab+Plus Configurator" provider-name="primaeval,Abbey">
+<requires>
+  <import addon="xbmc.python" version="3.0.0" />
+  <import addon="script.module.xbmcswift2" />
+  <import addon="script.module.requests" />
+</requires>
+<extension point="xbmc.python.pluginsource" library="main.py">
+  <provides>executable</provides>
+</extension>
+<extension point="xbmc.addon.metadata">
+  <summary lang="en">Webgrab+Plus Configurator</summary>
+  <description lang="en">Easily set up your Webgrab+Plus config and ini files.</description>
+  <disclaimer lang="en">.</disclaimer>
+  <assets>
 			<icon>icon.png</icon>
-			<fanart>fanart.jpg</fanart>
 		</assets>
-	</extension>
+</extension>
 </addon>
+
 </addons>
