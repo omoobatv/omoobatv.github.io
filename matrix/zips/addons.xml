@@ -669,7 +669,38 @@ In addition to what livestreams allowed you to do, you can now,
 	</extension>
 </addon>
 
-<addon id="script.module.youtube.dl" name="youtube-dl Control" version="2021.12.03+matrix" provider-name="Rick Phillips (ruuk)">
+<addon id="script.module.myaccounts" version="2.0.0" name="My Accounts" provider-name="Venom, Fen">
+	<requires>
+		<import addon="xbmc.python" version="3.0.0" />
+		<import addon="script.module.requests" version="2.19.1" />
+	</requires>
+	<extension point="xbmc.python.script" library="lib/default.py">
+		<provides>executable</provides>
+	</extension>
+	<extension point="xbmc.service" library="lib/service.py" start="startup" />
+	<extension point="xbmc.python.module" library="lib" /> 
+	<extension point="xbmc.addon.metadata">
+		<reuselanguageinvoker>false</reuselanguageinvoker>
+		<summary lang="en">My Accounts Module</summary>
+		<description>Single placeholder for all your accounts.</description>
+		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+		<forum />
+		<website>https://github.com/Mr-Kodi/repository.myaccounts</website>
+		<source>https://github.com/Mr-Kodi/repository.myaccounts</source>
+		<disclaimer lang="en">The author is not responsible for the use of this addon. [CR]The author is in no way affiliated with Kodi, Team Kodi, or the XBMC Foundation.[CR]This is a Non-profit resource, organized solely for educational purposes which is protected under the Fair-Use doctrine of the Copyright Act, Specifically section 107, which does promote freedom of expression, by permitting the unlicensed use of copyright-protected works.</disclaimer>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.png</fanart>
+			<screenshot />
+		</assets>
+		<news>
+[B][COLOR red]Update - v2.0.0 - Nov. 23, 2021[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] First official py3 only version for Kodi Matrix.[/I]
+[COLOR yellow]--[/COLOR][I] Fixed issue with "check for updates" using old github url.[/I]
+		</news>
+	</extension>
+</addon><addon id="script.module.youtube.dl" name="youtube-dl Control" version="2021.12.03+matrix" provider-name="Rick Phillips (ruuk)">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="script.module.addon.signals" version="0.0.5+matrix.1" />
@@ -696,7 +727,31 @@ In addition to what livestreams allowed you to do, you can now,
     </extension>
 </addon>
 
-<addon id="script.webgrab" version="2.0.0+matrix" name="Webgrab+Plus Configurator" provider-name="primaeval,Abbey">
+<addon id="script.tikiart" name="Tiki Art Module" provider-name="Tiki" version="1.1.58">
+    <extension point="xbmc.python.module" />
+    <extension point="xbmc.addon.metadata">
+        <summary>Themes for Addons</summary>
+        <description>Themes for Addons</description>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon><addon id="script.tikiskins" name="Tiki Skins Module" provider-name="Tiki" version="1.1.35">
+    <extension point="xbmc.python.module" />
+    <extension point="xbmc.addon.metadata">
+        <summary>Skins for Addons</summary>
+        <description>Skins for Addons</description>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon><addon id="script.webgrab" version="2.0.0+matrix" name="Webgrab+Plus Configurator" provider-name="primaeval,Abbey">
 <requires>
   <import addon="xbmc.python" version="3.0.0" />
   <import addon="script.module.xbmcswift2" />
