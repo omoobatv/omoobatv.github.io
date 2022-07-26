@@ -1,6 +1,6 @@
 import urllib.request, urllib.parse, urllib.error,urllib.request,urllib.error,urllib.parse,re,sys,socket,os,datetime,xbmcplugin,xbmcgui, xbmcaddon,json
 from hashlib import md5
-
+import codecs
 
 # external libs
 sys.path.insert(0, xbmc.translatePath(os.path.join('special://home/addons/plugin.video.itv', 'lib')))
@@ -13,11 +13,6 @@ ADDON = xbmcaddon.Addon(id=PLUGIN)
 icon = xbmc.translatePath(os.path.join('special://home/addons/plugin.video.itv', 'icon.png'))
 foricon = xbmc.translatePath(os.path.join('special://home/addons/plugin.video.itv', ''))
 from bs4 import BeautifulSoup
-datapath = xbmc.translatePath(ADDON.getAddonInfo('profile'))
-favorites = os.path.join(datapath, 'favorites')
-#if os.path.exists(favorites)==True:
-    #FAV = open(favorites).read()
-    
 
 # setup cache dir
 __scriptname__  = 'ITV'
@@ -31,6 +26,7 @@ __settings__   = xbmcaddon.Addon(id=__scriptid__)
 DIR_USERDATA   = xbmc.translatePath(__addoninfo__["profile"])
 SUBTITLES_DIR  = os.path.join(DIR_USERDATA, 'Subtitles')
 IMAGE_DIR      = os.path.join(DIR_USERDATA, 'Images')
+favorites      = os.path.join(DIR_USERDATA, 'favorites')
 
 if not os.path.isdir(DIR_USERDATA):
     os.makedirs(DIR_USERDATA)
@@ -47,87 +43,117 @@ http = get_httplib()
 # what OS?        
 environment = os.environ.get( "OS", "xbox" )
 
-
-############## SUBS #################
-
-def chomps(s):
-    return s.rstrip('\n')
-
-def httpget(url):
-    resp = ''
-    data = ''
-    http = get_httplib()
-    resp, data = http.request(url, "GET")
-    return data
-    
-    
 def download_subtitles_HLS(url, offset):
 
     logging.info('subtitles at =%s' % url)
     outfile = os.path.join(SUBTITLES_DIR, 'itv.srt')
-    fw = open(outfile, 'w')
+    fw = codecs.open(outfile, 'w', encoding='utf-8')
     
     if not url:
         fw.write("1\n0:00:00,001 --> 0:01:00,001\nNo subtitles available\n\n")
-        fw.close() 
+        fw.close()
         return outfile
-    txt = OPEN_URL(url)
 
-
-    fw.write(txt)
-    fw.close()    
-    return outfile
-
-
-def download_subtitles(url, offset):
-
-    logging.info('subtitles at =%s' % url)
-    outfile = os.path.join(SUBTITLES_DIR, 'itv.srt')
-    fw = open(outfile, 'w')
-    
-    if not url:
-        fw.write("1\n0:00:00,001 --> 0:01:00,001\nNo subtitles available\n\n")
-        fw.close() 
-        return outfile
-    txt = httpget(url)
     try:
-        txt = txt.decode("utf-16")
-    except UnicodeDecodeError:
-        txt = txt[:-1].decode("utf-16")
-    txt = txt.encode('latin-1')
-    txt = re.sub("<br/>"," ",txt)
-    #print "SUBS %s" % txt
-    p= re.compile('^\s*<p.*?begin=\"(.*?)\.([0-9]+)\"\s+.*?end=\"(.*?)\.([0-9]+)\"\s*>(.*?)</p>')
-    i=0
-    prev = None
-
-    entry = None
-    for line in txt.splitlines():
-        subtitles1 = re.findall('<p.*?begin="(...........)" end="(...........)".*?">(.*?)</p>',line)
-        if subtitles1:
-            for start_time, end_time, text in subtitles1:
-                r = re.compile('<[^>]*>')
-                text = r.sub('',text)
-                start_hours = re.findall('(..):..:..:..',start_time)
-                start_mins = re.findall('..:(..):..:..', start_time)
-                start_secs = re.findall('..:..:(..):..', start_time)
-                start_msecs = re.findall('..:..:..:(..)',start_time)
-#               start_mil = start_msecs +'0'
-                end_hours = re.findall('(..):..:..:..',end_time)
-                end_mins = re.findall('..:(..):..:..', end_time)
-                end_secs = re.findall('..:..:(..):..', end_time)
-                end_msecs = re.findall('..:..:..:(..)',end_time)
-#               end_mil = end_msecs +'0'
-                entry = "%d\n%s:%s:%s,%s --> %s:%s:%s,%s\n%s\n\n" % (i, start_hours[0], start_mins[0], start_secs[0], start_msecs[0], end_hours[0], end_mins[0], end_secs[0], end_msecs[0], text)
-                i=i+1
-                #print "ENTRY" + entry
-        if entry: 
-            fw.write(entry)
+        txt = OPEN_URL(url).decode('utf-8')
     
-    fw.close()    
+    except:
+        fw.write("1\n0:00:00,001 --> 0:01:00,001\nNo subtitles available\n\n")
+        fw.close()
+        return outfile
+    # print txt
+
+    # get styles
+    styles = []
+    match = re.search(r'<styling>(.+?)</styling>', txt, re.DOTALL)
+    if match:
+        match = re.findall(r'<style(.*?)>', match.group(1), re.DOTALL)
+        if match:
+            for style_line in match:
+                match = re.search(r'id="(.*?)"', style_line, re.DOTALL)
+                id = None
+                if match:
+                    id = match.group(1)
+                color = None
+                match = re.search(r'color="(.*?)"', style_line, re.DOTALL)
+                if match:
+                    # Some of the subtitle files use #ffffff color coding, others use plain text.
+                    if match.group(1).startswith('#'):
+                        styles.append((id, match.group(1)[0:7]))
+                    else:
+                        styles.append((id, match.group(1)))
+                    # span_replacer = make_span_replacer(styles)
+    # print "Retrieved styles"
+    # print styles
+
+    # get body
+    body = []
+    body = re.search(r'<body.*?>(.+?)</body>', txt, re.DOTALL)
+    if body:
+        # print "Located body"
+        # print body.group(1).encode('utf-8')
+        frames = re.findall(r'<p(.*?)>(.*?)</p>', body.group(1), re.DOTALL)
+        # frames = re.findall(r'<p.*?begin=\"(.*?)".*?end=\"(.*?)".*?style="(.*?)".*?>(.*?)</p>', body.group(1), re.DOTALL)
+        if frames:
+            index = 1
+            # print "Found %s frames"%len(frames)
+            # print frames
+            for formatting, content in frames:
+                start = ''
+                match = re.search(r'begin=\"(.*?)"', formatting, re.DOTALL)
+                if match:
+                    # begin="00:00:27:00"
+                    start = match.group(1)
+                    start_value = start[0:8] + "," + start[9:11] + '0'
+                end = ''
+                match = re.search(r'end=\"(.*?)"', formatting, re.DOTALL)
+                if match:
+                    #      0123456789
+                    # end="00:00:29:06"
+                    end = match.group(1)
+                    end_value = end[0:8] + "," + end[9:11] + '0'
+                style = None
+                match = re.search(r'style=\"(.*?)"', formatting, re.DOTALL)
+                if match:
+                    style = match.group(1)
+                else:
+                    style = False
+                start_split = re.split('\.',start)
+                # print start_split
+                if(len(start_split)>1):
+                    start_mil_f = start_split[1].ljust(3, '0')
+                else:
+                    start_mil_f = "000"
+                end_split = re.split('\.',end)
+                if(len(end_split)>1):
+                    end_mil_f = end_split[1].ljust(3, '0')
+                else:
+                    end_mil_f = "000"
+
+                spans = []
+                text = ''
+                spans = re.findall(r'<span.*?tts:color="(.*?)">(.*?)<\/span>', content, re.DOTALL)
+                if (spans):
+                    num_spans = len(spans)
+                    for num, (substyle, line) in enumerate(spans):
+                        if num >0:
+                            text = text+'\n'
+                        # print substyle, color, line.encode('utf-8')
+                        text = text+'<font color="%s">%s</font>' %  (substyle, line)
+                else:
+                    if style:
+                        color = [value for (style_id, value) in styles if style == style_id]
+                        text = text+'<font color="%s">%s</font>' %  (color[0], content)
+                    else:
+                         text = text+content
+                    # print substyle, color, line.encode('utf-8')
+                entry = "%d\n%s --> %s\n%s\n\n" % (index, start_value, end_value, text)
+                if entry:
+                    fw.write(entry)
+                    index += 1
+
+    fw.close()
     return outfile
-
-
 
 def CATS():
         if os.path.exists(favorites)==True:
@@ -135,23 +161,8 @@ def CATS():
             
         addDir('Shows','http://www.itv.com/hub/shows',1,icon,isFolder=True)
         # addDir('Categories','cats',205,icon,isFolder=True)
-        addDir('Live','Live',206,icon,isFolder=True)
+        # addDir('Live','Live',206,icon,isFolder=True)
         setView('tvshows', 'default')
-
-        
-                        
-def getsim(channel):
-    if 'ITV' == channel.upper():return ('ITV','1')
-
-    if 'ITV2' in channel.upper():return ('ITV2','2')
-
-    if 'ITV3' in channel.upper():return ('ITV3','3')
-
-    if 'ITV4' in channel.upper():return ('ITV4','4')
-
-    if 'CITV' in channel.upper():return ('CITV','7')
-
-    if 'ITVBE' in channel.upper():return ('ITVBe','8')
                         
 def LIVE():
     addDir('ITV1','https://www.itv.com/hub/itv',8,foricon+'art/1.png',isFolder=False)
@@ -177,76 +188,6 @@ def CATEGORIES():
         
         setView('tvshows', 'default')
 
-        
-        
-def PLAY_STREAM(name,url,iconimage):
-    ENDING=''
-    if len(url)>4:
-            
-        STREAM=url
-
-    else:    
-        #SoapMessage=TEMPLATE(url,'itv'+url.replace('sim',''))
-        #headers={'Content-Length':'%d'%len(SoapMessage),'Content-Type':'text/xml; charset=utf-8','Host':'secure-mercury.itv.com','Origin':'http://www.itv.com',
-                 #'Referer':'http://www.itv.com/Mercury/Mercury_VideoPlayer.swf?v=null',
-                 #'SOAPAction':"http://tempuri.org/PlaylistService/GetPlaylist",
-                 #'User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36'}
-
-        res, response = http.request("https://mediaplayer.itv.com/flash/playlists/ukonly/%s.xml" %url.lower())
-        #res, response = http.request("https://secure-mercury.itv.com/PlaylistService.svc", 'POST', headers=headers, body=SoapMessage)
- 
-        response = response.decode('utf-8')
-        rtmp=re.compile('<MediaFiles base="(.+?)"').findall(response)[0]
-        if 'CITV' in name:
-            r='CDATA\[(citv.+?)\]'
-        else:
-            r='CDATA\[(itv.+?)\]'
-        playpath=re.compile(r,re.DOTALL).findall(response) [0]
-        STREAM=rtmp+' playpath='+playpath+' swfUrl=http://www.itv.com/mediaplayer/ITVMediaPlayer.swf live=true timeout=10 swfvfy=true'
-       
-        
-    liz = xbmcgui.ListItem(name)
-    liz.setArt({'icon' : 'DefaultVideo.png', 'thumb' : iconimage})
-    liz.setInfo(type='Video', infoLabels={'Title':name})
-    liz.setProperty("IsPlayable","true")
-    liz.setPath(STREAM+ENDING)
-    xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, liz)
-
-    
-
-def STREAMS():
-        streams=[]
-        key = get_url('http://www.itv.com/_app/dynamic/AsxHandler.ashx?getkey=please')
-        for channel in range(1,5):
-                streaminfo = get_url('http://www.itv.com/_app/dynamic/AsxHandler.ashx?key='+key+'&simid=sim'+str(channel)+'&itvsite=ITV&itvarea=SIMULCAST.SIM'+str(channel)+'&pageid=4567756521')
-                stream=re.compile('<TITLE>(.+?)</TITLE><REF href="(.+?)" />').findall(streaminfo)
-                streams.append(stream[1])
-        for name,url in streams:
-                addLink(name,url)
-
-def BESTOF(url):
-        response = get_url(url).replace('&amp;','&')
-        match=re.compile('<li><a href="(.+?)"><img src=".+?" alt=".+?"></a><h4><a href=".+?">(.+?)</a></h4>').findall(response)
-        for url,name in match:
-                addDir(name,url,5,'')
-                
-def BESTOFEPS(name,url):
-    
-        response = get_url(url).replace('&amp;','&')
-        eps=re.compile('<a [^>]*?title="Play" href=".+?vodcrid=crid://itv.com/(.+?)&DF=0"><img\s* src="(.*?)" alt="(.*?)"').findall(response)
-        if eps:
-            for url,thumb,name in eps:
-                addDir(name,url,3,'http://itv.com/'+thumb,isFolder=False)
-            return
-        eps=re.compile('<a [^>]*?title="Play" href=".+?vodcrid=crid://itv.com/(.+?)&DF=0">(.+?)</a>').findall(response)
-        if not eps: eps=re.compile('href=".+?vodcrid=crid://itv.com/(.+?)&G=.+?&DF=0">(.+?)</a>').findall(response)
-        if not eps:
-                eps=re.compile('<meta name="videoVodCrid" content="crid://itv.com/(.+?)">').findall(response)
-                name=re.compile('<meta name="videoMetadata" content="(.+?)">').findall(response)
-                eps=[(eps[0],name[0])]
-        for url,name in eps:
-                addDir(name,url,3,'',isFolder=False)
-        
 def SHOWS(url):
     f = urllib.request.urlopen(url)
     buf = f.read().decode('utf-8')
@@ -298,7 +239,6 @@ def getFavorites():
 
             
 def addFavorite(name,url,iconimage):
-  
         iconimage='http://mercury.itv.com/browser/production/image?q=80&format=jpg&w=800&h=450&productionId='+iconimage
         import json
         favList = []
@@ -383,7 +323,7 @@ def EPS(name,url):
 
             date = re.compile('datetime="(.+?)">',re.DOTALL).findall (p)[0]
             try:
-                TIME= parse_Date(str(date), '%Y-%m-%dT%H:%MZ','%H:%M%p')
+                TIME= parse_Date(str(date), '%Y-%m-%dT%H:%MZ','%H:%M')
                 DATE= parse_Date(str(date), '%Y-%m-%dT%H:%MZ','%d/%m/%Y')
                 ADDDATE= '%s %s' % (DATE,TIME)
             except Exception as e:
@@ -552,9 +492,6 @@ def HLS(url,iconimage):
     liz.setPath(STREAM+ENDING)
     xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, liz)
     
-def VIDEO(url,iconimage):
-    return HLS(url,iconimage)
-                
 def setView(content, viewType):
         # set content type so library shows more views and info
         if content:
@@ -562,69 +499,6 @@ def setView(content, viewType):
         if ADDON.getSetting('auto-view') == 'true':#<<<----see here if auto-view is enabled(true) 
                 xbmc.executebuiltin("Container.SetViewMode(%s)" % ADDON.getSetting(viewType) )#<<<-----then get the view type
                 
-def decode_redirect(url):
-    
-    # some of the the urls passed in are redirects that are not handled by XBMC.
-    # These are text files with multiple stream urls
-
-    #if environment in ['xbox', 'linux']:
-    #    # xbox xbmc works just fine with redirects
-    #    return url
-
-    response = get_url(url).replace('&amp;','&')
-    match=re.compile('Ref1\=(http.*)\s').findall(response)
-
-    stream_url = None
-    if match:
-        stream_url = match[0].rstrip()
-    else:
-        # no match so pass url to xbmc and see if the url is directly supported 
-        stream_url = url
-
-    return stream_url
-
-def decode_date(date):
-    # format eg Sat 10 Jan 2009
-    (dayname,day,monthname,year) = date.split(' ')
-    if not year:
-        return date
-    month=1
-    monthname = monthname.lower()
-    lookup = {'jan':1, 'feb':2, 'mar':3, 'apr':4, 'may':5, 'jun':6, 'jul':7, 'aug':8, 'sep':9, 'oct':10, 'nov':11, 'dec':12}
-    if monthname[:3] in lookup:
-        month=lookup[monthname[:3]]
-    
-    try:
-        # yes I know the colons are weird but the 2009-01-25 xbox release
-        # when in filemode (but not library mode) converts YYYY-MM-DD in (YYYY)
-        sep='-'
-        if environment == 'xbox': sep=':' 
-        ndate = "%04d%s%02d%s%02d" % (int(year),sep,int(month),sep,int(day))
-    except:
-        # oops funny date, return orgional date
-        return date
-    #print "Date %s from %s" % (ndate, date)
-    return ndate
-
-def get_url(url):
-    http = get_httplib()
-    data = None    
-    try:
-        resp, data = http.request(url, 'GET')
-    except: pass
-    
-    # second try
-    if not data:
-        try:
-            resp, data = http.request(url, 'GET')
-        except: 
-            dialog = xbmcgui.Dialog()
-            dialog.ok('Network Error', 'Failed to fetch URL', url)
-            print ('Network Error. Failed to fetch URL %s' % url)
-            raise
-    
-    return data
-
 def get_params():
         param=[]
         paramstring=sys.argv[2]
@@ -643,16 +517,6 @@ def get_params():
                                 
         return param
 
-      
-def addLink(name,url):
-        ok=True
-        thumbnail_url = url.split( "thumbnailUrl=" )[ -1 ]
-        liz=xbmcgui.ListItem(name)
-        liz.setArt({'icon' : 'DefaultVideo.png', 'thumb' : thumbnail_url})
-        liz.setInfo( type="Video", infoLabels={ "Title": name,'Premiered' : '2012-01-01','Episode' : '1'} )
-        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz)
-        return ok
-
 def addDir(name,url,mode,iconimage,plot='',isFolder=True):
     
         try:
@@ -662,13 +526,13 @@ def addDir(name,url,mode,iconimage,plot='',isFolder=True):
         ok=True
         liz=xbmcgui.ListItem(name)
         liz.setArt({'icon' : 'DefaultVideo.png', 'thumb' : iconimage})
-        liz.setInfo( type="Video", infoLabels={ "Title": name, "Plot": plot,'Premiered' : '2012-01-01','Episode' : '7-1' } )
+        liz.setInfo( type="Video", infoLabels={ "Title": name, "Plot": plot } )
         liz.setProperty('Fanart_Image', iconimage.replace('w=512&h=288','w=1280&h=720'))
         menu=[]
         if mode == 2:
-            menu.append(('[COLOR yellow]Add To Favourites[/COLOR]','XBMC.RunPlugin(%s?mode=13&url=%s&name=%s&iconimage=%s)'% (sys.argv[0],url,name,PID)))
+            menu.append(('[COLOR yellow]Add To Favourites[/COLOR]','RunPlugin(%s?mode=13&url=%s&name=%s&iconimage=%s)'% (sys.argv[0],url,name,PID)))
         if mode == 204:
-            menu.append(('[COLOR yellow]Remove Favourite[/COLOR]','XBMC.RunPlugin(%s?mode=14&url=%s&name=%s&iconimage=%s)'% (sys.argv[0],url,name,iconimage)))
+            menu.append(('[COLOR yellow]Remove Favourite[/COLOR]','RunPlugin(%s?mode=14&url=%s&name=%s&iconimage=%s)'% (sys.argv[0],url,name,iconimage)))
         liz.addContextMenuItems(items=menu, replaceItems=False)    
         if mode==3:
             xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_DATE)
@@ -714,59 +578,28 @@ try:
         mode=int(params["mode"])
 except:
         pass
-print ("Mode: "+str(mode))
-print ("URL: "+str(url))
-print ("Name: "+str(name))
-print ("iconimage: "+str(iconimage))
 
 if mode==None or url==None or len(url)<1:
-        print ("categories")
         CATS()
 elif mode==1:
-        print ("index of : "+url)
         SHOWS(url)
 elif mode==2:
-        print ("Getting Episodes: "+url)
         EPS(name,url)
 elif mode==3:
-        print ("Getting Videofiles: "+url)
-        VIDEO(url,iconimage)
-elif mode==4:
-        print ("Getting Videofiles: "+url)
-        BESTOF(url)
-elif mode==5:
-        print ("Getting Videofiles: "+url)
-        BESTOFEPS(name,url)
-elif mode==6:
-        print ("Getting Videofiles: "+url)
-        STREAMS()
-elif mode==7:
-        print ("Getting Videofiles: "+url)
-        PLAY_STREAM(name,url,iconimage)
+        HLS(url,iconimage)
 elif mode==8:
-        print ("Getting Videofiles: "+url)
         PLAY_STREAM_HLS_LIVE(name,url,iconimage)        
-
 elif mode==12:
-    print ("")
     getFavorites()
-
 elif mode==13:
-    print ("")
     addFavorite(name,url,iconimage)
-
 elif mode==14:
-    print ("")
     rmFavorite(name)
-
 elif mode==204:
     EPS(name,url)
-        
 elif mode==205:
     CATEGORIES()
-    
 elif mode==206:
     LIVE()   
         
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
-
