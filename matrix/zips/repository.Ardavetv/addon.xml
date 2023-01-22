@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.Ardavetv" name="Ardave TV" version="3.0.3" provider-name="omoobatv">
+<addon id="repository.Ardavetv" name="Ardave TV" version="3.0.4" provider-name="omoobatv">
   <requires>
 		<import addon="xbmc.addon" version="12.0.0"/>
 	</requires>
@@ -13,6 +13,11 @@
             <info compressed="false">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/matrix/zips/addons.xml</info>
             <checksum>https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/matrix/zips/addons.xml.md5</checksum>
             <datadir zip="true">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/matrix/zips/</datadir>
+        </dir>
+        <dir minversion="20.0.0">
+            <info compressed="false">https://raw.githubusercontent.com/pannal/dontpanickodi/master/nexus/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/pannal/dontpanickodi/master/nexus/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/pannal/dontpanickodi/master/nexus/zips/</datadir>
         </dir>
         <dir>
 	          <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
