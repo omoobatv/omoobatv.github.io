@@ -291,10 +291,10 @@
 				<!-- Add icon to video window if nothing playing -->
 				<control type="image">
 					<visible>!player.hasmedia</visible>
-					<top>480</top>
-					<left>100</left>
-					<width>320</width>
-					<height>230</height>
+					<top>105</top>
+					<left>42</left>
+					<width>447</width>
+					<height>260</height>
 					<texture background="true">$VAR[IconWallThumbVar]</texture>
 					<align>justify</align>
 					<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>

@@ -1244,7 +1244,7 @@
 							<top>105</top>
 							<left>42</left>
 							<height>260</height>
-							<width>445</width>
+							<width>447</width>
 							<texture fallback="special://skin/media/q-icon.png">$INFO[ListItem.Icon]</texture>
 						</control>
 						<control type="textbox">
@@ -1348,8 +1348,8 @@
 				<aspectratio></aspectratio>
 				<top>20</top>
 				<left>65</left>
-				<width>138</width>
-				<height>80</height>
+				<width>140</width>
+				<height>78</height>
 				<texture>skyq.png</texture>
 			</control>
 
