@@ -76,7 +76,7 @@
 						<onclick>InhibitIdleShutdown(false)</onclick>
 						<visible>System.HasShutdown + System.IsInhibit</visible>
 					</item>
-
+					
 				</content>
 			</control>
 		</control>

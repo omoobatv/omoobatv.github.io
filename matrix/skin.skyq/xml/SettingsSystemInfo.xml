@@ -15,6 +15,14 @@
 			<imagepath background="true" colordiffuse="bg_overlay">$INFO[Skin.String(HomeFanart.path)]settings$INFO[Skin.String(HomeFanart.ext)]</imagepath>
 			<visible>!Player.HasMedia + !String.IsEmpty(Skin.String(HomeFanart.path))</visible>
 		</control>
+		<control type="image">
+ 		 <visible>!player.hasmedia</visible>
+ 		 <top>105</top>
+ 		 <left>43</left>
+ 		 <height>260</height>
+ 		 <width>444</width>
+ 		 <texture>special://skin/media/music/setup.png</texture>
+ 	 </control>
 		<control type="group">
 			<left>60</left>
 			<top>70</top>
@@ -105,7 +113,7 @@
 				<animation effect="fade" start="100" end="0" time="150">WindowClose</animation>
 			</control>
 			<control type="image">
-				<left>360</left>
+				<left>435</left>
 				<top>90</top>
 				<right>0</right>
 				<height>3</height>
@@ -115,14 +123,14 @@
 				<bottom>0</bottom>
 				<height>330</height>
 				<control type="image">
-					<left>360</left>
+					<left>435</left>
 					<top>20</top>
 					<right>0</right>
 					<height>3</height>
 					<texture colordiffuse="button_focus" border="2">dialogs/separator-grey.png</texture>
 				</control>
 				<control type="grouplist">
-					<left>430</left>
+					<left>440</left>
 					<orientation>vertical</orientation>
 					<control type="label">
 						<description>CPU Text</description>
@@ -230,8 +238,8 @@
 				<param name="width" value="480" />
 			</include>
 			<control type="grouplist" id="9000">
-				<left>0</left>
-				<top>160</top>
+				<left>26</left>
+				<top>380</top>
 				<width>420</width>
 				<height>100%</height>
 				<onup>9000</onup>
@@ -295,7 +303,7 @@
 				</control>
 			</control>
 		</control>
-		<include content="TopBar">
+		<include content="TopBa">
 			<param name="breadcrumbs_label" value="$LOCALIZE[130]" />
 		</include>
 		<include>BottomBar</include>

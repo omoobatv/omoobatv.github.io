@@ -31,9 +31,9 @@
 			<visible>!Player.HasMedia</visible>
 		</control>
 		<control type="image">
-			<left>42</left>
+			<left>43</left>
 			<top>104</top>
-			<width>445</width>
+			<width>444</width>
 			<height>260</height>
 			<texture>$INFO[ListItem.Art(thumb)]</texture>
 		</control>
@@ -167,8 +167,8 @@
 
 							<control type="image">
 								<left>70</left>
-								<width>395</width>
-								<height>104</height>
+								<width>392</width>
+								<height>85</height>
 								<texture>menuselect.png</texture>
 								<animation effect="fade" start="100" end="0" time="0" condition="[!Control.HasFocus(9000) + !ControlGroup(700).HasFocus] | System.HasModalDialog">Conditional</animation>
 							</control>
@@ -180,7 +180,7 @@
 							<height>95</height>
 							<width>560</width>
 							<aligny>center</aligny>
-							<font>font37</font>
+							<font>font32_title</font>
 							<label>$INFO[ListItem.Label]</label>
 							<shadowcolor>text_shadow</shadowcolor>
 						</control>
@@ -210,7 +210,7 @@
 							<label>Latest</label>
 							<onclick>ActivateWindow(10025,&quot;plugin://plugin.video.youtube/channel/UC1crMgATGeegnQTZTImZuqA/playlist/PL9NY5axt700H1sW_vK8E4KTETLHoD6_0K/&quot;,return)</onclick>
 							<property name="menu_id">$NUMBER[10100]</property>
-							<property name="id">latest</property>
+							<property name="id">Latest</property>
 							<visible>!Skin.HasSetting(HomeMenuNocatchuptvButton)</visible>
 							<thumb>special://skin/media/music/music-latest.png</thumb>
 						</item>
@@ -218,7 +218,7 @@
 							<label>All Time</label>
 							<onclick>ActivateWindow(10025,&quot;plugin://plugin.video.youtube/channel/UC8of0OZhtYxrikCo2Y32tLg/playlist/PLCWdiweuLHK7rny-QQMFOKNu1qUP4i0vj/&quot;,return)</onclick>
 							<property name="menu_id">$NUMBER[10200]</property>
-							<property name="id">alltime</property>
+							<property name="id">Alltime</property>
 							<visible>!Skin.HasSetting(HomeMenuNocatchuptvButton)</visible>
 							<thumb>special://skin/media/music/classic-music.png</thumb>
 						</item>
@@ -262,12 +262,7 @@
 					<onright>SetFocus(9000)</onright>
 					<onright>SetFocus(9000)</onright>
 					<align>justify</align>
-					<include content="IconButton">
-						<param name="control_id" value="804" />
-						<param name="onclick" value="ActivateWindow(shutdownmenu)" />
-						<param name="icon" value="icons/power.png" />
-						<param name="label" value="$LOCALIZE[33060]" />
-					</include>
+
 				</control>
 				<control type="button" id="800">
 					<top>337</top>

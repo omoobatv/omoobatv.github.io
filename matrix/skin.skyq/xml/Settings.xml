@@ -15,12 +15,19 @@
 			<imagepath colordiffuse="35FFFFFF">$INFO[Skin.String(HomeFanart.path)]settings$INFO[Skin.String(HomeFanart.ext)]</imagepath>
 			<visible>!Player.HasMedia + !String.IsEmpty(Skin.String(HomeFanart.path))</visible>
 		</control>
-
+		<control type="image">
+ 		 <visible>!player.hasmedia</visible>
+ 		 <top>105</top>
+ 		 <left>43</left>
+ 		 <height>260</height>
+ 		 <width>444</width>
+ 		 <texture>special://skin/media/music/setup.png</texture>
+ 	 </control>
 
 		<control type="panel" id="9000">
-			<centerleft>70%</centerleft>
+			<centerleft>68%</centerleft>
 			<width>1520</width>
-			<centertop>50%</centertop>
+			<centertop>55%</centertop>
 			<height>870</height>
 			<onleft>9000</onleft>
 			<onright>9000</onright>
@@ -30,7 +37,7 @@
 				<control type="image">
 					<width>430</width>
 					<height>270</height>
-					<texture>dialogs/dialog-bg-nobo.png</texture>
+					<texture>dialogs/dialog-bg-nobo.pn</texture>
 					<bordertexture border="21">overlays/shadow.png</bordertexture>
 					<bordersize>20</bordersize>
 				</control>
@@ -39,7 +46,7 @@
 					<top>180</top>
 					<width>390</width>
 					<height>70</height>
-					<texture colordiffuse="border_alpha">colors/black.png</texture>
+					<texture colordiffuse="border_alpha">colors/black.pn</texture>
 				</control>
 				<control type="image">
 					<centerleft>50%</centerleft>
@@ -75,6 +82,7 @@
 						<bordersize>20</bordersize>-->
 						<texture>menubox.png</texture>
 					</control>
+
 					<!--<control type="image">
 						<width>430</width>
 						<height>270</height>
@@ -175,7 +183,7 @@
 					<label>$LOCALIZE[24001]</label>
 					<onclick>ActivateWindow(addonbrowser)</onclick>
 					<icon>icons/settings/addons.png</icon>
-				</item> 
+				</item>
 			</content>
 		</control>
 		<include content="TopBar">

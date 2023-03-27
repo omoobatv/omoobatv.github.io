@@ -16,9 +16,17 @@
 			<imagepath background="true" colordiffuse="bg_overlay">$INFO[Skin.String(HomeFanart.path)]settings$INFO[Skin.String(HomeFanart.ext)]</imagepath>
 			<visible>!Player.HasMedia + !String.IsEmpty(Skin.String(HomeFanart.path))</visible>
 		</control>
+		<control type="image">
+ 		 <visible>!player.hasmedia</visible>
+ 		 <top>105</top>
+ 		 <left>43</left>
+ 		 <height>260</height>
+ 		 <width>444</width>
+ 		 <texture>special://skin/media/music/setup.png</texture>
+ 	 </control>
 		<control type="group" id="9100">
 			<include>OpenClose_Right</include>
-			<left>472</left>
+			<left>490</left>
 			<control type="image">
 				<top>160</top>
 				<right>0</right>
@@ -217,8 +225,8 @@
 
 								<control type="image">
 									<left>70</left>
-									<width>395</width>
-									<height>104</height>
+									<width>392</width>
+									<height>85</height>
 									<texture>menuselect.png</texture>
 									<animation effect="fade" start="100" end="0" time="0" condition="[!Control.HasFocus(9000) + !ControlGroup(700).HasFocus] | System.HasModalDialog">Conditional</animation>
 								</control>

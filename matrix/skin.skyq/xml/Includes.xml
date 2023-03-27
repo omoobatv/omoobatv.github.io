@@ -1238,13 +1238,13 @@
 							<width>2</width>
 							<texture>dialogs/separator-grey.png</texture>
 						</control>
-						<!-- Add icon to video window if nothing playing -->
+						<!-- Add icon to video window if nothing playing in tvguide -->
 						<control type="image">
 							<visible>!player.hasmedia</visible>
 							<top>105</top>
-							<left>42</left>
+							<left>43</left>
 							<height>260</height>
-							<width>447</width>
+							<width>444</width>
 							<texture fallback="special://skin/media/q-icon.png">$INFO[ListItem.Icon]</texture>
 						</control>
 						<control type="textbox">

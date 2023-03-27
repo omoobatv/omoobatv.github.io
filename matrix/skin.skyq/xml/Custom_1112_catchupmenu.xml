@@ -572,8 +572,8 @@
 
 									<control type="image">
 										<left>70</left>
-										<width>395</width>
-										<height>104</height>
+										<width>392</width>
+										<height>85</height>
 										<texture>menuselect.png</texture>
 										<animation effect="fade" start="100" end="0" time="0" condition="[!Control.HasFocus(9000) + !ControlGroup(700).HasFocus] | System.HasModalDialog">Conditional</animation>
 									</control>
