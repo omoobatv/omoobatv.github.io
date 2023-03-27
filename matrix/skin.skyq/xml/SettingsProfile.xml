@@ -283,7 +283,7 @@
 				</content>
 			</control>
 		</control>
-		<include content="TopBar">
+		<include content="TopBarT">
 			<param name="breadcrumbs_label" value="$LOCALIZE[10034]" />
 		</include>
 		<include>BottomBar</include>

@@ -127,20 +127,19 @@
 				<aligny>center</aligny>
 				<font>font37</font>
 				<texturefocus>menuselect.png</texturefocus>
-				<!--<texturefocus colordiffuse="button_focus">lists/focus.png</texturefocus>--->
 				<texturenofocus />
 			</control>
 
 			<!-- Settings level -->
 
 			<control type="radiobutton" id="20">
-				<width>400</width>
-				<left>50</left>
+				<width>392</width>
+				<left>60</left>
 				<top>980</top>
-				<height>100</height>
+				<height>85</height>
 				<aligny>center</aligny>
 				<onclick>SettingsLevelChange</onclick>
-				<textoffsetx>110</textoffsetx>
+				<textoffsetx>100</textoffsetx>
 				<textoffsety>0</textoffsety>
 				<texturefocus>menuselect.png</texturefocus>
 				<texturenofocus />
@@ -175,7 +174,7 @@
 			<animation effect="fade" start="100" end="0" time="150">WindowClose</animation>
 		</control>
 
-		<include content="TopBar">
+		<include content="TopBarT">
 			<param name="breadcrumbs_label" value="$LOCALIZE[5]$INFO[Control.GetLabel(2), / ]" />
 		</include>
 

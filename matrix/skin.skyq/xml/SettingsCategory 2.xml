@@ -15,6 +15,14 @@
 			<imagepath colordiffuse="35FFFFFF">$INFO[Skin.String(HomeFanart.path)]settings$INFO[Skin.String(HomeFanart.ext)]</imagepath>
 			<visible>!Player.HasMedia + !String.IsEmpty(Skin.String(HomeFanart.path))</visible>
 		</control>
+		<control type="image">
+ 		 <visible>!player.hasmedia</visible>
+ 		 <top>105</top>
+ 		 <left>43</left>
+ 		 <height>260</height>
+ 		 <width>444</width>
+ 		 <texture>special://skin/media/music/setup.png</texture>
+ 	 </control>
 
 		<!-- right hand section -->
 
@@ -112,9 +120,9 @@
 
 			<control type="button" id="10">
 				<description>Default Category Button</description>
-				<left>50</left>
-				<height>104</height>
-				<width>430</width>
+				<left>70</left>
+				<height>85</height>
+				<width>392</width>
 				<textoffsetx>30</textoffsetx>
 				<aligny>center</aligny>
 				<font>font37</font>

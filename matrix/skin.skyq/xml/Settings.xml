@@ -86,7 +86,7 @@
 					<!--<control type="image">
 						<width>430</width>
 						<height>270</height>
-						<!--<texture>menuselectlong.png</texture>
+						<texture>menuselectlong.png</texture>
 						<texture colordiffuse="button_focus">colors/grey.png</texture>
 						<bordersize>0</bordersize>
 						<include>Animation_FocusTextureFade</include>
@@ -118,6 +118,11 @@
 				</control>
 			</focusedlayout>
 			<content>
+				<item>
+					<label>$LOCALIZE[24001]</label>
+					<onclick>ActivateWindow(addonbrowser)</onclick>
+					<icon>icons/settings/addons.png</icon>
+				</item>
 				<item>
 					<label>$LOCALIZE[14201]</label>
 					<onclick>ActivateWindow(PlayerSettings)</onclick>
@@ -179,11 +184,7 @@
 					<onclick>ActivateWindow(filemanager)</onclick>
 					<icon>icons/settings/filemanager.png</icon>
 				</item>
-				<item>
-					<label>$LOCALIZE[24001]</label>
-					<onclick>ActivateWindow(addonbrowser)</onclick>
-					<icon>icons/settings/addons.png</icon>
-				</item>
+
 			</content>
 		</control>
 		<include content="TopBar">

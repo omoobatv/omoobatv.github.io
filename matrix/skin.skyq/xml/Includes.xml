@@ -838,8 +838,12 @@
 			</control>
 		</control>
 	</include>
-
-
+<include name="TopBarT">
+	<control type="label">
+		<label>$PARAM[breadcrumbs_label]</label>
+		<include>SysBreadcrumbsLabel</include>
+	</control>
+</include>
 	<include name="TopBar">
 		<param name="sublabel">$INFO[Container.SortMethod,$LOCALIZE[31022]: ,  ∙  ]$INFO[Container.CurrentItem,, / ]$INFO[Container.NumItems]</param>
 		<definition>
@@ -1073,6 +1077,15 @@
 		<font>font45</font>
 		<shadowcolor>text_shadow</shadowcolor>
 		<left>67</left>
+		<height>100</height>
+		<width>auto</width>-->
+	</include>
+	<include name="SysBreadcrumbsLabel">
+		<description>All menu name breadcrumbs</description>
+		<font>font45</font>
+		<shadowcolor>text_shadow</shadowcolor>
+		<left>500</left>
+		<top>85</top>
 		<height>100</height>
 		<width>auto</width>-->
 	</include>
@@ -1497,6 +1510,7 @@
 					<aligny>center</aligny>
 					<align>right</align>
 					<shadowcolor>text_shadow</shadowcolor>
+
 					<!--<label>$INFO[Container($PARAM[right_container_id]).CurrentItem,, / ]$INFO[Container($PARAM[right_container_id]).NumItems]</label>--->
 				</control>
 				<control type="image">

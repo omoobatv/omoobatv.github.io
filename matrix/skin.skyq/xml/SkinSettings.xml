@@ -17,6 +17,14 @@
 			<imagepath background="true" colordiffuse="bg_overlay">$INFO[Skin.String(HomeFanart.path)]settings$INFO[Skin.String(HomeFanart.ext)]</imagepath>
 			<visible>!Player.HasMedia + !String.IsEmpty(Skin.String(HomeFanart.path))</visible>
 		</control>
+		<control type="image">
+ 		 <visible>!player.hasmedia</visible>
+ 		 <top>105</top>
+ 		 <left>43</left>
+ 		 <height>260</height>
+ 		 <width>444</width>
+ 		 <texture>special://skin/media/music/setup.png</texture>
+ 	 </control>
 
 		<control type="group" id="10000">
 			<left>500</left>
@@ -314,7 +322,7 @@
 			<animation effect="fade" start="100" end="0" time="150">WindowClose</animation>
 			<visible>Control.IsVisible(610)</visible>
 		</control>
-		<include content="TopBar">
+		<include content="TopBarT">
 			<param name="breadcrumbs_label" value="$LOCALIZE[5] / $LOCALIZE[20077]" />
 		</include>
 		<control type="textbox" id="6">
