@@ -478,7 +478,7 @@
 					<control type="grouplist" id="13501">
 						<include>WidgetGroupListCommon</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value="plugin://plugin.video.fen/?action=tvshows&amp;name=Shows&amp;url=http%3a%2f%2fwww.tvmaze.com%2fnetworks%2f12%2fbbc-one"/>
+							<param name="content_path" value="plugin://plugin.video.fen/?action=tmdb_movies_latest_releases&amp;iconImage=dvd&amp;mode=build_movie_list&amp;name=32461&quot;,return"/>
 							<param name="widget_header" value="BBC iPlayer"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
