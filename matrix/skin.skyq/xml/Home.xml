@@ -50,13 +50,14 @@
 		<label>$INFO[ListItem.Label]</label>
 		<shadowcolor>text_shadow</shadowcolor>
 	</control>
+	<!-- Plot at the home top right bat -->
 	<control type="textbox">
 	<left>524</left>
 	<top>180</top>
 	<right>250</right>
 	<height>200</height>
 	<font>font27</font>
-	<label>$INFO[ListItem.Plot]</label>
+	<label fallback="Sky TV on demand offers you a world of entertainment through your Sky Q box including Box Sets and Catch Up TV. Add Sky Cinema today to watch blockbuster movies and Sky Original Films now including Paramount+">$INFO[ListItem.Plot]</label>
 	<align>left</align>
 	<width>1200</width>
 	<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
@@ -636,7 +637,6 @@
 							<onclick>ActivateWindow(1100)</onclick>
 							<property name="id">addons</property>
 							<visible>!Skin.HasSetting(HomeMenuNoProgramsButton)</visible>
-							<plot>Sky TV on demand offers you a world of entertainment through your Sky Q and Sky+HD box including Box Sets, Catch Up TV and Ultimate TV</plot>
 							<thumb>special://skin/media/music/home-menu-thumb.png</thumb>
 						</item>
 						<item>

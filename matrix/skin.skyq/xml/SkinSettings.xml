@@ -198,8 +198,8 @@
 					<selected>!Skin.HasSetting(HomeMenuNoFavButton)</selected>
 					<onclick>Skin.ToggleSetting(HomeMenuNoFavButton)</onclick>
 				</control>
-
-			</control>
+       </control>
+			 
 			<control type="image">
 				<description>Dialog Header image</description>
 				<left>0</left>
@@ -245,8 +245,8 @@
 
 								<control type="image">
 									<left>70</left>
-									<width>395</width>
-									<height>104</height>
+									<width>392</width>
+									<height>85</height>
 									<texture>menuselect.png</texture>
 									<animation effect="fade" start="100" end="0" time="0" condition="[!Control.HasFocus(9000) + !ControlGroup(700).HasFocus] | System.HasModalDialog">Conditional</animation>
 								</control>
@@ -261,8 +261,8 @@
 							<control type="label">
 								<left>104</left>
 								<top>0</top>
-								<height>95</height>
-								<width>560</width>
+								<height>85</height>
+								<width>392</width>
 								<aligny>center</aligny>
 								<font>font37</font>
 								<label>$INFO[ListItem.Label]</label>
