@@ -980,7 +980,7 @@ In addition to what livestreams allowed you to do, you can now,
 </extension>
 </addon>
 
-<addon id="skin.skyq" version="2.3.2" name="Sky Q" provider-name="moshii">
+<addon id="skin.skyq" version="2.3.3" name="Sky Q" provider-name="moshii">
 	<requires>
 		<import addon="xbmc.gui" version="5.15.0" />
 	</requires>
