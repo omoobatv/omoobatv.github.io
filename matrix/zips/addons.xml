@@ -723,7 +723,7 @@ In addition to what livestreams allowed you to do, you can now,
   </extension>
 </addon>
 
-<addon id="repository.Ardavetv" name="Ardave TV" version="3.0.4" provider-name="omoobatv">
+<addon id="repository.Ardavetv" name="Ardave TV" version="3.0.5" provider-name="omoobatv">
   <requires>
 		<import addon="xbmc.addon" version="12.0.0" />
 	</requires>
@@ -749,10 +749,15 @@ In addition to what livestreams allowed you to do, you can now,
 	          <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
         </dir>
         <dir>
-			      <info compressed="false">https://raw.githubusercontent.com/cy4root2/plugins/master/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/cy4root2/plugins/master/addon.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/cy4root2/plugins/master</datadir>
-		   </dir>
+            <info compressed="false">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zips</datadir>
+        </dir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/</datadir>
+        </dir>
        <dir>
 			    <info compressed="false">http://narcacist.com/_repo/addons.xml</info>
 			    <checksum>http://narcacist.com/_repo/addons.xml.md5</checksum>
