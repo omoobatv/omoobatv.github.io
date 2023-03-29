@@ -30,14 +30,13 @@
 					<pagecontrol>60</pagecontrol>
 					<focusedlayout height="90" width="tvchannelslist_width">
 						<control type="image">
-							<left>-20</left>
-							<top>0</top>
+							<left>5</left>
+							<top>-10</top>
 							<right>0</right>
 							<bottom>0</bottom>
-							<height>104</height>
-							<width>910</width>
-							<texture>menuselectlong.png</texture>
-							<!--<texture colordiffuse="button_focus">lists/focus.png</texture> -->
+							<height>115</height>
+							<width>860</width>
+							<texture>flare-panel-2.png</texture>
 							<visible>Control.hasFocus(50)</visible>
 						</control>
 						<control type="image">
@@ -48,15 +47,6 @@
 							<aspectratio align="right">keep</aspectratio>
 							<texture>$INFO[listitem.icon]</texture>
 						</control>
-						<!--<control type="progress">
-							<left>105</left>
-							<top>58</top>
-							<width>50</width>
-							<height>12</height>
-							<midtexture border="3">progress/texturebg_white.png</midtexture>
-							<visible>ListItem.HasEpg</visible>
-							<info>ListItem.Progress</info>
-						</control>-->
 						<control type="image">
 							<right>110</right>
 							<top>25</top>
@@ -293,9 +283,9 @@
 					<visible>!player.hasmedia</visible>
 					<top>105</top>
 					<left>42</left>
-					<width>447</width>
+					<width>444</width>
 					<height>260</height>
-					<texture background="true">$VAR[IconWallThumbVar]</texture>
+					<texture fallback="special://skin/media/q-icon.png">$INFO[ListItem.EpgEventIcon]</texture>
 					<align>justify</align>
 					<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
 				</control>
@@ -396,13 +386,6 @@
 					<visible>String.IsEmpty(Listitem.Plot)</visible>
 				</control>
 			</control>
-
-			<!-- <include content="SkyQ-KodiEditiontvinfobar"></include>-->
-
-			<include content="TopBar">
-				<param name="breadcrumbs_label" value="$INFO[Control.GetLabel(29)]" />
-				<!--<param name="breadcrumbs_label" value="$VAR[BreadcrumbsPVRChannelsVar]" /> -->
-			</include>
 
 			<!-- fake menu -->
 			<include>TVFakeMenu</include>
