@@ -286,8 +286,8 @@
 					<width>444</width>
 					<height>260</height>
 					<texture fallback="special://skin/media/q-icon.png">$INFO[ListItem.EpgEventIcon]</texture>
-					<align>justify</align>
 					<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
+					<align>justify</align>
 				</control>
 			</control>
 

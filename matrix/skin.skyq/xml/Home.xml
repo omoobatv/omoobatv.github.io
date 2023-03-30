@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
 	<defaultcontrol>9000</defaultcontrol>
+	<onload>Skin.SetBool(SkinHelper.EnablePVRThumbs)</onload>
 	<backgroundcolor>background</backgroundcolor>
 	<controls>
 		<control type="button" id="20000">
@@ -486,21 +487,21 @@
 							<param name="list_id" value="13503"/>
 						</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value="plugin://plugin.video.fen/?action=tvshows&amp;name=Shows&amp;url=http%3a%2f%2fwww.tvmaze.com%2fnetworks%2f35%2fitv"/>
+							<param name="content_path" value="plugin://script.skin.helper.widgets/?action=nextaired&amp;mediatype=episodes&amp;reload=$INFO[Window(Home).Property(widgetreload2)]"/>
 							<param name="widget_header" value="itv Hub"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
 							<param name="list_id" value="13504"/>
 						</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value="plugin://plugin.video.fen/?action=tvshows&amp;url=http%3a%2f%2fwww.tvmaze.com%2fnetworks%2f45%2fchannel-4"/>
+							<param name="content_path" value=" "/>
 							<param name="widget_header" value="All 4"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
 							<param name="list_id" value="13505"/>
 						</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value="plugin://plugin.video.fen/?action=tvshows&amp;url=http%3a%2f%2fwww.tvmaze.com%2fnetworks%2f135%2fchannel-5"/>
+							<param name="content_path" value=" "/>
 							<param name="widget_header" value="My 5"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>

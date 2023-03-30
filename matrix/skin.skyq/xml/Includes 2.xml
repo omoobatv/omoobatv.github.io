@@ -1258,7 +1258,7 @@
 							<left>43</left>
 							<height>260</height>
 							<width>444</width>
-							<texture fallback="special://skin/media/q-icon.png">$INFO[ListItem.Icon]</texture>
+							<texture fallback="special://skin/media/q-icon.png">$INFO[ListItem.EpgEventIcon]</texture>
 						</control>
 						<control type="textbox">
 							<left>1530</left>

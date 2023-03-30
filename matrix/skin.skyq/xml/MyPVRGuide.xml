@@ -6,6 +6,16 @@
 	<menucontrol>9000</menucontrol>
 	<controls>
 		<include>DefaultBackground</include>
+		<control type="image">
+		<left>1525</left>
+		<top>87</top>
+		<width>100</width>
+		<height>60</height>
+		<align>justify</align>
+		<fadetime>400</fadetime>
+		<texture>$INFO[container.ListItem.Icon]</texture>
+	</control>
+
 		<control type="group" id="50">
 			<animation effect="fade" start="100" end="0" time="200" tween="sine" condition="$EXP[infodialog_active]">Conditional</animation>
 			<control type="group">
@@ -16,13 +26,6 @@
 				<control type="group">
 					<top>350</top>
 					<depth>DepthContentPanel</depth>
-				<!--	<control type="image">
-						<left>822</left>
-						<top>44</top>
-						<width>100%</width>
-						<bottom>0</bottom>
-						<texture colordiffuse="22FFFFFF">colors/white.png</texture>
-					</control> -->
 					<control type="epggrid" id="10">
 						<left>493</left>
 						<top>0</top>
@@ -37,7 +40,6 @@
 						<onup>10</onup>
 						<ondown>10</ondown>
 						<viewtype label="19032">list</viewtype>
-						<!--<progresstexture border="0,60,18,14" colordiffuse="button_focus">windows/pvr/epg_progress.png</progresstexture>--->
 						<rulerlayout height="45" width="1400">
 							<control type="label">
 								<font>font35</font>
@@ -49,18 +51,20 @@
 							</control>
 						</rulerlayout>
 						<channellayout height="90" width="325">
-							<!--<control type="label">
+						<!-- Add channel number in main epg -->
+						<control type="label">
 								<right>10</right>
 								<top>0</top>
 								<width>75</width>
 								<height>90</height>
-								<font>font12</font>
-								<label>$INFO[ListItem.ChannelNumber]</label>
+								<font>font27_narrow</font>
+								<label>$INFO[ListItem.ChannelNumberLabel]</label>
 								<align>right</align>
 								<aligny>center</aligny>
-								<texture border="12" fallback="windows/pvr/epg-genres/192.png">$INFO[ListItem.Property(GenreType),windows/pvr/epg-genres/,.png]</texture>
-							</control>--->
-							<control type="image" id="1">
+							  <shadowcolor>text_shadow</shadowcolor>
+							</control>
+							<!-- Add channel icon to ChannelName in main epg -->
+								<!--<control type="image" id="1">
 								<right>10</right>
 						    <top>17</top>
 						    <width>65</width>
@@ -68,7 +72,7 @@
 								<aspectratio align="center" aligny="center">keep</aspectratio>
                 <fadetime>400</fadetime>
 								<texture background="true">$INFO[ListItem.Icon]</texture>
-							</control>
+							</control>-->
 							<control type="label" id="1">
 								<left>20</left>
 								<top>0</top>
@@ -76,68 +80,65 @@
 								<height>90</height>
 								<font>font27_narrow</font>
 								<label>$INFO[ListItem.ChannelName]</label>
-								<align>right</align>
+								<align>left</align>
 								<aligny>center</aligny>
 								<texture border="12" fallback="windows/pvr/epg-genres/192.png">$INFO[ListItem.Property(GenreType),windows/pvr/epg-genres/,.png]</texture>
 							</control>
 							<control type="image" id="2">
 								<width>327</width>
 								<height>90</height>
-								<!--<texture border="3" colordiffuse="button_focus">lightskyblue.png</texture>--->
-								<!--<texture border="12" colordiffuse="button_focus">windows/pvr/epg-genres/192.png</texture>--->
+								<!--<texture border="3" colordiffuse="button_focus">lightskyblue.png</texture>-->
+								<!--<texture border="12" colordiffuse="button_focus">windows/pvr/epg-genres/192.png</texture>-->
 							</control>
 						</channellayout>
 						<focusedchannellayout height="90" width="325">
-							<!--<control type="label">
-								<right>10</right>
-								<top>0</top>
-								<width>75</width>
-								<height>90</height>
-								<font>font12</font>
-								<label>$INFO[ListItem.ChannelNumber]</label>
-								<align>right</align>
-								<aligny>center</aligny>
-								<texture border="12" fallback="windows/pvr/epg-genres/192.png">$INFO[ListItem.Property(GenreType),windows/pvr/epg-genres/,.png]</texture>
-							</control>--->
 							<control type="image" id="2">
-							    <top>0</top>
+							  <top>0</top>
 								<width>327</width>
 								<height>100</height>
 								<texture>menuselect.png</texture>
 								<texture border="12" colordiffuse="button_focus">windows/pvr/epg-genres/128.png</texture>
-
-							</control>
-							<control type="image" id="1">
+             </control>
+						 <!-- Add channel number in main channel name hoover epg -->
+						 <control type="label">
+							 <right>10</right>
+							 <top>0</top>
+							 <height>90</height>
+							 <width>75</width>
+							 <align>right</align>
+							 <aligny>center</aligny>
+							 <font>font27_narrow</font>
+							 <label>[B]$INFO[ListItem.ChannelNumberLabel][/B]</label>
+							 <shadowcolor>text_shadow</shadowcolor>
+							 </control>
+						 <!-- Add channel icon to ChannelName hoover in main epg -->
+							<!--<control type="image" id="1">
 								<right>10</right>
 						    <top>17</top>
 						    <width>65</width>
 						    <height>56</height>
 								<aspectratio align="center" aligny="center">keep</aspectratio>
                 <fadetime>400</fadetime>
-
-								<texture background="true">$INFO[ListItem.Icon]</texture>
-							</control>
+                <texture background="true">$INFO[ListItem.Icon]</texture>
+							</control>-->
 							<control type="label" id="1">
 								<left>20</left>
 								<top>0</top>
 								<width>220</width>
 								<height>90</height>
 								<font>font27_narrow</font>
-
-								<label>$INFO[ListItem.ChannelName]</label>
-								<align>right</align>
+               <label>[B]$INFO[ListItem.ChannelName][/B]</label>
+								<align>left</align>
 								<aligny>center</aligny>
 								<texture border="3" fallback="windows/pvr/epg-genres/16.png">$INFO[ListItem.Property(GenreType),windows/pvr/epg-genres/,.png]</texture>
 							</control>
-
-						</focusedchannellayout>
+             </focusedchannellayout>
 						<itemlayout height="90" width="60">
 
 							<control type="image" id="2">
 								<width>58</width>
 								<height>90</height>
 								<top>0</top>
-								<!--<textures>steelblue.jpg</textures>--->
 							<texture border="3" colordiffuse="button_focus">lightskyblue.png</texture>
 							</control>
 							<control type="label" id="1">
@@ -164,13 +165,11 @@
 								<width>100%</width>
 								<height>100</height>
 								<texture>menuselect.png</texture>
-								<!--<texture border="12" colordiffuse="button_focus">menuselect.png</texture>--->
 								<visible>Control.HasFocus(10)</visible>
 							</control>
 							<control type="image" id="2">
 								<width>60</width>
 								<height>90</height>
-								<!--<texture border="8" colordiffuse="button_focus">buttons/thumbnail_focused.png</texture>--->
 							</control>
 							<control type="image" id="2">
 								<width>60</width>
@@ -217,7 +216,7 @@
 
 			<control type="image">
 						<left>490</left>
-						<top>350</top>
+						<top>340</top>
 						<right>0</right>
 						<height>2</height>
 						<texture>dialogs/separator-grey.png</texture>

@@ -1052,23 +1052,24 @@
 				<label>Sky Cinema</label>
 			</control>
 			<control type="label">
-				<label>Sky TV Shows</label>
+				<label>Kids</label>
 			</control>
 			<control type="label">
-				<label>TV</label>
+				<label>All Channels</label>
 			</control>
 			<control type="label">
 				<label>Catchup TV</label>
 			</control>
 			<control type="label">
-				<label>Music</label>
+				<label>HD</label>
 			</control>
 			<control type="label">
-				<label>Search</label>
+				<label>+1</label>
 			</control>
 			<control type="label">
-				<label>Settings</label>
+				<label>Documentaries</label>
 			</control>
+
 		</control>
 	</include>
 
@@ -1261,8 +1262,8 @@
 							<texture fallback="special://skin/media/q-icon.png">$INFO[ListItem.EpgEventIcon]</texture>
 						</control>
 						<control type="textbox">
-							<left>1530</left>
-							<top>100</top>
+							<left>1520</left>
+							<top>145</top>
 							<right>20</right>
 							<height>190</height>
 							<font>font37</font>
@@ -1272,8 +1273,8 @@
 							<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
 						</control>
 						<control type="textbox">
-							<left>1530</left>
-							<top>150</top>
+							<left>1520</left>
+							<top>185</top>
 							<right>20</right>
 							<height>190</height>
 							<font>font37</font>
@@ -1283,7 +1284,7 @@
 							<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
 						</control>
 							<!-- main epg top right Progress bar -->
-							<control type="progress">
+						<!--<control type="progress">
 								<left>1530</left>
 								<top>225</top>
 								<width>300</width>
@@ -1306,7 +1307,7 @@
 								<align>justify</align>
 								<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
 								<visible>true</visible>
-							</control>
+							</control>-->
 		</include>
 
 
