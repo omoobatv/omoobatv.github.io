@@ -38,6 +38,8 @@
     <height>260</height>
     <width>444</width>
     <texture fallback="special://skin/media/q-icon.png">$INFO[ListItem.Icon]</texture>
+		<aspectratio aligny="top">scale</aspectratio>
+
   </control>
 	<control type="label">
 		<description>List item title at home TopBar</description>
@@ -481,20 +483,20 @@
 						<include>WidgetGroupListCommon</include>
 						<include content="catchupWidgetListEpisodes">
 							<param name="content_path" value="plugin://plugin.video.fen/?action=tmdb_movies_latest_releases&amp;iconImage=dvd&amp;mode=build_movie_list&amp;name=32461&quot;,return"/>
-							<param name="widget_header" value="BBC iPlayer"/>
+							<param name="widget_header" value="BBC IPlayer"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
 							<param name="list_id" value="13503"/>
 						</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value="plugin://script.skin.helper.widgets/?action=nextaired&amp;mediatype=episodes&amp;reload=$INFO[Window(Home).Property(widgetreload2)]"/>
+							<param name="content_path" value="plugin://plugin.video.ezra/?action=tmdb_movies_in_theaters&amp;iconImage=intheatres.png&amp;mode=build_movie_list&amp;name=32464&quot;,return"/>
 							<param name="widget_header" value="itv Hub"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
 							<param name="list_id" value="13504"/>
 						</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value=" "/>
+							<param name="content_path" value=""/>
 							<param name="widget_header" value="All 4"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>

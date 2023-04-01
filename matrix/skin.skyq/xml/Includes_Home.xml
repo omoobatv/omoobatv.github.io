@@ -279,7 +279,7 @@
 		<usecontrolcoords>true</usecontrolcoords>
 	</include>
 	<include content="myqWidgetListCommon">
-					<param name="list_id" value="$PARAM[list_id]"/>
+	<param name="list_id" value="$PARAM[list_id]"/>
 	</include>
 
 	<include name="catchuptvWidgetGroupListCommon">
@@ -316,7 +316,7 @@
 			</include>
 			<control type="panel" id="$PARAM[list_id]">
 				<left>0</left>
-				<top>83</top>
+				<top>110</top>
 				<right>0</right>
 				<height>370</height>
 				<width>100%</width>
@@ -343,10 +343,10 @@
 						<left>20</left>
 						<top>5</top>
 						<animation type="Focus">
-							<effect type="zoom" start="100" end="112" time="200" tween="sine" easing="inout" center="230,120" />
+							<effect type="zoom" start="100" end="107" time="200" tween="sine" easing="inout" center="220,130" />
 						</animation>
 						<animation type="Unfocus">
-							<effect type="zoom" start="112" end="100" time="200" tween="sine" easing="inout" center="230,120" />
+							<effect type="zoom" start="112" end="100" time="200" tween="sine" easing="inout" center="220,130" />
 						</animation>
 						<include content="catchuptvEpisodeLayout">
 							<param name="main_label" value="$PARAM[main_label]" />
@@ -360,8 +360,8 @@
 			</control>
 		</definition>
 	</include>
-
-	<include name="catchup1WidgetListEpisodes"> <!-- Box layout -->
+<!-- Box layout -->
+	<include name="catchup1WidgetListEpisodes">
 		<param name="main_label">$INFO[ListItem.Title]</param>
 		<param name="sub_label">$INFO[ListItem.TVShowTitle]</param>
 		<param name="thumb_label">$INFO[ListItem.Season,,x]$INFO[ListItem.Episode]</param>
@@ -579,13 +579,13 @@
 		<ondown>20001</ondown><onleft>9000</onleft>
 		<usecontrolcoords>true</usecontrolcoords>
 	</include>
-
+ <!-- control all widget Title -->
 	<include name="CategoryLabel">
 		<param name="visible">true</param>
 		<definition>
 			<control type="label" id="$PARAM[list_id]666">
-				<left>55</left>
-				<top>80</top>
+				<left>42</left>
+				<top>85</top>
 				<width>9800</width>
 				<height>90</height>
 				<label>$PARAM[label]</label>
@@ -634,7 +634,7 @@
 	</include>
 
 
-	<!-- used to display scrolling posters in Library view -->
+	<!-- used to display scrolling posters in Library view movies tvshows -->
 
 	<include name="WidgetListPoster">
 		<definition>
@@ -670,7 +670,7 @@
 						<left>10</left>
 						<top>10</top>
 						<animation type="Focus">
-							<effect type="zoom" start="100" end="110" time="200" tween="sine" easing="inout" center="230,130" />
+							<effect type="zoom" start="100" end="105" time="200" tween="sine" easing="inout" center="210,130" />
 						</animation>
 						<animation type="Unfocus">
 							<effect type="zoom" start="110" end="100" time="200" tween="sine" easing="inout" center="230,130" />
