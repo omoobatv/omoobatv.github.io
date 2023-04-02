@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<defaultcontrol always="true">10</defaultcontrol>
+	<backgroundcolor>background</backgroundcolor>
+	<views>10</views>
+	<menucontrol>9000</menucontrol>
+	<controls>
+		<include>DefaultBackground</include>
+		<control type="image">
+		<left>1525</left>
+		<top>87</top>
+		<width>100</width>
+		<height>60</height>
+		<align>justify</align>
+		<fadetime>400</fadetime>
+		<texture>$INFO[container.ListItem.Icon]</texture>
+	</control>
+
+		<control type="group" id="50">
+			<animation effect="fade" start="100" end="0" time="200" tween="sine" condition="$EXP[infodialog_active]">Conditional</animation>
+			<control type="group">
+				<description>Guide Timeline</description>
+				<visible>Control.IsVisible(10)</visible>
+				<include>OpenClose_Right</include>
+				<include>Visible_Right</include>
+				<control type="group">
+					<top>350</top>
+					<depth>DepthContentPanel</depth>
+					<control type="epggrid" id="10">
+						<left>493</left>
+						<top>0</top>
+						<right>0</right>
+						<bottom>0</bottom>
+						<pagecontrol>60</pagecontrol>
+						<scrolltime tween="quadratic" easing="out">300</scrolltime>
+						<timeblocks>30</timeblocks>
+						<rulerunit>6</rulerunit>
+						<onleft>9000</onleft>
+						<onright>60</onright>
+						<onup>10</onup>
+						<ondown>10</ondown>
+						<viewtype label="19032">list</viewtype>
+						<rulerlayout height="45" width="1400">
+							<control type="label">
+								<font>font35</font>
+								<textcolor>FFFFFFFF</textcolor>
+								<width>580</width>
+								<height>45</height>
+								<label>$INFO[ListItem.Label]</label>
+								<textoffsetx>10</textoffsetx>
+							</control>
+						</rulerlayout>
+						<channellayout height="90" width="325">
+						<!-- Add channel number in main epg -->
+						<control type="label">
+								<right>10</right>
+								<top>0</top>
+								<width>75</width>
+								<height>90</height>
+								<font>font27_narrow</font>
+								<label>$INFO[ListItem.ChannelNumberLabel]</label>
+								<align>right</align>
+								<aligny>center</aligny>
+							  <shadowcolor>text_shadow</shadowcolor>
+							</control>
+							<!-- Add channel icon to ChannelName in main epg -->
+								<!--<control type="image" id="1">
+								<right>10</right>
+						    <top>17</top>
+						    <width>65</width>
+						    <height>56</height>
+								<aspectratio align="center" aligny="center">keep</aspectratio>
+                <fadetime>400</fadetime>
+								<texture background="true">$INFO[ListItem.Icon]</texture>
+							</control>-->
+							<control type="label" id="1">
+								<left>20</left>
+								<top>0</top>
+								<width>220</width>
+								<height>90</height>
+								<font>font27_narrow</font>
+								<label>$INFO[ListItem.ChannelName]</label>
+								<align>left</align>
+								<aligny>center</aligny>
+								<texture border="12" fallback="windows/pvr/epg-genres/192.png">$INFO[ListItem.Property(GenreType),windows/pvr/epg-genres/,.png]</texture>
+							</control>
+							<control type="image" id="2">
+								<width>327</width>
+								<height>90</height>
+								<!--<texture border="3" colordiffuse="button_focus">lightskyblue.png</texture>-->
+								<!--<texture border="12" colordiffuse="button_focus">windows/pvr/epg-genres/192.png</texture>-->
+							</control>
+						</channellayout>
+						<focusedchannellayout height="90" width="325">
+							<control type="image" id="2">
+							  <top>0</top>
+								<width>327</width>
+								<height>100</height>
+								<texture>menuselect.png</texture>
+								<texture border="12" colordiffuse="button_focus">windows/pvr/epg-genres/128.png</texture>
+             </control>
+						 <!-- Add channel number in main channel name hoover epg -->
+						 <control type="label">
+							 <right>10</right>
+							 <top>0</top>
+							 <height>90</height>
+							 <width>75</width>
+							 <align>right</align>
+							 <aligny>center</aligny>
+							 <font>font27_narrow</font>
+							 <label>[B]$INFO[ListItem.ChannelNumberLabel][/B]</label>
+							 <shadowcolor>text_shadow</shadowcolor>
+							 </control>
+						 <!-- Add channel icon to ChannelName hoover in main epg -->
+							<!--<control type="image" id="1">
+								<right>10</right>
+						    <top>17</top>
+						    <width>65</width>
+						    <height>56</height>
+								<aspectratio align="center" aligny="center">keep</aspectratio>
+                <fadetime>400</fadetime>
+                <texture background="true">$INFO[ListItem.Icon]</texture>
+							</control>-->
+							<control type="label" id="1">
+								<left>20</left>
+								<top>0</top>
+								<width>220</width>
+								<height>90</height>
+								<font>font27_narrow</font>
+               <label>[B]$INFO[ListItem.ChannelName][/B]</label>
+								<align>left</align>
+								<aligny>center</aligny>
+								<texture border="3" fallback="windows/pvr/epg-genres/16.png">$INFO[ListItem.Property(GenreType),windows/pvr/epg-genres/,.png]</texture>
+							</control>
+             </focusedchannellayout>
+						<itemlayout height="90" width="60">
+
+							<control type="image" id="2">
+								<width>58</width>
+								<height>90</height>
+								<top>0</top>
+							<texture border="3" colordiffuse="button_focus">lightskyblue.png</texture>
+							</control>
+							<control type="label" id="1">
+								<left>30</left>
+								<top>0</top>
+								<width>50</width>
+								<height>90</height>
+								<aligny>center</aligny>
+								<font>font27_narrow</font>
+								<label>$INFO[ListItem.Label]</label>
+							</control>
+							<control type="image">
+								<left>6</left>
+								<top>35</top>
+								<width>20</width>
+								<height>20</height>
+								<texture>$VAR[PVRTimerIcon]</texture>
+							</control>
+						</itemlayout>
+						<focusedlayout height="90" width="60">
+							<control type="image" id="2">
+								<top>-1</top>
+								<left>1</left>
+								<width>100%</width>
+								<height>100</height>
+								<texture>menuselect.png</texture>
+								<visible>Control.HasFocus(10)</visible>
+							</control>
+							<control type="image" id="2">
+								<width>60</width>
+								<height>90</height>
+							</control>
+							<control type="image" id="2">
+								<width>60</width>
+								<height>90</height>
+								<top>0</top>
+								<texture border="3" fallback="windows/pvr/epg-genres/16.png">$INFO[ListItem.Property(GenreType),windows/pvr/epg-genres/,.png]</texture>
+								<visible>!Control.HasFocus(10)</visible>
+							</control>
+							<control type="label" id="1">
+								<left>30</left>
+								<top>0</top>
+								<width>50</width>
+								<height>90</height>
+								<aligny>center</aligny>
+								<font>font27_narrow</font>
+								<label>$INFO[ListItem.Label]</label>
+							</control>
+							<control type="image">
+								<left>6</left>
+								<top>35</top>
+								<width>20</width>
+								<height>20</height>
+								<texture>$VAR[PVRTimerIcon]</texture>
+							</control>
+						</focusedlayout>
+					</control>
+
+					<control type="scrollbar" id="60">
+						<right>0</right>
+						<top>47</top>
+						<width>12</width>
+						<bottom>0</bottom>
+						<onleft>10</onleft>
+						<onright>10</onright>
+						<orientation>vertical</orientation>
+						<texturesliderbackground colordiffuse="22FFFFFF">colors/white.png</texturesliderbackground>
+						<animation effect="fade" start="100" end="40" time="0" condition="!system.getbool(input.enablemouse)">Conditional</animation>
+					</control>
+				</control>
+				<include content="SkyQ-KodiEditiontvinfobar"></include>
+			</control>
+
+
+
+			<control type="image">
+						<left>490</left>
+						<top>340</top>
+						<right>0</right>
+						<height>2</height>
+						<texture>dialogs/separator-grey.png</texture>
+					</control>
+					<control type="image">
+						<top>365</top>
+						<left>820</left>
+						<height>1100</height>
+						<width>2</width>
+						<texture>dialogs/separator-grey.png</texture>
+					</control>
+
+			<include content="TopBar">
+				<param name="breadcrumbs_label" value="TV Guide" />
+				<!-- <param name="subbreadcrumbs_label" value="$VAR[BreadcrumbsPVRGuideVar]" />
+				<param name="subbreadcrumbs_label" value="$INFO[Control.GetLabel(30)]" />-->
+				<param name="sublabel" value="" />
+			</include>
+
+			<include>TVFakeMenu</include>
+
+			<control type="group">
+				<include>MediaMenuCommon</include>
+				<include content="PVRSideBar">
+					<param name="group_label2" value="$INFO[Control.GetLabel(30)]" />
+				</include>
+			</control>
+		</control>
+		<control type="label" id="29">
+			<font></font>
+			<include>HiddenObject</include>
+		</control>
+		<control type="label" id="30">
+			<font></font>
+			<include>HiddenObject</include>
+		</control>
+	</controls>
+</window>
