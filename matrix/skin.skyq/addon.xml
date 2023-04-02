@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="skin.skyq" version="2.3.8" name="Sky Q" provider-name="moshii">
+<addon id="skin.skyq" version="2.3.9" name="Sky Q" provider-name="moshii">
 	<requires>
 		<import addon="xbmc.gui" version="5.15.0"/>
 	</requires>

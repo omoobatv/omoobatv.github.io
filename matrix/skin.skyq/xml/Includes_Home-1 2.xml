@@ -279,7 +279,7 @@
 		<usecontrolcoords>true</usecontrolcoords>
 	</include>
 	<include content="myqWidgetListCommon">
-	<param name="list_id" value="$PARAM[list_id]"/>
+					<param name="list_id" value="$PARAM[list_id]"/>
 	</include>
 
 	<include name="catchuptvWidgetGroupListCommon">
@@ -316,7 +316,7 @@
 			</include>
 			<control type="panel" id="$PARAM[list_id]">
 				<left>0</left>
-				<top>110</top>
+				<top>83</top>
 				<right>0</right>
 				<height>370</height>
 				<width>100%</width>
@@ -343,10 +343,10 @@
 						<left>20</left>
 						<top>5</top>
 						<animation type="Focus">
-							<effect type="zoom" start="100" end="107" time="200" tween="sine" easing="inout" center="220,130" />
+							<effect type="zoom" start="100" end="112" time="200" tween="sine" easing="inout" center="230,120" />
 						</animation>
 						<animation type="Unfocus">
-							<effect type="zoom" start="112" end="100" time="200" tween="sine" easing="inout" center="220,130" />
+							<effect type="zoom" start="112" end="100" time="200" tween="sine" easing="inout" center="230,120" />
 						</animation>
 						<include content="catchuptvEpisodeLayout">
 							<param name="main_label" value="$PARAM[main_label]" />
@@ -360,8 +360,8 @@
 			</control>
 		</definition>
 	</include>
-<!-- Box layout -->
-	<include name="catchup1WidgetListEpisodes">
+
+	<include name="catchup1WidgetListEpisodes"> <!-- Box layout -->
 		<param name="main_label">$INFO[ListItem.Title]</param>
 		<param name="sub_label">$INFO[ListItem.TVShowTitle]</param>
 		<param name="thumb_label">$INFO[ListItem.Season,,x]$INFO[ListItem.Episode]</param>
@@ -566,10 +566,6 @@
 	</include>
 
 
-
-
-
-
 	<include name="WidgetGroupListCommon">
 		<orientation>vertical</orientation>
 		<height>100%</height>
@@ -579,13 +575,13 @@
 		<ondown>20001</ondown><onleft>9000</onleft>
 		<usecontrolcoords>true</usecontrolcoords>
 	</include>
- <!-- control all widget Title -->
+<!-- control all widget Title -->
 	<include name="CategoryLabel">
 		<param name="visible">true</param>
 		<definition>
 			<control type="label" id="$PARAM[list_id]666">
 				<left>42</left>
-				<top>85</top>
+				<top>80</top>
 				<width>9800</width>
 				<height>90</height>
 				<label>$PARAM[label]</label>
@@ -599,13 +595,13 @@
 	<include name="PVRWidget">
 		<control type="image">
 			<top>80</top>
-			<left>16</left>
+			<left>10</left>
 			<width>670</width>
 			<height>225</height>
 			<texture border="21">dialogs/dialog-bg.png</texture>
 		</control>
 		<control type="image">
-			<left>55</left>
+			<left>49</left>
 			<top>122</top>
 			<width>140</width>
 			<height>140</height>
@@ -613,20 +609,20 @@
 			<texture background="true" fallback="DefaultVideo.png">$PARAM[icon]</texture>
 		</control>
 		<control type="label">
-			<left>225</left>
-			<top>127</top>
+			<left>209</left>
+			<top>117</top>
 			<height>25</height>
-			<width>420</width>
+			<width>430</width>
 			<label>$PARAM[header]</label>
 			<aligny>center</aligny>
 			<font>font36_title</font>
 			<shadowcolor>black</shadowcolor>
 		</control>
 		<control type="label">
-			<left>225</left>
-			<top>172</top>
-			<height>105</height>
-			<width>420</width>
+			<left>209</left>
+			<top>165</top>
+			<height>20</height>
+			<width>430</width>
 			<label>$PARAM[label1][CR]$PARAM[label2]</label>
 			<font>font12</font>
 			<shadowcolor>black</shadowcolor>
@@ -647,11 +643,13 @@
 				<param name="posy" value="250"/>
 			</include>
 			<control type="panel" id="$PARAM[list_id]">
-				<left>0</left>
+				<left>-23</left>
 				<top>115</top>
 				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) | Container($PARAM[list_id]).IsUpdating</visible>
 				<right>0</right>
-				<height>500</height>
+				<height>965</height>
+				<scrolltime tween="cubic" easing="out">500</scrolltime>
+				<orientation>vertical</orientation>
 				<include content="WidgetListCommon">
 					<param name="list_id" value="$PARAM[list_id]"/>
 				</include>

@@ -295,8 +295,8 @@
 	<include content="catchuptvWidgetListCommon">
 		<param name="list_id" value="$PARAM[list_id]"/>
 	</include>
-
-	<include name="catchupWidgetListEpisodes"> <!-- Long layout -->
+  <!-- Long layout -->
+	<include name="catchupWidgetListEpisodes">
 		<param name="main_label">$INFO[ListItem.TVShowTitle] $INFO[ListItem.Season,,x]$INFO[ListItem.Episode] $INFO[ListItem.Title]</param>
 		<param name="sub_label"></param>
 		<param name="thumb_label"></param>
@@ -314,6 +314,7 @@
 				<param name="list_id" value="$PARAM[list_id]"/>
 				<param name="posy" value="200"/>
 			</include>
+			<!-- control gap between the row all bottom-->
 			<control type="panel" id="$PARAM[list_id]">
 				<left>0</left>
 				<top>110</top>
@@ -634,7 +635,7 @@
 	</include>
 
 
-	<!-- used to display scrolling posters in Library view -->
+	<!-- used to display scrolling posters in Library view movies tvshows -->
 
 	<include name="WidgetListPoster">
 		<definition>
@@ -670,7 +671,7 @@
 						<left>10</left>
 						<top>10</top>
 						<animation type="Focus">
-							<effect type="zoom" start="100" end="110" time="200" tween="sine" easing="inout" center="230,130" />
+							<effect type="zoom" start="100" end="105" time="200" tween="sine" easing="inout" center="210,130" />
 						</animation>
 						<animation type="Unfocus">
 							<effect type="zoom" start="110" end="100" time="200" tween="sine" easing="inout" center="230,130" />
@@ -839,7 +840,7 @@
 				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) | Container($PARAM[list_id]).IsUpdating</visible>
 				<itemlayout width="310" height="500">
 					<control type="group">
-						<left>70</left>
+						<left>20</left>
 						<include content="InfoWallMusicLayout">
 							<param name="main_label" value="$PARAM[main_label]" />
 							<param name="single_label" value="$PARAM[single_label]" />
@@ -851,7 +852,7 @@
 				<focusedlayout width="310" height="500">
 					<control type="group">
 						<depth>DepthContentPopout</depth>
-						<left>70</left>
+						<left>20</left>
 						<animation type="Focus">
 							<effect type="zoom" start="100" end="112" time="200" tween="sine" easing="inout" center="240,120" />
 						</animation>
@@ -899,8 +900,9 @@
 				<visible>$PARAM[visible]</visible>
 				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) | Container($PARAM[list_id]).IsUpdating</visible>
 				<itemlayout width="310" height="340">
+				<!-- control categories image and title-->
 					<control type="group">
-						<left>70</left>
+						<left>20</left>
 						<control type="image">
 							<width>316</width>
 							<height>200</height>
@@ -932,7 +934,7 @@
 				<focusedlayout width="310" height="340">
 					<control type="group">
 						<depth>DepthContentPopout</depth>
-						<left>70</left>
+						<left>20</left>
 						<animation type="Focus">
 							<effect type="zoom" start="100" end="115" time="200" tween="sine" easing="inout" center="228,70" />
 						</animation>
@@ -962,7 +964,7 @@
 							<aspectratio>keep</aspectratio>
 						</control>
 						<control type="textbox">
-							<left>42</left>
+							<left>-42</left>
 							<top>106</top>
 							<width>240</width>
 							<height>70</height>
@@ -1076,8 +1078,9 @@
 				</include>
 				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) | Container($PARAM[list_id]).IsUpdating</visible>
 				<itemlayout width="310" height="500">
+					<!-- control recently played channels-->
 					<control type="group">
-						<left>70</left>
+						<left>20</left>
 						<control type="image">
 							<width>319</width>
 							<height>340</height>
@@ -1127,7 +1130,7 @@
 				<focusedlayout width="310" height="500">
 					<control type="group">
 						<depth>DepthContentPopout</depth>
-						<left>70</left>
+						<left>20</left>
 						<animation type="Focus">
 							<effect type="zoom" start="100" end="110" time="200" tween="sine" easing="inout" center="240,100" />
 						</animation>

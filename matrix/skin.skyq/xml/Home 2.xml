@@ -496,7 +496,7 @@
 							<param name="list_id" value="13504"/>
 						</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value="plugin://plugin.video.themoviedb.helper/info=popular&amp;tmdb_type=movie&amp;quot;,return"/>
+							<param name="content_path" value=""/>
 							<param name="widget_header" value="All 4"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>

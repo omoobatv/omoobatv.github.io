@@ -634,7 +634,7 @@
 	</include>
 
 
-	<!-- used to display scrolling posters in Library view -->
+	<!-- used to display scrolling posters in Library view movies tvshows -->
 
 	<include name="WidgetListPoster">
 		<definition>
@@ -670,7 +670,7 @@
 						<left>10</left>
 						<top>10</top>
 						<animation type="Focus">
-							<effect type="zoom" start="100" end="110" time="200" tween="sine" easing="inout" center="230,130" />
+							<effect type="zoom" start="100" end="105" time="200" tween="sine" easing="inout" center="210,130" />
 						</animation>
 						<animation type="Unfocus">
 							<effect type="zoom" start="110" end="100" time="200" tween="sine" easing="inout" center="230,130" />
