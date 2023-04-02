@@ -964,7 +964,7 @@
 							<aspectratio>keep</aspectratio>
 						</control>
 						<control type="textbox">
-							<left>-42</left>
+							<left>42</left>
 							<top>106</top>
 							<width>240</width>
 							<height>70</height>
