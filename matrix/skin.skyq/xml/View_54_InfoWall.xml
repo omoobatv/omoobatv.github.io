@@ -16,10 +16,6 @@
 				<left>-4</left>
 				<width>484</width>
 				<height>388</height>
-
-				<!--<texture colordiffuse="button_focus">colors/grey.png</texture>
-				<bordertexture border="21">overlays/shadow.png</bordertexture>
-				<bordersize>20</bordersize>-->
 				<texture>menubox.png</texture>
 				<visible>$PARAM[focused]</visible>
 				<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
@@ -252,21 +248,20 @@
 				<left>0</left>
 				<width>423</width>
 				<height>280</height>
-				<!--<texture colordiffuse="button_focus">colors/grey.png</texture>
-				<bordertexture border="21">overlays/shadow.png</bordertexture>
-				<bordersize>20</bordersize>-->
 				<texture>menubox.png</texture>
 				<visible>$PARAM[focused]</visible>
 				<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
 			</control>
+		<!-- control catchup home and music thumbnails size border etc -->
 			<control type="image">
 				<left>0</left>
 				<top>10</top>
 				<width>415</width>
-				<height>237</height>
+				<height>250</height>
 				<texture fallback="$PARAM[fallback_image]" background="true">$VAR[InfoWallThumbVar]</texture>
+				<bordertexture border="31">overlays/shadow.png</bordertexture>
+				<bordersize>23</bordersize>
 				<aspectratio>scale</aspectratio>
-				<bordersize>20</bordersize>
 			</control>
 
 			<control type="label">
@@ -311,7 +306,7 @@
 				<!-- control catchup tv small label bottom Title -->
 				<control type="label">
 					<left>8</left>
-					<top>225</top>
+					<top>240</top>
 					<width>320</width>
 					<label>$PARAM[main_label]</label>
 					<font>font10</font>
@@ -358,8 +353,6 @@
 					<top>-10</top>
 					<width>290</width>
 					<height>400</height>
-					<!--<texture colordiffuse="button_focus">colors/grey.png</texture>
-					<bordersize>20</bordersize>-->
 					<texture>menubox.png</texture>
 					<visible>$PARAM[focused]</visible>
 					<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
@@ -388,6 +381,7 @@
 				</control>
 			-->
 			</control>
+	<!-- control movies and tv shows thumbnails on focus -->
 			<control type="group">
 				<visible>!String.IsEmpty(ListItem.Art(poster))</visible>
 				<control type="image">
@@ -395,13 +389,11 @@
 					<top>-14</top>
 					<width>298</width>
 					<height>408</height>
-					<!--<texture colordiffuse="button_focus">colors/grey.png</texture>
-					<bordertexture border="21">overlays/shadow.png</bordertexture>
-					<bordersize>20</bordersize>-->
 					<texture>menubox.png</texture>
 					<visible>$PARAM[focused]</visible>
 					<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
 				</control>
+				<!-- control movies and tv shows thumbnails size etc -->
 				<control type="image">
 					<left>15</left>
 					<top>-10</top>
@@ -409,8 +401,8 @@
 					<height>400</height>
 					<texture background="true" fallback="DefaultVideo.png">$INFO[ListItem.Art(poster)]</texture>
 					<aspectratio>scale</aspectratio>
-					<bordertexture border="21">overlays/shadow.png</bordertexture>
-					<bordersize>20</bordersize>
+					<bordertexture border="31">overlays/shadow.png</bordertexture>
+					<bordersize>23</bordersize>
 				</control>
 				<control type="image">
 					<left>35</left>

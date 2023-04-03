@@ -634,7 +634,6 @@
 		</control>
 	</include>
 
-
 	<!-- used to display scrolling posters in Library view movies tvshows -->
 
 	<include name="WidgetListPoster">
