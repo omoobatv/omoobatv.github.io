@@ -483,7 +483,7 @@
 						<include>WidgetGroupListCommon</include>
 						<include content="catchupWidgetListEpisodes">
 							<param name="content_path" value="plugin://plugin.video.fen/?action=tmdb_movies_latest_releases&amp;iconImage=dvd&amp;mode=build_movie_list&amp;name=32461&quot;,return"/>
-							<param name="widget_header" value="BBC IPlayer"/>
+							<param name="widget_header" value="BBC iPlayer"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
 							<param name="list_id" value="13503"/>
@@ -496,7 +496,7 @@
 							<param name="list_id" value="13504"/>
 						</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value="plugin://plugin.video.themoviedb.helper/info=popular&amp;tmdb_type=movie&amp;quot;,return"/>
+							<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=popular&amp;tmdb_type=movie&amp;widget=true&amp;reload=$INFO[WINDOW(Home).Property(TMDbHelper.Widgets.Reload)],return"/>
 							<param name="widget_header" value="All 4"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
@@ -639,7 +639,7 @@
 							<property name="menu_id">$NUMBER[8000]</property>
 							<onclick>ActivateWindow(1100)</onclick>
 							<property name="id">addons</property>
-							<visible>!Skin.HasSetting(HomeMenuNoProgramsButton)</visible>
+							<visible>!Skin.HasSetting(Home2MenuNoProgramsButton)</visible>
 							<thumb>special://skin/media/music/home-menu-thumb.png</thumb>
 						</item>
 						<item>
@@ -713,7 +713,14 @@
 							<visible>!Skin.HasSetting(HomeMenuNoMusicButton)</visible>
 							<thumb>special://skin/media/music/rihanna-umbrella.png</thumb>
 						</item>
-
+						<item>
+							<label>Apps</label>
+							<property name="menu_id">$NUMBER[8000]</property>
+							<onclick>ActivateWindow(1100)</onclick>
+							<property name="id">addons</property>
+							<visible>!Skin.HasSetting(HomeMenuNoAppsButton)</visible>
+							<thumb>special://skin/media/music/home-menu-thumb.png</thumb>
+						</item>
 
 						<item>
 							<label>Videos</label>
@@ -727,6 +734,7 @@
 							<label>Search</label>
 							<onclick>ActivateWindow(1107)</onclick>
 							<thumb>special://skin/media/music/button.png</thumb>
+							<visible>!Skin.HasSetting(HomeMenuNoSearchButton)</visible>
 						</item>
 						<item>
 							<label>Settings</label>

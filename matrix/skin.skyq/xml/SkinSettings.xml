@@ -163,7 +163,7 @@
 					<onclick>Skin.ToggleSetting(HomeMenuNoMusicVideoButton)</onclick>
 				</control>-->
 				<control type="radiobutton" id="618">
-					<label>TV</label>
+					<label>TV Guide</label>
 					<include>DefaultSettingButton</include>
 					<selected>!Skin.HasSetting(HomeMenuNoTVButton)</selected>
 					<onclick>Skin.ToggleSetting(HomeMenuNoTVButton)</onclick>
@@ -173,13 +173,13 @@
 					<include>DefaultSettingButton</include>
 					<selected>!Skin.HasSetting(HomeMenuNoRadioButton)</selected>
 					<onclick>Skin.ToggleSetting(HomeMenuNoRadioButton)</onclick>
-				</control>
-				<control type="radiobutton" id="614">
-					<label>Programs</label>
-					<include>DefaultSettingButton</include>
-					<selected>!Skin.HasSetting(HomeMenuNoProgramsButton)</selected>
-					<onclick>Skin.ToggleSetting(HomeMenuNoProgramsButton)</onclick>
 				</control>-->
+				<control type="radiobutton" id="614">
+					<label>Apps</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeMenuNoAppsButton)</selected>
+					<onclick>Skin.ToggleSetting(HomeMenuNoAppsButton)</onclick>
+				</control>
 				<control type="radiobutton" id="615">
 					<label>Use Built in Library</label>
 					<include>DefaultSettingButton</include>
@@ -198,8 +198,15 @@
 					<selected>!Skin.HasSetting(HomeMenuNoFavButton)</selected>
 					<onclick>Skin.ToggleSetting(HomeMenuNoFavButton)</onclick>
 				</control>
-       </control>
-			 
+
+			 <control type="radiobutton" id="6162">
+				 <label>Search</label>
+				 <include>DefaultSettingButton</include>
+				 <selected>!Skin.HasSetting(HomeMenuNoSearchButton)</selected>
+				 <onclick>Skin.ToggleSetting(HomeMenuNoSearchButton)</onclick>
+			 </control>
+			</control>
+
 			<control type="image">
 				<description>Dialog Header image</description>
 				<left>0</left>

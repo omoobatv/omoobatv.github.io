@@ -659,7 +659,7 @@
 				<itemlayout width="310" height="486">
 					<control type="group">
 						<left>10</left>
-						<top>10</top>
+						<top>15</top>
 						<include content="InfoWallMovieLayout">
 							<param name="focused" value="false" />
 						</include>
@@ -669,7 +669,7 @@
 					<control type="group">
 						<depth>DepthContentPopout</depth>
 						<left>10</left>
-						<top>10</top>
+						<top>15</top>
 						<animation type="Focus">
 							<effect type="zoom" start="100" end="105" time="200" tween="sine" easing="inout" center="210,130" />
 						</animation>

@@ -241,5 +241,68 @@
 			<filename>arial.ttf</filename>
 			<size>30</size>
 		</font>
+		<font>
+        <name>font28_skyTVG</name>
+        <filename>SkyMedium.ttf</filename>
+			  <size>28</size>
+			  <style>lighten</style>
+			  <linespacing>1.0</linespacing>
+        </font>
+		<font>
+        <name>font28LOWC_skyTVG</name>
+        <filename>SkyMedium.ttf</filename>
+			  <size>28</size>
+		  	<style>lowercase lighten</style>
+		  	<linespacing></linespacing>
+        </font>
+		<font>
+        <name>font28B_skyTVG</name>
+        <filename>SkyBold.ttf</filename>
+			  <size>28</size>
+			  <style>lighten</style>
+		  	<linespacing>1.0</linespacing>
+        </font>
+		<font>
+        <name>font25LOWCB_skyTVG</name>
+        <filename>SkyMedium.ttf</filename>
+			  <size>25</size>
+		  	<style>lowercase bold</style>
+		  	<linespacing>1.0</linespacing>
+        </font>
+		<font>
+       <name>font25LOWCM_skyTVG</name>
+       <filename>SkyMedium.ttf</filename>
+			 <size>25</size>
+			 <style>lowercase lighten</style>
+			 <linespacing>1.0</linespacing>
+       </font>
+		<font>
+       <name>font25MB_skyTVG</name>
+       <filename>SkyMedium.ttf</filename>
+			 <size>25</size>
+			 <style>bold</style>
+			 <linespacing></linespacing>
+       </font>
+		<font>
+       <name>font32M_skyTVG</name>
+       <filename>SkyMedium.ttf</filename>
+			 <size>32</size>
+			 <style>lighten</style>
+			 <linespacing>1.0</linespacing>
+       </font>
+		<font>
+       <name>font35B_skyTVG</name>
+       <filename>SkyBold.ttf</filename>
+			 <size>35</size>
+			 <style>lighten</style>
+			 <linespacing>1.0</linespacing>
+       </font>
+		<font>
+        <name>font44M_skyTVGW</name>
+        <filename>SkyMedium.ttf</filename>
+			  <size>44</size>
+			  <style>lighten</style>
+			  <linespacing>1.2</linespacing>
+    </font>
 	</fontset>
 </fonts>
