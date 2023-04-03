@@ -14,7 +14,7 @@
 			<control type="image">
 				<top>-14</top>
 				<left>-4</left>
-				<width>384</width>
+				<width>484</width>
 				<height>388</height>
 
 				<!--<texture colordiffuse="button_focus">colors/grey.png</texture>
@@ -310,7 +310,7 @@
 				</control>
 				<!-- control catchup tv small label bottom Title -->
 				<control type="label">
-					<left>7</left>
+					<left>8</left>
 					<top>225</top>
 					<width>320</width>
 					<label>$PARAM[main_label]</label>
@@ -722,8 +722,7 @@
 				<left>350</left>
 				<top>0</top>
 				<width>90%</width>
-
-				<onleft>9000</onleft>
+        <onleft>9000</onleft>
 				<onright>531</onright>
 				<onup condition="Integer.IsGreater(Container.NumPages,1)">54</onup>
 				<onup condition="!Integer.IsGreater(Container.NumPages,1)">9000</onup>

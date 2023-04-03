@@ -542,7 +542,7 @@ msgstr ""
 
 #: /xml/Home.xml
 msgctxt "#31122"
-msgid "Unwatched TV Shows"
+msgid "Unwatched Shows"
 msgstr ""
 
 #: /xml/DialogVideoInfo.xml
