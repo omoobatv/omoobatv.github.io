@@ -426,6 +426,11 @@
 	</variable>
 	<variable name="TopPickThumbFanart">
    <value condition="!String.IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
+	 <value condition="!String.IsEmpty(ListItem.EpgEventIcon)">$INFO[ListItem.EpgEventIcon]</value>
    <value>$INFO[ListItem.Thumb]</value>
+</variable>
+<variable name="HomeEventIconListItemIcon">
+   <value condition="!String.IsEmpty(ListItem.EpgEventIcon)">$INFO[ListItem.EpgEventIcon]</value>
+   <value>$INFO[ListItem.Icon]</value>
 </variable>
 </includes>

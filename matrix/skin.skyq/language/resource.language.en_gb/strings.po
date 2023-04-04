@@ -97,7 +97,7 @@ msgstr ""
 #. home screen channel widget: recently played tv channels. (please note that in some non-english languages #31018 and #31016 might not be equal)
 #: /xml/Home.xml
 msgctxt "#31016"
-msgid "Recently played channels"
+msgid "Recent Channels"
 msgstr ""
 
 #: /xml/DialogVideoInfo.xml

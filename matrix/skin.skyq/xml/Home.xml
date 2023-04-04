@@ -37,7 +37,7 @@
     <left>43</left>
     <height>260</height>
     <width>444</width>
-    <texture fallback="special://skin/media/q-icon.png">$INFO[ListItem.Icon]</texture>
+    <texture fallback="special://skin/media/q-icon.png">$VAR[HomeEventIconListItemIcon]</texture>
 		<aspectratio aligny="top">scale</aspectratio>
 
   </control>
@@ -483,6 +483,15 @@
 							<param name="list_id" value="12200"/>
 						</include>
 						<include content="WidgetListChannels" condition="System.HasPVRAddon">
+							<param name="content_path" value="pvr://channels/tv/*"/>
+							<param name="widget_header" value="All Channels"/>
+							<param name="widget_target" value="pvr"/>
+							<param name="list_id" value="12202"/>
+							<param name="item_limit" value="2000"/>
+							<param name="label" value="$INFO[ListItem.ChannelName]"/>
+							<param name="label2" value="$INFO[ListItem.Title] $VAR[SeasonEpisodeLabel]"/>
+						</include>
+						<include content="WidgetListChannels" condition="System.HasPVRAddon">
 							<param name="content_path" value="pvr://recordings/tv/active?view=flat"/>
 							<param name="sortby" value="date"/>
 							<param name="sortorder" value="descending"/>
@@ -535,7 +544,7 @@
 							<param name="list_id" value="13505"/>
 						</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value=" "/>
+							<param name="content_path" value="pvr://channels/tv/"/>
 							<param name="widget_header" value="My 5"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
