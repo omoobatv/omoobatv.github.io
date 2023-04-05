@@ -364,7 +364,7 @@
 
 	<!-- Widget List Episodes Home Pvr  Layout -->
 	<include name="WidgetListEpisodesHomePvr">
-		<param name="main_label">$INFO[ListItem.TVShowTitle] $INFO[ListItem.Season,,x]$INFO[ListItem.Episode] $INFO[ListItem.Title]</param>
+		<param name="main_label">$INFO[ListItem.Title]</param>
 		<param name="sub_label"></param>
 		<param name="sortby"></param>
 		<param name="visible">True</param>

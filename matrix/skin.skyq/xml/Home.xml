@@ -546,7 +546,7 @@
 							<param name="list_id" value="13505"/>
 						</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value="pvr://channels/tv/"/>
+							<param name="content_path" value=""/>
 							<param name="widget_header" value="My 5"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
