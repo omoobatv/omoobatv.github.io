@@ -233,13 +233,8 @@
 		</definition>
 	</include>
 
-
+<!-- for catchup home and music thumbnails size border etc -->
 	<include name="catchuptvEpisodeLayout">
-		<!--
-		<param name="main_label">$INFO[ListItem.Title]</param>
-		<param name="sub_label">$INFO[ListItem.TVShowTitle]</param>
-		<param name="thumb_label">$INFO[ListItem.Season,,x]$INFO[ListItem.Episode]</param>
-	-->
 		<param name="fallback_image">DefaultTVShows.png</param>
 		<param name="focused">false</param>
 		<definition>
@@ -332,8 +327,103 @@
 		</definition>
 	</include>
 
+	<!-- for Widget List Episodes Home Pvr thumbnails size border etc -->
+		<include name="WidgetListEpisodesHomePvrLayout">
+			<param name="fallback_image">q-image.png</param>
+			<param name="focused">false</param>
+			<definition>
+				<control type="image">
+					<top>6</top>
+					<left>0</left>
+					<width>423</width>
+					<height>280</height>
+					<texture>menubox.png</texture>
+					<visible>$PARAM[focused]</visible>
+					<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
+				</control>
+			<!-- control Widget List Episodes Home Pvr thumbnails size border etc -->
+				<control type="image">
+					<left>0</left>
+					<top>10</top>
+					<width>415</width>
+					<height>250</height>
+					<texture fallback="$PARAM[fallback_image]" background="true">$INFO[ListItem.EpgEventIcon]</texture>
+					<bordertexture border="31">overlays/shadow.png</bordertexture>
+					<bordersize>23</bordersize>
+					<aspectratio>scale</aspectratio>
+				</control>
 
+				<control type="label">
+					<left>31</left>
+					<top>178</top>
+					<width>260</width>
+					<label>$PARAM[thumb_label]</label>
+					<font>font20_title</font>
+					<shadowcolor>text_shadow</shadowcolor>
+					<align>right</align>
+				</control>
+			<!-- add icon to home pvr event image -->
+				<control type="image">
+					<left>35</left>
+					<top>180</top>
+					<width>80</width>
+					<height>45</height>
+					<texture>$INFO[ListItem.thumb]</texture>
+					<aspectratio>keep</aspectratio>
+				</control>
+				<control type="textbox">
+					<left>28</left>
+					<top>202</top>
+					<width>262</width>
+					<height>80</height>
+					<font>font12</font>
+					<align>center</align>
+					<aligny>center</aligny>
+					<label>$INFO[ListItem.Label]</label>
+					<visible>Window.IsActive(videos)</visible>
+				</control>
+				<control type="group">
+					<visible>!Window.IsActive(videos)</visible>
+					<control type="label">
+						<left>29</left>
+						<top>210</top>
+						<width>260</width>
+						<label>$PARAM[sub_label]</label>
+						<font>font12</font>
+						<shadowcolor>text_shadow</shadowcolor>
+						<scroll>$PARAM[focused]</scroll>
+						<align>center</align>
+					</control>
+					<!-- control catchup tv small label bottom Title -->
+					<control type="label">
+						<left>8</left>
+						<top>240</top>
+						<width>320</width>
+						<label>$PARAM[main_label]</label>
+						<font>font10</font>
+						<shadowcolor>text_shadow</shadowcolor>
+						<align>left</align>
+					</control>
+				</control>
+				<control type="progress">
+					<left>20</left>
+					<top>258</top>
+					<width>276</width>
+					<height>1</height>
+					<texturebg></texturebg>
+					<midtexture colordiffuse="button_focus" border="3">progress/texturebg_alt_white.png</midtexture>
+					<info>ListItem.PercentPlayed</info>
+					<visible>!Integer.IsEqual(ListItem.PercentPlayed,0)</visible>
+				</control>
+				<control type="group">
+					<left>134</left>
+					<top>8</top>
+					<include>UserRatingCircle</include>
+				</control>
+			</definition>
+		</include>
 
+<!-- for info wall movie thumbnails size border etc -->
 	<include name="InfoWallMovieLayout">
 		<param name="focused">false</param>
 		<definition>

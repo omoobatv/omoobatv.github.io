@@ -1170,13 +1170,11 @@ In addition to what livestreams allowed you to do, you can now,
 		<disclaimer lang="zh_CN">Estuary 是 Kodi 的默认皮肤，删除它可能导致故障。</disclaimer>
 		<disclaimer lang="zh_TW">Estuary 是 Kodi 預設的佈景主題，移除它可能會造成問題</disclaimer>
 	</extension>
-</addon><addon id="skin.skyq" version="2.4.6" name="Sky Q" provider-name="moshii">
+</addon><addon id="skin.skyq" version="2.4.7" name="Sky Q" provider-name="moshii">
 	<requires>
 		<import addon="xbmc.gui" version="5.15.0" />
 	</requires>
 	<extension point="xbmc.gui.skin" debugging="false">
-		<summary lang="en">eXtended MOD of Estuary skin by Moshii.</summary>
-		<description lang="en">Sky Q skin is a MOD of Estuary to make it look so much like a popular UK TV.</description>
 		<res width="1920" height="1440" aspect="4:3" default="false" folder="xml" />
 		<res width="1920" height="1280" aspect="3:2" default="false" folder="xml" />
 		<res width="1920" height="1200" aspect="16:10" default="false" folder="xml" />
@@ -1192,5 +1190,7 @@ In addition to what livestreams allowed you to do, you can now,
 			<icon>resources/icon.png</icon>
 			<fanart>resources/fanart.jpg</fanart>
 		</assets>
+		<summary lang="en_gb">Sky Q MOD of Estuary skin by Moshii.</summary>
+		<description lang="en_gb">Sky Q skin is a MOD of Estuary to make it look so much like a popular UK TV.</description>
 	</extension>
 </addon></addons>
