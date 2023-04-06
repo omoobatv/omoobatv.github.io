@@ -189,15 +189,17 @@
 				</control>
 				<include content="SkyQ-KodiEditiontvinfobar"></include>
 			</control>
+			<!-- Add divider to tvg date and time top -->
       <control type="image">
 						<left>490</left>
 						<top>340</top>
 						<right>0</right>
 						<height>2</height>
-						<texture>dialogs/separator-grey.png</texture>
+						<texture>div-h2.png</texture>
 					</control>
+					<!-- Tvg straight divider between channel number -->
 					<control type="image">
-						<top>365</top>
+						<top>340</top>
 						<left>820</left>
 						<height>1100</height>
 						<width>2</width>

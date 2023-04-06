@@ -47,14 +47,14 @@
 				<top>160</top>
 				<right>0</right>
 				<height>2</height>
-				<texture colordiffuse="button_focus" border="2">dialogs/separator-grey.png</texture>
+				<texture colordiffuse="button_focus" border="2">div-h.png</texture>
 			</control>
 			<control type="image">
 				<left>500</left>
 				<bottom>135</bottom>
 				<right>0</right>
 				<height>2</height>
-				<texture colordiffuse="button_focus" border="2">dialogs/separator-grey.png</texture>
+				<texture colordiffuse="button_focus" border="2">div-h.png</texture>
 			</control>
 		</control>
 
@@ -79,7 +79,7 @@
 		<control type="image" id="11">
 			<description>separator image</description>
 			<height>3</height>
-			<texture colordiffuse="AAAAAAAA" border="3">dialogs/separator-grey.png</texture>
+			<texture colordiffuse="AAAAAAAA" border="3">div-h.png</texture>
 		</control>
 		<control type="label" id="14">
 			<description>Default Label</description>
@@ -91,7 +91,7 @@
 			<align>center</align>
 			<aligny>center</aligny>
 			<font>font25_title</font>
-			<textcolor>grey</textcolor>
+			<textcolor>FBFBFBFB</textcolor>
 			<shadowcolor>black</shadowcolor>
 		</control>
 		<control type="group">
