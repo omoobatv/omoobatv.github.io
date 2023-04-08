@@ -39,7 +39,6 @@
     <width>444</width>
     <texture fallback="special://skin/media/q-icon.png">$VAR[HomeEventIconListItemIcon]</texture>
 		<aspectratio aligny="top">scale</aspectratio>
-
   </control>
 	<control type="label">
 		<description>List item title at home TopBar</description>
@@ -468,13 +467,22 @@
 								</include>
 							</control>
 						</control>
-						<include content="WidgetListCategories" condition="System.HasPVRAddon">
+						<!--<include content="WidgetListCategories" condition="System.HasPVRAddon">
 							<param name="widget_header" value="$LOCALIZE[31148]"/>
 							<param name="list_id" value="12900"/>
 							<param name="pvr_submenu" value="true"/>
 							<param name="pvr_type" value="TV"/>
+						</include>-->
+						<include content="WidgetListEpisodesHomePvr" condition="System.HasPVRAddon">
+							<param name="content_path" value="pvr://channels/tv/*"/>
+							<param name="widget_header" value="On Now"/>
+							<param name="widget_target" value="pvr"/>
+							<param name="list_id" value="12202"/>
+							<param name="item_limit" value="2000"/>
+							<param name="label" value="$INFO[ListItem.ChannelName]"/>
+							<param name="label2" value="$INFO[ListItem.Title] $VAR[SeasonEpisodeLabel]"/>
 						</include>
-						<include content="WidgetListChannels" condition="System.HasPVRAddon">
+						<include content="WidgetListEpisodesHomePvr" condition="System.HasPVRAddon">
 							<param name="content_path" value="pvr://channels/tv/*?view=lastplayed"/>
 							<param name="sortby" value="lastplayed"/>
 							<param name="sortorder" value="descending"/>
@@ -482,15 +490,7 @@
 							<param name="widget_target" value="pvr"/>
 							<param name="list_id" value="12200"/>
 						</include>
-						<include content="WidgetListChannels" condition="System.HasPVRAddon">
-							<param name="content_path" value="pvr://channels/tv/*"/>
-							<param name="widget_header" value="All Channels"/>
-							<param name="widget_target" value="pvr"/>
-							<param name="list_id" value="12202"/>
-							<param name="item_limit" value="2000"/>
-							<param name="label" value="$INFO[ListItem.ChannelName]"/>
-							<param name="label2" value="$INFO[ListItem.Title] $VAR[SeasonEpisodeLabel]"/>
-						</include>
+
 						<include content="WidgetListChannels" condition="System.HasPVRAddon">
 							<param name="content_path" value="pvr://recordings/tv/active?view=flat"/>
 							<param name="sortby" value="date"/>
@@ -502,6 +502,7 @@
 							<param name="label2" value="$INFO[ListItem.Title]$INFO[ListItem.EpisodeName, (,)]"/>
 						</include>
 					</control>
+
 					<include content="ImageWidget" condition="!System.HasPVRAddon">
 						<param name="text_label" value="$LOCALIZE[31143]" />
 						<param name="button_label" value="$LOCALIZE[31144]" />
@@ -544,7 +545,7 @@
 							<param name="list_id" value="13505"/>
 						</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value="pvr://channels/tv/"/>
+							<param name="content_path" value="plugin://plugin.video.iplayerwww/?description&amp;logged_in=False&amp;mode=120&amp;name=Channel A-Z&amp;subtitles_url&amp;url=url&quot;,return"/>
 							<param name="widget_header" value="My 5"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
@@ -623,7 +624,7 @@
 					<width>462</width>
 					<height>574</height>
 					<movement>6</movement>
-					<focusposition>1</focusposition>
+					<focusposition>0</focusposition>
 					<onfocus>ClearProperty(listposition,home)</onfocus>
 					<onright>SetFocus($INFO[Container(9000).ListItem.Property(menu_id)])</onright>
 					<onup>700</onup>
@@ -681,7 +682,7 @@
 							<onclick>ActivateWindow(1100)</onclick>
 							<property name="id">home</property>
 							<visible>!Skin.HasSetting(Home2MenuNoProgramsButton)</visible>
-							<thumb>special://skin/media/music/home-menu-thumb.png</thumb>
+							<thumb>special://skin/media/menuimage/home-menu-thumb.png</thumb>
 						</item>
 						<item>
 							<label>TV Guide</label>
@@ -689,7 +690,7 @@
 							<onclick>ActivateWindow(TVGuide)</onclick>
 							<property name="id">livetv</property>
 							<visible>!Skin.HasSetting(HomeMenuNoTVButton)</visible>
-							<thumb>special://skin/media/music/itvhd-topicks.png</thumb>
+							<thumb>special://skin/media/menuimage/itvhd-topicks.png</thumb>
 						</item>
 						<item>
 							<label>My Sky Q</label>
@@ -707,7 +708,7 @@
 							<property name="id">movies</property>
 							<visible>!Skin.HasSetting(HomeMenuNoMovieButton)</visible>
 							<visible>!Skin.HasSetting(HomeMenuNoLibraryButton)</visible>
-							<thumb>special://skin/media/music/cinema-home-icon.png</thumb>
+							<thumb>special://skin/media/menuimage/cinema-home-icon.png</thumb>
 						</item>
 						<item> <!-- Using Exodus -->
 							<label>Sky Cinema</label>
@@ -725,7 +726,7 @@
 							<property name="id">tvshows</property>
 							<visible>!Skin.HasSetting(HomeMenuNoTVShowButton)</visible>
 							<visible>!Skin.HasSetting(HomeMenuNoLibraryButton)</visible>
-							<thumb>special://skin/media/music/tv-shows-icon.png</thumb>
+							<thumb>special://skin/media/menuimage/tv-shows-icon.png</thumb>
 
 						</item>
 						<item> <!-- using Exodus -->
@@ -743,7 +744,7 @@
 							<onclick>ActivateWindow(1112)</onclick>
 							<property name="id">catchuptv</property>
 							<visible>!Skin.HasSetting(HomeMenuNoTVButton)</visible>
-							<thumb>special://skin/media/music/ITV-Hub.png</thumb>
+							<thumb>special://skin/media/menuimage/itvhub.png</thumb>
 						</item>
 						<item>
 							<label>Music</label>
@@ -751,7 +752,7 @@
 							<onclick>ActivateWindow(1118)</onclick>
 							<property name="id">music</property>
 							<visible>!Skin.HasSetting(HomeMenuNoMusicButton)</visible>
-							<thumb>special://skin/media/music/rihanna-umbrella.png</thumb>
+							<thumb>special://skin/media/menuimage/music-menu-icon.png</thumb>
 						</item>
 						<item>
 							<label>Apps</label>
@@ -759,7 +760,7 @@
 							<onclick>ActivateWindow(1100)</onclick>
 							<property name="id">addons</property>
 							<visible>!Skin.HasSetting(HomeMenuNoAppsButton)</visible>
-							<thumb>special://skin/media/music/plugin.png</thumb>
+							<thumb>special://skin/media/menuimage/plugin.png</thumb>
 						</item>
 
 						<item>
@@ -779,24 +780,27 @@
 						<item>
 							<label>Settings</label>
 							<onclick>ActivateWindow(settings)</onclick>
-							<thumb>special://skin/media/music/sky-q-upgrade.png</thumb>
+							<thumb>special://skin/media/menuimage/sky-q-upgrade.png</thumb>
 						</item>
 						<item>
 							<label>Shutdown</label>
 							<onclick>ActivateWindow(shutdownmenu)</onclick>
-							<thumb>special://skin/media/music/q-shutdown.png</thumb>
+							<onfocus>ActivateWindow(shutdownmenu)</onfocus>
+							<thumb>special://skin/media/menuimage/q-shutdown.png</thumb>
 						</item>
 						<!-- Blank line to keep menu looks good -->
+
 						<item>
 							<label></label>
 							<onclick></onclick>
                <control type="button">
 								 <texturefocus/>
 							 	 <texturenofocus/>
-	              <onfocus>ActivateWindow(shutdownmenu)</onfocus>
+	              <onfocus></onfocus>
 							</control>
 
 						</item>
+
 					</content>
 
 				</control>

@@ -1237,13 +1237,13 @@
 							<align>left</align>
 							<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
 						</control>
-						<!-- Add divider to tvg date and time top bottom -->
+						<!-- Add divider to tvg date and time bottom -->
 						<control type="image">
 							<left>490</left>
 							<top>400</top>
 							<right>0</right>
-							<height>2</height>
-							<texture>dialogs/separator-grey.png</texture>
+							<height>3</height>
+							<texture>div-h2.png</texture>
 						</control>
 						<control type="image">
 							<top>90</top>
@@ -1262,8 +1262,8 @@
 							<texture fallback="special://skin/media/q-icon.png">$INFO[ListItem.EpgEventIcon]</texture>
 						</control>
 						<control type="textbox">
-							<left>1530</left>
-							<top>100</top>
+							<left>1520</left>
+							<top>145</top>
 							<right>20</right>
 							<height>190</height>
 							<font>font37</font>
@@ -1273,8 +1273,8 @@
 							<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
 						</control>
 						<control type="textbox">
-							<left>1530</left>
-							<top>150</top>
+							<left>1520</left>
+							<top>185</top>
 							<right>20</right>
 							<height>190</height>
 							<font>font37</font>
@@ -1284,7 +1284,7 @@
 							<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
 						</control>
 							<!-- main epg top right Progress bar -->
-							<control type="progress">
+						<!--<control type="progress">
 								<left>1530</left>
 								<top>225</top>
 								<width>300</width>
@@ -1307,7 +1307,7 @@
 								<align>justify</align>
 								<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
 								<visible>true</visible>
-							</control>
+							</control>-->
 		</include>
 
 
@@ -1362,7 +1362,7 @@
 				<aspectratio></aspectratio>
 				<top>20</top>
 				<left>65</left>
-				<width>140</width>
+				<width>144</width>
 				<height>78</height>
 				<texture>skyq.png</texture>
 			</control>

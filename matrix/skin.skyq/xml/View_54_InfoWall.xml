@@ -41,7 +41,7 @@
 			</control>
 		</definition>
 	</include>
-
+<!-- control wigetlistsquire -->
 	<include name="InfoWallMusicLayout">
 		<param name="fallback_image">DefaultFolder.png</param>
 		<param name="main_label">$INFO[ListItem.Artist]</param>
@@ -62,9 +62,6 @@
 				<left>-4</left>
 				<width>324</width>
 				<height>394</height>
-				<!--<texture colordiffuse="button_focus">colors/grey.png</texture>
-				<bordertexture border="21">overlays/shadow.png</bordertexture>
-				<bordersize>20</bordersize>-->
 				<texture>menubox.png</texture>
 				<visible>$PARAM[focused]</visible>
 				<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
@@ -74,7 +71,7 @@
 				<top>0</top>
 				<width>316</width>
 				<height>316</height>
-				<texture fallback="$PARAM[fallback_image]" background="true">$VAR[InfoWallThumbVar]</texture>
+				<texture fallback="$PARAM[fallback_image]" background="true">$INFO[ListItem.thumb]</texture>
 				<aspectratio>keep</aspectratio>
 				<bordersize>20</bordersize>
 			</control>
@@ -326,6 +323,100 @@
 			</control>
 		</definition>
 	</include>
+
+	<!-- for catchup1 home and music thumbnails size border etc -->
+		<include name="catchup1WidgetListEpisodeLayout">
+			<param name="fallback_image">DefaultTVShows.png</param>
+			<param name="focused">false</param>
+			<definition>
+				<control type="image">
+					<top>15</top>
+					<left>0</left>
+					<width>423</width>
+					<height>280</height>
+					<texture>menubox.png</texture>
+					<visible>$PARAM[focused]</visible>
+					<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
+				</control>
+			<!-- control catchup1 home and music thumbnails size border etc -->
+				<control type="image">
+					<left>0</left>
+					<top>20</top>
+					<width>415</width>
+					<height>250</height>
+					<texture fallback="$PARAM[fallback_image]" background="true">$VAR[InfoWallThumbVar]</texture>
+					<bordertexture border="31">overlays/shadow.png</bordertexture>
+					<bordersize>23</bordersize>
+					<aspectratio>scale</aspectratio>
+				</control>
+
+				<control type="label">
+					<left>31</left>
+					<top>178</top>
+					<width>260</width>
+					<label>$PARAM[thumb_label]</label>
+					<font>font20_title</font>
+					<shadowcolor>text_shadow</shadowcolor>
+					<align>right</align>
+				</control>
+				<control type="image">
+					<left>20</left>
+					<top>175</top>
+					<width>32</width>
+					<height>32</height>
+					<texture>$VAR[WallWatchedIconVar]</texture>
+				</control>
+				<control type="textbox">
+					<left>28</left>
+					<top>202</top>
+					<width>262</width>
+					<height>80</height>
+					<font>font12</font>
+					<align>center</align>
+					<aligny>center</aligny>
+					<label>$INFO[ListItem.Label]</label>
+					<visible>Window.IsActive(videos)</visible>
+				</control>
+				<control type="group">
+					<visible>!Window.IsActive(videos)</visible>
+					<control type="label">
+						<left>29</left>
+						<top>210</top>
+						<width>260</width>
+						<label>$PARAM[sub_label]</label>
+						<font>font12</font>
+						<shadowcolor>text_shadow</shadowcolor>
+						<scroll>$PARAM[focused]</scroll>
+						<align>center</align>
+					</control>
+					<!-- control catchup1 tv small label bottom Title -->
+					<control type="label">
+						<left>20</left>
+						<top>250</top>
+						<width>320</width>
+						<label>$PARAM[main_label]</label>
+						<font>font10</font>
+						<shadowcolor>text_shadow</shadowcolor>
+						<align>left</align>
+					</control>
+				</control>
+				<control type="progress">
+					<left>20</left>
+					<top>258</top>
+					<width>276</width>
+					<height>1</height>
+					<texturebg></texturebg>
+					<midtexture colordiffuse="button_focus" border="3">progress/texturebg_alt_white.png</midtexture>
+					<info>ListItem.PercentPlayed</info>
+					<visible>!Integer.IsEqual(ListItem.PercentPlayed,0)</visible>
+				</control>
+				<control type="group">
+					<left>134</left>
+					<top>8</top>
+					<include>UserRatingCircle</include>
+				</control>
+			</definition>
+		</include>
 
 	<!-- for Widget List Episodes Home Pvr thumbnails size border etc -->
 		<include name="WidgetListEpisodesHomePvrLayout">

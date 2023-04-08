@@ -21,7 +21,7 @@
  		 <left>43</left>
  		 <height>260</height>
  		 <width>444</width>
- 		 <texture>special://skin/media/music/setup.png</texture>
+ 		 <texture>special://skin/media/menuimage/setup.png</texture>
  	 </control>
 
 		<control type="panel" id="9000">
