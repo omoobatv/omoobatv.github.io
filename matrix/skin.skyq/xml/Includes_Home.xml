@@ -369,7 +369,7 @@
 		<param name="sortby"></param>
 		<param name="visible">True</param>
 		<param name="sortorder">ascending</param>
-		<param name="widget_limit">50</param>
+		<param name="widget_limit">2000</param>
 		<definition>
 			<include content="CategoryLabel">
 				<param name="label">$PARAM[widget_header]</param>
