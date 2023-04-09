@@ -1217,19 +1217,19 @@
 
 		<include name="SkyQ-KodiEditiontvinfobar">
 			<control type="textbox">
-							<left>513</left>
-							<top>30</top>
+							<left>505</left>
+							<top>80</top>
 							<right>500</right>
 							<height>290</height>
 							<font>font32_title</font>
 							<textcolor>FFFFFFFF</textcolor>
 							<label fallback="no program information available">$INFO[ListItem.Title]</label>
-							<align>justify</align>
+							<align>left</align>
 							<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
 						</control>
 			<control type="textbox">
 							<left>505</left>
-							<top>85</top>
+							<top>150</top>
 							<right>500</right>
 							<height>270</height>
 							<font>font27</font>

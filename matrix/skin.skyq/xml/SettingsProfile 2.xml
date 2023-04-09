@@ -22,7 +22,7 @@
  		 <left>43</left>
  		 <height>260</height>
  		 <width>444</width>
- 		 <texture>special://skin/media/music/setup.png</texture>
+ 		 <texture>special://skin/media/menuimage/setup.png</texture>
  	 </control>
 		<control type="group" id="9100">
 			<include>OpenClose_Right</include>
@@ -31,13 +31,13 @@
 				<top>160</top>
 				<right>0</right>
 				<height>3</height>
-				<texture colordiffuse="button_focus" border="2">dialogs/separator-grey.png</texture>
+				<texture colordiffuse="button_focus" border="2">div-h.png</texture>
 			</control>
 			<control type="image">
 				<bottom>134</bottom>
 				<right>0</right>
 				<height>3</height>
-				<texture colordiffuse="button_focus" border="2">dialogs/separator-grey.png</texture>
+				<texture colordiffuse="button_focus" border="2">div-h.png</texture>
 			</control>
 			<control type="panel" id="2">
 				<top>163</top>
@@ -286,6 +286,5 @@
 		<include content="TopBarT">
 			<param name="breadcrumbs_label" value="$LOCALIZE[10034]" />
 		</include>
-		<include>BottomBar</include>
 	</controls>
 </window>
