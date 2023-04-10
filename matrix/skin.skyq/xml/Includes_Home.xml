@@ -295,11 +295,11 @@
 	<include content="catchuptvWidgetListCommon">
 		<param name="list_id" value="$PARAM[list_id]"/>
 	</include>
+
   <!-- Catchup Widget List Layout -->
 	<include name="catchupWidgetListEpisodes">
 		<param name="main_label">$INFO[ListItem.TVShowTitle] $INFO[ListItem.Season,,x]$INFO[ListItem.Episode] $INFO[ListItem.Title]</param>
 		<param name="sub_label"></param>
-		<param name="thumb_label"></param>
 		<param name="thumb_label"></param>
 		<param name="sortby"></param>
 		<param name="visible">True</param>
@@ -350,6 +350,72 @@
 							<effect type="zoom" start="112" end="100" time="200" tween="sine" easing="inout" center="220,130" />
 						</animation>
 						<include content="catchuptvEpisodeLayout">
+							<param name="main_label" value="$PARAM[main_label]" />
+							<param name="sub_label" value="$PARAM[sub_label]" />
+							<param name="thumb_label" value="$PARAM[thumb_label]" />
+							<param name="focused" value="true" />
+						</include>
+					</control>
+				</focusedlayout>
+				<content sortby="$PARAM[sortby]" sortorder="$PARAM[sortorder]" target="$PARAM[widget_target]" limit="$PARAM[widget_limit]">$PARAM[content_path]</content>
+			</control>
+		</definition>
+	</include>
+
+	<!-- Widget List Home Apps Layout -->
+	<include name="WidgetListHomeAddonsApps">
+		<param name="main_label">$INFO[ListItem.Label]</param>
+		<param name="sub_label"></param>
+		<param name="thumb_label"></param>
+		<param name="sortby"></param>
+		<param name="visible">True</param>
+		<param name="sortorder">ascending</param>
+		<param name="widget_limit">50</param>
+		<definition>
+			<include content="CategoryLabel">
+				<param name="label">$PARAM[widget_header]</param>
+				<param name="list_id" value="$PARAM[list_id]"/>
+			</include>
+			<include content="BusyListSpinner">
+				<param name="list_id" value="$PARAM[list_id]"/>
+				<param name="posy" value="200"/>
+			</include>
+			<!-- control gap between the row all bottom-->
+			<control type="panel" id="$PARAM[list_id]">
+				<left>0</left>
+				<top>110</top>
+				<right>0</right>
+				<height>370</height>
+				<width>100%</width>
+				<include content="WidgetListCommon">
+					<param name="list_id" value="$PARAM[list_id]"/>
+				</include>
+				<visible>$PARAM[visible]</visible>
+				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) | Container($PARAM[list_id]).IsUpdating</visible>
+				<itemlayout width="424" height="292">
+					<control type="group">
+						<left>20</left>
+						<top>5</top>
+						<include content="WidgetListHomeAddonsAppsLayout">
+							<param name="main_label" value="$PARAM[main_label]" />
+							<param name="sub_label" value="$PARAM[sub_label]" />
+							<param name="thumb_label" value="$PARAM[thumb_label]" />
+							<param name="focused" value="false" />
+						</include>
+					</control>
+				</itemlayout>
+				<focusedlayout width="424" height="292">
+					<control type="group">
+						<depth>DepthContentPopout</depth>
+						<left>20</left>
+						<top>5</top>
+						<animation type="Focus">
+							<effect type="zoom" start="100" end="107" time="200" tween="sine" easing="inout" center="220,130" />
+						</animation>
+						<animation type="Unfocus">
+							<effect type="zoom" start="112" end="100" time="200" tween="sine" easing="inout" center="220,130" />
+						</animation>
+						<include content="WidgetListHomeAddonsAppsLayout">
 							<param name="main_label" value="$PARAM[main_label]" />
 							<param name="sub_label" value="$PARAM[sub_label]" />
 							<param name="thumb_label" value="$PARAM[thumb_label]" />
@@ -706,6 +772,7 @@
 			<include content="CategoryLabel">
 				<param name="label">$PARAM[widget_header]</param>
 				<param name="list_id" value="$PARAM[list_id]"/>
+				<param name="item_limit" value="50"/>
 			</include>
 			<include content="BusyListSpinner">
 				<param name="list_id" value="$PARAM[list_id]"/>
@@ -820,7 +887,7 @@
 		<param name="sortby"></param>
 		<param name="visible">True</param>
 		<param name="sortorder">ascending</param>
-		<param name="widget_limit">20</param>
+		<param name="widget_limit">30</param>
 		<definition>
 			<include content="CategoryLabel">
 				<param name="label">$PARAM[widget_header]</param>

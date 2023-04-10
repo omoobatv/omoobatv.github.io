@@ -35,7 +35,31 @@
 			<top>104</top>
 			<width>444</width>
 			<height>260</height>
-			<texture>$INFO[ListItem.Art(thumb)]</texture>
+			<texture fallback="special://skin/media/q-icon.png">$VAR[HomeEventIconListItemIcon]</texture>
+		</control>
+		<!-- Plot at the  -->
+		<control type="textbox">
+		<left>524</left>
+		<top>180</top>
+		<right>250</right>
+		<height>200</height>
+		<font>font27</font>
+		<label fallback="Sky TV on demand offers you a world of entertainment through your Sky Q box including Box Sets and Catch Up TV. Add Sky Cinema today to watch blockbuster movies and Sky Original Films now including Paramount+">$INFO[ListItem.Plot]</label>
+		<align>left</align>
+		<width>1200</width>
+		<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
+		</control>
+		<control type="label">
+			<description>List item title at home TopBar</description>
+			<left>524</left>
+			<top>75</top>
+			<height>95</height>
+			<width>560</width>
+			<aligny>center</aligny>
+			<font>font32_title</font>
+			<textcolor>FFFFFFFF</textcolor>
+			<label>$INFO[ListItem.Label]</label>
+			<shadowcolor>text_shadow</shadowcolor>
 		</control>
 		<!--<include content="SkyQ-KodiEditioninfobar"></include>-->
 		<include content="TopBar">
@@ -79,11 +103,11 @@
 					</include>
 					<control type="grouplist" id="10201">
 						<include>catchuptvWidgetGroupListCommon</include>
-						<include content="catchup1WidgetListEpisodes">
-							<param name="content_path" value=""/>
+						<include content="catchupWidgetListEpisodes">
+							<param name="content_path" value="plugin://plugin.program.super.favourites/?folder=itest"/>
 							<param name="widget_header" value="ITV Hub"/>
 							<param name="widget_target" value="videos"/>
-							<param name="sortby" value="random"/>
+							<param name="sortby" value="ascending"/>
 							<param name="list_id" value="10203"/>
 						</include>
 					</control>
@@ -96,7 +120,7 @@
 					<control type="grouplist" id="10301">
 						<include>catchuptvWidgetGroupListCommon</include>
 						<include content="catchup1WidgetListEpisodes">
-							<param name="content_path" value="plugin://plugin.video.youtube/channel/UCiZ47iCEOmqsyZU_6XP9ekg/"/>
+							<param name="content_path" value="plugin://plugin.program.super.favourites/?folder=All HD"/>
 							<param name="widget_header" value="All 4"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
@@ -111,11 +135,11 @@
 					</include>
 					<control type="grouplist" id="10401">
 						<include>catchuptvWidgetGroupListCommon</include>
-						<include content="catchup1WidgetListEpisodes">
-							<param name="content_path" value="plugin://plugin.video.exodus/?action=tvshows&amp;url=http%3a%2f%2fwww.tvmaze.com%2fnetworks%2f135%2fchannel-5"/>
+						<include content="WidgetListEpisodesHomePvr">
+							<param name="content_path" value="pvr://channels/tv/*"/>
 							<param name="widget_header" value="Channel 5"/>
-							<param name="widget_target" value="videos"/>
-							<param name="sortby" value="random"/>
+							<param name="widget_target" value="pvr"/>
+							<param name="sortby" value="ascending"/>
 							<param name="list_id" value="10403"/>
 						</include>
 					</control>

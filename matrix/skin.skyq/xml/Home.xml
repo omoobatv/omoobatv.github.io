@@ -59,7 +59,7 @@
 	<right>250</right>
 	<height>200</height>
 	<font>font27</font>
-	<label fallback="Sky TV on demand offers you a world of entertainment through your Sky Q box including Box Sets and Catch Up TV. Add Sky Cinema today to watch blockbuster movies and Sky Original Films now including Paramount+">$INFO[ListItem.Plot]</label>
+	<label fallback="Sky TV on demand offers you a world of entertainment through your Sky Q box including Box Sets and Catch Up TV. Add Sky Cinema today to watch blockbuster movies and Sky Original Films now including Paramount+">$INFO[ListItem.Plot]$INFO[ListItem.AddonDescription]</label>
 	<align>left</align>
 	<width>1200</width>
 	<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
@@ -93,12 +93,14 @@
 							<param name="widget_header" value="Today's Top Picks"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="5100"/>
+							<param name="item_limit" value="50"/>
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(movies)">
 							<param name="content_path" value="special://skin/playlists/recent_unwatched_movies.xsp"/>
 							<param name="widget_header" value="Recent Movies"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="5200"/>
+							<param name="item_limit" value="50"/>
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(movies)">
 							<param name="content_path" value="special://skin/playlists/unwatched_movies.xsp"/>
@@ -263,13 +265,13 @@
 					</include>
 					<control type="grouplist" id="8001">
 						<include>WidgetGroupListCommon</include>
-						<include content="WidgetListCategories">
+					<!--<include content="WidgetListCategories">
 							<param name="widget_header" value="$LOCALIZE[31148]"/>
 							<param name="list_id" value="8900"/>
 							<param name="visible" value="Integer.IsGreater(Container(8100).NumItems,0) | Integer.IsGreater(Container(8200).NumItems,0) | Integer.IsGreater(Container(8300).NumItems,0) | Integer.IsGreater(Container(8400).NumItems,0) | Integer.IsGreater(Container(8500).NumItems,0)"/>
 							<param name="addon_submenu" value="true"/>
-						</include>
-						<include content="WidgetListSquare">
+						</include>-->
+						<include content="WidgetListHomeAddonsApps">
 							<param name="content_path" value="addons://sources/video/"/>
 							<param name="widget_header" value="$LOCALIZE[1037]"/>
 							<param name="widget_target" value="videos"/>
@@ -278,7 +280,7 @@
 							<param name="list_id" value="8100"/>
 							<param name="fallback_icon" value="DefaultAddon.png"/>
 						</include>
-						<include content="WidgetListSquare">
+						<include content="WidgetListHomeAddonsApps">
 							<param name="content_path" value="addons://sources/audio/"/>
 							<param name="widget_header" value="$LOCALIZE[1038]"/>
 							<param name="widget_target" value="music"/>
@@ -287,7 +289,7 @@
 							<param name="list_id" value="8200"/>
 							<param name="fallback_icon" value="DefaultAddon.png"/>
 						</include>
-						<include content="WidgetListSquare">
+						<include content="WidgetListHomeAddonsApps">
 							<param name="content_path" value="addons://sources/executable/"/>
 							<param name="widget_header" value="$LOCALIZE[1043]"/>
 							<param name="widget_target" value="programs"/>
@@ -296,7 +298,7 @@
 							<param name="list_id" value="8300"/>
 							<param name="fallback_icon" value="DefaultAddon.png"/>
 						</include>
-						<include content="WidgetListSquare" condition="System.Platform.Android">
+						<include content="WidgetListHomeAddonsApps" condition="System.Platform.Android">
 							<param name="content_path" value="androidapp://sources/apps/"/>
 							<param name="widget_header" value="$LOCALIZE[20244]"/>
 							<param name="widget_target" value="programs"/>
@@ -305,7 +307,7 @@
 							<param name="list_id" value="8400"/>
 							<param name="fallback_icon" value="DefaultAddon.png"/>
 						</include>
-						<include content="WidgetListSquare">
+						<include content="WidgetListHomeAddonsApps">
 							<param name="content_path" value="addons://sources/image/"/>
 							<param name="widget_header" value="$LOCALIZE[1039]"/>
 							<param name="widget_target" value="pictures"/>
@@ -328,7 +330,7 @@
 					<visible>String.IsEqual(Container(9000).ListItem.Property(id),home)</visible>
 					<include content="subContentPanel"></include>
 					<include content="Visible_Right_Delayed">
-						<param name="id" value="home"/>
+					<param name="id" value="home"/>
 					</include>
 					<control type="grouplist" id="4100">
 						<include>WidgetGroupListCommon</include>
@@ -362,7 +364,7 @@
 					<visible>String.IsEqual(Container(9000).ListItem.Property(id),music)</visible>
 					<include content="subContentPanel"></include>
 					<include content="Visible_Right_Delayed">
-						<param name="id" value="music"/>
+					<param name="id" value="music"/>
 					</include>
 					<control type="grouplist" id="16501">
 						<include>WidgetGroupListCommon</include>
@@ -395,7 +397,7 @@
 				<control type="group" id="11000">
 					<visible>String.IsEqual(Container(9000).ListItem.Property(id),video)</visible>
 					<include content="Visible_Right_Delayed">
-						<param name="id" value="video"/>
+					<param name="id" value="video"/>
 					</include>
 					<control type="grouplist" id="11001">
 						<include>WidgetGroupListCommon</include>
@@ -434,7 +436,7 @@
 				<control type="group" id="12000">
 					<visible>String.IsEqual(Container(9000).ListItem.Property(id),livetv)</visible>
 					<include content="Visible_Right_Delayed">
-						<param name="id" value="livetv"/>
+					<param name="id" value="livetv"/>
 					</include>
 					<control type="grouplist" id="12001">
 						<include>WidgetGroupListCommon</include>
@@ -642,7 +644,7 @@
 								<left>70</left>
 								<width>392</width>
 								<height>85</height>
-								<texture>menuselect.png</texture>
+                <texture>menuselect.png</texture>
 								<animation effect="fade" start="100" end="0" time="0" condition="[!Control.HasFocus(9000) + !ControlGroup(700).HasFocus] | System.HasModalDialog">Conditional</animation>
 							</control>
 						</control>
@@ -662,7 +664,6 @@
 
 					</focusedlayout>
 					<itemlayout height="95">
-
 						<control type="label">
 							<left>104</left>
 							<top>0</top>
