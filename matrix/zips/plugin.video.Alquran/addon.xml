@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.Alquran" name="Useful Duas" version="3.0.1" provider-name="Abbey">
+<addon id="plugin.video.Alquran" name="Useful Duas" version="3.0.2" provider-name="Abbey">
 	<requires>
 		<import addon="script.module.six" />
 		<import addon="script.module.kodi-six" />
@@ -18,7 +18,7 @@
 	</extension>
 
 	<extension point="xbmc.addon.metadata">
-		<summary>Listen to useful Quran Duas</summary>
+		<summary>Listen to powerful and useful Duas online, from protection to success. Addon by Abbey</summary>
 		<description>Listen to powerful Duas online, from protection to success, etc. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
 		<platform>all</platform>
 		<assets>
