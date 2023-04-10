@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.naijaMovies" name="Nigerian Movies" version="3.0.0" provider-name="Abbey">
+<addon id="plugin.video.naijaMovies" name="Nigerian Movies" version="3.0.1" provider-name="Abbey">
 	<requires>
 		<import addon="script.module.six" />
 		<import addon="script.module.kodi-six" />
@@ -18,7 +18,7 @@
 	</extension>
 
 	<extension point="xbmc.addon.metadata">
-		<summary>Free Latest Nigerian Movies</summary>
+		<summary>Watch Latest Nigerian Movies Both Yoruba and English. Addon by Abbey</summary>
 		<description>Watch Latest Nigerian Movies Both Yoruba and English. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
 		<platform>all</platform>
 		<assets>

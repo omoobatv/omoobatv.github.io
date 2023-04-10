@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.Theradios" name="Online Radios" version="3.0.0" provider-name="Abbey">
+<addon id="plugin.video.Theradios" name="Online Radios" version="3.0.1" provider-name="Abbey">
 	<requires>
 		<import addon="script.module.six" />
 		<import addon="script.module.kodi-six" />
@@ -18,7 +18,7 @@
 	</extension>
 
 	<extension point="xbmc.addon.metadata">
-		<summary>Online based radio stations</summary>
+		<summary>Online based radio stations from all over the world. Addon by Abbey</summary>
 		<description>All the contents of this Addon are legal, I do not host any file. they are from legit radio stations from around the globe</description>
 		<platform>all</platform>
 		<assets>

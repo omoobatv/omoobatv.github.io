@@ -255,7 +255,7 @@ Added support for Kodi v19 (Matrix)
 	</extension>
 </addon>
 
-<addon id="plugin.video.Theradios" name="Online Radios" version="3.0.0" provider-name="Abbey">
+<addon id="plugin.video.Theradios" name="Online Radios" version="3.0.1" provider-name="Abbey">
 	<requires>
 		<import addon="script.module.six" />
 		<import addon="script.module.kodi-six" />
@@ -274,7 +274,7 @@ Added support for Kodi v19 (Matrix)
 	</extension>
 
 	<extension point="xbmc.addon.metadata">
-		<summary>Online based radio stations</summary>
+		<summary>Online based radio stations from all over the world. Addon by Abbey</summary>
 		<description>All the contents of this Addon are legal, I do not host any file. they are from legit radio stations from around the globe</description>
 		<platform>all</platform>
 		<assets>
@@ -282,9 +282,7 @@ Added support for Kodi v19 (Matrix)
 			<fanart>fanart.jpg</fanart>
 		</assets>
 	</extension>
-</addon>
-
-<addon id="plugin.video.fen" name="Fen" provider-name="Tiki" version="2.6.13">
+</addon><addon id="plugin.video.fen" name="Fen" provider-name="Tiki" version="2.6.13">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="script.module.requests" version="2.19.1" />
@@ -467,7 +465,7 @@ version 0.2.0
     </assets>
     <reuselanguageinvoker>true</reuselanguageinvoker>
   </extension>
-</addon><addon id="plugin.video.keepFit" name="Fitness Workout" version="3.0.0" provider-name="Abbey">
+</addon><addon id="plugin.video.keepFit" name="Fitness Workout" version="3.0.1" provider-name="Abbey">
 	<requires>
 		<import addon="script.module.six" />
 		<import addon="script.module.kodi-six" />
@@ -487,7 +485,7 @@ version 0.2.0
 	</extension>
 
 	<extension point="xbmc.addon.metadata">
-		<summary>Free Fitness Workout</summary>
+		<summary>Watch free fitness workout for both Men and Women. Addon by Abbey</summary>
 		<description>Watch free fitness workout for both Men and Women. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
 		<platform>all</platform>
 		<assets>
@@ -495,9 +493,7 @@ version 0.2.0
 			<fanart>fanart.jpg</fanart>
 		</assets>
 	</extension>
-</addon>
-
-<addon id="plugin.video.live.streamspro" name="LiveStreamsPro" version="3.0.0~alpha4" provider-name="gujal">
+</addon><addon id="plugin.video.live.streamspro" name="LiveStreamsPro" version="3.0.0~alpha4" provider-name="gujal">
 	<requires>
 		<import addon="script.module.six" />
 		<import addon="script.module.kodi-six" />
@@ -540,7 +536,7 @@ In addition to what livestreams allowed you to do, you can now,
 	</extension>
 </addon>
 
-<addon id="plugin.video.naijaChurches" name="Naija Churches" version="3.0.0" provider-name="Abbey">
+<addon id="plugin.video.naijaChurches" name="Naija Churches" version="3.0.1" provider-name="Abbey">
 	<requires>
 		<import addon="script.module.six" />
 		<import addon="script.module.kodi-six" />
@@ -560,7 +556,7 @@ In addition to what livestreams allowed you to do, you can now,
 	</extension>
 
 	<extension point="xbmc.addon.metadata">
-		<summary>Free Fitness Workout</summary>
+		<summary>Watch nigerian churches live from all over the world. Addon by Abbey</summary>
 		<description>Watch nigerian churches live. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
 		<platform>all</platform>
 		<assets>
@@ -568,8 +564,7 @@ In addition to what livestreams allowed you to do, you can now,
 			<fanart>fanart.jpg</fanart>
 		</assets>
 	</extension>
-</addon>
-<addon id="plugin.video.naijaMovies" name="Nigerian Movies" version="3.0.0" provider-name="Abbey">
+</addon><addon id="plugin.video.naijaMovies" name="Nigerian Movies" version="3.0.1" provider-name="Abbey">
 	<requires>
 		<import addon="script.module.six" />
 		<import addon="script.module.kodi-six" />
@@ -588,7 +583,7 @@ In addition to what livestreams allowed you to do, you can now,
 	</extension>
 
 	<extension point="xbmc.addon.metadata">
-		<summary>Free Latest Nigerian Movies</summary>
+		<summary>Watch Latest Nigerian Movies Both Yoruba and English. Addon by Abbey</summary>
 		<description>Watch Latest Nigerian Movies Both Yoruba and English. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
 		<platform>all</platform>
 		<assets>
@@ -596,9 +591,7 @@ In addition to what livestreams allowed you to do, you can now,
 			<fanart>fanart.jpg</fanart>
 		</assets>
 	</extension>
-</addon>
-
-<addon id="plugin.video.venom" name="[COLOR red]Venom[/COLOR]" provider-name="Venom" version="6.5.6">
+</addon><addon id="plugin.video.venom" name="[COLOR red]Venom[/COLOR]" provider-name="Venom" version="6.5.6">
 	<requires>
 		<import addon="xbmc.python" version="3.0.0" />
 		<import addon="context.venom" />
