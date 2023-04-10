@@ -723,7 +723,7 @@ In addition to what livestreams allowed you to do, you can now,
   </extension>
 </addon>
 
-<addon id="repository.Ardavetv" name="Ardave TV" version="3.0.6" provider-name="omoobatv">
+<addon id="repository.Ardavetv" name="Ardave TV" version="3.0.7" provider-name="omoobatv">
   <requires>
 		<import addon="xbmc.addon" version="12.0.0" />
 	</requires>
