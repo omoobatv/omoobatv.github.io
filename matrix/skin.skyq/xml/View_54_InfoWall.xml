@@ -392,7 +392,7 @@
 					<!-- control Widget ListHome Addons Apps small label bottom Title -->
 					<control type="label">
 						<left>30</left>
-						<top>200</top>
+						<top>205</top>
 						<width>320</width>
 						<label>$PARAM[main_label]</label>
 						<font>font10</font>
