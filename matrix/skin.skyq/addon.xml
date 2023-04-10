@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="skin.skyq" version="2.5.8" name="Sky Q" provider-name="moshii">
+<addon id="skin.skyq" version="2.5.9" name="Sky Q" provider-name="moshii">
 	<requires>
 		<import addon="xbmc.gui" version="5.15.0"/>
 	</requires>
@@ -19,7 +19,7 @@
 			<icon>resources/icon.png</icon>
 			<fanart>resources/fanart.jpg</fanart>
 		</assets>
-		<summary lang="en_gb">Sky Q MOD of Estuary skin by Moshii.</summary>
-		<description lang="en_gb">Sky Q skin is a MOD of Estuary to make it look so much like a popular UK TV.</description>
+		<summary lang="en_gb">Sky Q skin is a MOD of Estuary to make it look so much like a popular UK TV</summary>
+		<description lang="en_gb">Sky Q MOD of Estuary skin by Moshii is a MOD of Estuary to make it look so much like a popular UK TV</description>
 	</extension>
 </addon>
