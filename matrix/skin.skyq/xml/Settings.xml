@@ -119,32 +119,32 @@
 			</focusedlayout>
 			<content>
 				<item>
-					<label>$LOCALIZE[24001]</label>
+					<label>Add-ons</label>
 					<onclick>ActivateWindow(addonbrowser)</onclick>
 					<icon>icons/settings/addons.png</icon>
 				</item>
 				<item>
-					<label>$LOCALIZE[14201]</label>
+					<label>Player</label>
 					<onclick>ActivateWindow(PlayerSettings)</onclick>
 					<icon>icons/settings/player.png</icon>
 				</item>
 				<item>
-					<label>$LOCALIZE[14212]</label>
+					<label>Media</label>
 					<onclick>ActivateWindow(MediaSettings)</onclick>
 					<icon>icons/settings/media.png</icon>
 				</item>
 				<item>
-					<label>$LOCALIZE[14205]</label>
+					<label>PVR & Live TV</label>
 					<onclick>ActivateWindow(PVRSettings)</onclick>
 					<icon>icons/settings/livetv.png</icon>
 				</item>
 				<item>
-					<label>$LOCALIZE[14208]</label>
+					<label>Services</label>
 					<onclick>ActivateWindow(ServiceSettings)</onclick>
 					<icon>icons/settings/network.png</icon>
 				</item>
 				<item>
-					<label>$LOCALIZE[14207]</label>
+					<label>Interface</label>
 					<onclick>ActivateWindow(InterfaceSettings)</onclick>
 					<icon>icons/settings/interface.png</icon>
 				</item>
@@ -154,12 +154,12 @@
 					<icon>icons/settings/skin.png</icon>
 				</item>
 				<item>
-					<label>$LOCALIZE[14210]</label>
+					<label>Profile</label>
 					<onclick>ActivateWindow(Profiles)</onclick>
 					<icon>icons/settings/profiles.png</icon>
 				</item>
 				<item>
-					<label>$LOCALIZE[14209]</label>
+					<label>System</label>
 					<onclick>ActivateWindow(SystemSettings)</onclick>
 					<icon>icons/settings/system.png</icon>
 				</item>
@@ -170,17 +170,17 @@
 					<visible>System.HasAddon(service.libreelec.settings)</visible>
 				</item>
 				<item>
-					<label>$LOCALIZE[138]</label>
+					<label>System information</label>
 					<onclick>ActivateWindow(systeminfo)</onclick>
 					<icon>icons/settings/sysinfo.png</icon>
 				</item>
 				<item>
-					<label>$LOCALIZE[31067]</label>
+					<label>Event log</label>
 					<onclick>ActivateWindow(eventlog)</onclick>
 					<icon>icons/settings/eventlog.png</icon>
 				</item>
 				<item>
-					<label>$LOCALIZE[10003]</label>
+					<label>File manager</label>
 					<onclick>ActivateWindow(filemanager)</onclick>
 					<icon>icons/settings/filemanager.png</icon>
 				</item>
@@ -188,7 +188,7 @@
 			</content>
 		</control>
 		<include content="TopBar">
-			<param name="breadcrumbs_label" value="$LOCALIZE[13000]" />
+			<param name="breadcrumbs_label" value="Settings" />
 		</include>
 	</controls>
 </window>
