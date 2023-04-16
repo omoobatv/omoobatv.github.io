@@ -90,7 +90,7 @@
 			<label></label>
 			<align>center</align>
 			<aligny>center</aligny>
-			<font>font25_title</font>
+			<font>font30_medium</font>
 			<textcolor>FBFBFBFB</textcolor>
 			<shadowcolor>black</shadowcolor>
 		</control>
@@ -125,7 +125,7 @@
 				<width>392</width>
 				<textoffsetx>30</textoffsetx>
 				<aligny>center</aligny>
-				<font>font37</font>
+				<font>font35_regular</font>
 				<texturefocus>menuselect.png</texturefocus>
 				<texturenofocus />
 			</control>
@@ -186,7 +186,7 @@
 				<bottom>25</bottom>
 				<right>60</right>
 				<height>102</height>
-				<font>font12</font>
+				<font>font30_regular</font>
 				<align>justify</align>
 				<textcolor>button_focus</textcolor>
 				<autoscroll time="3000" delay="5000" repeat="5000">true</autoscroll>

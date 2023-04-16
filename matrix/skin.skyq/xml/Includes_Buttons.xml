@@ -218,7 +218,7 @@
 			<textureradioondisabled colordiffuse="disabled">$PARAM[icon]</textureradioondisabled>
 		</definition>
 	</include>
-	
+
 	<include name="InfoDialogButton">
 		<param name="width">262</param>
 		<definition>
@@ -320,9 +320,9 @@
 			</control>
 			<control type="image">
 				<left>0</left>
-				<top>0</top>
+				<top>10</top>
 				<width>580</width>
-				<height>104</height>
+				<height>85</height>
 				<texture>menuselect.png</texture>
 			</control>
 			<control type="label">

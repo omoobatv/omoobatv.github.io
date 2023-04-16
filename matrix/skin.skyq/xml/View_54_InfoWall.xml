@@ -36,7 +36,7 @@
 				<height>20</height>
 				<align>center</align>
 				<aligny>center</aligny>
-				<font>font12</font>
+				<font>font24_regular</font>
 				<label>$INFO[ListItem.Label]</label>
 			</control>
 		</definition>
@@ -80,7 +80,7 @@
 					<top>289</top>
 					<width>262</width>
 					<height>80</height>
-					<font>font12</font>
+					<font>font24_regular</font>
 					<align>center</align>
 					<aligny>center</aligny>
 					<label>$PARAM[single_label]</label>
@@ -93,7 +93,7 @@
 						<top>300</top>
 						<width>260</width>
 						<label>$PARAM[sub_label]</label>
-						<font>font10</font>
+						<font>font24_regular</font>
 						<shadowcolor>text_shadow</shadowcolor>
 						<scroll>$PARAM[focused]</scroll>
 						<align>center</align>
@@ -103,7 +103,7 @@
 						<top>328</top>
 						<width>260</width>
 						<label>$PARAM[main_label]</label>
-						<font>font12</font>
+						<font>font24_regular</font>
 						<shadowcolor>text_shadow</shadowcolor>
 						<scroll>$PARAM[focused]</scroll>
 						<align>center</align>
@@ -167,7 +167,7 @@
 				<top>178</top>
 				<width>260</width>
 				<label>$PARAM[thumb_label]</label>
-				<font>font20_title</font>
+				<font>font30_regular</font>
 				<shadowcolor>text_shadow</shadowcolor>
 				<align>right</align>
 			</control>
@@ -183,7 +183,7 @@
 				<top>202</top>
 				<width>262</width>
 				<height>80</height>
-				<font>font12</font>
+				<font>font30_regular</font>
 				<align>center</align>
 				<aligny>center</aligny>
 				<label>$INFO[ListItem.Label]</label>
@@ -196,7 +196,7 @@
 					<top>210</top>
 					<width>260</width>
 					<label>$PARAM[sub_label]</label>
-					<font>font12</font>
+					<font>font30_regular</font>
 					<shadowcolor>text_shadow</shadowcolor>
 					<scroll>$PARAM[focused]</scroll>
 					<align>center</align>
@@ -206,7 +206,7 @@
 					<top>240</top>
 					<width>260</width>
 					<label>$PARAM[main_label]</label>
-					<font>font10</font>
+					<font>font30_regular</font>
 					<shadowcolor>text_shadow</shadowcolor>
 					<scroll>$PARAM[focused]</scroll>
 					<align>center</align>
@@ -261,7 +261,7 @@
 				<top>178</top>
 				<width>260</width>
 				<label>$PARAM[thumb_label]</label>
-				<font>font20_title</font>
+				<font>font30_regular</font>
 				<shadowcolor>text_shadow</shadowcolor>
 				<align>right</align>
 			</control>
@@ -277,7 +277,7 @@
 				<top>202</top>
 				<width>262</width>
 				<height>80</height>
-				<font>font12</font>
+				<font>font24_regular</font>
 				<align>center</align>
 				<aligny>center</aligny>
 				<label>$INFO[ListItem.Label]</label>
@@ -290,18 +290,18 @@
 					<top>210</top>
 					<width>260</width>
 					<label>$PARAM[sub_label]</label>
-					<font>font12</font>
+					<font>font24_regular</font>
 					<shadowcolor>text_shadow</shadowcolor>
 					<scroll>$PARAM[focused]</scroll>
 					<align>center</align>
 				</control>
 				<!-- control catchup tv small label bottom Title -->
 				<control type="label">
-					<left>8</left>
-					<top>240</top>
+					<left>12</left>
+					<top>245</top>
 					<width>320</width>
 					<label>$PARAM[main_label]</label>
-					<font>font10</font>
+					<font>font24_regular</font>
 					<shadowcolor>text_shadow</shadowcolor>
 					<align>left</align>
 				</control>
@@ -345,7 +345,7 @@
 					<width>415</width>
 					<height>250</height>
 					<texture fallback="$PARAM[fallback_image]" background="true">$INFO[ListItem.Icon]</texture>
-					<bordertexture border="31">overlays/shadow.png</bordertexture>
+          <bordertexture border="31">overlays/shadow.png</bordertexture>
 					<bordersize>23</bordersize>
 					<aspectratio>scale</aspectratio>
 				</control>
@@ -355,7 +355,7 @@
 					<top>178</top>
 					<width>260</width>
 					<label>$PARAM[thumb_label]</label>
-					<font>font20_title</font>
+					<font>font30_regular0_title</font>
 					<shadowcolor>text_shadow</shadowcolor>
 					<align>right</align>
 				</control>
@@ -371,7 +371,7 @@
 					<top>202</top>
 					<width>262</width>
 					<height>80</height>
-					<font>font12</font>
+					<font>font24_regular</font>
 					<align>center</align>
 					<aligny>center</aligny>
 					<label>$INFO[ListItem.Label]</label>
@@ -384,19 +384,20 @@
 						<top>210</top>
 						<width>260</width>
 						<label>$PARAM[sub_label]</label>
-						<font>font12</font>
+						<font>font24_regular</font>
 						<shadowcolor>text_shadow</shadowcolor>
 						<scroll>$PARAM[focused]</scroll>
 						<align>center</align>
 					</control>
 					<!-- control Widget ListHome Addons Apps small label bottom Title -->
 					<control type="label">
-						<left>30</left>
+						<left>25</left>
 						<top>205</top>
 						<width>320</width>
 						<label>$PARAM[main_label]</label>
-						<font>font10</font>
+						<font>font24_regular</font>
 						<shadowcolor>text_shadow</shadowcolor>
+						<visible>!Skin.HasSetting(HomeAddonsNoLabelButton)</visible>
 						<align>left</align>
 					</control>
 				</control>
@@ -434,7 +435,7 @@
 					<top>178</top>
 					<width>260</width>
 					<label>$PARAM[thumb_label]</label>
-					<font>font20_title</font>
+					<font>font30_regular</font>
 					<shadowcolor>text_shadow</shadowcolor>
 					<align>right</align>
 				</control>
@@ -450,7 +451,7 @@
 					<top>202</top>
 					<width>262</width>
 					<height>80</height>
-					<font>font12</font>
+					<font>font24_regular</font>
 					<align>center</align>
 					<aligny>center</aligny>
 					<label>$INFO[ListItem.Label]</label>
@@ -463,7 +464,7 @@
 						<top>210</top>
 						<width>260</width>
 						<label>$PARAM[sub_label]</label>
-						<font>font12</font>
+						<font>font24_regular</font>
 						<shadowcolor>text_shadow</shadowcolor>
 						<scroll>$PARAM[focused]</scroll>
 						<align>center</align>
@@ -474,7 +475,7 @@
 						<top>250</top>
 						<width>320</width>
 						<label>$PARAM[main_label]</label>
-						<font>font10</font>
+						<font>font24_medium</font>
 						<shadowcolor>text_shadow</shadowcolor>
 						<align>left</align>
 					</control>
@@ -528,7 +529,7 @@
 					<top>178</top>
 					<width>260</width>
 					<label>$PARAM[thumb_label]</label>
-					<font>font20_title</font>
+					<font>font30_regular</font>
 					<shadowcolor>text_shadow</shadowcolor>
 					<align>right</align>
 				</control>
@@ -546,7 +547,7 @@
 					<top>202</top>
 					<width>262</width>
 					<height>80</height>
-					<font>font12</font>
+					<font>font24_regular</font>
 					<align>center</align>
 					<aligny>center</aligny>
 					<label>$INFO[ListItem.Label]</label>
@@ -559,7 +560,7 @@
 						<top>210</top>
 						<width>260</width>
 						<label>$PARAM[sub_label]</label>
-						<font>font12</font>
+						<font>font24_regular</font>
 						<shadowcolor>text_shadow</shadowcolor>
 						<scroll>$PARAM[focused]</scroll>
 						<align>center</align>
@@ -567,10 +568,10 @@
 					<!-- control home pvr tv small label bottom Title -->
 					<control type="label">
 						<left>23</left>
-						<top>240</top>
+						<top>245</top>
 						<width>320</width>
 						<label>$PARAM[main_label]</label>
-						<font>font10</font>
+						<font>font24_regular</font>
 						<shadowcolor>text_shadow</shadowcolor>
 						<align>left</align>
 					</control>
@@ -689,7 +690,7 @@
 					<top>20</top>
 					<width>244</width>
 					<label>$INFO[ListItem.Property(WatchedEpisodes)]$INFO[ListItem.Property(TotalEpisodes), / ,]</label>
-					<font>font20_title</font>
+					<font>font30_regular</font>
 					<shadowcolor>text_shadow</shadowcolor>
 					<align>right</align>
 				</control>
@@ -755,7 +756,7 @@
 					<top>250</top>
 					<width>242</width>
 					<height>120</height>
-					<font>font27</font>
+					<font>font33_regular</font>
 					<align>center</align>
 					<aligny>center</aligny>
 					<label>$INFO[ListItem.Label]</label>
@@ -820,7 +821,7 @@
 					<top>20</top>
 					<width>244</width>
 					<label>$INFO[ListItem.Property(WatchedEpisodes)]$INFO[ListItem.Property(TotalEpisodes), / ,]</label>
-					<font>font20_title</font>
+					<font>font30_regular</font>
 					<shadowcolor>text_shadow</shadowcolor>
 					<align>right</align>
 				</control>
@@ -886,7 +887,7 @@
 					<top>250</top>
 					<width>242</width>
 					<height>120</height>
-					<font>font27</font>
+					<font>font33_regular</font>
 					<align>center</align>
 					<aligny>center</aligny>
 					<label>$INFO[ListItem.Label]</label>

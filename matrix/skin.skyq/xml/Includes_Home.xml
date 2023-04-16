@@ -711,7 +711,7 @@
 		<ondown>20001</ondown><onleft>9000</onleft>
 		<usecontrolcoords>true</usecontrolcoords>
 	</include>
- <!-- control all widget Title -->
+ <!-- control all widget Title header -->
 	<include name="CategoryLabel">
 		<param name="visible">true</param>
 		<definition>
@@ -722,6 +722,7 @@
 				<height>90</height>
 				<label>$PARAM[label]</label>
 				<shadowcolor>text_shadow</shadowcolor>
+				<font>font35_regular</font>
 				<visible>$PARAM[visible]</visible>
 				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) | Container($PARAM[list_id]).IsUpdating</visible>
 			</control>
@@ -751,7 +752,7 @@
 			<width>420</width>
 			<label>$PARAM[header]</label>
 			<aligny>center</aligny>
-			<font>font36_title</font>
+			<font>font3_regular</font>
 			<shadowcolor>black</shadowcolor>
 		</control>
 		<control type="label">
@@ -760,7 +761,7 @@
 			<height>105</height>
 			<width>420</width>
 			<label>$PARAM[label1][CR]$PARAM[label2]</label>
-			<font>font12</font>
+			<font>font33_regular</font>
 			<shadowcolor>black</shadowcolor>
 		</control>
 	</include>
@@ -840,7 +841,7 @@
 						<height min="0" max="300">auto</height>
 						<label>$PARAM[text_label]</label>
 						<align>center</align>
-						<font>font14</font>
+						<font>font33_regular</font>
 					</control>
 					<control type="grouplist" id="$PARAM[button_id]567">
 						<width>100%</width>
@@ -1055,7 +1056,7 @@
 							<width>240</width>
 							<height>70</height>
 							<label>$INFO[ListItem.Label]</label>
-							<font>font25_narrow</font>
+							<font>font30_regular</font>
 							<shadowcolor>text_shadow</shadowcolor>
 							<align>center</align>
 							<aligny>center</aligny>
@@ -1100,7 +1101,7 @@
 							<width>240</width>
 							<height>70</height>
 							<label>$INFO[ListItem.Label]</label>
-							<font>font25_narrow</font>
+							<font>font30_regular</font>
 							<shadowcolor>text_shadow</shadowcolor>
 							<align>center</align>
 							<aligny>center</aligny>
@@ -1234,7 +1235,7 @@
 							<width>245</width>
 							<height>70</height>
 							<label>$PARAM[label]</label>
-							<font>font12</font>
+							<font>font30_regular</font>
 							<shadowcolor>text_shadow</shadowcolor>
 							<align>center</align>
 							<aligny>top</aligny>
@@ -1245,7 +1246,7 @@
 							<width>245</width>
 							<height>65</height>
 							<label>$PARAM[label2]</label>
-							<font>font12</font>
+							<font>font30_regular</font>
 							<shadowcolor>text_shadow</shadowcolor>
 							<align>center</align>
 							<aligny>top</aligny>
@@ -1297,7 +1298,7 @@
 							<width>245</width>
 							<height>70</height>
 							<label>$PARAM[label]</label>
-							<font>font12</font>
+							<font>font30_regular</font>
 							<shadowcolor>text_shadow</shadowcolor>
 							<align>center</align>
 							<scroll>true</scroll>
@@ -1309,7 +1310,7 @@
 							<width>245</width>
 							<height>65</height>
 							<label>$PARAM[label2]</label>
-							<font>font12</font>
+							<font>font30_regular</font>
 							<shadowcolor>text_shadow</shadowcolor>
 							<align>center</align>
 							<scroll>true</scroll>
@@ -1375,7 +1376,7 @@
 							<left>15</left>
 							<top>78</top>
 							<align>center</align>
-							<font>font12</font>
+							<font>font30_regular</font>
 							<label>$INFO[ListItem.Property(ShortDate)]</label>
 							<width>230</width>
 						</control>
@@ -1384,7 +1385,7 @@
 							<top>236</top>
 							<align>center</align>
 							<label>$INFO[ListItem.Label2]</label>
-							<font>font12</font>
+							<font>font30_regular</font>
 							<width>230</width>
 						</control>
 					</control>
@@ -1435,7 +1436,7 @@
 							<left>15</left>
 							<top>78</top>
 							<align>center</align>
-							<font>font12</font>
+							<font>font30_regular</font>
 							<label>$INFO[ListItem.Property(ShortDate)]</label>
 							<width>230</width>
 						</control>
@@ -1444,7 +1445,7 @@
 							<top>236</top>
 							<align>center</align>
 							<label>$INFO[ListItem.Label2]</label>
-							<font>font12</font>
+							<font>font30_regular</font>
 							<width>230</width>
 						</control>
 					</control>
@@ -1624,7 +1625,7 @@
 			<texturenofocus border="21">buttons/button-nofo.png</texturenofocus>
 			<animation effect="slide" end="0,-90" time="0" condition="true">Conditional</animation>
 			<texturefocus border="21" colordiffuse="button_focus">buttons/button-fo.png</texturefocus>
-			<font>font30_title</font>
+			<font>font33_regular</font>
 			<onclick>noop</onclick>
 			<label>$INFO[Window(weather).Property(Map.$PARAM[item_id].Heading)]</label>
 			<visible>Weather.IsFetched + !String.IsEmpty(Window(weather).Property(Map.$PARAM[item_id].Area)) + !String.IsEmpty(Window(weather).Property(Map.IsFetched))</visible>

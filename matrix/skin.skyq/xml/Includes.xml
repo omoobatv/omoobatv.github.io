@@ -625,7 +625,7 @@
 				</control>
 				<control type="label" id="$PARAM[id]">
 					<label>$PARAM[sub_label]</label>
-					<font>font12</font>
+					<font>font30_regular</font>
 					<left>85</left>
 					<shadowcolor>text_shadow</shadowcolor>
 					<height>100</height>
@@ -651,7 +651,7 @@
 				<control type="label">
 					<width>100%</width>
 					<label>$PARAM[main_label]</label>
-					<font>font52_title</font>
+					<font>font45_regular</font>
 					<shadowcolor>text_shadow</shadowcolor>
 					<height>65</height>
 					<align>center</align>
@@ -805,7 +805,7 @@
 				<top>0</top>
 				<right>100</right>
 				<height>70</height>
-				<font>font32_title</font>
+				<font>font33_regular</font>
 				<label>$PARAM[header_label]</label>
 				<aligny>center</aligny>
 				<shadowcolor>black</shadowcolor>
@@ -1046,7 +1046,8 @@
 			<align>Left</align>
 			<itemgap>94</itemgap>
 			<orientation>vertical</orientation>
-			<font>font37A</font>
+			<font>font35_regular</font>
+			<textcolor>FFFFFFFF</textcolor>
 			<control type="label">
 				<visible>!Control.IsVisible(50)</visible>
 				<label>Sky Cinema</label>
@@ -1075,7 +1076,7 @@
 
 	<include name="BreadcrumbsLabel">
 		<description>All menu name breadcrumbs</description>
-		<font>font45</font>
+		<font>font45_regular</font>
 		<shadowcolor>text_shadow</shadowcolor>
 		<left>67</left>
 		<height>100</height>
@@ -1083,7 +1084,7 @@
 	</include>
 	<include name="SysBreadcrumbsLabel">
 		<description>All menu name breadcrumbs</description>
-		<font>font45</font>
+		<font>font45_regular</font>
 		<shadowcolor>text_shadow</shadowcolor>
 		<left>500</left>
 		<top>85</top>
@@ -1152,7 +1153,7 @@
 				<top>20</top>
 				<right>80</right>
 				<height>50</height>
-				<font>font40_title</font>
+				<font>font40_regular</font>
 				<textcolor>FFFFFFFF</textcolor>
 				<label fallback="">$INFO[ListItem.Label]</label>
 				<align>justify</align>
@@ -1221,7 +1222,7 @@
 							<top>80</top>
 							<right>500</right>
 							<height>290</height>
-							<font>font32_title</font>
+							<font>font39_regular</font>
 							<textcolor>FFFFFFFF</textcolor>
 							<label fallback="no program information available">$INFO[ListItem.Title]</label>
 							<align>left</align>
@@ -1231,8 +1232,8 @@
 							<left>505</left>
 							<top>150</top>
 							<right>500</right>
-							<height>270</height>
-							<font>font27</font>
+							<height>110</height>
+							<font>font30_regular</font>
 							<label>$INFO[ListItem.EpisodeName] $INFO[ListItem.Plot]</label>
 							<align>left</align>
 							<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
@@ -1242,7 +1243,7 @@
 							<left>490</left>
 							<top>400</top>
 							<right>0</right>
-							<height>3</height>
+							<height>2</height>
 							<texture>div-h2.png</texture>
 						</control>
 						<control type="image">
@@ -1266,7 +1267,7 @@
 							<top>145</top>
 							<right>20</right>
 							<height>190</height>
-							<font>font37</font>
+							<font>font30_regular</font>
 							<textcolor>FFB2D4F5</textcolor>
 							<label fallback="Unknown Duration">$INFO[ListItem.Duration(h)]h $INFO[ListItem.Duration(m)]m[CR]</label>
 							<align>justify</align>
@@ -1277,7 +1278,7 @@
 							<top>185</top>
 							<right>20</right>
 							<height>190</height>
-							<font>font37</font>
+							<font>font30_regular</font>
 							<textcolor>FFB2D4F5</textcolor>
 							<label fallback="Unknown Start Time">Started at [LOWERCASE]$INFO[ListItem.StartTime][/LOWERCASE]</label>
 							<align>justify</align>
@@ -1356,17 +1357,27 @@
 			</control>
 
 
-			<!-- Logo and clock -->
+			<!-- Top head sky Logo -->
 
 			<control type="image">
-				<aspectratio></aspectratio>
+				<aspectratio>keep</aspectratio>
 				<top>20</top>
 				<left>65</left>
 				<width>144</width>
 				<height>78</height>
 				<texture>skyq.png</texture>
+				<visible>!Skin.HasSetting(HomeHeaderUseLogoSky)</visible>
 			</control>
-
+			<control type="image">
+				<aspectratio>keep</aspectratio>
+				<top>15</top>
+				<left>35</left>
+				<width>144</width>
+				<height>78</height>
+				<texture>kodi-logo.png</texture>
+				<visible>Skin.HasSetting(HomeHeaderUseLogoSky)</visible>
+			</control>
+      <!-- Top head clock time -->
 			<control type="label">
 				<left>335</left>
 				<top>47</top>

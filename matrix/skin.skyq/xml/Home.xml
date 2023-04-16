@@ -47,9 +47,9 @@
 		<height>95</height>
 		<width>560</width>
 		<aligny>center</aligny>
-		<font>font32_title</font>
+		<font>font37_medium</font>
 		<textcolor>FFFFFFFF</textcolor>
-		<label>$INFO[ListItem.Label]</label>
+		<label>$VAR[HomeTopListItemTitleOrLabel]</label>
 		<shadowcolor>text_shadow</shadowcolor>
 	</control>
 	<!-- Plot at the home top right bat -->
@@ -59,9 +59,10 @@
 	<right>250</right>
 	<height>200</height>
 	<font>font27</font>
-	<label fallback="Sky TV on demand offers you a world of entertainment through your Sky Q box including Box Sets and Catch Up TV. Add Sky Cinema today to watch blockbuster movies and Sky Original Films now including Paramount+">$INFO[ListItem.Plot]$INFO[ListItem.AddonDescription]</label>
+	<label fallback="Sky TV on demand offers you a world of entertainment through your Sky Q box including Box Sets and Catch Up TV. Add Sky Cinema today to watch blockbuster movies and Sky Original Films now including Paramount+">$INFO[ListItem.Plot]$INFO[ListItem.AddonSummary]</label>
 	<align>left</align>
 	<width>1200</width>
+	<shadowcolor>text_shadow</shadowcolor>
 	<autoscroll delay="5000" repeat="7500" time="5000"></autoscroll>
 	</control>
 
@@ -485,6 +486,24 @@
 							<param name="label2" value="$INFO[ListItem.Title] $VAR[SeasonEpisodeLabel]"/>
 						</include>
 						<include content="WidgetListEpisodesHomePvr" condition="System.HasPVRAddon">
+							<param name="content_path" value="pvr://channels/tv/kids"/>
+							<param name="widget_header" value="Kids"/>
+							<param name="widget_target" value="pvr"/>
+							<param name="list_id" value="12203"/>
+							<param name="item_limit" value="2000"/>
+							<param name="label" value="$INFO[ListItem.ChannelName]"/>
+							<param name="label2" value="$INFO[ListItem.Title] $VAR[SeasonEpisodeLabel]"/>
+						</include>
+						<include content="WidgetListEpisodesHomePvr" condition="System.HasPVRAddon">
+							<param name="content_path" value="pvr://channels/tv/sports"/>
+							<param name="widget_header" value="Sports"/>
+							<param name="widget_target" value="pvr"/>
+							<param name="list_id" value="12204"/>
+							<param name="item_limit" value="2000"/>
+							<param name="label" value="$INFO[ListItem.ChannelName]"/>
+							<param name="label2" value="$INFO[ListItem.Title] $VAR[SeasonEpisodeLabel]"/>
+						</include>
+						<include content="WidgetListEpisodesHomePvr" condition="System.HasPVRAddon">
 							<param name="content_path" value="pvr://channels/tv/*?view=lastplayed"/>
 							<param name="sortby" value="lastplayed"/>
 							<param name="sortorder" value="descending"/>
@@ -622,10 +641,11 @@
 				</include>
 				<control type="fixedlist" id="9000">
 					<left>0</left>
-					<top>450</top>
+					<top>480</top>
 					<width>462</width>
-					<height>574</height>
-					<movement>6</movement>
+					<height>564</height>
+					<movement>8</movement>
+					<bottom>-10</bottom>
 					<focusposition>0</focusposition>
 					<onfocus>ClearProperty(listposition,home)</onfocus>
 					<onright>SetFocus($INFO[Container(9000).ListItem.Property(menu_id)])</onright>
@@ -636,7 +656,7 @@
 					<scrolltime tween="cubic" easing="out">500</scrolltime>
 					<focusedlayout height="95">
 						<control type="group">
-							<animation effect="fade" start="100" end="0" time="0">UnFocus</animation>
+              <animation effect="fade" start="100" end="0" time="0">UnFocus</animation>
 
 							<!-- Box around menu items -->
 
@@ -655,7 +675,7 @@
 							<height>95</height>
 							<width>560</width>
 							<aligny>center</aligny>
-							<font>font32_title</font>
+							<font>font37_medium</font>
 							<label>$INFO[ListItem.Label]</label>
 							<shadowcolor>text_shadow</shadowcolor>
 						</control>
@@ -670,7 +690,7 @@
 							<height>95</height>
 							<width>560</width>
 							<aligny>center</aligny>
-							<font>font37</font>
+							<font>font33_regular</font>
 							<label>$INFO[ListItem.Label]</label>
 							<shadowcolor>text_shadow</shadowcolor>
 						</control>
@@ -740,7 +760,7 @@
 						</item>
 
 						<item>
-							<label>Catchup TV</label>
+							<label>Catch up TV</label>
 							<property name="menu_id">$NUMBER[13500]</property>
 							<onclick>ActivateWindow(1112)</onclick>
 							<property name="id">catchuptv</property>
@@ -791,16 +811,7 @@
 						</item>
 						<!-- Blank line to keep menu looks good -->
 
-						<item>
-							<label></label>
-							<onclick></onclick>
-               <control type="button">
-								 <texturefocus/>
-							 	 <texturenofocus/>
-	              <onfocus></onfocus>
-							</control>
 
-						</item>
 
 					</content>
 

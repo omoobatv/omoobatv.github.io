@@ -43,7 +43,7 @@
 		<top>180</top>
 		<right>250</right>
 		<height>200</height>
-		<font>font27</font>
+		<font>font30_regular</font>
 		<label fallback="Sky TV on demand offers you a world of entertainment through your Sky Q box including Box Sets and Catch Up TV. Add Sky Cinema today to watch blockbuster movies and Sky Original Films now including Paramount+">$INFO[ListItem.Plot]</label>
 		<align>left</align>
 		<width>1200</width>
@@ -56,7 +56,7 @@
 			<height>95</height>
 			<width>560</width>
 			<aligny>center</aligny>
-			<font>font32_title</font>
+			<font>font39_regular_title</font>
 			<textcolor>FFFFFFFF</textcolor>
 			<label>$INFO[ListItem.Label]</label>
 			<shadowcolor>text_shadow</shadowcolor>
@@ -152,7 +152,7 @@
 					<control type="grouplist" id="10501">
 						<include>catchuptvWidgetGroupListCommon</include>
 						<include content="catchup1WidgetListEpisodes">
-							<param name="content_path" value="plugin://plugin.video.exodus/?action=tvshows&amp;url=http%3a%2f%2fwww.tvmaze.com%2fnetworks%2f63%2fsky-1"/>
+							<param name="content_path" value="plugin://script.skin.helper.widgets/?action=channels&mediatype=pvr&reload=$INFO[Window(Home).Property(widgetreload2)]"/>
 							<param name="widget_header" value="Sky1"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
@@ -615,7 +615,7 @@
 									<height>95</height>
 									<width>560</width>
 									<aligny>center</aligny>
-									<font>font37</font>
+									<font>font37_medium</font>
 									<label>$INFO[ListItem.Label]</label>
 									<shadowcolor>text_shadow</shadowcolor>
 								</control>
@@ -627,7 +627,7 @@
 									<height>95</height>
 									<width>560</width>
 									<aligny>center</aligny>
-									<font>font37</font>
+									<font>font33_regular</font>
 									<label>$INFO[ListItem.Label]</label>
 									<shadowcolor>text_shadow</shadowcolor>
 								</control>

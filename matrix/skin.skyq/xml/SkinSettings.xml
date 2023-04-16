@@ -70,6 +70,18 @@
 					<onclick>Skin.ToggleSetting(hide_mediaflags)</onclick>
 					<selected>!Skin.HasSetting(hide_mediaflags)</selected>
 				</control>
+				<control type="radiobutton" id="6121">
+					<label>Enable home addons label</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeAddonsNoLabelButton)</selected>
+					<onclick>Skin.ToggleSetting(HomeAddonsNoLabelButton)</onclick>
+				</control>
+				<control type="radiobutton" id="6126">
+					<label>Use Sky Logo</label>
+					<include>DefaultSettingButton</include>
+					<selected>!Skin.HasSetting(HomeHeaderUseLogoSky)</selected>
+					<onclick>Skin.ToggleSetting(HomeHeaderUseLogoSky)</onclick>
+				</control>
 			</control>
 			<control type="grouplist" id="600">
 				<top>160</top>
@@ -271,7 +283,7 @@
 								<height>85</height>
 								<width>392</width>
 								<aligny>center</aligny>
-								<font>font37</font>
+								<font>font35_regular</font>
 								<label>$INFO[ListItem.Label]</label>
 								<texturefocus>menuselect.png</texturefocus>
 								<shadowcolor>text_shadow</shadowcolor>
@@ -291,7 +303,7 @@
 								<height>95</height>
 								<width>560</width>
 								<aligny>center</aligny>
-								<font>font37</font>
+								<font>font35_regular</font>
 								<label>$INFO[ListItem.Label]</label>
 								<shadowcolor>text_shadow</shadowcolor>
 							</control>
@@ -339,7 +351,7 @@
 			<bottom>27</bottom>
 			<width>1350</width>
 			<height>100</height>
-			<font>font12</font>
+			<font>font30_regular</font>
 			<align>justify</align>
 			<textcolor>button_focus</textcolor>
 			<label>$VAR[SkinSettingsHelpTextVar]</label>
