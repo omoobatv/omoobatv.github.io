@@ -8,13 +8,15 @@
     See LICENSES/GPL-2.0-only for more information.
 """
 
-from six.moves import urllib
-
 import datetime
 import json
 import os
 import sys
 import weakref
+from urllib.parse import quote
+from urllib.parse import unquote
+from urllib.parse import urlparse
+from urllib.parse import parse_qsl
 
 import xbmc
 import xbmcaddon
@@ -51,8 +53,8 @@ class XbmcContext(AbstractContext):
         # first the path of the uri
         if override:
             self._uri = sys.argv[0]
-            comps = urllib.parse.urlparse(self._uri)
-            self._path = urllib.parse.unquote(comps.path)
+            comps = urlparse(self._uri)
+            self._path = unquote(comps.path)
 
             # after that try to get the params
             if len(sys.argv) > 2:
@@ -61,7 +63,7 @@ class XbmcContext(AbstractContext):
                     self._uri = '?'.join([self._uri, params])
 
                     self._params = {}
-                    params = dict(urllib.parse.parse_qsl(params))
+                    params = dict(parse_qsl(params))
                     for _param in params:
                         item = params[_param]
                         self._params[_param] = item
@@ -208,6 +210,7 @@ class XbmcContext(AbstractContext):
     def set_content_type(self, content_type):
         self.log_debug('Setting content-type: "%s" for "%s"' % (content_type, self.get_path()))
         xbmcplugin.setContent(self._plugin_handle, content_type)
+        self.get_ui().set_view_mode(content_type)
 
     def add_sort_method(self, *sort_methods):
         for sort_method in sort_methods:
@@ -276,7 +279,7 @@ class XbmcContext(AbstractContext):
     def send_notification(self, method, data):
         data = json.dumps(data)
         self.log_debug('send_notification: |%s| -> |%s|' % (method, data))
-        data = '\\"[\\"%s\\"]\\"' % urllib.parse.quote(data)
+        data = '\\"[\\"%s\\"]\\"' % quote(data)
         self.execute('NotifyAll(plugin.video.youtube,%s,%s)' % (method, data))
 
     def use_inputstream_adaptive(self):
@@ -312,8 +315,8 @@ class XbmcContext(AbstractContext):
             'vp9': '2.3.14',
             'vp9.2': '2.3.14',
             'vorbis': None,
-            'opus': None,
-            'av1': None,
+            'opus': '19.0.7',
+            'av1': '20.3.0',
         }
 
         if capability is None:

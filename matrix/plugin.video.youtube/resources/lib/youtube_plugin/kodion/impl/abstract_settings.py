@@ -90,6 +90,9 @@ class AbstractSettings(object):
     def is_setup_wizard_enabled(self):
         return self.get_bool(constants.setting.SETUP_WIZARD, False)
 
+    def is_override_view_enabled(self):
+        return self.get_bool(constants.setting.VIEW_OVERRIDE, False)
+
     def is_support_alternative_player_enabled(self):
         return self.get_bool(constants.setting.SUPPORT_ALTERNATIVE_PLAYER, False)
 
@@ -246,3 +249,9 @@ class AbstractSettings(object):
 
     def remote_friendly_search(self):
         return self.get_bool(constants.setting.REMOTE_FRIENDLY_SEARCH, False)
+
+    def hide_short_videos(self):
+        return self.get_bool(constants.setting.HIDE_SHORT_VIDEOS, False)
+
+    def use_alternative_client(self):
+        return self.get_bool(constants.setting.ALTERNATIVE_CLIENT, False)

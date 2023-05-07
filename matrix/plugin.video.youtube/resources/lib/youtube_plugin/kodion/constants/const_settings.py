@@ -30,9 +30,14 @@ LOCATION_RADIUS = 'youtube.location.radius'  # (int)
 PLAY_COUNT_MIN_PERCENT = 'kodion.play_count.percent'  # (int)
 USE_PLAYBACK_HISTORY = 'kodion.playback.history'  # (bool)
 REMOTE_FRIENDLY_SEARCH = 'youtube.search.remote.friendly'  # (bool)
+HIDE_SHORT_VIDEOS = 'youtube.hide_shorts'  # (bool)
 
 SUPPORT_ALTERNATIVE_PLAYER = 'kodion.support.alternative_player'  # (bool)
 ALTERNATIVE_PLAYER_WEB_URLS = 'kodion.alternative_player.web.urls'  # (bool)
+
+VIEW_OVERRIDE = 'kodion.view.override'  # (bool)
+VIEW_DEFAULT = 'kodion.view.default'  # (int)
+VIEW_X = 'kodion.view.%s'  # (int)
 
 ALLOW_DEV_KEYS = 'youtube.allow.dev.keys'  # (bool)
 
@@ -45,3 +50,5 @@ HTTPD_LISTEN = 'kodion.http.listen'  # (string)
 HTTPD_WHITELIST = 'kodion.http.ip.whitelist'  # (string)
 
 API_CONFIG_PAGE = 'youtube.api.config.page'  # (bool)
+
+ALTERNATIVE_CLIENT = 'youtube.client.alternative'  # (bool)

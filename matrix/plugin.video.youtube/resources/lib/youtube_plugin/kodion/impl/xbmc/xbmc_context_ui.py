@@ -8,8 +8,6 @@
     See LICENSES/GPL-2.0-only for more information.
 """
 
-from six import PY3
-
 import xbmc
 import xbmcgui
 
@@ -34,6 +32,18 @@ class XbmcContextUI(AbstractContextUI):
             return XbmcProgressDialogBG(heading, text)
 
         return XbmcProgressDialog(heading, text)
+
+    def set_view_mode(self, view_mode):
+        if isinstance(view_mode, str):
+            view_mode = self._context.get_settings().get_int(constants.setting.VIEW_X % view_mode, self._context.get_settings().get_int(constants.setting.VIEW_DEFAULT, 50))
+
+        self._view_mode = view_mode
+
+    def get_view_mode(self):
+        if self._view_mode is not None:
+            return self._view_mode
+
+        return self._context.get_settings().get_int(constants.setting.VIEW_DEFAULT, 50)
 
     def get_skin_id(self):
         return xbmc.getSkinDir()
@@ -85,11 +95,8 @@ class XbmcContextUI(AbstractContextUI):
     def on_select(self, title, items=None):
         if items is None:
             items = []
-        major_version = self._context.get_system_version().get_version()[0]
-        if isinstance(items[0], tuple) and len(items[0]) == 4 and major_version <= 16:
-            items = [(item[0], item[2]) for item in items]
 
-        use_details = (isinstance(items[0], tuple) and len(items[0]) == 4 and major_version > 16)
+        use_details = (isinstance(items[0], tuple) and len(items[0]) == 4)
 
         _dict = {}
         _items = []
@@ -128,7 +135,7 @@ class XbmcContextUI(AbstractContextUI):
         if not _image:
             _image = self._context.get_icon()
 
-        if PY3 and isinstance(message, str):
+        if isinstance(message, str):
             message = utils.to_unicode(message)
 
         try:
@@ -152,7 +159,7 @@ class XbmcContextUI(AbstractContextUI):
         self._xbmc_addon.openSettings()
 
     def refresh_container(self):
-        script_uri = 'special://home/addons/%s/resources/lib/youtube_plugin/refresh.py' % self._context.get_id()
+        script_uri = "{}/resources/lib/youtube_plugin/refresh.py".format(self._xbmc_addon.getAddonInfo('path'))
         xbmc.executebuiltin('RunScript(%s)' % script_uri)
 
     @staticmethod

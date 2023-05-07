@@ -8,8 +8,6 @@
     See LICENSES/GPL-2.0-only for more information.
 """
 
-from six import PY2
-
 import re
 import time
 
@@ -143,8 +141,6 @@ def update_channel_infos(provider, context, channel_id_dict, subscription_id_dic
         if context.get_path() == '/subscriptions/list/':
             channel = title.lower()
             channel = channel.replace(',', '')
-            if PY2:
-                channel = channel.encode('utf-8', 'ignore')
             if channel in filter_list:
                 yt_context_menu.append_remove_my_subscriptions_filter(context_menu, provider, context, title)
             else:
@@ -258,7 +254,7 @@ def update_video_infos(provider, context, video_id_dict, playlist_item_id_dict=N
         video_item = video_id_dict[video_id]
 
         # set mediatype
-        video_item.set_mediatype('video')  # using video
+        video_item.set_mediatype('episode')  # using video
 
         if not yt_item:
             continue
@@ -679,3 +675,19 @@ def add_related_video_to_playlist(provider, context, client, v3, video_id):
 
             if not page_token:
                 break
+
+
+def filter_short_videos(context, items):
+    if context.get_settings().hide_short_videos():
+        shorts_filtered = []
+
+        for item in items:
+            if hasattr(item, '_duration'):
+                item_duration = 0 if item.get_duration() is None else item.get_duration()
+                if 0 < item_duration <= 60:
+                    continue
+            shorts_filtered += [item]
+
+        return shorts_filtered
+
+    return items
