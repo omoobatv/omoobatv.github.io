@@ -716,7 +716,7 @@
 							<onclick>ActivateWindow(favourites)</onclick>
 							<property name="menu_id">$NUMBER[14000]</property>
 							<property name="id">favorites</property>
-							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
+							<visible>Skin.HasSetting(HomeMenuNoFavButton)</visible>
 							<thumb>special://skin/media/music/b-hunt.png</thumb>
 						</item>
 						<item> <!-- Using library -->
@@ -791,7 +791,7 @@
 							<onclick>ActivateWindow(Videos,root)</onclick>
 							<property name="menu_id">$NUMBER[11000]</property>
 							<property name="id">video</property>
-							<visible>!Skin.HasSetting(HomeMenuNoVideosButton)</visible>
+							<visible>Skin.HasSetting(HomeMenuNoVideosButton)</visible>
 							<thumb>special://skin/media/music/tvg-tv.png</thumb>
 						</item>
 						<item>
