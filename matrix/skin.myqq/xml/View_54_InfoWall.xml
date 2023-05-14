@@ -384,7 +384,7 @@
 						<height>108</height>
 						<texture>image-gradient.png</texture>
 						<aspectratio>stretch</aspectratio>
-						<visible>!Skin.HasSetting(HomeAddonsNoLabelButton)</visible>
+						<visible>Skin.HasSetting(HomeAddonsNoLabelButton)</visible>
 					</control>
 				<control type="label">
 					<left>31</left>
@@ -434,7 +434,7 @@
 						<font>font24_regular</font>
 						<textcolor>FFFFFFFF</textcolor>
 						<shadowcolor>CCCCCCCC</shadowcolor>
-						<visible>!Skin.HasSetting(HomeAddonsNoLabelButton)</visible>
+						<visible>Skin.HasSetting(HomeAddonsNoLabelButton)</visible>
 						<align>left</align>
 					</control>
 				</control>

@@ -305,7 +305,7 @@
 					<enable>Skin.HasSetting(OSDAutoClose)</enable>
 				</control>
 				<control type="radiobutton" id="6121">
-					<label>Enable home addons label</label>
+					<label>Disable home addons label</label>
 					<include>DefaultSettingButton</include>
 					<selected>!Skin.HasSetting(HomeAddonsNoLabelButton)</selected>
 					<onclick>Skin.ToggleSetting(HomeAddonsNoLabelButton)</onclick>
