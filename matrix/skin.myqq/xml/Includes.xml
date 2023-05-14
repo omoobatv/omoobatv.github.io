@@ -1446,7 +1446,7 @@
 						<width>144</width>
 						<height>78</height>
 						<texture>skyq.png</texture>
-						<visible>!Skin.HasSetting(HomeHeaderUseLogoSky)</visible>
+						<visible>Skin.HasSetting(HomeHeaderUseLogoSky)</visible>
 					</control>
 					<control type="image">
 						<aspectratio>keep</aspectratio>
@@ -1455,7 +1455,7 @@
 						<width>144</width>
 						<height>78</height>
 						<texture>kodi-logo.png</texture>
-						<visible>Skin.HasSetting(HomeHeaderUseLogoSky)</visible>
+						<visible>!Skin.HasSetting(HomeHeaderUseLogoSky)</visible>
 					</control>
 		      <!-- Top head clock time -->
 					<control type="label">

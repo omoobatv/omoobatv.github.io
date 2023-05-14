@@ -313,13 +313,13 @@
 				<control type="radiobutton" id="6126">
 					<label>Disable Sky Logo</label>
 					<include>DefaultSettingButton</include>
-					<selected>Skin.HasSetting(HomeHeaderUseLogoSky)</selected>
+					<selected>!Skin.HasSetting(HomeHeaderUseLogoSky)</selected>
 					<onclick>Skin.ToggleSetting(HomeHeaderUseLogoSky)</onclick>
 				</control>
 				<control type="radiobutton" id="6127">
 					<label>Disable Year and Video Resolution on home</label>
 					<include>DefaultSettingButton</include>
-					<selected>Skin.HasSetting(HomeNoYearResoluOverlay)</selected>
+					<selected>!Skin.HasSetting(HomeNoYearResoluOverlay)</selected>
 					<onclick>Skin.ToggleSetting(HomeNoYearResoluOverlay)</onclick>
 				</control>
 			</control>
