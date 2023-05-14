@@ -288,7 +288,7 @@
 					<font>font24_regular</font>
 					<shadowcolor>AAAAAAAA</shadowcolor>
 					<label>$INFO[ListItem.Year]</label>
-					<visible>!Skin.HasSetting(HomeNoYearResoluOverlay)</visible>
+					<visible>Skin.HasSetting(HomeNoYearResoluOverlay)</visible>
 				</control>
 				<!-- add movie studio logo to image -->
 					<control type="image">
@@ -297,7 +297,7 @@
 						<width>40</width>
             <height>25</height>
 						<texture>$INFO[ListItem.VideoResolution,q-icons/,.png]</texture>
-						<visible>!Skin.HasSetting(HomeNoYearResoluOverlay)</visible>
+						<visible>Skin.HasSetting(HomeNoYearResoluOverlay)</visible>
 					</control>
 			<control type="textbox">
 				<left>28</left>
