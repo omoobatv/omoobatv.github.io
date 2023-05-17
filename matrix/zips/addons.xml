@@ -1458,7 +1458,7 @@ v1.20.0
 		<disclaimer lang="zh_CN">Estuary 是 Kodi 的默认皮肤，删除它可能导致故障。</disclaimer>
 		<disclaimer lang="zh_TW">Estuary 是 Kodi 預設的佈景主題，移除它可能會造成問題</disclaimer>
 	</extension>
-</addon><addon id="skin.myqq" version="3.0.19" name="My QQ" provider-name="Mosii">
+</addon><addon id="skin.myqq" version="3.0.20" name="My QQ" provider-name="Mosii">
 	<requires>
 		<import addon="xbmc.gui" version="5.16.0" />
 	</requires>
@@ -1489,8 +1489,8 @@ v1.20.0
 			<screenshot>resources/screenshot-07.jpg</screenshot>
 			<screenshot>resources/screenshot-08.jpg</screenshot>
 		</assets>
-		<summary lang="en_gb">Sky Q MOD of Estuary skin by Moshii.</summary>
-		<description lang="en_gb">Sky Q skin is a MOD of Estuary to make it look so much like a popular UK TV.</description>
+		<summary lang="en_gb">MY Q MOD of Estuary skin by Moshii.</summary>
+		<description lang="en_gb">MY Q skin is a MOD of Estuary to make it look so much like a popular UK TV.</description>
 	</extension>
 </addon><addon id="skin.skyq" version="2.6.5" name="Sky Q" provider-name="moshii">
 	<requires>
