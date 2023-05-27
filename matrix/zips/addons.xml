@@ -280,6 +280,27 @@ Added support for Kodi v19 (Matrix)
 			<fanart>fanart.jpg</fanart>
 		</assets>
 	</extension>
+</addon><addon id="plugin.video.addon.recorder" version="0.0.31" name="Addon Recorder" provider-name="Moshii">
+<requires>
+  <import addon="xbmc.python" version="3.0.0" />
+  <import addon="script.module.xbmcswift2" />
+  <import addon="script.module.requests" version="2.9.1" />
+  <import addon="script.module.future" version="0.17.1" />
+  <import addon="script.module.six" />
+  <import addon="script.module.kodi-six" />
+</requires>
+<extension point="xbmc.python.pluginsource" library="main.py">
+  <provides>video</provides>
+</extension>
+<extension point="xbmc.service" library="service.py" start="login" />
+<extension point="xbmc.addon.metadata">
+  <summary lang="en">PVR Recorder for Addon Streams</summary>
+  <description lang="en">Record from Addon Streams on a Timer. Requires ffmpeg. Add Rule with python regexes.</description>
+  <disclaimer lang="en">Make sure you have legal permission to record from the creators.</disclaimer>
+  <assets>
+    <icon>icon.png</icon>
+  </assets>
+</extension>
 </addon><addon id="plugin.video.fen" name="Fen" provider-name="Tiki" version="2.6.13">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
