@@ -21,7 +21,7 @@
  		 <visible>!player.hasmedia</visible>
  		 <top>135</top>
  		 <left>43</left>
- 		 <height>240</height>
+ 		 <height>250</height>
  		 <width>444</width>
  		 <texture>special://skin/media/menuimage/setup.png</texture>
  	 </control>

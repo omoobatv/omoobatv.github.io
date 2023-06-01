@@ -2,7 +2,6 @@
 <window>
 	<defaultcontrol>9000</defaultcontrol>
 	<onload>Skin.SetBool(SkinHelper.EnablePVRThumbs)</onload>
-	<onload>Skin.SetString(SkinHelper.StudioLogos.Path,resource://resource.images.studios.coloured)</onload>
 	<backgroundcolor>background</backgroundcolor>
 	<controls>
 		<control type="button" id="20000">
@@ -39,7 +38,7 @@
     <height>260</height>
     <width>444</width>
     <texture fallback="special://skin/media/q-icon.png">$VAR[HomeEventIconListItemIcon]</texture>
-		<aspectratio aligny="center">stretch</aspectratio>
+		<aspectratio aligny="top">scale</aspectratio>
   </control>
 	<control type="label">
 		<description>List item title at home TopBar</description>
@@ -138,30 +137,30 @@
 							<param name="list_id" value="5900"/>
 						</include>
 					</control>
-				<!-- Cinema listings from plugin -->
+				<!-- Cinema listings from Exodus -->
 				<control type="grouplist" id="5002">
 					<visible>Skin.HasSetting(HomeMenuNoLibraryButton)</visible>
 					<include>WidgetGroupListCommon</include>
 					<include content="catchupWidgetListEpisodes">
-						<param name="content_path" value=""/>
+						<param name="content_path" value="plugin://plugin.video.exodus/?action=movies&amp;url=popular"/>
 						<param name="widget_header" value="Popular Movies"/>
 						<param name="widget_target" value="videos"/>
 						<param name="list_id" value="5102"/>
 					</include>
 					<include content="catchupWidgetListEpisodes">
-						<param name="content_path" value=""/>
+						<param name="content_path" value="plugin://plugin.video.exodus/?action=movies&amp;url=trending"/>
 						<param name="widget_header" value="Trending Movies"/>
 						<param name="widget_target" value="videos"/>
 						<param name="list_id" value="5202"/>
 					</include>
 					<include content="catchupWidgetListEpisodes">
-						<param name="content_path" value=""/>
+						<param name="content_path" value="plugin://plugin.video.exodus/?action=movies&amp;url=boxoffice"/>
 						<param name="widget_header" value="BoxOffice Movies"/>
 						<param name="widget_target" value="videos"/>
 						<param name="list_id" value="5302"/>
 					</include>
 					<include content="catchupWidgetListEpisodes">
-						<param name="content_path" value=""/>
+						<param name="content_path" value="plugin://plugin.video.exodus/?action=movies&amp;url=views"/>
 						<param name="widget_header" value="Most Viewed Movies"/>
 						<param name="widget_target" value="videos"/>
 						<param name="list_id" value="5402"/>
@@ -225,31 +224,31 @@
 							<param name="list_id" value="6900"/>
 						</include>
 					</control>
-					<!-- TV Shows from plugin -->
+					<!-- TV Shows from Exodus -->
 					<control type="grouplist" id="6002">
 						<visible>Skin.HasSetting(HomeMenuNoLibraryButton)</visible>
 
 						<include>WidgetGroupListCommon</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value=" "/>
+							<param name="content_path" value="plugin://plugin.video.exodus/?action=tvshows&amp;url=popular"/>
 							<param name="widget_header" value="Popular TV Shows"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="6102"/>
 						</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value=""/>
+							<param name="content_path" value="plugin://plugin.video.exodus/?action=tvshows&amp;url=trending"/>
 							<param name="widget_header" value="Trending TV Shows"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="6202"/>
 						</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value=""/>
+							<param name="content_path" value="plugin://plugin.video.exodus/?action=tvshows&amp;url=airing"/>
 							<param name="widget_header" value="Airing Today TV Shows"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="6302"/>
 						</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value=""/>
+							<param name="content_path" value="plugin://plugin.video.exodus/?action=movies&amp;url=premiere"/>
 							<param name="widget_header" value="Premiere TV Shows"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="6402"/>
@@ -337,15 +336,15 @@
 					<control type="grouplist" id="4100">
 						<include>WidgetGroupListCommon</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value="special://skin/playlists/random_movies.xsp"/>
+							<param name="content_path" value="plugin://plugin.video.themoviedb.helper/?info=popular&amp;tmdb_type=movie&amp;widget=true&amp;reload=$INFO[WINDOW(Home).Property(TMDbHelper.Widgets.Reload)],return"/>
 							<param name="widget_header" value="Today's Top Picks"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
 							<param name="list_id" value="4200"/>
 						</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value="special://skin/playlists/continue_watching_tvepisode.xsp"/>
-							<param name="widget_header" value="On The Deck"/>
+							<param name="content_path" value="plugin://plugin.video.fen/?action=tmdb_movies_latest_releases&amp;iconImage=dvd&amp;mode=build_movie_list&amp;name=32461&quot;,return"/>
+							<param name="widget_header" value=""/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
 							<param name="list_id" value="4203"/>
@@ -546,7 +545,7 @@
 					<control type="grouplist" id="13501">
 						<include>WidgetGroupListCommon</include>
 						<include content="catchupWidgetListEpisodes">
-							<param name="content_path" value="plugin://plugin.video.itvhub/resources/lib/main/list_categories/?_pickle_=8004951b000000000000007d948c075f7469746c655f948c0a43617465676f7269657394732e&amp;quot;,return"/>
+							<param name="content_path" value="plugin://plugin.video.fen/?action=tmdb_movies_latest_releases&amp;iconImage=dvd&amp;mode=build_movie_list&amp;name=32461&quot;,return"/>
 							<param name="widget_header" value="BBC iPlayer"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
@@ -650,15 +649,17 @@
 					<focusposition>0</focusposition>
 					<onfocus>ClearProperty(listposition,home)</onfocus>
 					<onright>SetFocus($INFO[Container(9000).ListItem.Property(menu_id)])</onright>
-					<onup>9000</onup>
-					<ondown>9000</ondown>
+					<onup>700</onup>
+					<ondown>700</ondown>
 					<onleft>13500</onleft>
+
 					<scrolltime tween="cubic" easing="out">500</scrolltime>
 					<focusedlayout height="95">
 						<control type="group">
               <animation effect="fade" start="100" end="0" time="0">UnFocus</animation>
 
 							<!-- Box around menu items -->
+
 							<control type="image">
 								<left>70</left>
 								<width>392</width>
@@ -666,15 +667,6 @@
                 <texture>menuselect.png</texture>
 								<animation effect="fade" start="100" end="0" time="0" condition="[!Control.HasFocus(9000) + !ControlGroup(700).HasFocus] | System.HasModalDialog">Conditional</animation>
 							</control>
-						</control>
-             <!-- Box around menu items retain focus-->
-						<control type="image">
-							<left>70</left>
-							<width>392</width>
-							<height>85</height>
-						  <texture>menuselect.png</texture>
-							<animation effect="fade" start="100" end="50" time="40" condition="!Control.HasFocus(9000) | System.HasActiveModalDialog">Conditional</animation>
-              <visible>!Skin.HasSetting(HomeMenuRetainFocus)</visible>
 						</control>
 
 						<control type="label">
@@ -687,6 +679,8 @@
 							<label>$INFO[ListItem.Label]</label>
 							<shadowcolor>text_shadow</shadowcolor>
 						</control>
+
+
 
 					</focusedlayout>
 					<itemlayout height="95">
@@ -709,7 +703,7 @@
 							<property name="id">home</property>
 							<visible>!Skin.HasSetting(Home2MenuNoProgramsButton)</visible>
 							<thumb>special://skin/media/menuimage/home-menu-thumb.png</thumb>
-							<label2>$VAR[HomeLabel2PlotVar]</label2>
+							<label2>What should I watch? Top Picks is a key feature of Sky Q which sees recommended shows and movies pushed right to the front of the menu, so that whenever you turn your TV on it’ll be the first thing you see.</label2>
 						</item>
 						<item>
 							<label>TV Guide</label>
@@ -718,14 +712,14 @@
 							<property name="id">livetv</property>
 							<visible>!Skin.HasSetting(HomeMenuNoTVButton)</visible>
 							<thumb>special://skin/media/menuimage/itvhd-topicks.png</thumb>
-							<label2>$VAR[HomeTvGuideLabel2PlotVar]</label2>
+							<label2>Endless entertainment with over 100 TV channels not on Freeview plus over 500 Box Sets. Get latest TV listings from Sky TV Guide. Check daily recommendations, watch videos and Remote Record your favourite shows.</label2>
 						</item>
 						<item>
 							<label>My Sky Q</label>
 							<onclick>ActivateWindow(favourites)</onclick>
 							<property name="menu_id">$NUMBER[14000]</property>
 							<property name="id">favorites</property>
-							<visible>Skin.HasSetting(HomeMenuNoFavButton)</visible>
+							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
 							<thumb>special://skin/media/music/b-hunt.png</thumb>
 						</item>
 						<item> <!-- Using library -->
@@ -737,11 +731,11 @@
 							<visible>!Skin.HasSetting(HomeMenuNoMovieButton)</visible>
 							<visible>!Skin.HasSetting(HomeMenuNoLibraryButton)</visible>
 							<thumb>special://skin/media/menuimage/cinema-home-icon.png</thumb>
-							<label2>$VAR[HomeSkyCinemaLabel2PlotVar]</label2>
+							<label2>Watch blockbuster movies and Sky Original Films. Now including Paramount+ at no extra cost saving you £6.99 a month. Sky Cinema is the home of Sky Original films with brand new films launching every month alongside an unrivalled range of the latest cinema releases.</label2>
 						</item>
-						<item> <!-- Using plugins -->
+						<item> <!-- Using Exodus -->
 							<label>Sky Cinema</label>
-							<onclick></onclick>
+							<onclick>ActivateWindow(Videos,"plugin://plugin.video.exodus/?action=movies&amp;url=trending",return)</onclick>
 							<property name="menu_id">$NUMBER[5000]</property>
 							<property name="id">movies</property>
 							<visible>!Skin.HasSetting(HomeMenuNoMovieButton)</visible>
@@ -756,11 +750,11 @@
 							<visible>!Skin.HasSetting(HomeMenuNoTVShowButton)</visible>
 							<visible>!Skin.HasSetting(HomeMenuNoLibraryButton)</visible>
 							<thumb>special://skin/media/menuimage/tv-shows-icon.png</thumb>
-							<label2>$VAR[HomeTvShowsLabel2PlotVar]</label2>
+
 						</item>
-						<item> <!-- using plugin -->
+						<item> <!-- using Exodus -->
 							<label>Sky TV Shows</label>
-							<onclick></onclick>
+							<onclick>ActivateWindow(Videos,"plugin://plugin.video.exodus/?action=tvshows&amp;url=trending",return)</onclick>
 							<property name="menu_id">$NUMBER[6000]</property>
 							<property name="id">tvshows</property>
 							<visible>!Skin.HasSetting(HomeMenuNoTVShowButton)</visible>
@@ -774,7 +768,7 @@
 							<property name="id">catchuptv</property>
 							<visible>!Skin.HasSetting(HomeMenuNoTVButton)</visible>
 							<thumb>special://skin/media/menuimage/itvhub.png</thumb>
-							<label2>$VAR[HomeCatchUpLabel2PlotVar]</label2>
+							<label2>Sky TV on demand offers you a world of entertainment through your Sky Q box including Box Sets and Catch Up TV. Add Sky Cinema today to watch blockbuster movies and Sky Original Films now including Paramount+</label2>
 						</item>
 						<item>
 							<label>Music</label>
@@ -783,7 +777,7 @@
 							<property name="id">music</property>
 							<visible>!Skin.HasSetting(HomeMenuNoMusicButton)</visible>
 							<thumb>special://skin/media/menuimage/music-menu-icon.png</thumb>
-							<label2>$VAR[HomeMusicLabel2PlotVar]</label2>
+							<label2>Say Hello to Amazon Music on Sky Q. Discover playlists covering different music genres, including some of the biggest songs in the world on All Hits, the best of UK rap, R&B, drill, grime and afro-beats on +44, upbeat hits to make you feel good and happy.</label2>
 						</item>
 						<item>
 							<label>Apps</label>
@@ -792,7 +786,7 @@
 							<property name="id">addons</property>
 							<visible>!Skin.HasSetting(HomeMenuNoAppsButton)</visible>
 							<thumb>special://skin/media/menuimage/plugin.png</thumb>
-							<label2>$VAR[HomeAppsLabel2PlotVar]</label2>
+							<label2>See your Sky TV next to your Netflix, YouTube, Prime Video, Spotify, LIONSGATE+, BBC iPlayer, ITV Hub, and All4. Everything you love, all in one place, easy.</label2>
 						</item>
 
 						<item>
@@ -800,14 +794,14 @@
 							<onclick>ActivateWindow(Videos,root)</onclick>
 							<property name="menu_id">$NUMBER[11000]</property>
 							<property name="id">video</property>
-							<visible>Skin.HasSetting(HomeMenuNoVideosButton)</visible>
+							<visible>!Skin.HasSetting(HomeMenuNoVideosButton)</visible>
 							<thumb>special://skin/media/music/tvg-tv.png</thumb>
 						</item>
 						<item>
 							<label>Settings</label>
 							<onclick>ActivateWindow(settings)</onclick>
 							<thumb>special://skin/media/menuimage/sky-q-upgrade.png</thumb>
-							<label2>$VAR[HomeSettingsLabel2PlotVar]</label2>
+							<label2>Press Home on your Sky Q remote and select Settings or select settings  from side menu and select the setting you want, from Addon settings  to Player settings, Media settings , PVR & Live TV settings, Services, Interface , Skin settings , System settings and many more. all in one place.</label2>
 						</item>
 						<item>
 							<label>Shutdown</label>
@@ -815,11 +809,17 @@
 							<onfocus>ActivateWindow(shutdownmenu)</onfocus>
 							<thumb>special://skin/media/menuimage/q-shutdown.png</thumb>
 						</item>
+						<!-- Blank line to keep menu looks good -->
+
+
+
 					</content>
+
 				</control>
 
 				<!-- bottom icons -->
-			<!--	<control type="grouplist" id="700">
+
+				<control type="grouplist" id="700">
 					<orientation>horizontal</orientation>
 					<itemgap>0</itemgap>
 					<left>30</left>
@@ -841,7 +841,7 @@
 						<param name="label" value="$LOCALIZE[31000]" />
 						<param name="visible" value="Player.HasMedia" />
 					</include>
-				</control>-->
+				</control>
 
 			</control>
 			<include content="TopBar">

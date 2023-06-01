@@ -566,64 +566,92 @@
 					</control>
 				</rulerlayout>
 				<channellayout height="62" width="$PARAM[channel_width]">
+					<!-- main epg grid channel number -->
 					<control type="label">
-						<left>2</left>
+						<right>5</right>
 						<top>-2</top>
 						<width>90</width>
 						<height>60</height>
-						<font>font32_title</font>
+						<font>font28_regular</font>
 						<label>$INFO[ListItem.ChannelNumberLabel]</label>
 						<align>center</align>
 						<aligny>center</aligny>
+						<textcolor>FFFFFFFF</textcolor>
+						<shadowcolor>AA000000</shadowcolor>
 					</control>
+					<!-- main epg grid channel name -->
 					<control type="label" id="1">
-						<left>83</left>
+						<left>5</left>
 						<top>-2</top>
+						<width>280</width>
 						<height>60</height>
-						<font>font13</font>
+						<font>font28_regular</font>
 						<label>$INFO[ListItem.ChannelName]</label>
+						<align>left</align>
 						<aligny>center</aligny>
 						<textoffsetx>10</textoffsetx>
+						<textcolor>FFFFFFFF</textcolor>
+						<shadowcolor>AA000000</shadowcolor>
+					</control>
+					<!-- main epg grid channel name and number BG-->
+					<control type="image" id="2">
+						<width>347</width>
+						<height>58</height>
+						<texture colordiffuse="30FFFFFF">steelblue.png</texture>
 					</control>
 				</channellayout>
 				<focusedchannellayout height="62" width="$PARAM[channel_width]">
+					<!-- main epg grid channel name and number hoover BG-->
+					<control type="image" id="2">
+						<width>347</width>
+						<height>58</height>
+						<texture colordiffuse="90FFFFFF">steelblue.png</texture>
+					</control>
+					<!-- main epg grid channel number hoover-->
 					<control type="label">
-						<left>2</left>
+						<right>5</right>
 						<top>-2</top>
 						<width>90</width>
 						<height>60</height>
-						<font>font32_title</font>
+						<font>font28_medium</font>
 						<label>$INFO[ListItem.ChannelNumberLabel]</label>
-						<textcolor>button_focus</textcolor>
+						<textcolor>FFFFFFFF</textcolor>
 						<align>center</align>
 						<aligny>center</aligny>
+						<shadowcolor>AA000000</shadowcolor>
 					</control>
+					<!-- main epg grid channel name hoover-->
 					<control type="label" id="1">
-						<left>83</left>
+						<left>5</left>
 						<top>-2</top>
 						<height>60</height>
-						<font>font13</font>
+						<font>font28_medium</font>
 						<label>$INFO[ListItem.ChannelName]</label>
-						<textcolor>button_focus</textcolor>
+	          <textcolor>FFFFFFFF</textcolor>
 						<aligny>center</aligny>
 						<textoffsetx>10</textoffsetx>
 						<scroll>true</scroll>
+						<shadowcolor>AA000000</shadowcolor>
 					</control>
+
 				</focusedchannellayout>
-				<!-- main epg grid label background -->
+
 				<itemlayout height="62" width="60">
+					<!-- main epg grid label background -->
 					<control type="image" id="2">
 						<width>58</width>
 						<height>58</height>
-						<texture border="3" fallback="windows/pvr/epg-genres/0.pn">$INFO[ListItem.Property(GenreType),windows/pvr/epg-genres/,.pn]</texture>
+						<texture colordiffuse="30FFFFFF">steelblue.png</texture>
 					</control>
+					<!-- main epg grid label -->
 					<control type="label" id="1">
-						<left>6</left>
-						<top>0</top>
+						<left>10</left>
+						<top>10</top>
 						<height>36</height>
 						<aligny>center</aligny>
-						<font>font13</font>
+						<font>font28_regular</font>
 						<label>$INFO[ListItem.Label]</label>
+						<shadowcolor>AA000000</shadowcolor>
 					</control>
 					<control type="image">
 						<visible>ListItem.IsNew | ListItem.IsPremiere | ListItem.IsFinale | ListItem.IsLive</visible>
@@ -644,20 +672,21 @@
 					</control>
 				</itemlayout>
 				<focusedlayout height="62" width="60">
-					<!-- epg grid focus  -->
+					<!-- main epg grid focus hoover -->
 					<control type="image" id="2">
-						<top>2</top>
-						<left>2</left>
-						<width>54</width>
-						<height>54</height>
-						<texture colordiffuse="button_focus">lists/focus.png</texture>
+						<top>0</top>
+						<left>0</left>
+						<width>58</width>
+						<height>58</height>
+						<texture colordiffuse="90FFFFFF">steelblue.png</texture>
+						<!--<texture colordiffuse="button_focus">lists/focus.png</texture>-->
 						<visible>Control.HasFocus($PARAM[control_id])</visible>
 					</control>
-					<!-- epg grid focus border -->
+					<!-- main epg grid focus border -->
 					<control type="image" id="2">
 						<width>58</width>
 						<height>58</height>
-						<texture border="8" colordiffuse="button_focus">buttons/thumbnail_focused.png</texture>
+					<!--<texture border="8" colordiffuse="button_focus">buttons/thumbnail_focused.png</texture>-->
 					</control>
 					<control type="image" id="2">
 						<width>58</width>
@@ -666,13 +695,16 @@
 						<texture border="3" fallback="windows/pvr/epg-genres/0.png">$INFO[ListItem.Property(GenreType),windows/pvr/epg-genres/,.png]</texture>
 						<visible>!Control.HasFocus($PARAM[control_id])</visible>
 					</control>
+					<!-- main epg grid label hoover -->
 					<control type="label" id="1">
-						<left>6</left>
-						<top>0</top>
+						<left>10</left>
+						<top>10</top>
 						<height>36</height>
 						<aligny>center</aligny>
-						<font>font13</font>
+						<font>font28_medium</font>
 						<label>$INFO[ListItem.Label]</label>
+						<textcolor>FFFFFFFF</textcolor>
+						<shadowcolor>AA000000</shadowcolor>
 					</control>
 					<control type="image">
 						<visible>ListItem.IsNew | ListItem.IsPremiere | ListItem.IsFinale | ListItem.IsLive</visible>

@@ -238,8 +238,8 @@
 			<control type="image">
 				<top>6</top>
 				<left>0</left>
-				<width>425</width>
-				<height>280</height>
+				<width>430</width>
+				<height>270</height>
 				<texture>menubox.png</texture>
 				<visible>$PARAM[focused]</visible>
 				<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
@@ -248,13 +248,13 @@
 			<control type="image">
 				<left>0</left>
 				<top>10</top>
-				<width>425</width>
-				<height>250</height>
+				<width>430</width>
+				<height>260</height>
 				<texture fallback="$PARAM[fallback_image]" background="true">$VAR[InfoWallThumbVar]</texture>
 				<bordertexture border="31">overlays/shadow.png</bordertexture>
 				<bordersize>23</bordersize>
 				<aspectratio>scale</aspectratio>
-			</control>
+        </control>
 
 			<control type="label">
 				<left>31</left>
@@ -265,13 +265,40 @@
 				<shadowcolor>text_shadow</shadowcolor>
 				<align>right</align>
 			</control>
+			<!-- add image gradient home catchup tv and co  image -->
+				<control type="image">
+					<left>20</left>
+					<top>140</top>
+					<width>387</width>
+					<height>108</height>
+					<texture>image-gradient.png</texture>v
+					<aspectratio>stretch</aspectratio>
+				</control>
 			<control type="image">
-				<left>20</left>
-				<top>175</top>
+				<left>370</left>
+				<top>215</top>
 				<width>32</width>
 				<height>32</height>
 				<texture>$VAR[WallWatchedIconVar]</texture>
 			</control>
+			<!-- add movie year to image -->
+				<control type="label">
+					<left>45</left>
+					<top>35</top>
+					<font>font24_regular</font>
+					<shadowcolor>AAAAAAAA</shadowcolor>
+					<label>$INFO[ListItem.Year]</label>
+					<visible>Skin.HasSetting(HomeNoYearResoluOverlay)</visible>
+				</control>
+				<!-- add movie studio logo to image -->
+					<control type="image">
+						<left>350</left>
+						<top>40</top>
+						<width>40</width>
+            <height>25</height>
+						<texture>$INFO[ListItem.VideoResolution,q-icons/,.png]</texture>
+						<visible>Skin.HasSetting(HomeNoYearResoluOverlay)</visible>
+					</control>
 			<control type="textbox">
 				<left>28</left>
 				<top>202</top>
@@ -297,18 +324,18 @@
 				</control>
 				<!-- control catchup tv small label bottom Title -->
 				<control type="label">
-					<left>12</left>
-					<top>245</top>
+					<left>33</left>
+					<top>215</top>
 					<width>320</width>
 					<label>$PARAM[main_label]</label>
-					<font>font24_regular</font>
+					<font>font24_medium</font>
 					<shadowcolor>text_shadow</shadowcolor>
 					<align>left</align>
 				</control>
 			</control>
 			<control type="progress">
 				<left>20</left>
-				<top>258</top>
+				<top>228</top>
 				<width>276</width>
 				<height>1</height>
 				<texturebg></texturebg>
@@ -332,8 +359,8 @@
 				<control type="image">
 					<top>6</top>
 					<left>0</left>
-					<width>425</width>
-					<height>280</height>
+					<width>430</width>
+					<height>270</height>
 					<texture>menubox.png</texture>
 					<visible>$PARAM[focused]</visible>
 					<include condition="$PARAM[focused]">Animation_FocusTextureFade</include>
@@ -342,14 +369,23 @@
 				<control type="image">
 					<left>0</left>
 					<top>10</top>
-					<width>425</width>
-					<height>250</height>
+					<width>430</width>
+					<height>260</height>
 					<texture fallback="$PARAM[fallback_image]" background="true">$INFO[ListItem.Icon]</texture>
           <bordertexture border="31">overlays/shadow.png</bordertexture>
 					<bordersize>23</bordersize>
 					<aspectratio>scale</aspectratio>
 				</control>
-
+				<!-- add image gradient home apps image -->
+					<control type="image">
+						<left>20</left>
+						<top>140</top>
+						<width>387</width>
+						<height>108</height>
+						<texture>image-gradient.png</texture>
+						<aspectratio>stretch</aspectratio>
+						<visible>Skin.HasSetting(HomeAddonsNoLabelButton)</visible>
+					</control>
 				<control type="label">
 					<left>31</left>
 					<top>178</top>
@@ -391,14 +427,14 @@
 					</control>
 					<!-- control Widget ListHome Addons Apps small label bottom Title -->
 					<control type="label">
-						<left>25</left>
-						<top>205</top>
+						<left>33</left>
+						<top>215</top>
 						<width>320</width>
 						<label>$PARAM[main_label]</label>
 						<font>font24_regular</font>
 						<textcolor>FFFFFFFF</textcolor>
 						<shadowcolor>CCCCCCCC</shadowcolor>
-						<visible>!Skin.HasSetting(HomeAddonsNoLabelButton)</visible>
+						<visible>Skin.HasSetting(HomeAddonsNoLabelButton)</visible>
 						<align>left</align>
 					</control>
 				</control>

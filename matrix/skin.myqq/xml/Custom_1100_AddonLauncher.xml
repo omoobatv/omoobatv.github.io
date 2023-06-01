@@ -20,7 +20,7 @@
 	    <visible>!player.hasmedia</visible>
 	    <top>135</top>
 	    <left>43</left>
-	    <height>240</height>
+	    <height>250</height>
 	    <width>444</width>
 	    <texture fallback="special://skin/media/q-icon.png">$VAR[HomeEventIconListItemIcon]</texture>
 			<aspectratio aligny="center">stretch</aspectratio>

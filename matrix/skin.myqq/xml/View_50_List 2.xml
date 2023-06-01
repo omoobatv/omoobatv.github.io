@@ -236,7 +236,7 @@
 					<left>43</left>
 					<top>135</top>
 					<width>444</width>
-					<height>250</height>
+					<height>230</height>
 					<aspectratio aligny="bottom">stretch</aspectratio>
 					<fadetime>300</fadetime>
 					<texture fallback="$PARAM[fallback_image]" background="true">$VAR[IconWallThumbVar]</texture>
