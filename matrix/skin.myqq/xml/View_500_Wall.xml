@@ -3,9 +3,9 @@
 	<include name="View_500_Wall">
 		<control type="image">
 	    <visible>!player.hasmedia</visible>
-	    <top>105</top>
+	    <top>135</top>
 	    <left>43</left>
-	    <height>260</height>
+	    <height>240</height>
 	    <width>444</width>
 	    <texture fallback="special://skin/media/q-icon.png">$VAR[HomeEventIconListItemIcon]</texture>
 			<aspectratio aligny="center">stretch</aspectratio>

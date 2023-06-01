@@ -1318,9 +1318,9 @@
 						<!-- Add icon to video window if nothing playing in tvguide -->
 						<control type="image">
 							<visible>!player.hasmedia</visible>
-							<top>105</top>
+							<top>135</top>
 							<left>43</left>
-							<height>260</height>
+							<height>240</height>
 							<width>444</width>
 							<texture fallback="special://skin/media/q-icon.png">$INFO[ListItem.EpgEventIcon]</texture>
 						</control>
@@ -1430,9 +1430,9 @@
 
 		      <!-- epg tv window main playing TV at left top Window -->
 					<control type="videowindow">
-						<top>105</top>
+						<top>135</top>
 						<left>42</left>
-						<height>260</height>
+						<height>250</height>
 						<width>445</width>
 						<visible>Player.HasVideo</visible>
 						<visible>!Slideshow.IsActive</visible>
@@ -1450,7 +1450,7 @@
 					</control>
 					<control type="image">
 						<aspectratio>keep</aspectratio>
-						<top>15</top>
+						<top>45</top>
 						<left>35</left>
 						<width>144</width>
 						<height>78</height>

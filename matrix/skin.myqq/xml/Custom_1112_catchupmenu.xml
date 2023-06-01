@@ -33,9 +33,9 @@
 		<control type="image">
 			<visible>!player.hasmedia</visible>
 			<left>43</left>
-			<top>104</top>
+			<top>134</top>
 			<width>444</width>
-			<height>260</height>
+			<height>240</height>
 			<texture fallback="special://skin/media/q-icon.png">$VAR[HomeEventIconListItemIcon]</texture>
 		</control>
 		<!-- Plot at the  -->

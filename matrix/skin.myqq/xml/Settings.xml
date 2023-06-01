@@ -16,9 +16,9 @@
 		</control>
 		<control type="image">
  		 <visible>!player.hasmedia</visible>
- 		 <top>105</top>
+ 		 <top>135</top>
  		 <left>43</left>
- 		 <height>260</height>
+ 		 <height>240</height>
  		 <width>444</width>
  		 <texture>special://skin/media/menuimage/setup.png</texture>
  	 </control>
