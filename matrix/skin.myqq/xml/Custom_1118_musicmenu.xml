@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="1118">
+	<defaultcontrol always="true">9000</defaultcontrol>
+	<backgroundcolor>background</backgroundcolor>
+	<controls>
+		<control type="button" id="20000">
+			<include>HiddenObject</include>
+			<animation effect="fade" time="300" start="100" end="0">Focus</animation>
+			<onfocus>SetFocus(2000)</onfocus>
+			<onclick>noop</onclick>
+			<visible allowhiddenfocus="true">Control.HasFocus(20000)</visible>
+		</control>
+		<control type="button" id="20001">
+			<include>HiddenObject</include>
+			<animation effect="fade" time="300" start="100" end="0">Focus</animation>
+			<onfocus>SetFocus(2000)</onfocus>
+			<onclick>noop</onclick>
+			<visible allowhiddenfocus="true">Control.HasFocus(20001)</visible>
+		</control>
+		<include>DefaultBackground</include>
+		<control type="multiimage">
+			<depth>DepthBackground</depth>
+			<include>FullScreenDimensions</include>
+			<aspectratio>scale</aspectratio>
+			<fadetime>600</fadetime>
+			<animation effect="zoom" center="auto" end="102,102" time="0" condition="Integer.IsGreater(System.StereoscopicMode,0)">conditional</animation>
+			<animation effect="fade" start="0" end="100" time="400">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="300">WindowClose</animation>
+			<animation effect="fade" time="400">VisibleChange</animation>
+			<imagepath background="true" colordiffuse="bg_overlay">$VAR[HomeFanartVar]</imagepath>
+			<visible>!Player.HasMedia</visible>
+		</control>
+		<control type="image">
+			<visible>!player.hasmedia</visible>
+			<left>43</left>
+			<top>104</top>
+			<width>444</width>
+			<height>250</height>
+			<texture fallback="special://skin/media/q-icon.png">$VAR[HomeEventIconListItemIcon]</texture>
+		</control>
+
+		<include content="TopBar">
+				<param name="breadcrumbs_label" value="Music" />
+			</include>
+		<control type="group">
+			<animation effect="fade" start="100" end="0" time="200" tween="sine" condition="$EXP[infodialog_active]">Conditional</animation>
+			<control type="group" id="2000">
+				<left>500</left>
+				<animation type="Conditional" condition="Control.IsVisible(20000)" reversible="false">
+					<effect type="slide" end="0,20" time="60" tween="sine" />
+					<effect type="slide" end="0,-20" time="180" tween="sine" delay="80" />
+				</animation>
+				<animation type="Conditional" condition="Control.IsVisible(20001)" reversible="false">
+					<effect type="slide" end="0,-20" time="60" tween="sine" />
+					<effect type="slide" end="0,20" time="180" tween="sine" delay="80" />
+				</animation>
+				<include>OpenClose_Right</include>
+				<control type="group" id="10100">
+					<visible>String.IsEqual(Container(9000).ListItem.Property(id),latest)</visible>
+					<include content="Visible_Right_Delayed">
+						<param name="id" value="latest"/>
+					</include>
+					<control type="grouplist" id="10101">
+					<top>300</top>
+						<include>WidgetGroupListCommon</include>
+						<include content="WidgetListEpisodes">
+							<param name="content_path" value="plugin://plugin.video.youtube/channel/UC1crMgATGeegnQTZTImZuqA/playlist/PL9NY5axt700H1sW_vK8E4KTETLHoD6_0K/"/>
+							<param name="widget_header" value="Current Hits"/>
+							<param name="widget_target" value="videos"/>
+							<param name="sortby" value="random"/>
+							<param name="list_id" value="10102"/>
+						</include>
+					</control>
+				</control>
+				<control type="group" id="10200">
+					<visible>String.IsEqual(Container(9000).ListItem.Property(id),alltime)</visible>
+					<include content="Visible_Right_Delayed">
+						<param name="id" value="alltime"/>
+					</include>
+					<control type="grouplist" id="10201">
+						<top>300</top>
+						<include>catchuptvWidgetGroupListCommon</include>
+						<include content="WidgetListEpisodes">
+							<param name="content_path" value="plugin://plugin.video.youtube/channel/UC8of0OZhtYxrikCo2Y32tLg/playlist/PLCWdiweuLHK7rny-QQMFOKNu1qUP4i0vj/"/>
+							<param name="widget_header" value="All Time Top 100 Greatest Hits"/>
+							<param name="widget_target" value="videos"/>
+							<param name="sortby" value="random"/>
+							<param name="list_id" value="10203"/>
+						</include>
+					</control>
+				</control>
+				<control type="group" id="10300">
+					<visible>String.IsEqual(Container(9000).ListItem.Property(id),70hits)</visible>
+					<include content="Visible_Right_Delayed">
+						<param name="id" value="70hits"/>
+					</include>
+					<control type="grouplist" id="10301">
+						<top>300</top><include>catchuptvWidgetGroupListCommon</include>
+						<include content="WidgetListEpisodes">
+							<param name="content_path" value="plugin://plugin.video.youtube/channel/UCwtKO1Vwz-7g0nBxBQcU4bg/playlist/PLGBuKfnErZlAkaUUy57-mR97f8SBgMNHh/"/>
+							<param name="widget_header" value="70's Greatest Hits"/>
+							<param name="widget_target" value="videos"/>
+							<param name="sortby" value="random"/>
+							<param name="list_id" value="10303"/>
+						</include>
+					</control>
+				</control>
+				<control type="group" id="10400">
+					<visible>String.IsEqual(Container(9000).ListItem.Property(id),90hits)</visible>
+					<include content="Visible_Right_Delayed">
+						<param name="id" value="90hits"/>
+					</include>
+					<control type="grouplist" id="10401">
+						<top>300</top><include>catchuptvWidgetGroupListCommon</include>
+						<include content="WidgetListEpisodes">
+							<param name="content_path" value="plugin://plugin.video.youtube/channel/UCwtKO1Vwz-7g0nBxBQcU4bg/playlist/PL7DA3D097D6FDBC02/"/>
+							<param name="widget_header" value="90's Greatest Hits"/>
+							<param name="widget_target" value="videos"/>
+							<param name="sortby" value="random"/>
+							<param name="list_id" value="10403"/>
+						</include>
+					</control>
+				</control>
+				<control type="group" id="10500">
+					<visible>String.IsEqual(Container(9000).ListItem.Property(id),80hits)</visible>
+					<include content="Visible_Right_Delayed">
+						<param name="id" value="80hits"/>
+					</include>
+					<control type="grouplist" id="10501">
+						<top>300</top><include>catchuptvWidgetGroupListCommon</include>
+						<include content="WidgetListEpisodes">
+							<param name="content_path" value="plugin://plugin.video.youtube/channel/UCwtKO1Vwz-7g0nBxBQcU4bg/playlist/PLCD0445C57F2B7F41/"/>
+							<param name="widget_header" value="80's Greatest Hits"/>
+							<param name="widget_target" value="videos"/>
+							<param name="sortby" value="random"/>
+							<param name="list_id" value="10503"/>
+						</include>
+					</control>
+				</control>
+			</control>
+
+			<!-- Menu -->
+
+			<control type="group">
+				<depth>DepthContentPanel</depth>
+				<include>OpenClose_Left</include>
+				<include content="ContentPanel">
+					<param name="width" value="522" />
+				</include>
+				<control type="fixedlist" id="9000">
+					<left>0</left>
+					<top>450</top>
+					<width>462</width>
+					<width>574</width>
+					<movement>6</movement>
+					<focusposition>0</focusposition>
+					<onfocus>ClearProperty(listposition,home)</onfocus>
+					<onright>SetFocus($INFO[Container(9000).ListItem.Property(menu_id)])</onright>
+					<onup>700</onup>
+					<ondown>700</ondown>
+					<scrolltime tween="cubic" easing="out">500</scrolltime>
+					<focusedlayout height="95">
+					<control type="group">
+					<animation effect="fade" start="100" end="0" time="0">UnFocus</animation>
+
+							<!-- Box around menu items -->
+              	<control type="image">
+								<left>70</left>
+								<width>392</width>
+								<height>85</height>
+								<texture>menuselect.png</texture>
+								<animation effect="fade" start="100" end="0" time="0" condition="[!Control.HasFocus(9000) + !ControlGroup(700).HasFocus] | System.HasModalDialog">Conditional</animation>
+							</control>
+						</control>
+
+						<control type="label">
+							<left>104</left>
+							<top>0</top>
+							<height>95</height>
+							<width>560</width>
+							<aligny>center</aligny>
+							<font>font39_medium</font>
+							<label>$INFO[ListItem.Label]</label>
+							<shadowcolor>text_shadow</shadowcolor>
+						</control>
+					</focusedlayout>
+					<itemlayout height="95">
+						<control type="label">
+							<left>104</left>
+							<top>0</top>
+							<height>95</height>
+							<width>560</width>
+							<aligny>center</aligny>
+							<font>font35_regular</font>
+							<label>$INFO[ListItem.Label]</label>
+							<shadowcolor>text_shadow</shadowcolor>
+						</control>
+					</itemlayout>
+
+					<content>
+						<item>
+							<label>Latest</label>
+							<onclick>ActivateWindow(10025,&quot;plugin://plugin.video.youtube/channel/UC1crMgATGeegnQTZTImZuqA/playlist/PL9NY5axt700H1sW_vK8E4KTETLHoD6_0K/&quot;,return)</onclick>
+							<property name="menu_id">$NUMBER[10100]</property>
+							<property name="id">Latest</property>
+							<visible>!Skin.HasSetting(HomeMenuNocatchuptvButton)</visible>
+							<thumb>special://skin/media/menuimage/submenu/music-latest.png</thumb>
+						</item>
+						<item>
+							<label>All Time</label>
+							<onclick>ActivateWindow(10025,&quot;plugin://plugin.video.youtube/channel/UC8of0OZhtYxrikCo2Y32tLg/playlist/PLCWdiweuLHK7rny-QQMFOKNu1qUP4i0vj/&quot;,return)</onclick>
+							<property name="menu_id">$NUMBER[10200]</property>
+							<property name="id">Alltime</property>
+							<visible>!Skin.HasSetting(HomeMenuNocatchuptvButton)</visible>
+							<thumb>special://skin/media/menuimage/submenu/classic-music.png</thumb>
+						</item>
+						<item>
+							<label>70's Hits</label>
+							<onclick>ActivateWindow(10025,&quot;plugin://plugin.video.youtube/channel/UCwtKO1Vwz-7g0nBxBQcU4bg/playlist/PLGBuKfnErZlAkaUUy57-mR97f8SBgMNHh//&quot;,return)</onclick>
+							<property name="menu_id">$NUMBER[10300]</property>
+							<property name="id">70hits</property>
+							<visible>!Skin.HasSetting(HomeMenuNocatchuptvButton)</visible>
+							<thumb>special://skin/media/menuimage/submenu/seventies.png</thumb>
+						</item>
+						<item>
+							<label>80's Hits</label>
+							<onclick>ActivateWindow(10025,&quot;plugin://plugin.video.youtube/channel/UCwtKO1Vwz-7g0nBxBQcU4bg/playlist/PLCD0445C57F2B7F41/&quot;,return)</onclick>
+							<property name="menu_id">$NUMBER[10500]</property>
+							<property name="id">80hits</property>
+							<visible>!Skin.HasSetting(HomeMenuNocatchuptvButton)</visible>
+							<thumb>special://skin/media/menuimage/submenu/eighties.png</thumb>
+						</item>
+
+						<item>
+							<label>90's Hits</label>
+							<onclick>ActivateWindow(10025,&quot;plugin://plugin.video.youtube/channel/UCwtKO1Vwz-7g0nBxBQcU4bg/playlist/PL7DA3D097D6FDBC02/&quot;,return)</onclick>
+							<property name="menu_id">$NUMBER[10400]</property>
+							<property name="id">90hits</property>
+							<visible>!Skin.HasSetting(HomeMenuNocatchuptvButton)</visible>
+							<thumb>special://skin/media/menuimage/submenu/90ties.png</thumb>
+						</item>
+					</content>
+				</control>
+				<control type="grouplist" id="700">
+					<orientation>horizontal</orientation>
+					<itemgap>0</itemgap>
+					<left>-8</left>
+					<width>100</width>
+					<height>110</height>
+					<bottom>10</bottom>
+					<onleft>SetFocus(9000)</onleft>
+					<onup>SetFocus(800)</onup>
+          <onup>SetFocus(9000)</onup>
+					<onright>SetFocus(9000)</onright>
+					<onup>PageDown</onup>
+				 <onup>PageDown</onup>
+				 <ondown>SetFocus(9000)</ondown>
+				 <ondown>PageUp</ondown>
+					<ondown>PageUp</ondown>
+					<align>justify</align>
+
+				</control>
+				<control type="button" id="800">
+					<top>337</top>
+					<width>580</width>
+					<height>411</height>
+					<left>-50</left>
+					<onleft>SetFocus(9000)</onleft>
+					<onright>SetFocus(9000)</onright>
+					<ondown>SetFocus(700)</ondown>
+					<ondown>SetFocus(700)</ondown>
+					<onright>SetFocus(9000)</onright>
+					<label></label>
+					<onclick>Fullscreen</onclick>
+					<texturefocus colordiffuse="button_focus">buttons/button-nofo.png</texturefocus>
+					<texturenofocus />
+				</control>
+			</control>
+			<include content="TopBar">
+				<param name="breadcrumbs_label" value="" />
+			</include>
+		</control>
+	</controls>
+</window>
