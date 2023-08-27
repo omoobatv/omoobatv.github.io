@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.Ardavetv" name="Ardave TV" version="3.10" provider-name="omoobatv">
+<addon id="repository.Ardavetv" name="Ardave TV" version="3.10.1" provider-name="omoobatv">
   <requires>
 		<import addon="xbmc.addon" version="12.0.0"/>
 	</requires>
@@ -45,7 +45,7 @@
          <datadir zip="true">https://magnetic.website/__zips/</datadir>
          <hashes>false</hashes>
       </dir>
-      <dir>
+      <dir minversion="19.0.0">
             <info compressed="false">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml</info>
             <checksum>https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml.md5</checksum>
             <datadir zip="true">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/</datadir>

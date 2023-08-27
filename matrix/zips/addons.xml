@@ -754,7 +754,7 @@ In addition to what livestreams allowed you to do, you can now,
         <disclaimer lang="zh_CN">此插件未被谷歌认可</disclaimer>
         <disclaimer lang="zh_TW">此附加元件未由Google支持</disclaimer>
     </extension>
-</addon><addon id="repository.Ardavetv" name="Ardave TV" version="3.10" provider-name="omoobatv">
+</addon><addon id="repository.Ardavetv" name="Ardave TV" version="3.10.1" provider-name="omoobatv">
   <requires>
 		<import addon="xbmc.addon" version="12.0.0" />
 	</requires>
@@ -800,7 +800,7 @@ In addition to what livestreams allowed you to do, you can now,
          <datadir zip="true">https://magnetic.website/__zips/</datadir>
          <hashes>false</hashes>
       </dir>
-      <dir>
+      <dir minversion="19.0.0">
             <info compressed="false">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml</info>
             <checksum>https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml.md5</checksum>
             <datadir zip="true">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/</datadir>
