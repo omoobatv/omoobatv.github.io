@@ -1,3 +1,7 @@
+7.0.2.3
+[fix] Fix Matrix compatibility
+[fix] Update unofficial patch
+
 7.0.2.2
 [fix] Fix Matrix compatibility
 [fix] Update unofficial patch
@@ -597,7 +601,7 @@
 [upd] APi-Changer - First login delete old Credentials - New Login Required! Sorry :)
 
 5.1.20.7 (2016-05-03)
-Workaround for the Quota Exceed-Error. 
+Workaround for the Quota Exceed-Error.
 [add] API-Changer for a Pool of 6 API-Keys
 [add] Auto-Reauthenticate with Pool-Key on "Quota Exceed" error
 [add] "Use own API"-Button
@@ -903,7 +907,7 @@ UPD: switch to kodion
 
 1.0.0~alpha16 (2014-08-08)
 - FIX: provide 'Next Page' under 'My Subscriptions' if there are more results
-- ADD: Hide and show menu items via settings 
+- ADD: Hide and show menu items via settings
 - ADD: Search history (set the size via settings from 0-50 items)
 
 1.0.0~alpha15 (2014-08-04)
@@ -923,14 +927,14 @@ UPD: switch to kodion
 1.0.0~alpha12 (2014-08-01)
 - ADD: Show 'Published on' and 'Channel' in the description of a video (can be disabled via setting)
 - ADD: support for 3D videos (can be disabled via setting)
-- Accelerated resolving of video URLs (almost 2x as fast) 
+- Accelerated resolving of video URLs (almost 2x as fast)
 
 1.0.0~alpha11 (2014-07-30)
 - FIX: added a fallback for videos that require a login (works very fast?!?!)
-- FIX: if username or password is missing reset the whole token logic 
+- FIX: if username or password is missing reset the whole token logic
 
 1.0.0~alpha10 (2014-07-29)
-- FIX: improved performance on decoding signatures for some videos 
+- FIX: improved performance on decoding signatures for some videos
 - ADD: support for custom-created playlists
 - FIX: sort own subscriptions
 - ADD: enable/disable video, channel and/or playlist search
@@ -946,7 +950,7 @@ UPD: switch to kodion
 
 1.0.0~alpha6 (2014-07-27)
 - added support of playlists of a channel (first page only)
-- optimized some major routines for easier support of all youtube's content 
+- optimized some major routines for easier support of all youtube's content
 
 1.0.0~alpha5 (2014-07-27)
 - version bump for tests

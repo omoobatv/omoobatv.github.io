@@ -760,10 +760,7 @@ In addition to what livestreams allowed you to do, you can now,
     <disclaimer lang="zh_CN">此插件未被谷歌认可</disclaimer>
     <disclaimer lang="zh_TW">此附加元件未由Google支持</disclaimer>
   </extension>
-</addon><addon id="repository.Ardavetv" name="Ardave TV" version="3.10.2" provider-name="omoobatv">
-  <requires>
-		<import addon="xbmc.addon" version="12.0.0" />
-	</requires>
+</addon><addon id="repository.Ardavetv" name="Ardave TV" version="3.10.3" provider-name="omoobatv">
     <extension point="xbmc.addon.repository" name="Ardave TV">
         <dir minversion="18.0.0" maxversion="18.9.9">
             <info compressed="false">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/leia/zips/addons.xml</info>
