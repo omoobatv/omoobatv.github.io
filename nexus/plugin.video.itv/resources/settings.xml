@@ -1,0 +1,15 @@
+<settings>
+  <!-- Streams -->
+  <category label="30100">
+    <setting id="delcache" type="bool" label="30101" default="true"/>
+    <setting id="UA" label="30103"  type="bool" default="true" />
+    <setting id="subtitles_control" label="30104"  type="bool" default="false" />
+  </category>
+  <!-- Auto View -->
+  <category label="30200">
+	<setting id="auto-view" type="bool" label="30201" default="false"/>
+	<setting id="default" type="number" label="30202" default="50" enable="!eq(-1,false)"/>
+	<setting id="show" type="number" label="30203" default="50" enable="!eq(-1,false)"/>
+	<setting id="episode" type="number" label="30204" default="503" enable="!eq(-1,false)"/>
+   </category>
+</settings>

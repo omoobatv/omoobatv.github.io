@@ -1,4 +1,4 @@
-""" 
+"""
     Put this script in the root folder of your repo and it will
     zip up all addon folders, create a new zip in your zips folder
     and then update the md5 and addons.xml file
@@ -75,19 +75,19 @@ def _setup_colors():
         return hasattr(sys.stdout, "isatty") and sys.stdout.isatty()
 
     def legacy_support():
-        color = 0
         console = 0
-        if sys.platform in ["linux", "linux2"]:
-            color = os.system("color")
+        color = 0
+        if sys.platform in ["linux", "linux2", "darwin"]:
+            pass
         elif sys.platform == "win32":
+            color = os.system("color")
+
             from ctypes import windll
 
             k = windll.kernel32
             console = k.SetConsoleMode(k.GetStdHandle(-11), 7)
-        elif sys.platform == "darwin":
-            pass
 
-        return color == 1 or console == 1
+        return any([color == 1, console == 1])
 
     return any(
         [

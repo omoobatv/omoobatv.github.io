@@ -1,0 +1,1555 @@
+<?xml version='1.0' encoding='utf-8'?>
+<addons>
+<addon id="context.venom" name="Venom - Global Context Menu Items" provider-name="Venom" version="1.2.1">
+	<requires>
+		<import addon="script.module.requests" version="2.19.1" />
+	</requires>
+	<extension point="kodi.context.item">
+		<menu id="kodi.core.main">
+			<item library="contextSettings.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - CM Settings</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.venom.settings)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.venom/) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true)
+				</visible>
+			</item>
+			<item library="traktManager.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Trakt Manager</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.venom.traktManager)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.venom/) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,tvshow) | String.IsEqual(ListItem.dbtype,season) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="clearProviders.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Clear Providers</label>
+				<visible>
+					[!String.IsEmpty(Window(home).Property(context.venom.clearProviders)) +
+					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]] |
+					[String.Contains(Container.FolderPath,videodb://) +
+					[String.Contains(Container.ListItem.Path,Window(home).Property(venom.movieLib.path)) | String.Contains(Container.ListItem.Path,Window(home).Property(venom.tvLib.path))] +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]]
+				</visible>
+			</item>
+			<item library="clearBookmark.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Clear Item Bookmark</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.venom.clearBookmark)) +
+					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					ListItem.IsResumable +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="rescrape.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Rescrape Item</label>
+				<visible>
+					[!String.IsEmpty(Window(home).Property(context.venom.rescrape)) +
+					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]]
+				</visible>
+			</item>
+			<item library="libRescrape.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Rescrape Lib Item</label>
+				<visible>
+					String.Contains(Container.FolderPath,videodb://) +
+					[String.Contains(Container.ListItem.Path,Window(home).Property(venom.movieLib.path)) | String.Contains(Container.ListItem.Path,Window(home).Property(venom.tvLib.path))] +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="playFromHere.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Play from here</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.venom.playFromHere)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.venom/) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					String.IsEqual(ListItem.dbtype,episode)
+				</visible>
+			</item>
+			<item library="autoPlay.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Auto Play</label>
+				<visible>
+					String.IsEmpty(Window(home).Property(venom.autoPlay.enabled)) +
+					!String.IsEmpty(Window(home).Property(context.venom.autoPlay)) +
+					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="sourceSelect.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Source Select</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(venom.autoPlay.enabled)) +
+					!String.IsEmpty(Window(home).Property(context.venom.sourceSelect)) +
+					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="findSimilar.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Find Similar</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.venom.findSimilar)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.venom/) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					[String.IsEqual(ListItem.dbtype,tvshow) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="browseSeries.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Browse Series</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.venom.browseSeries)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.venom/) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,tvshow)]
+				</visible>
+			</item>
+			<item library="browseEpisodes.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Browse Episodes</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.venom.browseEpisodes)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.venom/) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					String.IsEqual(ListItem.dbtype,episode)
+				</visible>
+			</item>
+		</menu>
+	</extension>
+	<extension point="xbmc.service" library="service.py" />
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Venom - This Addon is currently in beta. Please be aware there may be bugs present</summary>
+		<description lang="en">Adds Global Contextual Menu Items for Venom menu items throughout Kodi</description>
+		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+		<forum />
+		<website>https://github.com/123Venom/context.venom</website>
+		<source>https://github.com/123Venom/context.venom</source>
+		<disclaimer lang="en" />
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+			<screenshot />
+		</assets>
+		<news>
+[B][COLOR red]Update - v1.2.1 - Nov. 04, 2021[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] The "Rescrape Item" context menu now has a pop-up select method of 4 possible choices to rescrape.  You can set a preferred default action in the settings to bypass the select dialog pop up.[/I]
+		</news>
+	</extension>
+</addon><addon id="plugin.audio.soundcloud" name="SoundCloud" version="4.0.0" provider-name="jaylinski">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.requests" version="2.22.0" />
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="addon.py">
+        <provides>audio</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="de_DE">SoundCloud – Musik- und Podcast-Streaming-Plattform</summary>
+        <summary lang="en_GB">SoundCloud – Music and podcast streaming platform</summary>
+        <description lang="de_DE">SoundCloud ist eine Musik- und Podcast-Streaming-Plattform, mit der Du Millionen von Songs aus der ganzen Welt anhören kannst.</description>
+		<description lang="en_GB">SoundCloud is a music and podcast streaming platform that lets you listen to millions of songs from around the world.</description>
+        <disclaimer lang="en_GB">This plugin is not official, approved or endorsed by SoundCloud.</disclaimer>
+        <platform>all</platform>
+        <license>MIT</license>
+        <forum>https://forum.kodi.tv/showthread.php?tid=206635</forum>
+        <website>https://soundcloud.com</website>
+        <source>https://github.com/jaylinski/kodi-addon-soundcloud</source>
+        <news>4.0.0 (2020-12-12)
+Added support for Kodi v19 (Matrix)
+        </news>
+        <assets>
+            <icon>resources/icon.png</icon>
+            <fanart>resources/fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
+
+<addon id="plugin.program.autocompletion" name="AutoCompletion for virtual keyboard" version="2.0.1" provider-name="Philipp Temminghoff (phil65), xulek, domb84">
+    <requires>
+        <import addon="script.module.autocompletion" version="1.0.0" />
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="plugin.py" />
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">AutoCompletion for the virtual keyboard (needs skin support)</summary>
+        <description lang="en">AutoCompletion for the virtual keyboard (needs skin support)</description>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE Version 2.1, February 1999</license>
+        <source>https://github.com/phil65/plugin.program.autocompletion</source>
+        <assets>
+            <icon>resources/icon.png</icon>
+            
+            
+            
+            
+        </assets>
+    </extension>
+</addon>
+
+<addon id="plugin.program.omobatvwizard19" name="[COLOR limegreen]OmobaTV[/COLOR] Wizard" version="2.0.1" provider-name="OmobaTV">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.requests" />
+        <import addon="script.module.six" />
+        <import addon="script.kodi.android.update" optional="true" version="1.1.7" />
+        <import addon="script.speedtester" optional="true" version="1.1.2" />
+    </requires>
+
+    <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>executable</provides>
+    </extension>
+
+    <extension point="xbmc.service" library="startup.py" start="startup" />
+
+    <extension point="xbmc.addon.metadata">
+      <summary lang="en">[COLOR limegreen]OmobaTV[/COLOR] Wizard</summary>
+      <description lang="en">[COLOR limegreen]OmobaTV[/COLOR] Wizard offers many maintenance features and automated build installs from OmobaTV.</description>
+        <platform>all</platform>
+        <reuselanguageinvoker>false</reuselanguageinvoker>
+        <source>https://www.github.com/</source>
+        <news>
+         2.0.1
+         - Fanart Updated
+         - Initial Commit
+        </news>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
+
+<addon id="plugin.video.Alquran" name="Useful Duas" version="3.0.2" provider-name="Abbey">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true" />
+		<import addon="script.module.websocket" version="0.50.0" optional="true" />
+		<import addon="script.module.youtube.dl" optional="true" />
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true" />
+		<import addon="script.module.cloudscraper" optional="true" />
+		<import addon="script.module.inputstreamhelper" optional="true" />
+		<import addon="script.module.slproxy" optional="true" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>Listen to powerful and useful Duas online, from protection to success. Addon by Abbey</summary>
+		<description>Listen to powerful Duas online, from protection to success, etc. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon><addon id="plugin.video.Theradios" name="Online Radios" version="3.0.1" provider-name="Abbey">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true" />
+		<import addon="script.module.websocket" version="0.50.0" optional="true" />
+		<import addon="script.module.youtube.dl" optional="true" />
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true" />
+		<import addon="script.module.cloudscraper" optional="true" />
+		<import addon="script.module.inputstreamhelper" optional="true" />
+		<import addon="script.module.slproxy" optional="true" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>Online based radio stations from all over the world. Addon by Abbey</summary>
+		<description>All the contents of this Addon are legal, I do not host any file. they are from legit radio stations from around the globe</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon><addon id="plugin.video.addon.recorder" version="0.0.31" name="Addon Recorder" provider-name="Moshii">
+<requires>
+  <import addon="xbmc.python" version="3.0.0" />
+  <import addon="script.module.xbmcswift2" />
+  <import addon="script.module.requests" version="2.9.1" />
+  <import addon="script.module.future" version="0.17.1" />
+  <import addon="script.module.six" />
+  <import addon="script.module.kodi-six" />
+</requires>
+<extension point="xbmc.python.pluginsource" library="main.py">
+  <provides>video</provides>
+</extension>
+<extension point="xbmc.service" library="service.py" start="login" />
+<extension point="xbmc.addon.metadata">
+  <summary lang="en">PVR Recorder for Addon Streams</summary>
+  <description lang="en">Record from Addon Streams on a Timer. Requires ffmpeg. Add Rule with python regexes.</description>
+  <disclaimer lang="en">Make sure you have legal permission to record from the creators.</disclaimer>
+  <assets>
+    <icon>icon.png</icon>
+  </assets>
+</extension>
+</addon><addon id="plugin.video.fen" name="Fen" provider-name="Tiki" version="2.6.13">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.requests" version="2.19.1" />
+        <import addon="script.tikiart" version="1.0.0" />
+        <import addon="script.module.myaccounts" version="0.0.0" />
+        <import addon="script.module.fenomscrapers" version="0.0.0" />
+    </requires>
+    <extension library="resources/lib/fen.py" point="xbmc.python.pluginsource">
+        <provides>video</provides>
+    </extension>
+    <extension library="resources/lib/service.py" point="xbmc.service" />
+    <extension library="resources/lib/" point="xbmc.python.module" />
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="resources/contextmenu/refresh_widgets.py">
+                <label>40001</label>
+                <visible>String.IsEqual(ListItem.Property(fen_widget),true)</visible>
+            </item>
+            <item library="resources/contextmenu/mark_watched.py">
+                <label>40003</label>
+                <visible>[String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,episode)] + String.IsEqual(ListItem.Property(fen_widget),true) + String.IsEqual(ListItem.Property(fen_playcount),0)</visible>
+            </item>
+            <item library="resources/contextmenu/mark_unwatched.py">
+                <label>40004</label>
+                <visible>[String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,episode)] + String.IsEqual(ListItem.Property(fen_widget),true) + String.IsEqual(ListItem.Property(fen_playcount),1)</visible>
+            </item>
+            <item library="resources/contextmenu/clear_progress.py">
+                <label>40009</label>
+                <visible>[String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,episode)] + String.IsEqual(ListItem.Property(fen_widget),true) + String.IsEqual(ListItem.Property(fen_in_progress),true)</visible>
+            </item>
+            <item library="resources/contextmenu/browse.py">
+                <label>40002</label>
+                <visible>String.IsEqual(ListItem.dbtype,episode) + String.IsEqual(ListItem.Property(fen_widget),true)</visible>
+            </item>
+            <item library="resources/contextmenu/browse_season.py">
+                <label>40011</label>
+                <visible>String.IsEqual(ListItem.dbtype,episode) + String.IsEqual(ListItem.Property(fen_widget),true)</visible>
+            </item>
+            <item library="resources/contextmenu/trakt_manager.py">
+                <label>40005</label>
+                <visible>[String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,tvshow)] + String.IsEqual(ListItem.Property(fen_widget),true)</visible>
+            </item>
+            <item library="resources/contextmenu/favorites_manager.py">
+                <label>40008</label>
+                <visible>[String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,tvshow)] + String.IsEqual(ListItem.Property(fen_widget),true)</visible>
+            </item>
+            <item library="resources/contextmenu/play_random.py">
+                <label>40010</label>
+                <visible>[String.IsEqual(ListItem.dbtype,tvshow)] + String.IsEqual(ListItem.Property(fen_widget),true)</visible>
+            </item>
+            <item library="resources/contextmenu/options.py">
+                <label>40007</label>
+                <visible>String.IsEqual(ListItem.Property(fen_widget),true)</visible>
+            </item>
+            <item library="resources/contextmenu/extras.py">
+                <label>40006</label>
+                <visible>String.IsEqual(ListItem.Property(fen_widget),true)</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <reuselanguageinvoker>true</reuselanguageinvoker>
+        <summary lang="en">Mainly used for Furk and Easynews.</summary>
+        <description lang="en">This add-on is intended for advanced Kodi users only. Mainly used for Furk and Easynews(web) account access. Also utilizes Fenomscrapers for those without a Furk or Easynews(web) account. You must have a debrid service to use this add-on without Furk/Easynews.[CR][CR][B]Please Note: This add-on is NOT an Exodus fork, and as such will behave differently to an Exodus fork.[/B]</description>
+        <platform>all</platform>
+		<disclaimer lang="en">The author of this addon do not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+        <news>INFO: For latest changes see Changelog within Tools of add-on.</news>
+    </extension>
+</addon>
+
+<addon id="plugin.video.iptv.recorder" version="1.0" name="IPTV Recorder" provider-name="primaeval, Chychy, Dob!, Publish3r">
+<requires>
+  <import addon="xbmc.python" version="3.0.0" />
+  <import addon="script.module.xbmcswift2" />
+  <import addon="script.module.requests" />
+  <import addon="script.module.chardet" />
+  <import addon="script.module.pytz" />
+  <import addon="script.module.kodi-six" />
+</requires>
+<extension point="xbmc.python.pluginsource" library="main.py">
+  <provides>video</provides>
+</extension>
+<extension point="xbmc.python.script" library="default.py">
+    <provides>executable</provides>
+</extension>
+<extension point="kodi.context.item">
+<menu id="kodi.core.main">
+  <item library="context.py">
+    <label>IPTV Recorder Timer</label>
+    <visible>Window.isActive(tvchannels)</visible>
+  </item>
+  <item library="contextEPG.py">
+    <label>Schedule IPTV Recorder</label>
+    <visible>Window.isActive(tvguide)</visible>
+  </item>
+</menu>
+</extension>
+<extension point="xbmc.service" library="server.py" start="login" />
+<extension point="xbmc.addon.metadata">
+  <summary lang="en">Record from IPTV Simple Client or xmltv/m3u with ffmpeg.</summary>
+  <description lang="en">
+Set your recording path and ffmpeg location.
+On Android ffmpeg will be copied to /data/data to be runnable.
+Complex stream handling might need an extra script instead of ffmpeg.
+ffmpeg simply copies the stream into a transport stream container.
+</description>
+<disclaimer lang="en">Make sure recording streams is legal in your country.</disclaimer>
+<source>https://github.com/Dobi-Dev/plugin.video.iptv.recorder</source>
+<forum>https://forum.kodi.tv/showthread.php?tid=329991</forum>
+<language>en fr de</language>
+<news>
+version 0.2.0
+- Compatibility with Kodi Matrix.
+- Add some missing translations.
+- Improve "Sort Channels by" settings.
+- Add channel icon in the record list.
+- Improve encoding detection of the XML TV file.
+- Fix search input not supporting non ascii character.
+- Fix kodi crash on startup when user have rules to renew jobs.
+- Fix and improve "record and play" feature.
+- Reducing default startup time to 20 seconds.
+- Add error messag when trying to access database not created.
+- Exit the service smoothly and fastly if the user request Kodi to exit before the startup delay.
+</news>
+<assets>
+  <icon>icon.png</icon>
+  <screenshot>resources/screenshots/screenshot-00.jpg</screenshot>
+  <screenshot>resources/screenshots/screenshot-01.jpg</screenshot>
+  <screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
+</assets>
+</extension>
+</addon>
+
+<addon id="plugin.video.itv" name="ITV" version="3.0.2" provider-name="LittleWiz, Cowebtech">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.beautifulsoup4" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>	
+  <extension library="service.py" point="xbmc.service" start="startup" />	
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary>TV from ITV Hub</summary>
+    <description>This add-on enables the playing of Live and Catchup TV from ITV Hub (UK only)</description>
+    <disclaimer lang="en">This add-on is a front end to the ITV Hub website. It is not an official ITV product. A UK TV Licence is required to watch the live, catch-up, or on-demand TV content.</disclaimer>
+    <assets>
+      <icon>icon.png</icon>
+  </assets>
+  </extension>
+</addon><addon id="plugin.video.itvhub" name="ITV hub" version="0.3.0" provider-name="Dimitri Kroon">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+    <import addon="script.module.requests" />
+    <import addon="script.module.pytz" />
+    <import addon="script.module.six" />
+    <import addon="script.module.codequick" />
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.inputstreamhelper" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="addon.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary>Live TV and catchup from ITV Hub</summary>
+    <description>This add-on enables playing live and Catchup TV from ITV Hub. An ITV account is required </description>
+    <disclaimer lang="en">This add-on is not developed by ITV and is no way affiliated with, or endorsed by ITV.
+    </disclaimer>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+    <reuselanguageinvoker>true</reuselanguageinvoker>
+  </extension>
+</addon><addon id="plugin.video.keepFit" name="Fitness Workout" version="3.0.1" provider-name="Abbey">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true" />
+		<import addon="script.module.websocket" version="0.50.0" optional="true" />
+		<import addon="script.module.youtube.dl" optional="true" />
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true" />
+		<import addon="script.module.urlresolver" optional="true" />
+		<import addon="script.module.cloudscraper" optional="true" />
+		<import addon="script.module.inputstreamhelper" optional="true" />
+		<import addon="script.module.slproxy" optional="true" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>Watch free fitness workout for both Men and Women. Addon by Abbey</summary>
+		<description>Watch free fitness workout for both Men and Women. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon><addon id="plugin.video.live.streamspro" name="LiveStreamsPro" version="3.0.0~alpha4" provider-name="gujal">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true" />
+		<import addon="script.module.websocket" version="0.50.0" optional="true" />
+		<import addon="script.module.youtube.dl" optional="true" />
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true" />
+		<import addon="script.module.urlresolver" optional="true" />
+		<import addon="script.module.cloudscraper" optional="true" />
+		<import addon="script.module.inputstreamhelper" optional="true" />
+		<import addon="script.module.slproxy" optional="true" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>livestreamspro- shamelessly forked from livestreams but added many things</summary>
+		<description>
+In addition to what livestreams allowed you to do, you can now,
+1. call regex in regex,
+2. multiple regex in page, regex in session, also htmlunescape responses
+3. create session from one regex and pass onto next in line
+4. save sessions to a file and open again later
+5. write python code in .py file, put in the profile directory and then call from your regex.
+6. use epoctime, guid and unpack as functions already defined.
+7. Use it to post values to the pages to get the proper responses
+8. support many headers, like origin, X-Requested-With
+9. you can now append cookies in response and then read in regex using includeheaders
+10. You can now link to another web url via your xml using externallink
+11. support for google captcha, now you can show and then post the text
+		</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon>
+
+<addon id="plugin.video.naijaChurches" name="Naija Churches" version="3.0.1" provider-name="Abbey">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true" />
+		<import addon="script.module.websocket" version="0.50.0" optional="true" />
+		<import addon="script.module.youtube.dl" optional="true" />
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true" />
+		<import addon="script.module.urlresolver" optional="true" />
+		<import addon="script.module.cloudscraper" optional="true" />
+		<import addon="script.module.inputstreamhelper" optional="true" />
+		<import addon="script.module.slproxy" optional="true" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>Watch nigerian churches live from all over the world. Addon by Abbey</summary>
+		<description>Watch nigerian churches live. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon><addon id="plugin.video.naijaMovies" name="Nigerian Movies" version="3.0.1" provider-name="Abbey">
+	<requires>
+		<import addon="script.module.six" />
+		<import addon="script.module.kodi-six" />
+		<import addon="script.module.requests" optional="true" />
+		<import addon="script.module.websocket" version="0.50.0" optional="true" />
+		<import addon="script.module.youtube.dl" optional="true" />
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.dateutil" optional="true" />
+		<import addon="script.module.resolveurl" optional="true" />
+		<import addon="script.module.cloudscraper" optional="true" />
+		<import addon="script.module.inputstreamhelper" optional="true" />
+		<import addon="script.module.slproxy" optional="true" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+
+	<extension point="xbmc.addon.metadata">
+		<summary>Watch Latest Nigerian Movies Both Yoruba and English. Addon by Abbey</summary>
+		<description>Watch Latest Nigerian Movies Both Yoruba and English. All the contents of this Addon are legal, I do not host any file. they are from legit sources from around the world</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon><addon id="plugin.video.venom" name="[COLOR red]Venom[/COLOR]" provider-name="Venom" version="6.5.6">
+	<requires>
+		<import addon="xbmc.python" version="3.0.0" />
+		<import addon="context.venom" />
+		<import addon="script.module.myaccounts" version="2.0.0" />
+		<import addon="script.module.fenomscrapers" version="2.0.2" />
+		<import addon="script.module.requests" />
+		<import addon="script.module.beautifulsoup4" />
+		<import addon="script.module.metahandler" optional="true" />
+		<import addon="plugin.video.youtube" optional="true" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="venom.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.service" library="service.py" start="startup" />
+	<extension point="xbmc.python.module" library="resources/lib/" />
+	<extension point="xbmc.addon.metadata">
+		<reuselanguageinvoker>true</reuselanguageinvoker>
+		<summary lang="en">[B][COLOR red]Venom[/COLOR][/B] - We do not host any of the contents streamed</summary>
+		<description lang="en">[B][COLOR red]Venom[/COLOR][/B][CR] This addon does not form part of the Kodi Media Centre. Please do not seek assistance with this addon from any of the Official Kodi Support Channels.[CR]The author does not host any of the content in this addon and takes no responsibility for content found</description>
+		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+		<forum />
+		<website>https://github.com/123Venom/plugin.video.venom</website>
+		<source>https://github.com/123Venom/plugin.video.venom</source>
+		<disclaimer lang="en">The author of this addon does not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+			<screenshot>resources/screenshots/screenshot001.jpg</screenshot>
+			<screenshot>resources/screenshots/screenshot002.jpg</screenshot>
+			<screenshot>resources/screenshots/screenshot003.jpg</screenshot>
+		</assets>
+		<news>
+[B][COLOR red]Update - v6.5.6 - April 09, 2022[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Due to report of timeout error I've bumped the timeout value from 10 to 20 for fanarttv, tmdb, tvmaze, and trakt indexers.[/I]
+[COLOR yellow]--[/COLOR][I] Trakt scrobble reset has been moved to "[B]onAVStarted()[/B]" callback method due to a bug in the Kodi player "[B]onPlayBackEnded()[/B]" method being issued after the next playlist item already began playback.[/I]
+[COLOR yellow]--[/COLOR][I] Added the Source Select index number to the Resolve dialog. Now if a resolve failure occurs you'll know which item number the failure occurred on.[/I]
+[COLOR yellow]--[/COLOR][I] Added a new setting to the "[B]Trakt"[/B] category called [B]"Browse Progress - load all remaining episodes of series"[/B].  Please see the help file below the new setting for a detailed explanation on it's functionality.[/I]
+		</news>
+	</extension>
+</addon>
+
+<addon id="plugin.video.youtube" name="YouTube" version="7.0.2.2+unofficial.1" provider-name="anxdpanic, bromix">
+  <requires>
+    <import addon="xbmc.python" version="3.0.1" />
+    <import addon="script.module.requests" version="2.12.4" />
+    <import addon="inputstream.adaptive" version="20.3.1" />
+    <import addon="script.module.inputstreamhelper" version="0.2.2" optional="true" />
+    <import addon="script.module.infotagger" version="0.0.5" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="resources/lib/default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.service" library="resources/lib/startup.py" />
+  <extension point="xbmc.python.module" library="resources/lib/" />
+  <extension point="xbmc.addon.metadata">
+    <news>
+[new] quality and stream feature selection
+[new] enable HLS live streams
+[new] stream and language labelling
+[chg] separately enable local/remote history
+[chg] restore unsupported compatibility for Kodi v19 (Matrix)
+[fix] fix various playback issues |contrib: various|
+[fix] Limit host connections getting subscription feeds |contrib: cas--|
+[fix] fix handling of connection failures
+[upd] Translations updated from Kodi Weblate
+        </news>
+    <assets>
+      <icon>resources/media/icon.png</icon>
+      <fanart>resources/media/fanart.jpg</fanart>
+    </assets>
+    <platform>all</platform>
+    <license>GPL-2.0-only</license>
+    <forum>https://ytaddon.panicked.xyz/forum</forum>
+    <website>https://www.youtube.com</website>
+    <source>https://github.com/anxdpanic/plugin.video.youtube</source>
+    <reuselanguageinvoker>true</reuselanguageinvoker>
+    <summary lang="bg_BG">Добавка за YouTube</summary>
+    <summary lang="cs_CZ">Plugin pro YouTube</summary>
+    <summary lang="da_DK">Plugin til YouTube</summary>
+    <summary lang="de_DE">Plugin für YouTube</summary>
+    <summary lang="el_GR">Πρόσθετο YouTube</summary>
+    <summary lang="en_GB">Plugin for YouTube</summary>
+    <summary lang="es_ES">Plugin para YouTube</summary>
+    <summary lang="es_MX">Complemento para YouTube</summary>
+    <summary lang="fi_FI">YouTube-lisäosa</summary>
+    <summary lang="fr_FR">Plugin pour YouTube</summary>
+    <summary lang="he_IL">תוסף עבור YouTube</summary>
+    <summary lang="hr_HR">Dodatak za YouTube</summary>
+    <summary lang="hu_HU">YouTube kiegészítő</summary>
+    <summary lang="id_ID">Pengaya untuk YouTube</summary>
+    <summary lang="it_IT">Plugin per YouTube</summary>
+    <summary lang="ko_KR">유튜브 플러그인</summary>
+    <summary lang="nb_NO">Tillegg for YouTube</summary>
+    <summary lang="nl_NL">Plugin voor YouTube</summary>
+    <summary lang="pl_PL">Wtyczka YouTube</summary>
+    <summary lang="ru_RU">Видеодополнение YouTube</summary>
+    <summary lang="sk_SK">Doplnok pre YouTube</summary>
+    <summary lang="tr_TR">YouTube için eklenti</summary>
+    <summary lang="vi_VN">Plugin dành cho YouTube</summary>
+    <summary lang="zh_CN">油管插件</summary>
+    <summary lang="zh_TW">YouTube附加元件</summary>
+    <description lang="bg_BG">YouTube е един от най-големите уеб сайтове за споделяне на видео в целия свят.</description>
+    <description lang="cs_CZ">YouTube je jedna z největších webových stránek světa sdílející video.</description>
+    <description lang="da_DK">YouTube er et af verdens største videodelingswebsteder.</description>
+    <description lang="de_DE">YouTube ist eines der größten Video-Sharing-Websites der Welt.</description>
+    <description lang="el_GR">Το YouTube είναι μία από τις μεγαλύτερες ιστοσελίδες διαμοιρασμού βίντεο στον κόσμο.</description>
+    <description lang="en_GB">YouTube is one of the biggest video-sharing websites of the world.</description>
+    <description lang="es_ES">YouTube es uno de los sitios web más grande del mundo para compartir vídeos.</description>
+    <description lang="es_MX">YouTube es uno de los más grandes sitios web de intercambio de videos del mundo.</description>
+    <description lang="fi_FI">YouTube on yksi maailman suurimmista videoiden jakosivustoista.</description>
+    <description lang="fr_FR">YouTube est l'un des plus grands sites de partage vidéos du monde.</description>
+    <description lang="he_IL">YouTube הוא אחד מאתרי שיתוף הווידאו הגדולים בעולם.</description>
+    <description lang="hr_HR">YouTube je jedna od najvećih stranica za dijeljenje video sadržaja na svijetu.</description>
+    <description lang="hu_HU">A YouTube világ egyik legnagyobb videómegosztó weboldala.</description>
+    <description lang="id_ID">YouTube adalah salah satu situs web berbagi video terbesar di dunia.</description>
+    <description lang="it_IT">YouTube è uno dei più grandi siti di condivisione video del mondo.</description>
+    <description lang="ko_KR">유튜브는 세상에서 가장 큰 동영상 공유 사이트 중의 하나입니다.</description>
+    <description lang="nb_NO">YouTube er en av verdens største nettsider for videodeling.</description>
+    <description lang="nl_NL">YouTube is een van de grootste videodelenwebsite in de hele wereld.</description>
+    <description lang="pl_PL">YouTube jest jednym z największych na świecie serwisów udostępniania wideo.</description>
+    <description lang="ru_RU">YouTube - популярнейший видеохостинговый сайт, предоставляющий пользователям услуги хранения, доставки и показа видео.</description>
+    <description lang="sk_SK">YouTube je jednou z najväčších stránok na zdieľanie videa na svete.</description>
+    <description lang="tr_TR">YouTube, dünya üzerindeki en büyük video paylaşma platformlarından birisidir.</description>
+    <description lang="vi_VN">YouTube là một trong những trang web chia sẻ video lớn nhất trên thế giới.</description>
+    <description lang="zh_CN">油管是世界上最大的视频分享网站之一。</description>
+    <description lang="zh_TW">Youtube 是全世界最大的影片分享網站。</description>
+    <disclaimer lang="cs_CZ">Tento plugin není schválen společností Google</disclaimer>
+    <disclaimer lang="da_DK">Dette plugin er ikke godkendt af Google</disclaimer>
+    <disclaimer lang="de_DE">Dieses Plugin ist nicht von Google befürwortet</disclaimer>
+    <disclaimer lang="el_GR">Η παρούσα μικροεφαρμογή δεν έχει υϊοθετηθεί από την Google</disclaimer>
+    <disclaimer lang="en_GB">This plugin is not endorsed by Google</disclaimer>
+    <disclaimer lang="es_ES">Este add-on no está respaldado por Google</disclaimer>
+    <disclaimer lang="es_MX">Este complemento no está respaldado por Google</disclaimer>
+    <disclaimer lang="fi_FI">Google ei tue tätä lisäosaa</disclaimer>
+    <disclaimer lang="fr_FR">Ce module n'est pas validé par Google</disclaimer>
+    <disclaimer lang="hr_HR">Ovaj dodatak nije podržan od strane Googlea</disclaimer>
+    <disclaimer lang="id_ID">Plugin ini tidak didukung oleh Google</disclaimer>
+    <disclaimer lang="it_IT">Questo plugin non è approvato da Google</disclaimer>
+    <disclaimer lang="ko_KR">이 플러그인은 Google의 허가를 받지 않았습니다</disclaimer>
+    <disclaimer lang="nl_NL">Deze plug-in wordt niet door Google ondersteund</disclaimer>
+    <disclaimer lang="pl_PL">Ta wtyczka nie jest zatwierdzona przez Google</disclaimer>
+    <disclaimer lang="ru_RU">Плагин не поддерживается Google</disclaimer>
+    <disclaimer lang="sk_SK">Tento doplnok nie je schválený spoločnosťou Google</disclaimer>
+    <disclaimer lang="tr_TR">Bu eklenti Google tarafından üretilmemiştir</disclaimer>
+    <disclaimer lang="vi_VN">Plugin này không được xác nhận bởi Google</disclaimer>
+    <disclaimer lang="zh_CN">此插件未被谷歌认可</disclaimer>
+    <disclaimer lang="zh_TW">此附加元件未由Google支持</disclaimer>
+  </extension>
+</addon><addon id="repository.Ardavetv" name="Ardave TV" version="3.10.2" provider-name="omoobatv">
+  <requires>
+		<import addon="xbmc.addon" version="12.0.0" />
+	</requires>
+    <extension point="xbmc.addon.repository" name="Ardave TV">
+        <dir minversion="18.0.0" maxversion="18.9.9">
+            <info compressed="false">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/leia/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/leia/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/leia/zips/</datadir>
+        </dir>
+        <dir minversion="19.0.0">
+            <info compressed="false">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/matrix/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/matrix/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/matrix/zips/</datadir>
+        </dir>
+        <dir minversion="20.0.0">
+            <info compressed="false">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/nexus/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/nexus/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/nexus/zips/</datadir>
+        </dir>v
+        <dir minversion="20.0.0">
+            <info compressed="false">https://raw.githubusercontent.com/pannal/dontpanickodi/master/nexus/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/pannal/dontpanickodi/master/nexus/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/pannal/dontpanickodi/master/nexus/zips/</datadir>
+        </dir>
+        <dir>
+	          <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+	          <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+	          <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+        </dir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zips</datadir>
+        </dir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/</datadir>
+        </dir>
+       <dir>
+			    <info compressed="false">http://narcacist.com/_repo/addons.xml</info>
+			    <checksum>http://narcacist.com/_repo/addons.xml.md5</checksum>
+			    <datadir zip="true">http://narcacist.com/_repo/</datadir>
+		   </dir>
+       <dir>
+         <info compressed="false">https://magnetic.website/__zips/addons.xml</info>
+         <checksum>https://magnetic.website/__zips/addons.xml.md5</checksum>
+         <datadir zip="true">https://magnetic.website/__zips/</datadir>
+         <hashes>false</hashes>
+      </dir>
+      <dir minversion="19.0.0">
+            <info compressed="false">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/</datadir>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Ardave TV</summary>
+        <description>Anything Kodi</description>
+        <disclaimer />
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon><addon id="repository.jellyfin.kodi" name="Kodi Jellyfin Addons" version="1.0.0" provider-name="null_pointer,angelblue05,sualfred,im85288,xnappo">
+  <requires>
+    <import addon="xbmc.addon" version="12.0.0" />
+  </requires>
+  <extension point="xbmc.addon.repository" name="Kodi Jellyfin Repository">
+    <dir>
+      <info compressed="false">https://repo.jellyfin.org/releases/client/kodi/addons.xml</info>
+      <checksum>https://repo.jellyfin.org/releases/client/kodi/addons.xml.md5</checksum>
+      <datadir zip="true">https://repo.jellyfin.org/releases/client/kodi</datadir>
+    </dir>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Kodi Jellyfin Addon Repository</summary>
+    <description>This repo contains addons related to the Jellyfin project</description>
+    <disclaimer />
+    <platform>all</platform>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon><addon id="repository.loop" name="[COLORlime]Loop[/COLOR] Repository" version="3.0.2" provider-name="The Loop">
+	<extension point="xbmc.addon.repository" name="Loop Repository">
+		<dir>
+			<info compressed="false">https://loopaddon.uk/zips19/addons.xml</info>
+	<checksum>https://loopaddon.uk/zips19/addons.xml.md5</checksum>
+			<datadir zip="true">https://loopaddon.uk/zips19/</datadir>
+		</dir>
+		<dir>
+      <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+      <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+      <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+    </dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+    <assets>
+        <icon>icon.png</icon>
+        <fanart>fanart.jpg</fanart>			
+    </assets>
+		<summary lang="en" />
+		<description lang="en" />
+		<genre />
+	</extension>
+</addon><addon id="script.module.fenomscrapers" name="FenomScrapers Module" version="2.1.8" provider-name="Mr-Kodi">
+	<requires>
+		<import addon="xbmc.python" version="3.0.0" />
+		<import addon="script.module.requests" />
+		<import addon="script.module.myaccounts" version="2.0.0" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="lib/default.py">
+		<provides>executable</provides>
+	</extension>
+	<extension point="xbmc.service" library="lib/service.py" start="startup" />
+	<extension point="xbmc.python.module" library="lib" /> 
+	<extension point="xbmc.addon.metadata">
+		<reuselanguageinvoker>false</reuselanguageinvoker>
+		<summary lang="en">FenomScrapers Module</summary>
+		<description>Scrape common video host for URL's to be playable in Kodi, simplifying addon development of video plugins requiring multi video hosts.</description>
+		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+		<forum />
+		<website>https://github.com/Mr-Kodi/repository.fenomscrapers</website>
+		<source>https://github.com/Mr-Kodi/repository.fenomscrapers</source>
+		<disclaimer lang="en">The author is not responsible for the use of this addon. The author is not responsible for the content found using this addon. The author does not host or own any content found within this addon.[CR]The author is in no way affiliated with Kodi, Team Kodi, or the XBMC Foundation.[CR]This is a Non-profit resource, organized solely for educational purposes which is protected under the Fair-Use doctrine of the Copyright Act, Specifically section 107, which does promote freedom of expression, by permitting the unlicensed use of copyright-protected works.</disclaimer>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.png</fanart>
+			<screenshot />
+		</assets>
+		<news>
+[B][COLOR red]Update - v2.1.8 - April 07, 2022[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Fixed BITCQ bug in pack file title checking.[/I]
+[COLOR yellow]--[/COLOR][I] Updated torrentinfo help file.[/I]
+[COLOR yellow]--[/COLOR][I] Small fix for BITSEARCH query results when an item might contain a new liked count mucking with the index.[/I]
+		</news>
+	</extension>
+</addon>
+
+<addon id="script.module.metahandler" name="metahandler" version="5.0.1" provider-name="Eldorado">
+	<requires>
+		<import addon="xbmc.python" version="3.0.0" />
+		<import addon="script.module.six" version="1.14.0+matrix.2" />
+		<import addon="script.module.simplejson" version="3.17.0+matrix.2" />
+		<import addon="script.module.myconnpy" version="8.0.18+matrix.1" />
+	</requires>
+	<extension point="xbmc.python.module" library="lib" />
+	<extension point="xbmc.python.pluginsource" library="lib/default.py" />
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="en">Downloads Artwork for TV shows, Movies and Music videos for addons and stores them in a local SQLITE database</summary>
+		<description lang="en">Queries, stores, and returns metadata for TV shows, Movies and Musicvideos. [CR]Sources:[CR]www.thetvdb.com[CR]www.themoviedb.org[CR]www.imdb.com[CR]www.omdbapi.com[CR]This product uses the TMDb API but is not endorsed or certified by TMDb.</description>
+		<disclaimer lang="en" />
+		<language />
+		<license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+		<forum />
+		<website />
+		<email />
+		<source />
+		<assets>
+			<icon>icon.png</icon>
+			<fanart />
+			<screenshot />
+		</assets>
+		<news>
+[B]Version 5.0.1[/B]
+- Fixed settings.xml version preventing setting UI from showing in Kodiunder Matrix
+		</news>
+	</extension>
+</addon>
+
+<addon id="script.module.myaccounts" version="2.0.0" name="My Accounts" provider-name="Venom, Fen">
+	<requires>
+		<import addon="xbmc.python" version="3.0.0" />
+		<import addon="script.module.requests" version="2.19.1" />
+	</requires>
+	<extension point="xbmc.python.script" library="lib/default.py">
+		<provides>executable</provides>
+	</extension>
+	<extension point="xbmc.service" library="lib/service.py" start="startup" />
+	<extension point="xbmc.python.module" library="lib" /> 
+	<extension point="xbmc.addon.metadata">
+		<reuselanguageinvoker>false</reuselanguageinvoker>
+		<summary lang="en">My Accounts Module</summary>
+		<description>Single placeholder for all your accounts.</description>
+		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+		<forum />
+		<website>https://github.com/Mr-Kodi/repository.myaccounts</website>
+		<source>https://github.com/Mr-Kodi/repository.myaccounts</source>
+		<disclaimer lang="en">The author is not responsible for the use of this addon. [CR]The author is in no way affiliated with Kodi, Team Kodi, or the XBMC Foundation.[CR]This is a Non-profit resource, organized solely for educational purposes which is protected under the Fair-Use doctrine of the Copyright Act, Specifically section 107, which does promote freedom of expression, by permitting the unlicensed use of copyright-protected works.</disclaimer>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.png</fanart>
+			<screenshot />
+		</assets>
+		<news>
+[B][COLOR red]Update - v2.0.0 - Nov. 23, 2021[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] First official py3 only version for Kodi Matrix.[/I]
+[COLOR yellow]--[/COLOR][I] Fixed issue with "check for updates" using old github url.[/I]
+		</news>
+	</extension>
+</addon><addon id="script.module.youtube.dl" name="youtube-dl Control" version="2021.12.03+matrix" provider-name="Rick Phillips (ruuk)">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.addon.signals" version="0.0.5+matrix.1" />
+        <import addon="script.module.kodi-six" version="0.1.3" />
+    </requires>
+    <extension point="xbmc.python.script" library="control.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.python.module" library="lib" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary lang="en_GB">Module providing access to youtube-dl video stream extraction</summary>
+        <description lang="en_GB">Module providing access to youtube-dl video stream extraction for hundreds of sites. Version is based on youtube-dl date version: YY.MDD.V where V is the addon specific sub-version. Also provides downloading with the option for background downloading with a queue and queue manager.</description>
+        <summary lang="el_EL">Βοηθητική μονάδα πρόσβασης στους επιλυτές youtube-dl για την εξαγωγή ροών βίντεο</summary>
+        <description lang="el_EL">Βοηθητική μονάδα πρόσβασης στους επιλυτές youtube-dl για την εξαγωγή ροών βίντεο από εκατοντάδες ιστότοπους. Η έκδοση βασίζεται στην έκδοση ημερομηνίας του youtube-dl: EE.MHH.EK όπου ΕΚ η υπό-έκδοση συγκεκριμένα για το πρόσθετο. Επιπλέον δίνει δυνατότητα μεταφόρτωσης στο παρασκήνιο με ουρά και διαχειριστή αυτής.</description>
+        <summary lang="es_ES">Módulo que proporciona acceso a YouTube-dl para la extracción de flujos de video</summary>
+        <description lang="es_ES">Módulo que proporciona acceso a YouTube-dl para la extracción de flujos de video de cientos de sitios. La versión está basada en la versión de fecha youtube-dl: YY.MDD.V donde V es la subversión específica del complemento. También permite descargas con la opción de descarga en segundo plano con una cola y un administrador de colas.</description>
+        <license>LGPL-2.1-only</license>
+        <forum>https://forum.kodi.tv/showthread.php?tid=200877</forum>
+        <source>https://github.com/ruuk/script.module.youtube.dl</source>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon>
+
+<addon id="script.skin.helper.service" name="Skin Helper Service" version="1.20.1" provider-name="marcelveldt and others">
+    <requires>
+		<import addon="xbmc.python" version="3.0.0" />
+        <import addon="xbmc.addon" version="12.0.0" />
+        <import addon="script.module.simplejson" version="3.3.0" />
+        <import addon="script.module.simplecache" version="2.0.2" />
+        <import addon="script.module.metadatautils" version="1.20.1" />
+    </requires>
+
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="resources\lib\context_animatedart.py">
+              <label>32024</label>
+              <visible>!String.IsEmpty(Window(Home).Property(SkinHelper.EnableAnimatedPosters)) + Container.Content(movies)</visible>
+            </item>
+            <item library="resources\lib\context_pvr.py">
+                <label>32023</label>
+                <description>PVR artwork Configuration</description>
+                <visible>
+                    !String.IsEmpty(Window(Home).Property(SkinHelper.EnablePvrThumbs)) + 
+                    [Window.IsActive(MyPVRChannels.xml) | String.Contains(ListItem.FileNameAndPath,action=playchannel) | 
+                    Window.IsActive(MyPVRGuide.xml) | Window.IsActive(MyPVRRecordings.xml) | 
+                    Window.IsActive(MyPVRTimers.xml) | Window.IsActive(MyPVRSearch.xml)]
+                </visible>
+            </item>
+            <item library="resources\lib\context_music.py">
+                <label>32023</label>
+                <description>Music artwork Configuration</description>
+                <visible>
+                    !String.IsEmpty(Window(Home).Property(SkinHelper.EnableMusicArt)) + 
+                    [Container.Content(albums) | Container.Content(artists) | Container.Content(songs)]
+                </visible>
+            </item>
+        </menu>
+    </extension>
+
+    <extension point="xbmc.python.library" library="default.py" />
+    <extension point="xbmc.python.pluginsource" library="plugin.py" />
+    <extension library="service.py" point="xbmc.service" start="login" />
+
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Helper service for Kodi skins</summary>
+        <description>Helper service for Kodi skins</description>
+        <news>
+v1.20.0
+- Nexus version
+        </news>
+		<assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+        <language />
+        <platform>all</platform>
+        <license>GPL v2.0</license>
+        <forum>http://forum.kodi.tv/showthread.php?tid=235676</forum>
+        <website />
+        <source>https://github.com/kodi-community-addons/script.skin.helper.service</source>
+    </extension>
+</addon><addon id="script.skin.helper.widgets" name="Skin Helper Service Widgets" version="1.20.1" provider-name="marcelveldt and others">
+    <requires>
+		<import addon="xbmc.python" version="3.0.0" />
+        <import addon="xbmc.addon" version="12.0.0" />
+        <import addon="script.module.metadatautils" version="1.20.1" />
+        <import addon="script.module.simplecache" version="2.0.2" />
+    </requires>
+
+    <extension point="xbmc.python.pluginsource" library="plugin.py">
+        <provides>video audio</provides>
+    </extension>
+    <extension library="service.py" point="xbmc.service" start="login" />
+
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Ready to use widgets for all kind of media types</summary>
+        <description />
+	<news>
+	</news>
+		<assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+        <language />
+        <platform>all</platform>
+        <license>GPL v2.0</license>
+        <forum>http://forum.kodi.tv/showthread.php?tid=235676</forum>
+        <website />
+        <source>https://github.com/kodi-community-addons/script.skin.helper.widgets</source>
+    </extension>
+</addon><addon id="script.tikiart" name="Tiki Art Module" provider-name="Tiki" version="1.1.58">
+    <extension point="xbmc.python.module" />
+    <extension point="xbmc.addon.metadata">
+        <summary>Themes for Addons</summary>
+        <description>Themes for Addons</description>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon><addon id="script.tikiskins" name="Tiki Skins Module" provider-name="Tiki" version="1.1.35">
+    <extension point="xbmc.python.module" />
+    <extension point="xbmc.addon.metadata">
+        <summary>Skins for Addons</summary>
+        <description>Skins for Addons</description>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon><addon id="script.webgrab" version="2.0.0+matrix" name="Webgrab+Plus Configurator" provider-name="primaeval,Abbey">
+<requires>
+  <import addon="xbmc.python" version="3.0.0" />
+  <import addon="script.module.xbmcswift2" />
+  <import addon="script.module.requests" />
+</requires>
+<extension point="xbmc.python.pluginsource" library="main.py">
+  <provides>executable</provides>
+</extension>
+<extension point="xbmc.addon.metadata">
+  <summary lang="en">Webgrab+Plus Configurator</summary>
+  <description lang="en">Easily set up your Webgrab+Plus config and ini files.</description>
+  <disclaimer lang="en">.</disclaimer>
+  <assets>
+			<icon>icon.png</icon>
+		</assets>
+</extension>
+</addon>
+
+<addon id="skin.blue.estuary" version="3.0.10" name="Estuary Blue2" provider-name="Mosii">
+	<requires>
+		<import addon="xbmc.gui" version="5.16.0" />
+	</requires>
+	<extension point="xbmc.gui.skin" debugging="false">
+		<res width="1920" height="1440" aspect="4:3" default="false" folder="xml" />
+		<res width="1920" height="1280" aspect="3:2" default="false" folder="xml" />
+		<res width="1920" height="1200" aspect="16:10" default="false" folder="xml" />
+		<res width="2040" height="1080" aspect="17:9" default="false" folder="xml" />
+		<res width="1920" height="1080" aspect="16:9" default="true" folder="xml" />
+		<res width="2560" height="1080" aspect="21:9" default="false" folder="xml" />
+		<res width="2338" height="1080" aspect="19.5:9" default="false" folder="xml" />
+		<res width="2160" height="1080" aspect="18:9" default="false" folder="xml" />
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<license>CC BY-SA 4.0, GNU GENERAL PUBLIC LICENSE Version 2.0</license>
+		<forum>http://forum.kodi.tv/</forum>
+		<source>https://github.com/xbmc/skin.estuary/</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+			<screenshot>resources/screenshot-01.jpg</screenshot>
+			<screenshot>resources/screenshot-02.jpg</screenshot>
+			<screenshot>resources/screenshot-03.jpg</screenshot>
+			<screenshot>resources/screenshot-04.jpg</screenshot>
+			<screenshot>resources/screenshot-05.jpg</screenshot>
+			<screenshot>resources/screenshot-06.jpg</screenshot>
+			<screenshot>resources/screenshot-07.jpg</screenshot>
+			<screenshot>resources/screenshot-08.jpg</screenshot>
+		</assets>
+		<summary lang="af_ZA">Estuary oortreksel deur phil65. (Kodi se bestek oortreksel)</summary>
+		<summary lang="ar_SA">مظهر Estuary بواسطة phil65. ( مظهر كودي الافتراضي )</summary>
+		<summary lang="be_BY">Абалонка "Estuary" ад phil65. (прадвызначаная абалонка Kodi)</summary>
+		<summary lang="bg_BG">Estuary облик от phil65 и Piers. (стандартния облик на Kodi)</summary>
+		<summary lang="ca_ES">Aparença Estuary per phil65 i Piers. (aparença predeterminada de Kodi)</summary>
+		<summary lang="cs_CZ">Vzhled Estuary od autora phil65. (Výchozí vzhled Kodi)</summary>
+		<summary lang="da_DK">Estuary skin af phil65 (Kodis standard brugerflade)</summary>
+		<summary lang="de_DE">Estuary Skin von phil65. (Kodi-Standardskin)</summary>
+		<summary lang="el_GR">Το κέλυφος Estuary από τον phil65 και τον Pier. (προεπιλεγμένο κέλυφος του Kodi)</summary>
+		<summary lang="en_GB">Estuary skin by phil65. (Kodi's default skin)</summary>
+		<summary lang="en_NZ">Estuary skin by phil65 and Piers. (Kodi's default skin)</summary>
+		<summary lang="en_US">Estuary skin by phil65 and Piers. (Kodi's default skin)</summary>
+		<summary lang="es_AR">Skin Estuary por phil65 (skin por defecto de Kodi)</summary>
+		<summary lang="es_ES">Skin Estuary por phil65. (skin por defecto de Kodi)</summary>
+		<summary lang="es_MX">Máscara Estuary por phil65 y Piers. (La máscara predeterminada de Kodi)</summary>
+		<summary lang="et_EE">Estuary rüü autor on phil65. (Kodi vaikerüü)</summary>
+		<summary lang="eu_ES">Estuary azala phil65-ek egina. (Kodiren azal lehenetsia)</summary>
+		<summary lang="fa_IR">پوستهٔ اسچوری به دست phil65. (پوستهٔ پیش‌گزیدهٔ کودی)</summary>
+		<summary lang="fi_FI">Estuary-ulkoasun ovat kehittäneet phil65 ja Piers. (Kodin oletusulkoasu)</summary>
+		<summary lang="fr_CA">Habillage Estuary par phil65 et Piers (habillage par défaut de Kodi).</summary>
+		<summary lang="fr_FR">Estuary, un habillage par phil65 et Piers (habillage d'origine de Kodi)</summary>
+		<summary lang="gl_ES">Pel Estuary por phil65 and Piers. (Pel predefinida do Kodi)</summary>
+		<summary lang="he_IL">מעטפת Estuary של phil65 (ברירת המחדל של קודי)</summary>
+		<summary lang="hr_HR">Estuary presvlaka autora phil65 i Piersa. (Zadana Kodi presvlaka)</summary>
+		<summary lang="hu_HU">Estuary felszín. Készítette phil65 és Piers. (Kodi alapértelmezett felszín)</summary>
+		<summary lang="id_ID">Skin Estuary oleh phil65. (Skin default Kodi)</summary>
+		<summary lang="is_IS">Estuary-skinnið eftir phil65. (sjálfgefið útlit Kodi)</summary>
+		<summary lang="it_IT">Skin Estuary di phil65. (Skin predefinita di Kodi)</summary>
+		<summary lang="ja_JP">Estuaryスキン by phil65 and Piers (Kodi デフォルトスキン)</summary>
+		<summary lang="ko_KR">phil65가 만든 Estuary 스킨. (Kodi 기본 스킨)</summary>
+		<summary lang="lt_LT">Estuary teminė išvaizda, kurią sukūrė phil65 ir Piers. (Numatytoji Kodi teminė išvaizda)</summary>
+		<summary lang="lv_LV">Estuary apvalks no phil65. (Kodi noklusējuma apvalks)</summary>
+		<summary lang="mk_MK">Estuary skin by phil65. (Kodi's default skin)</summary>
+		<summary lang="ms_MY">Kulit Estuary oleh phil65 dan rakan-rakan. (Kulit lalai Kodi)</summary>
+		<summary lang="nb_NO">Esturay-drakt av phil65 og Piers. (Kodis forvalgte drakt)</summary>
+		<summary lang="nl_NL">Estuary skin door phil65 en Piers. (Kodi's standaardskin)</summary>
+		<summary lang="pl_PL">Skóra Eustary autorstwa phil65. (domyślna skóra Kodi)</summary>
+		<summary lang="pt_BR">Skin Estuary por phil65 e Piers. (Skin padrão do Kodi)</summary>
+		<summary lang="pt_PT">Visual Estuary de phil65 e Piers. (Visual por omissão do Kodi)</summary>
+		<summary lang="ro_RO">Tema Estuary de phil65. (Temă implicită pentru Kodi)</summary>
+		<summary lang="ru_RU">Обложка Estuary от phil65 (стандартная обложка Kodi)</summary>
+		<summary lang="sk_SK">Vzhľad Estuary, vytvorili phil65. (predvolený vzhľad pre Kodi)</summary>
+		<summary lang="sr_RS">Маска Estuary аутора phil65 и Piers. (Подразумевана Коди маска)</summary>
+		<summary lang="sr_RS@latin">Maska Estuary autora phil65 i Piers. (Podrazumevana Kodi maska)</summary>
+		<summary lang="sv_SE">Estuary, ett skal av phil65. (Kodi's standardskal)</summary>
+		<summary lang="szl">Skōra Estuary ôd phil65 i Piers. (Wychodnŏ skōra Kodi)</summary>
+		<summary lang="th_TH">สกิน Estuary โดย phil65 และ Piers (หน้าตาเริ่มต้นของKodi)</summary>
+		<summary lang="tr_TR">Estuary dış görünümü. phil65 (Kodi'nin varsayılan dış görünümü)</summary>
+		<summary lang="uk_UA">Обкладинка Estuary від phil65 і Piers. (стандартна обкладинка Kodi)</summary>
+		<summary lang="vi_VN">Giao diện Estuary của phil65. (Giao diện mặc định của Kodi)</summary>
+		<summary lang="zh_CN">phil65 开发的 Estuary 皮肤（Kodi 的默认皮肤）。</summary>
+		<summary lang="zh_TW">phil65與Piers 製作的Estuary佈景主題（Kodi的預設佈景主題）</summary>
+		<description lang="af_ZA">Estuary is die bestek oortreksel vir Kodi 17.0 en op. Dit poog om maklik te wees vir eerste keer Kodi gebruikers om te verstaan en te gebruik.</description>
+		<description lang="ar_SA">Estuary هو المظهر الافتراضي ل كودي الإصدار 17.0 و أعلى. يطمح بأن يكون سهل الاستخدام والفهم لمستخدمين كودي الجدد.</description>
+		<description lang="be_BY">Estuary - прадвызначаная абалонка для Kodi 17.0 і пазнейшых версій. Яна будзе простай і зразумелай для карыстальнікаў, якія не мелі досведу працы з Kodi.</description>
+		<description lang="bg_BG">Estuary е стандартният облик на Kodi 17 и по-новите версии. Целта е да се улеснят хората, които се сблъскват за първи път с Kodi.</description>
+		<description lang="ca_ES">Estuary és l'aparença predeterminada de Kodi 17.0 i posteriors. Per als usuaris per primera vegada de Kodi, intenta ser fàcil d'entendre i d'utilitzar.</description>
+		<description lang="cs_CZ">Estuary je výchozí vzhled pro Kodi 17.0 a vyšší. Snaží se být jednoduše pochopitelný a použitelný pro nové uživatele Kodi.</description>
+		<description lang="da_DK">Estuary er standardbrugerfladen for Kodi 17.0 og højere. Det forenkler førstegangsbrugen af Kodi ved at gøre det nemmere at forstå og bruge.</description>
+		<description lang="de_DE">Estuary ist der Standardskin für Kodi 17.0 und höher. Ziel war es, einen einfach zu bedienenden Skin für neue Kodi-Benutzer zu entwickeln.</description>
+		<description lang="el_GR">Το Estuary είναι η προεπιλεγμένη αμφίεση για τις εκδόσεις Kodi 17.0 και άνω. Επιχειρεί να είναι προσιτό στους αρχάριους χρήστες του Kodi για να το κατανοήσουν και να το χρησιμοποιήσουν.</description>
+		<description lang="en_GB">Estuary is the default skin for Kodi 17.0 and above. It attempts to be easy for first time Kodi users to understand and use.</description>
+		<description lang="en_NZ">Estuary is the default skin for Kodi 17.0 and above. It attempts to be easy for first time Kodi users to understand and use.</description>
+		<description lang="en_US">Estuary is the default skin for Kodi 17.0 and above. It attempts to be easy for first time Kodi users to understand and use.</description>
+		<description lang="es_AR">Estuary es el skin por defecto para Kodi 17.0 y posteriores. Intenta ser fácil de entender y utilizar para los usuarios Kodi primerizos.</description>
+		<description lang="es_ES">Estuary es el skin por defecto para Kodi 17.0 o superior. Su objetivo es la facilidad de comprensión y uso para usuarios primerizos de Kodi.</description>
+		<description lang="es_MX">Estuary es la máscara por defecto para Kodi 17.0 y superior. Su objetivo es ser fácil de entender y usar para los usuarios nuevos a Kodi.</description>
+		<description lang="et_EE">Estuary on Kodi vaikerüü versioonist 17.0. Kodi esmakasutajatel on rüüd kerge mõista ja kasutada.</description>
+		<description lang="eu_ES">Estuary azala kodi 17.0 eta berriagoen azal lehenetsia da. Kodiren erabiltzaile hasiberrientzako erabilerraza eta ulerterraza izaten saiatzen da.</description>
+		<description lang="fa_IR">اسچوری پوستهٔ پیش‌گزیدهٔ کودی ۱۷٫۰ و بالاتر است. این پوسته تلاش می‌کند درک و استفاده‌اش برای کاربرانی که نخستین بار با کودی کار می‌کنند، ساده باشد.</description>
+		<description lang="fi_FI">Estuary on Kodin oletusulkoasu alkaen versiosta 17.0. Sen on tarkoitus olla uusille Kodi-käyttäjille selkeä ja helppokäyttöinen.</description>
+		<description lang="fr_CA">Estuary est l’habillage par défaut pour Kodi 17.0 et ultérieure. Il s’efforce d’être facile à comprendre et à utiliser pour les utilisateurs débutants de Kodi.</description>
+		<description lang="fr_FR">Estuary est l'habillage d'origine pour Kodi 17.0 et supérieur. Il est facile à comprendre et à utiliser pour les utilisateurs novices de Kodi.</description>
+		<description lang="gl_ES">Estuary é a pel predefinida para Kodi 17.0 e superior. Esta tenta ser doada de entender e usar polos usuarios recen chegados a Kodi.</description>
+		<description lang="he_IL">Estuary היא מעטפת ברירת המחדל של קודי מגרסאות 17.0 ומעלה. מטרת מעטפת זו היא להיות פשוטה לשימוש ולהכרה ראשונית על ידי משתמשים חדשים.</description>
+		<description lang="hr_HR">Estuary je zadana presvlaka za Kodi 17.0 i novije inačice. To je pokušaj da se novim korisnicima olakša prvo korištenje i kasnija upotreba Kodija.</description>
+		<description lang="hu_HU">Az Estuary az alapértelmezett felszín a 17.0 és újabb Kodi kiadásokban. Megpróbál könnyen kezelhető és használható lenni, az újonc Kodi felhasználóknak is.</description>
+		<description lang="id_ID">Estuary adalah skin default untuk Kodi 17.0 dan di atasnya. Ini untuk mudah dipahami dan digunakan oleh pengguna Kodi yang pertama kali.</description>
+		<description lang="is_IS">Estuary er sjálfgefið skinn fyrir Kodi 17.0 og nýrri. Með því á að vera auðvelt fyrir fyrsta-skiptis Kodi-notendur að skilja og nota viðmótið.</description>
+		<description lang="it_IT">Estuary è la skin predefinita di Kodi 17.0 e successivi. Cerca di essere facile da capire e da usare per chi si avvicina per la prima volta a Kodi.</description>
+		<description lang="ja_JP">EstuaryはKodi 17.0およびそれ以上のバージョンで標準のスキンです。ユーザーが初めてKodiに触れる際にわかりやすく使えるようにしてあります。</description>
+		<description lang="ko_KR">Estuary는 Kodi 17.0이상의 기본 스킨입니다. 처음 Kodi를 접하는 사용자가 쉽게 이해하고 사용할 수 있도록 만들었습니다.</description>
+		<description lang="lt_LT">Estuary yra numatytoji Kodi 17.0 ir aukštesnių versijų teminė išvaizda. Jos tikslas yra būti lengvai perprantama naujiems Kodi vartotojams.</description>
+		<description lang="ms_MY">Estuary ialah kulit lalai untuk Kodi 17.0 dan ke atas. Kulit yang mudah digunakan buat pengguna Kodi kali pertama untuk memahami dan menggunakannya.</description>
+		<description lang="nb_NO">Estuary er forvalgt drakt til Kodi 17.0 og nyere. Det tar mål av seg å være en enkel drakt for førstegangsbrukere av Kodi, slik at det er til å forstå og kan brukes.</description>
+		<description lang="nl_NL">Estuary is de standaardskin voor Kodi 17.0 en hoger. Het tracht eenvoudig te begrijpen en te gebruiken te zijn voor beginnende Kodi-gebruikers.</description>
+		<description lang="pl_PL">Eustary jest domyślną skórą Kodi dla wersji 17.0 i późniejszych. Jest próbą łatwego wprowadzenia początkujących użytkowników w funkcje Kodi.</description>
+		<description lang="pt_BR">Estuary é a skin padrão para o Kodi 17.0 e acima. Objetiva ser fácil para usuários que iniciam no Kodi pela primeira vez, facilitando aprendizagem de uso do mesmo.</description>
+		<description lang="pt_PT">O Estuary é o visual por omissão para o Kodi 17.0 e posteriores. Tenta ser simples para os utilizadores menos experientes do Kodi compreenderem e usarem.</description>
+		<description lang="ro_RO">Estuary este tema implicită pentru Kodi 17.0 și versiunile ulterioare. Încearcă să fie ușor de înțeles și folosit pentru utilizatorii care folosesc Kodi pentru prima dată.</description>
+		<description lang="ru_RU">Estuary — это стандартная обложка Kodi, начиная с версии 17.0. Простая и понятная в использовании для новых пользователей Kodi.</description>
+		<description lang="sk_SK">Estuary je predvolený vzhľad pre Kodi 17.0 a vyššie. Je výsledkom snahy o vzhľad, ktorý bude ľahko zrozumiteľný a použiteľný pre nových používateľov Kodi.</description>
+		<description lang="sr_RS">Estuary је подразумевана маска за Kodi 17.0 и изнад. Покушава да буде једноставан за разумевање и коришћење новим корисницима Kodi-ја.</description>
+		<description lang="sr_RS@latin">Estuary je podrazumevana maska za Kodi 17.0 i iznad. Pokušava da bude jednostavan za razumevanje i korišćenje novim korisnicima Kodija.</description>
+		<description lang="sv_SE">Estuary är standardskalet för Kodi 17.0 och uppåt. Det är utformat för att vara lättförståeligt och användarvänligt för förstagångsanvändare av Kodi.</description>
+		<description lang="szl">Estuary je wychodnōm skōrōm Kodi dlŏ wersyje 17.0 i dalszych. Prōbuje być proste dlŏ używŏczōw, dlŏ kerych Kodi je nowe</description>
+		<description lang="th_TH">Estuary คือหน้าตาเริ่มต้นของ Kodi 17.0 และสูงกว่า เป็นความพยายามที่จะทำให้ง่ายสำหรับผู้ใช้ Kodi ในครั้งแรก ที่จะเข้าใจและใช้งาน</description>
+		<description lang="tr_TR">Estuary Kodi 17.0 ve yukarısı için varsayılan dış görünümdür. İlk kez Kodi kullananlar için anlaşılması ve kullanımı kolaydır.</description>
+		<description lang="uk_UA">Estuary є стандартною обкладинкою Kodi 17.0 і подальших версій. Її основна ідея — простота використання для нових користувачів Kodi.</description>
+		<description lang="vi_VN">Estuary là giao diện mặc định cho Kodi 17.0 trở lên. Nó dễ dàng cho người dùng Kodi lần đầu tiên hiểu và sử dụng.</description>
+		<description lang="zh_CN">Estuary 是 Kodi 17.0 的默认皮肤。它力求使首次使用 Kodi 的用户易于上手。</description>
+		<description lang="zh_TW">Estuary是Kodi 17.0開始搭載的預設佈景主題。主要在讓第一次使用 Kodi 的使用者可以簡單地上手。</description>
+		<disclaimer lang="af_ZA">Estuary is die bestek oortreksel vir Kodi, verwydering mag probleme veroorsaak</disclaimer>
+		<disclaimer lang="ar_SA">Estuary هو المظهر الافتراضي ل كودي, إزالته قد تسبب بعض المشاكل</disclaimer>
+		<disclaimer lang="be_BY">Estuary - прадвызначаная абалонка для Kodi. Яе выдаленне можа прывесці да праблем</disclaimer>
+		<disclaimer lang="bg_BG">Estuary е стандартният облик на Kodi. Премахването му може да предизвика проблеми</disclaimer>
+		<disclaimer lang="ca_ES">Estuary és l'aparença predeterminada de Kodi, si s'elimina pot causar problemes</disclaimer>
+		<disclaimer lang="cs_CZ">Estuary je výchozí vzhled pro Kodi, jeho odebrání může způsobit problémy</disclaimer>
+		<disclaimer lang="cy_GB">Estuary yw croen diofyn Kodi. Efallai bydd ei dynnu yn achosi problemau</disclaimer>
+		<disclaimer lang="da_DK">Estuary er standard brugerfladen. Fjernes det kan der opstå problemer.</disclaimer>
+		<disclaimer lang="de_DE">Estuary ist der Standardskin von Kodi. Ein Entfernen des Skins kann Probleme verursachen</disclaimer>
+		<disclaimer lang="el_GR">Το Estuary είναι η προεπιλεγμένη αμφίεση για το Kodi. Η αφαίρεσή του μπορεί να δημιουργήσει προβλήματα.</disclaimer>
+		<disclaimer lang="en_GB">Estuary is the default skin for Kodi, removing it may cause issues</disclaimer>
+		<disclaimer lang="en_NZ">Estuary is the default skin for Kodi, removing it may cause issues</disclaimer>
+		<disclaimer lang="en_US">Estuary is the default skin for Kodi, removing it may cause issues</disclaimer>
+		<disclaimer lang="es_AR">Estuary es el skin por defecto de Kodi. Borrarlo puede causar problemas</disclaimer>
+		<disclaimer lang="es_ES">Estuary es el skin por defecto de Kodi, quitarlo puede causar problemas</disclaimer>
+		<disclaimer lang="es_MX">Estuary es la máscara predeterminada de Kodi, eliminarla puede causar problemas</disclaimer>
+		<disclaimer lang="et_EE">Estuary on Kodi vaikerüü, selle eemaldamine võib põhjustada probleeme</disclaimer>
+		<disclaimer lang="eu_ES">Estuary Kodiren azal lehenetsia da. Ezabatzeak arazoak eragin ditzake</disclaimer>
+		<disclaimer lang="fa_IR">اسچوری پوستهٔ پیش‌گزیدهٔ کودی است. ممکن است برداشتنش موجب مشکلاتی شود</disclaimer>
+		<disclaimer lang="fi_FI">Estuary on Kodin oletusulkoasu ja sen poisto voi aiheuttaa ongelmia</disclaimer>
+		<disclaimer lang="fr_CA">Estuary est l’habillage par défaut de Kodi, le supprimer peut créer des problèmes</disclaimer>
+		<disclaimer lang="fr_FR">Estuary est l'habillage d'origine de Kodi, le retirer peut créer des problèmes</disclaimer>
+		<disclaimer lang="gl_ES">Estuary é a pel predefinida para Kodi e eliminala pode causar problemas.</disclaimer>
+		<disclaimer lang="he_IL">Estuary היא מעטפת ברירת המחדל של קודי, הסרתה עלולה לגרום לתקלות</disclaimer>
+		<disclaimer lang="hr_HR">Estuary je zadana presvlaka za Kodi, njegovo uklanjanje može uzrokovati poteškoće</disclaimer>
+		<disclaimer lang="hu_HU">Az Estuary az alapértelmezett Kodi felszín. Eltávolítása problémákat okozhat</disclaimer>
+		<disclaimer lang="id_ID">Estuary adalah skin default untuk Kodi, menghapusnya dapat menyebabkan masalah</disclaimer>
+		<disclaimer lang="is_IS">Estuary er sjálfgefið skinn fyrir Kodi, ef það er fjarlægt gætu komið upp ýmis vandamál</disclaimer>
+		<disclaimer lang="it_IT">Estuary è la skin predefinita di Kodi, rimuoverla potrebbe causare problemi</disclaimer>
+		<disclaimer lang="ja_JP">EstuaryはKodiのデフォルトスキンなので、これを削除するとうまく動かなくなる可能性があります</disclaimer>
+		<disclaimer lang="ko_KR">Estuary는 Kodi의 기본스킨으로 제거시 문제가 생길 수 있습니다</disclaimer>
+		<disclaimer lang="lt_LT">Estuary yra numatytoji Kodi teminė išvaizda, jos pašalinimas gali sukelti problemų</disclaimer>
+		<disclaimer lang="ms_MY">Estuary ialah kulit lalai Kodi, mengubahnya boleh menimbulkan isu.</disclaimer>
+		<disclaimer lang="nb_NO">Estuary er forvalgt drakt for Kodi, dersom du fjerner det kan det forårsake problemer.</disclaimer>
+		<disclaimer lang="nl_NL">Estuary is de standaardskin voor Kodi, het verwijderen van Estuary kan leiden tot problemen.</disclaimer>
+		<disclaimer lang="pl_PL">Eustary jest domyślną skórą Kodi, usunięciejej może powodować problemy</disclaimer>
+		<disclaimer lang="pt_BR">Estuary é a skin padrão para o Kodi, removendo-a pode causar problemas</disclaimer>
+		<disclaimer lang="pt_PT">O Estuary é o visual por omissão do Kodi; se o remover, poderá ter alguns problemas</disclaimer>
+		<disclaimer lang="ro_RO">Estuary este tema implicită pentru Kodi, eliminarea ei poate cauza probleme</disclaimer>
+		<disclaimer lang="ru_RU">Estuary — это стандартная обложка Kodi, и ее удаление может привести к возникновению проблем</disclaimer>
+		<disclaimer lang="sk_SK">Estuary je predvolený vzhľad pre Kodi, jeho odstránenie môže spôsobiť problémy</disclaimer>
+		<disclaimer lang="sr_RS">Estuary је подразумевана маска за Kodi, уклањање може изазвати проблеме</disclaimer>
+		<disclaimer lang="sr_RS@latin">Estuary je podrazumevana maska za Kodi, uklanjanje može izazvati probleme</disclaimer>
+		<disclaimer lang="sv_SE">Estuary är Kodis standardskal. Om du tar bort det kan det orsaka problem.</disclaimer>
+		<disclaimer lang="szl">Estuary je wychodnōm skōrōm Kodi, jij uchrōniynie może sprŏwiać niyprzileżytości</disclaimer>
+		<disclaimer lang="th_TH">Estuary เป็นหน้าตาเริ่มต้นสำหรับ Kodi, การลบมัน อาจทำให้เกิดปัญหา</disclaimer>
+		<disclaimer lang="tr_TR">Estuary Kodi için varsayılan dış görünümdür, kaldırmak sorunlara yol açabilir</disclaimer>
+		<disclaimer lang="uk_UA">Estuary — основна обкладинка Kodi, і її видалення може призвести до проблем</disclaimer>
+		<disclaimer lang="vi_VN">Estuary là giao diện mặc định cho Kodi, loại bỏ nó có thể gây ra sự cố</disclaimer>
+		<disclaimer lang="zh_CN">Estuary 是 Kodi 的默认皮肤，删除它可能导致故障。</disclaimer>
+		<disclaimer lang="zh_TW">Estuary 是 Kodi 預設的佈景主題，移除它可能會造成問題</disclaimer>
+	</extension>
+</addon><addon id="skin.estuary.blue" version="3.0.10" name="Estuary Blue" provider-name="Mosii">
+	<requires>
+		<import addon="xbmc.gui" version="5.16.0" />
+	</requires>
+	<extension point="xbmc.gui.skin" debugging="false">
+		<res width="1920" height="1440" aspect="4:3" default="false" folder="xml" />
+		<res width="1920" height="1280" aspect="3:2" default="false" folder="xml" />
+		<res width="1920" height="1200" aspect="16:10" default="false" folder="xml" />
+		<res width="2040" height="1080" aspect="17:9" default="false" folder="xml" />
+		<res width="1920" height="1080" aspect="16:9" default="true" folder="xml" />
+		<res width="2560" height="1080" aspect="21:9" default="false" folder="xml" />
+		<res width="2338" height="1080" aspect="19.5:9" default="false" folder="xml" />
+		<res width="2160" height="1080" aspect="18:9" default="false" folder="xml" />
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<license>CC BY-SA 4.0, GNU GENERAL PUBLIC LICENSE Version 2.0</license>
+		<forum>http://forum.kodi.tv/</forum>
+		<source>https://github.com/xbmc/skin.estuary/</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+			<screenshot>resources/screenshot-01.jpg</screenshot>
+			<screenshot>resources/screenshot-02.jpg</screenshot>
+			<screenshot>resources/screenshot-03.jpg</screenshot>
+			<screenshot>resources/screenshot-04.jpg</screenshot>
+			<screenshot>resources/screenshot-05.jpg</screenshot>
+			<screenshot>resources/screenshot-06.jpg</screenshot>
+			<screenshot>resources/screenshot-07.jpg</screenshot>
+			<screenshot>resources/screenshot-08.jpg</screenshot>
+		</assets>
+		<summary lang="af_ZA">Estuary oortreksel deur phil65. (Kodi se bestek oortreksel)</summary>
+		<summary lang="ar_SA">مظهر Estuary بواسطة phil65. ( مظهر كودي الافتراضي )</summary>
+		<summary lang="be_BY">Абалонка "Estuary" ад phil65. (прадвызначаная абалонка Kodi)</summary>
+		<summary lang="bg_BG">Estuary облик от phil65 и Piers. (стандартния облик на Kodi)</summary>
+		<summary lang="ca_ES">Aparença Estuary per phil65 i Piers. (aparença predeterminada de Kodi)</summary>
+		<summary lang="cs_CZ">Vzhled Estuary od autora phil65. (Výchozí vzhled Kodi)</summary>
+		<summary lang="da_DK">Estuary skin af phil65 (Kodis standard brugerflade)</summary>
+		<summary lang="de_DE">Estuary Skin von phil65. (Kodi-Standardskin)</summary>
+		<summary lang="el_GR">Το κέλυφος Estuary από τον phil65 και τον Pier. (προεπιλεγμένο κέλυφος του Kodi)</summary>
+		<summary lang="en_GB">Estuary skin by phil65. (Kodi's default skin)</summary>
+		<summary lang="en_NZ">Estuary skin by phil65 and Piers. (Kodi's default skin)</summary>
+		<summary lang="en_US">Estuary skin by phil65 and Piers. (Kodi's default skin)</summary>
+		<summary lang="es_AR">Skin Estuary por phil65 (skin por defecto de Kodi)</summary>
+		<summary lang="es_ES">Skin Estuary por phil65. (skin por defecto de Kodi)</summary>
+		<summary lang="es_MX">Máscara Estuary por phil65 y Piers. (La máscara predeterminada de Kodi)</summary>
+		<summary lang="et_EE">Estuary rüü autor on phil65. (Kodi vaikerüü)</summary>
+		<summary lang="eu_ES">Estuary azala phil65-ek egina. (Kodiren azal lehenetsia)</summary>
+		<summary lang="fa_IR">پوستهٔ اسچوری به دست phil65. (پوستهٔ پیش‌گزیدهٔ کودی)</summary>
+		<summary lang="fi_FI">Estuary-ulkoasun ovat kehittäneet phil65 ja Piers. (Kodin oletusulkoasu)</summary>
+		<summary lang="fr_CA">Habillage Estuary par phil65 et Piers (habillage par défaut de Kodi).</summary>
+		<summary lang="fr_FR">Estuary, un habillage par phil65 et Piers (habillage d'origine de Kodi)</summary>
+		<summary lang="gl_ES">Pel Estuary por phil65 and Piers. (Pel predefinida do Kodi)</summary>
+		<summary lang="he_IL">מעטפת Estuary של phil65 (ברירת המחדל של קודי)</summary>
+		<summary lang="hr_HR">Estuary presvlaka autora phil65 i Piersa. (Zadana Kodi presvlaka)</summary>
+		<summary lang="hu_HU">Estuary felszín. Készítette phil65 és Piers. (Kodi alapértelmezett felszín)</summary>
+		<summary lang="id_ID">Skin Estuary oleh phil65. (Skin default Kodi)</summary>
+		<summary lang="is_IS">Estuary-skinnið eftir phil65. (sjálfgefið útlit Kodi)</summary>
+		<summary lang="it_IT">Skin Estuary di phil65. (Skin predefinita di Kodi)</summary>
+		<summary lang="ja_JP">Estuaryスキン by phil65 and Piers (Kodi デフォルトスキン)</summary>
+		<summary lang="ko_KR">phil65가 만든 Estuary 스킨. (Kodi 기본 스킨)</summary>
+		<summary lang="lt_LT">Estuary teminė išvaizda, kurią sukūrė phil65 ir Piers. (Numatytoji Kodi teminė išvaizda)</summary>
+		<summary lang="lv_LV">Estuary apvalks no phil65. (Kodi noklusējuma apvalks)</summary>
+		<summary lang="mk_MK">Estuary skin by phil65. (Kodi's default skin)</summary>
+		<summary lang="ms_MY">Kulit Estuary oleh phil65 dan rakan-rakan. (Kulit lalai Kodi)</summary>
+		<summary lang="nb_NO">Esturay-drakt av phil65 og Piers. (Kodis forvalgte drakt)</summary>
+		<summary lang="nl_NL">Estuary skin door phil65 en Piers. (Kodi's standaardskin)</summary>
+		<summary lang="pl_PL">Skóra Eustary autorstwa phil65. (domyślna skóra Kodi)</summary>
+		<summary lang="pt_BR">Skin Estuary por phil65 e Piers. (Skin padrão do Kodi)</summary>
+		<summary lang="pt_PT">Visual Estuary de phil65 e Piers. (Visual por omissão do Kodi)</summary>
+		<summary lang="ro_RO">Tema Estuary de phil65. (Temă implicită pentru Kodi)</summary>
+		<summary lang="ru_RU">Обложка Estuary от phil65 (стандартная обложка Kodi)</summary>
+		<summary lang="sk_SK">Vzhľad Estuary, vytvorili phil65. (predvolený vzhľad pre Kodi)</summary>
+		<summary lang="sr_RS">Маска Estuary аутора phil65 и Piers. (Подразумевана Коди маска)</summary>
+		<summary lang="sr_RS@latin">Maska Estuary autora phil65 i Piers. (Podrazumevana Kodi maska)</summary>
+		<summary lang="sv_SE">Estuary, ett skal av phil65. (Kodi's standardskal)</summary>
+		<summary lang="szl">Skōra Estuary ôd phil65 i Piers. (Wychodnŏ skōra Kodi)</summary>
+		<summary lang="th_TH">สกิน Estuary โดย phil65 และ Piers (หน้าตาเริ่มต้นของKodi)</summary>
+		<summary lang="tr_TR">Estuary dış görünümü. phil65 (Kodi'nin varsayılan dış görünümü)</summary>
+		<summary lang="uk_UA">Обкладинка Estuary від phil65 і Piers. (стандартна обкладинка Kodi)</summary>
+		<summary lang="vi_VN">Giao diện Estuary của phil65. (Giao diện mặc định của Kodi)</summary>
+		<summary lang="zh_CN">phil65 开发的 Estuary 皮肤（Kodi 的默认皮肤）。</summary>
+		<summary lang="zh_TW">phil65與Piers 製作的Estuary佈景主題（Kodi的預設佈景主題）</summary>
+		<description lang="af_ZA">Estuary is die bestek oortreksel vir Kodi 17.0 en op. Dit poog om maklik te wees vir eerste keer Kodi gebruikers om te verstaan en te gebruik.</description>
+		<description lang="ar_SA">Estuary هو المظهر الافتراضي ل كودي الإصدار 17.0 و أعلى. يطمح بأن يكون سهل الاستخدام والفهم لمستخدمين كودي الجدد.</description>
+		<description lang="be_BY">Estuary - прадвызначаная абалонка для Kodi 17.0 і пазнейшых версій. Яна будзе простай і зразумелай для карыстальнікаў, якія не мелі досведу працы з Kodi.</description>
+		<description lang="bg_BG">Estuary е стандартният облик на Kodi 17 и по-новите версии. Целта е да се улеснят хората, които се сблъскват за първи път с Kodi.</description>
+		<description lang="ca_ES">Estuary és l'aparença predeterminada de Kodi 17.0 i posteriors. Per als usuaris per primera vegada de Kodi, intenta ser fàcil d'entendre i d'utilitzar.</description>
+		<description lang="cs_CZ">Estuary je výchozí vzhled pro Kodi 17.0 a vyšší. Snaží se být jednoduše pochopitelný a použitelný pro nové uživatele Kodi.</description>
+		<description lang="da_DK">Estuary er standardbrugerfladen for Kodi 17.0 og højere. Det forenkler førstegangsbrugen af Kodi ved at gøre det nemmere at forstå og bruge.</description>
+		<description lang="de_DE">Estuary ist der Standardskin für Kodi 17.0 und höher. Ziel war es, einen einfach zu bedienenden Skin für neue Kodi-Benutzer zu entwickeln.</description>
+		<description lang="el_GR">Το Estuary είναι η προεπιλεγμένη αμφίεση για τις εκδόσεις Kodi 17.0 και άνω. Επιχειρεί να είναι προσιτό στους αρχάριους χρήστες του Kodi για να το κατανοήσουν και να το χρησιμοποιήσουν.</description>
+		<description lang="en_GB">Estuary is the default skin for Kodi 17.0 and above. It attempts to be easy for first time Kodi users to understand and use.</description>
+		<description lang="en_NZ">Estuary is the default skin for Kodi 17.0 and above. It attempts to be easy for first time Kodi users to understand and use.</description>
+		<description lang="en_US">Estuary is the default skin for Kodi 17.0 and above. It attempts to be easy for first time Kodi users to understand and use.</description>
+		<description lang="es_AR">Estuary es el skin por defecto para Kodi 17.0 y posteriores. Intenta ser fácil de entender y utilizar para los usuarios Kodi primerizos.</description>
+		<description lang="es_ES">Estuary es el skin por defecto para Kodi 17.0 o superior. Su objetivo es la facilidad de comprensión y uso para usuarios primerizos de Kodi.</description>
+		<description lang="es_MX">Estuary es la máscara por defecto para Kodi 17.0 y superior. Su objetivo es ser fácil de entender y usar para los usuarios nuevos a Kodi.</description>
+		<description lang="et_EE">Estuary on Kodi vaikerüü versioonist 17.0. Kodi esmakasutajatel on rüüd kerge mõista ja kasutada.</description>
+		<description lang="eu_ES">Estuary azala kodi 17.0 eta berriagoen azal lehenetsia da. Kodiren erabiltzaile hasiberrientzako erabilerraza eta ulerterraza izaten saiatzen da.</description>
+		<description lang="fa_IR">اسچوری پوستهٔ پیش‌گزیدهٔ کودی ۱۷٫۰ و بالاتر است. این پوسته تلاش می‌کند درک و استفاده‌اش برای کاربرانی که نخستین بار با کودی کار می‌کنند، ساده باشد.</description>
+		<description lang="fi_FI">Estuary on Kodin oletusulkoasu alkaen versiosta 17.0. Sen on tarkoitus olla uusille Kodi-käyttäjille selkeä ja helppokäyttöinen.</description>
+		<description lang="fr_CA">Estuary est l’habillage par défaut pour Kodi 17.0 et ultérieure. Il s’efforce d’être facile à comprendre et à utiliser pour les utilisateurs débutants de Kodi.</description>
+		<description lang="fr_FR">Estuary est l'habillage d'origine pour Kodi 17.0 et supérieur. Il est facile à comprendre et à utiliser pour les utilisateurs novices de Kodi.</description>
+		<description lang="gl_ES">Estuary é a pel predefinida para Kodi 17.0 e superior. Esta tenta ser doada de entender e usar polos usuarios recen chegados a Kodi.</description>
+		<description lang="he_IL">Estuary היא מעטפת ברירת המחדל של קודי מגרסאות 17.0 ומעלה. מטרת מעטפת זו היא להיות פשוטה לשימוש ולהכרה ראשונית על ידי משתמשים חדשים.</description>
+		<description lang="hr_HR">Estuary je zadana presvlaka za Kodi 17.0 i novije inačice. To je pokušaj da se novim korisnicima olakša prvo korištenje i kasnija upotreba Kodija.</description>
+		<description lang="hu_HU">Az Estuary az alapértelmezett felszín a 17.0 és újabb Kodi kiadásokban. Megpróbál könnyen kezelhető és használható lenni, az újonc Kodi felhasználóknak is.</description>
+		<description lang="id_ID">Estuary adalah skin default untuk Kodi 17.0 dan di atasnya. Ini untuk mudah dipahami dan digunakan oleh pengguna Kodi yang pertama kali.</description>
+		<description lang="is_IS">Estuary er sjálfgefið skinn fyrir Kodi 17.0 og nýrri. Með því á að vera auðvelt fyrir fyrsta-skiptis Kodi-notendur að skilja og nota viðmótið.</description>
+		<description lang="it_IT">Estuary è la skin predefinita di Kodi 17.0 e successivi. Cerca di essere facile da capire e da usare per chi si avvicina per la prima volta a Kodi.</description>
+		<description lang="ja_JP">EstuaryはKodi 17.0およびそれ以上のバージョンで標準のスキンです。ユーザーが初めてKodiに触れる際にわかりやすく使えるようにしてあります。</description>
+		<description lang="ko_KR">Estuary는 Kodi 17.0이상의 기본 스킨입니다. 처음 Kodi를 접하는 사용자가 쉽게 이해하고 사용할 수 있도록 만들었습니다.</description>
+		<description lang="lt_LT">Estuary yra numatytoji Kodi 17.0 ir aukštesnių versijų teminė išvaizda. Jos tikslas yra būti lengvai perprantama naujiems Kodi vartotojams.</description>
+		<description lang="ms_MY">Estuary ialah kulit lalai untuk Kodi 17.0 dan ke atas. Kulit yang mudah digunakan buat pengguna Kodi kali pertama untuk memahami dan menggunakannya.</description>
+		<description lang="nb_NO">Estuary er forvalgt drakt til Kodi 17.0 og nyere. Det tar mål av seg å være en enkel drakt for førstegangsbrukere av Kodi, slik at det er til å forstå og kan brukes.</description>
+		<description lang="nl_NL">Estuary is de standaardskin voor Kodi 17.0 en hoger. Het tracht eenvoudig te begrijpen en te gebruiken te zijn voor beginnende Kodi-gebruikers.</description>
+		<description lang="pl_PL">Eustary jest domyślną skórą Kodi dla wersji 17.0 i późniejszych. Jest próbą łatwego wprowadzenia początkujących użytkowników w funkcje Kodi.</description>
+		<description lang="pt_BR">Estuary é a skin padrão para o Kodi 17.0 e acima. Objetiva ser fácil para usuários que iniciam no Kodi pela primeira vez, facilitando aprendizagem de uso do mesmo.</description>
+		<description lang="pt_PT">O Estuary é o visual por omissão para o Kodi 17.0 e posteriores. Tenta ser simples para os utilizadores menos experientes do Kodi compreenderem e usarem.</description>
+		<description lang="ro_RO">Estuary este tema implicită pentru Kodi 17.0 și versiunile ulterioare. Încearcă să fie ușor de înțeles și folosit pentru utilizatorii care folosesc Kodi pentru prima dată.</description>
+		<description lang="ru_RU">Estuary — это стандартная обложка Kodi, начиная с версии 17.0. Простая и понятная в использовании для новых пользователей Kodi.</description>
+		<description lang="sk_SK">Estuary je predvolený vzhľad pre Kodi 17.0 a vyššie. Je výsledkom snahy o vzhľad, ktorý bude ľahko zrozumiteľný a použiteľný pre nových používateľov Kodi.</description>
+		<description lang="sr_RS">Estuary је подразумевана маска за Kodi 17.0 и изнад. Покушава да буде једноставан за разумевање и коришћење новим корисницима Kodi-ја.</description>
+		<description lang="sr_RS@latin">Estuary je podrazumevana maska za Kodi 17.0 i iznad. Pokušava da bude jednostavan za razumevanje i korišćenje novim korisnicima Kodija.</description>
+		<description lang="sv_SE">Estuary är standardskalet för Kodi 17.0 och uppåt. Det är utformat för att vara lättförståeligt och användarvänligt för förstagångsanvändare av Kodi.</description>
+		<description lang="szl">Estuary je wychodnōm skōrōm Kodi dlŏ wersyje 17.0 i dalszych. Prōbuje być proste dlŏ używŏczōw, dlŏ kerych Kodi je nowe</description>
+		<description lang="th_TH">Estuary คือหน้าตาเริ่มต้นของ Kodi 17.0 และสูงกว่า เป็นความพยายามที่จะทำให้ง่ายสำหรับผู้ใช้ Kodi ในครั้งแรก ที่จะเข้าใจและใช้งาน</description>
+		<description lang="tr_TR">Estuary Kodi 17.0 ve yukarısı için varsayılan dış görünümdür. İlk kez Kodi kullananlar için anlaşılması ve kullanımı kolaydır.</description>
+		<description lang="uk_UA">Estuary є стандартною обкладинкою Kodi 17.0 і подальших версій. Її основна ідея — простота використання для нових користувачів Kodi.</description>
+		<description lang="vi_VN">Estuary là giao diện mặc định cho Kodi 17.0 trở lên. Nó dễ dàng cho người dùng Kodi lần đầu tiên hiểu và sử dụng.</description>
+		<description lang="zh_CN">Estuary 是 Kodi 17.0 的默认皮肤。它力求使首次使用 Kodi 的用户易于上手。</description>
+		<description lang="zh_TW">Estuary是Kodi 17.0開始搭載的預設佈景主題。主要在讓第一次使用 Kodi 的使用者可以簡單地上手。</description>
+		<disclaimer lang="af_ZA">Estuary is die bestek oortreksel vir Kodi, verwydering mag probleme veroorsaak</disclaimer>
+		<disclaimer lang="ar_SA">Estuary هو المظهر الافتراضي ل كودي, إزالته قد تسبب بعض المشاكل</disclaimer>
+		<disclaimer lang="be_BY">Estuary - прадвызначаная абалонка для Kodi. Яе выдаленне можа прывесці да праблем</disclaimer>
+		<disclaimer lang="bg_BG">Estuary е стандартният облик на Kodi. Премахването му може да предизвика проблеми</disclaimer>
+		<disclaimer lang="ca_ES">Estuary és l'aparença predeterminada de Kodi, si s'elimina pot causar problemes</disclaimer>
+		<disclaimer lang="cs_CZ">Estuary je výchozí vzhled pro Kodi, jeho odebrání může způsobit problémy</disclaimer>
+		<disclaimer lang="cy_GB">Estuary yw croen diofyn Kodi. Efallai bydd ei dynnu yn achosi problemau</disclaimer>
+		<disclaimer lang="da_DK">Estuary er standard brugerfladen. Fjernes det kan der opstå problemer.</disclaimer>
+		<disclaimer lang="de_DE">Estuary ist der Standardskin von Kodi. Ein Entfernen des Skins kann Probleme verursachen</disclaimer>
+		<disclaimer lang="el_GR">Το Estuary είναι η προεπιλεγμένη αμφίεση για το Kodi. Η αφαίρεσή του μπορεί να δημιουργήσει προβλήματα.</disclaimer>
+		<disclaimer lang="en_GB">Estuary is the default skin for Kodi, removing it may cause issues</disclaimer>
+		<disclaimer lang="en_NZ">Estuary is the default skin for Kodi, removing it may cause issues</disclaimer>
+		<disclaimer lang="en_US">Estuary is the default skin for Kodi, removing it may cause issues</disclaimer>
+		<disclaimer lang="es_AR">Estuary es el skin por defecto de Kodi. Borrarlo puede causar problemas</disclaimer>
+		<disclaimer lang="es_ES">Estuary es el skin por defecto de Kodi, quitarlo puede causar problemas</disclaimer>
+		<disclaimer lang="es_MX">Estuary es la máscara predeterminada de Kodi, eliminarla puede causar problemas</disclaimer>
+		<disclaimer lang="et_EE">Estuary on Kodi vaikerüü, selle eemaldamine võib põhjustada probleeme</disclaimer>
+		<disclaimer lang="eu_ES">Estuary Kodiren azal lehenetsia da. Ezabatzeak arazoak eragin ditzake</disclaimer>
+		<disclaimer lang="fa_IR">اسچوری پوستهٔ پیش‌گزیدهٔ کودی است. ممکن است برداشتنش موجب مشکلاتی شود</disclaimer>
+		<disclaimer lang="fi_FI">Estuary on Kodin oletusulkoasu ja sen poisto voi aiheuttaa ongelmia</disclaimer>
+		<disclaimer lang="fr_CA">Estuary est l’habillage par défaut de Kodi, le supprimer peut créer des problèmes</disclaimer>
+		<disclaimer lang="fr_FR">Estuary est l'habillage d'origine de Kodi, le retirer peut créer des problèmes</disclaimer>
+		<disclaimer lang="gl_ES">Estuary é a pel predefinida para Kodi e eliminala pode causar problemas.</disclaimer>
+		<disclaimer lang="he_IL">Estuary היא מעטפת ברירת המחדל של קודי, הסרתה עלולה לגרום לתקלות</disclaimer>
+		<disclaimer lang="hr_HR">Estuary je zadana presvlaka za Kodi, njegovo uklanjanje može uzrokovati poteškoće</disclaimer>
+		<disclaimer lang="hu_HU">Az Estuary az alapértelmezett Kodi felszín. Eltávolítása problémákat okozhat</disclaimer>
+		<disclaimer lang="id_ID">Estuary adalah skin default untuk Kodi, menghapusnya dapat menyebabkan masalah</disclaimer>
+		<disclaimer lang="is_IS">Estuary er sjálfgefið skinn fyrir Kodi, ef það er fjarlægt gætu komið upp ýmis vandamál</disclaimer>
+		<disclaimer lang="it_IT">Estuary è la skin predefinita di Kodi, rimuoverla potrebbe causare problemi</disclaimer>
+		<disclaimer lang="ja_JP">EstuaryはKodiのデフォルトスキンなので、これを削除するとうまく動かなくなる可能性があります</disclaimer>
+		<disclaimer lang="ko_KR">Estuary는 Kodi의 기본스킨으로 제거시 문제가 생길 수 있습니다</disclaimer>
+		<disclaimer lang="lt_LT">Estuary yra numatytoji Kodi teminė išvaizda, jos pašalinimas gali sukelti problemų</disclaimer>
+		<disclaimer lang="ms_MY">Estuary ialah kulit lalai Kodi, mengubahnya boleh menimbulkan isu.</disclaimer>
+		<disclaimer lang="nb_NO">Estuary er forvalgt drakt for Kodi, dersom du fjerner det kan det forårsake problemer.</disclaimer>
+		<disclaimer lang="nl_NL">Estuary is de standaardskin voor Kodi, het verwijderen van Estuary kan leiden tot problemen.</disclaimer>
+		<disclaimer lang="pl_PL">Eustary jest domyślną skórą Kodi, usunięciejej może powodować problemy</disclaimer>
+		<disclaimer lang="pt_BR">Estuary é a skin padrão para o Kodi, removendo-a pode causar problemas</disclaimer>
+		<disclaimer lang="pt_PT">O Estuary é o visual por omissão do Kodi; se o remover, poderá ter alguns problemas</disclaimer>
+		<disclaimer lang="ro_RO">Estuary este tema implicită pentru Kodi, eliminarea ei poate cauza probleme</disclaimer>
+		<disclaimer lang="ru_RU">Estuary — это стандартная обложка Kodi, и ее удаление может привести к возникновению проблем</disclaimer>
+		<disclaimer lang="sk_SK">Estuary je predvolený vzhľad pre Kodi, jeho odstránenie môže spôsobiť problémy</disclaimer>
+		<disclaimer lang="sr_RS">Estuary је подразумевана маска за Kodi, уклањање може изазвати проблеме</disclaimer>
+		<disclaimer lang="sr_RS@latin">Estuary je podrazumevana maska za Kodi, uklanjanje može izazvati probleme</disclaimer>
+		<disclaimer lang="sv_SE">Estuary är Kodis standardskal. Om du tar bort det kan det orsaka problem.</disclaimer>
+		<disclaimer lang="szl">Estuary je wychodnōm skōrōm Kodi, jij uchrōniynie może sprŏwiać niyprzileżytości</disclaimer>
+		<disclaimer lang="th_TH">Estuary เป็นหน้าตาเริ่มต้นสำหรับ Kodi, การลบมัน อาจทำให้เกิดปัญหา</disclaimer>
+		<disclaimer lang="tr_TR">Estuary Kodi için varsayılan dış görünümdür, kaldırmak sorunlara yol açabilir</disclaimer>
+		<disclaimer lang="uk_UA">Estuary — основна обкладинка Kodi, і її видалення може призвести до проблем</disclaimer>
+		<disclaimer lang="vi_VN">Estuary là giao diện mặc định cho Kodi, loại bỏ nó có thể gây ra sự cố</disclaimer>
+		<disclaimer lang="zh_CN">Estuary 是 Kodi 的默认皮肤，删除它可能导致故障。</disclaimer>
+		<disclaimer lang="zh_TW">Estuary 是 Kodi 預設的佈景主題，移除它可能會造成問題</disclaimer>
+	</extension>
+</addon><addon id="skin.myqq" version="3.0.37" name="My QQ" provider-name="Mosii">
+	<requires>
+		<import addon="xbmc.gui" version="5.16.0" />
+	</requires>
+	<extension point="xbmc.gui.skin" debugging="false">
+		<res width="1920" height="1440" aspect="4:3" default="false" folder="xml" />
+		<res width="1920" height="1280" aspect="3:2" default="false" folder="xml" />
+		<res width="1920" height="1200" aspect="16:10" default="false" folder="xml" />
+		<res width="2040" height="1080" aspect="17:9" default="false" folder="xml" />
+		<res width="1920" height="1080" aspect="16:9" default="true" folder="xml" />
+		<res width="2560" height="1080" aspect="21:9" default="false" folder="xml" />
+		<res width="2338" height="1080" aspect="19.5:9" default="false" folder="xml" />
+		<res width="2160" height="1080" aspect="18:9" default="false" folder="xml" />
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<license>CC BY-SA 4.0, GNU GENERAL PUBLIC LICENSE Version 2.0</license>
+		<forum>http://forum.kodi.tv/</forum>
+		<source>https://github.com/xbmc/skin.estuary/</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+			<screenshot>resources/screenshot-01.jpg</screenshot>
+			<screenshot>resources/screenshot-02.jpg</screenshot>
+			<screenshot>resources/screenshot-03.jpg</screenshot>
+			<screenshot>resources/screenshot-04.jpg</screenshot>
+			<screenshot>resources/screenshot-05.jpg</screenshot>
+			<screenshot>resources/screenshot-06.jpg</screenshot>
+			<screenshot>resources/screenshot-07.jpg</screenshot>
+			<screenshot>resources/screenshot-08.jpg</screenshot>
+		</assets>
+		<summary lang="en_gb">Sky Q MOD of Estuary skin by Moshii.</summary>
+		<description lang="en_gb">Sky Q skin is a MOD of Estuary to make it look so much like a popular UK TV.</description>
+	</extension>
+</addon><addon id="skin.skyq" version="2.6.5" name="Sky Q" provider-name="moshii">
+	<requires>
+		<import addon="xbmc.gui" version="5.15.0" />
+	</requires>
+	<extension point="xbmc.gui.skin" debugging="false">
+		<res width="1920" height="1440" aspect="4:3" default="false" folder="xml" />
+		<res width="1920" height="1280" aspect="3:2" default="false" folder="xml" />
+		<res width="1920" height="1200" aspect="16:10" default="false" folder="xml" />
+		<res width="1920" height="1080" aspect="16:9" default="true" folder="xml" />
+		<res width="2560" height="1080" aspect="21:9" default="false" folder="xml" />
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<license>CC BY-SA 4.0, GNU GENERAL PUBLIC LICENSE Version 2.0</license>
+		<forum>http://forum.kodi.tv/</forum>
+		<source />
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+		</assets>
+		<summary lang="en_gb">Sky Q MOD of Estuary skin by Moshii.</summary>
+		<description lang="en_gb">Sky Q skin is a MOD of Estuary to make it look so much like a popular UK TV.</description>
+	</extension>
+</addon></addons>
