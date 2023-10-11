@@ -12,8 +12,6 @@ import xbmc
 import xbmcgui
 import xbmcplugin
 
-from infotagger.listitem import ListItemInfoTag
-
 from ..abstract_provider_runner import AbstractProviderRunner
 from ...exceptions import KodionException
 from ...items import *
@@ -103,7 +101,7 @@ class XbmcRunner(AbstractProviderRunner):
 
         item = xbmcgui.ListItem(label=directory_item.get_name(), offscreen=True)
 
-        info_tag = ListItemInfoTag(item, tag_type='video')
+        info_tag = xbmc_items.ListItemInfoTag(item, tag_type='video')
 
         # only set fanart is enabled
         if directory_item.get_fanart() and self.settings.show_fanart():
