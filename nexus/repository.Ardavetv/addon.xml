@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.Ardavetv" name="Ardave TV" version="3.10.4" provider-name="omoobatv">
+<addon id="repository.Ardavetv" name="Ardave TV" version="3.10.5" provider-name="omoobatv">
     <extension point="xbmc.addon.repository" name="Ardave TV">
         <dir minversion="18.0.0" maxversion="18.9.9">
             <info compressed="false">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/leia/zips/addons.xml</info>
@@ -15,42 +15,6 @@
             <info compressed="false">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/nexus/zips/addons.xml</info>
             <checksum>https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/nexus/zips/addons.xml.md5</checksum>
             <datadir zip="true">https://raw.githubusercontent.com/omoobatv/omoobatv.github.io/master/nexus/zips/</datadir>
-        </dir>
-        <dir minversion="20.0.0">
-            <info compressed="false">https://raw.githubusercontent.com/pannal/dontpanickodi/master/nexus/zips/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/pannal/dontpanickodi/master/nexus/zips/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/pannal/dontpanickodi/master/nexus/zips/</datadir>
-        </dir>
-        <dir>
-	          <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
-	          <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
-	          <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
-        </dir>
-        <dir>
-            <info compressed="false">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zips/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zips/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zips</datadir>
-        </dir>
-        <dir>
-            <info compressed="false">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/</datadir>
-        </dir>
-       <dir>
-			    <info compressed="false">http://narcacist.com/_repo/addons.xml</info>
-			    <checksum>http://narcacist.com/_repo/addons.xml.md5</checksum>
-			    <datadir zip="true">http://narcacist.com/_repo/</datadir>
-		   </dir>
-       <dir>
-         <info compressed="false">https://magnetic.website/__zips/addons.xml</info>
-         <checksum>https://magnetic.website/__zips/addons.xml.md5</checksum>
-         <datadir zip="true">https://magnetic.website/__zips/</datadir>
-         <hashes>false</hashes>
-      </dir>
-      <dir minversion="19.0.0">
-            <info compressed="false">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/</datadir>
         </dir>
     </extension>
     <extension point="xbmc.addon.metadata">
