@@ -1,32 +1,55 @@
 # -*- coding: utf-8 -*-
 import re
 import time
-import copy
-import random
 import hashlib
+import _strptime
 import unicodedata
-import _strptime  # fix bug in python import
-from html.parser import HTMLParser
-from importlib import import_module
+from random import random
+from html import unescape
+from importlib import import_module, reload as rel_module
 from datetime import datetime, timedelta, date
-from modules.kodi_utils import local_string as ls
-from modules.settings_reader import get_setting
+from modules.settings import max_threads
+from modules.kodi_utils import sys, translate_path, sleep, Thread, activeCount, json, get_setting, local_string as ls
 # from modules.kodi_utils import logger
 
 days_translate = {'Monday': 32971, 'Tuesday': 32972, 'Wednesday': 32973, 'Thursday': 32974, 'Friday': 32975, 'Saturday': 32976, 'Sunday': 32977}
 
+def change_image_resolution(image, replace_res):
+	return re.sub(r'(w185|w300|w342|w780|w1280|h632|original|/fanart/|/preview/)', replace_res, image)
+
+def append_module_to_syspath(location):
+	sys.path.append(translate_path(location))
+
 def manual_function_import(location, function_name):
 	return getattr(import_module(location), function_name)
 
-def make_thread_list(_target, _list, _thread):
+def reload_module(location):
+	return rel_module(manual_module_import(location))
+
+def manual_module_import(location):
+	return import_module(location)
+
+def make_thread_list(_target, _list, _max_threads=None):
+	if not _max_threads: _max_threads = max_threads()
 	for item in _list:
-		threaded_object = _thread(target=_target, args=(item,))
+		while activeCount() > _max_threads: sleep(1)
+		threaded_object = Thread(target=_target, args=(item,))
 		threaded_object.start()
 		yield threaded_object
 
-def make_thread_list_enumerate(_target, _list, _thread):
-	for item_position, item in enumerate(_list):
-		threaded_object = _thread(target=_target, args=(item_position, item))
+def make_thread_list_multi_arg(_target, _list, _max_threads=None):
+	if not _max_threads: _max_threads = max_threads()
+	for item in _list:
+		while activeCount() > _max_threads: sleep(1)
+		threaded_object = Thread(target=_target, args=item)
+		threaded_object.start()
+		yield threaded_object
+
+def make_thread_list_enumerate(_target, _list, _max_threads=None):
+	if not _max_threads: _max_threads = max_threads()
+	for count, item in enumerate(_list):
+		while activeCount() > _max_threads: sleep(1)
+		threaded_object = Thread(target=_target, args=(count, item))
 		threaded_object.start()
 		yield threaded_object
 
@@ -62,6 +85,9 @@ def get_datetime(string=False, dt=False):
 	if dt: return d
 	if string: return d.strftime('%Y-%m-%d')
 	return datetime.date(d)
+
+def get_current_timestamp():
+	return int(time.time())
 	
 def adjust_premiered_date(orig_date, adjust_hours):
 	if not orig_date: return None, None
@@ -185,9 +211,16 @@ def regex_get_all(text, start_with, end_with):
 
 def replace_html_codes(txt):
 	txt = re.sub(r"(&#[0-9]+)([^;^0-9]+)", "\\1;\\2", txt)
-	txt = HTMLParser().unescape(txt)
+	txt = unescape(txt)
+	txt = txt.replace("<ul>", "\n")
+	txt = txt.replace("</ul>", "\n")
+	txt = txt.replace("<li>", "\n* ")
+	txt = txt.replace("</li>", "")
+	txt = txt.replace("<br/><br/>", "\n")
 	txt = txt.replace("&quot;", "\"")
 	txt = txt.replace("&amp;", "&")
+	txt = txt.replace("[spoiler]", "")
+	txt = txt.replace("[/spoiler]", "")
 	return txt
 
 def gen_file_hash(file):
@@ -235,21 +268,20 @@ def sort_list(sort_key, sort_direction, list_data, ignore_articles):
 	try:
 		reverse = sort_direction != 'asc'
 		if sort_key == 'rank': return sorted(list_data, key=lambda x: x['rank'], reverse=reverse)
-		elif sort_key == 'added': return sorted(list_data, key=lambda x: x['listed_at'], reverse=reverse)
-		elif sort_key == 'title': return sorted(list_data, key=lambda x: title_key(x[x['type']].get('title'), ignore_articles), reverse=reverse)
-		elif sort_key == 'released': return sorted(list_data, key=lambda x: released_key(x[x['type']]), reverse=reverse)
-		elif sort_key == 'runtime': return sorted(list_data, key=lambda x: x[x['type']].get('runtime', 0), reverse=reverse)
-		elif sort_key == 'popularity': return sorted(list_data, key=lambda x: x[x['type']].get('votes', 0), reverse=reverse)
-		elif sort_key == 'percentage': return sorted(list_data, key=lambda x: x[x['type']].get('rating', 0), reverse=reverse)
-		elif sort_key == 'votes': return sorted(list_data, key=lambda x: x[x['type']].get('votes', 0), reverse=reverse)
-		elif sort_key == 'random': return sorted(list_data, key=lambda k: random.random())
-		else: return list_data
+		if sort_key == 'added': return sorted(list_data, key=lambda x: x['listed_at'], reverse=reverse)
+		if sort_key == 'title': return sorted(list_data, key=lambda x: title_key(x[x['type']].get('title'), ignore_articles), reverse=reverse)
+		if sort_key == 'released': return sorted(list_data, key=lambda x: released_key(x[x['type']]), reverse=reverse)
+		if sort_key == 'runtime': return sorted(list_data, key=lambda x: x[x['type']].get('runtime', 0), reverse=reverse)
+		if sort_key == 'popularity': return sorted(list_data, key=lambda x: x[x['type']].get('votes', 0), reverse=reverse)
+		if sort_key == 'percentage': return sorted(list_data, key=lambda x: x[x['type']].get('rating', 0), reverse=reverse)
+		if sort_key == 'votes': return sorted(list_data, key=lambda x: x[x['type']].get('votes', 0), reverse=reverse)
+		if sort_key == 'random': return sorted(list_data, key=lambda k: random())
+		return list_data
 	except: return list_data
 
 def imdb_sort_list():
-	# From Exodus Codebase
-	sort = int(get_setting('imdb_lists.sort_type'))
-	sort_order = int(get_setting('imdb_lists.sort_direction'))
+	# From Exodus code
+	sort, sort_order = int(get_setting('fen.imdb_lists.sort_type', '0')), int(get_setting('fen.imdb_lists.sort_direction', '0'))
 	if sort == 0: imdb_sort = 'list_order' # Default
 	elif sort == 1: imdb_sort = 'alpha' # Alphabetical
 	elif sort == 2: imdb_sort = 'user_rating' # IMDb Rating
@@ -262,3 +294,54 @@ def imdb_sort_list():
 	imdb_sort_order = ',asc' if sort_order == 0 else ',desc'
 	sort_string = imdb_sort + imdb_sort_order
 	return sort_string
+
+def paginate_list(item_list, page, limit=20, paginate_start=0):
+	if paginate_start:
+		all_pages = json.dumps(list(chunks(item_list, limit)))
+		item_list = item_list[paginate_start:]
+		pages = list(chunks(item_list, limit))
+		pages.insert(0, [])
+	else:
+		pages = list(chunks(item_list, limit))
+		all_pages = json.dumps(pages)
+	all_pages = json.dumps(pages)
+	result = (pages[page - 1], all_pages, len(pages))
+	return result
+
+def download_github_zip(repo, file, destination):
+	from io import BytesIO
+	from zipfile import ZipFile
+	from modules.kodi_utils import requests, path_exists, userdata_path, translate_path
+	try:
+		url = 'https://github.com/Tikipeter/%s/raw/main/%s.zip' % (repo, file)
+		result = requests.get(url, stream=True)
+		zipfile = ZipFile(BytesIO(result.raw.read()))
+		zipfile.extractall(path=userdata_path)
+		if path_exists(destination): status = True
+		else: status = False
+	except Exception as e:
+		from modules.kodi_utils import logger
+		logger('download_github_zip error', str(e))
+		status = False
+	return status
+
+def copy2clip(txt):
+	from sys import platform
+	if platform == "win32":
+		try:
+			from subprocess import check_call
+			cmd = 'echo ' + txt.replace('&', '^&').strip() + '|clip'
+			return check_call(cmd, shell=True)
+		except: pass
+	elif platform == "darwin":
+		try:
+			from subprocess import check_call
+			cmd = 'echo ' + txt.strip() + '|pbcopy'
+			return check_call(cmd, shell=True)
+		except: pass
+	elif platform == "linux":
+		try:
+			from subprocess import Popen, PIPE
+			p = Popen(['xsel', '-pi'], stdin=PIPE)
+			p.communicate(input=txt)
+		except: pass

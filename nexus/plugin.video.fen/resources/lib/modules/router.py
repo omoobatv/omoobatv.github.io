@@ -1,315 +1,250 @@
 # -*- coding: utf-8 -*-
-from urllib.parse import parse_qsl
+from modules.kodi_utils import external, parse_qsl, get_setting
 # from modules.kodi_utils import logger
 
-def routing(argv2):
-	params = dict(parse_qsl(argv2.replace('?','')))
-	mode = params.get('mode', 'navigator.main')
+def sys_exit_check():
+	if get_setting('fen.reuse_language_invoker') == 'true' and external(): return True
+	return False
+
+def routing(sys):
+	params = dict(parse_qsl(sys.argv[2][1:], keep_blank_values=True))
+	_get = params.get
+	mode = _get('mode', 'navigator.main')
 	if 'navigator.' in mode:
 		from indexers.navigator import Navigator
-		exec('Navigator(params).%s()' % mode.split('.')[1])
-	elif 'menu_editor' in mode:
+		return exec('Navigator(params).%s()' % mode.split('.')[1])
+	if 'menu_editor.' in mode:
 		from modules.menu_editor import MenuEditor
-		exec('MenuEditor(params).%s()' % mode.split('.')[1])
-	elif 'discover.' in mode:
-		if mode in ('discover.remove_from_history', 'discover.remove_all_history'):
-			if mode == 'discover.remove_from_history':
-				from indexers.discover import remove_from_history
-				params['silent'] = False
-				remove_from_history(params)
-			elif mode == 'discover.remove_all_history':
-				from indexers.discover import remove_all_history
-				params['silent'] = True
-				remove_all_history(params)
-		else:
-			from indexers.discover import Discover
-			exec('Discover(params).%s()' % mode.split('.')[1])
-	elif 'furk.' in mode:
+		return exec('MenuEditor(params).%s()' % mode.split('.')[1])
+	if 'discover.' in mode:
+		from indexers.discover import Discover
+		return exec('Discover(params).%s()' % mode.split('.')[1])
+	if 'furk.' in mode:
 		if mode == 'furk.browse_packs':
 			from modules.sources import Sources
-			Sources().furkPacks(params['file_name'], params['file_id'], params['highlight'])
-		elif mode == 'furk.add_to_files':
+			return Sources().furkPacks(_get('file_name'), _get('file_id'))
+		if mode == 'furk.add_to_files':
 			from indexers.furk import add_to_files
-			add_to_files(params['item_id'])
-		elif mode == 'furk.remove_from_files':
+			return add_to_files(_get('item_id'))
+		if mode == 'furk.remove_from_files':
 			from indexers.furk import remove_from_files
-			remove_from_files(params['item_id'])
-		elif mode == 'furk.remove_from_downloads':
-			from indexers.furk import remove_from_downloads
-			remove_from_downloads(params['item_id'])
-		elif mode == 'furk.remove_from_files':
-			from indexers.furk import add_uncached_file
-			add_uncached_file(params['id'])
-		elif mode == 'furk.myfiles_protect_unprotect':
+			return remove_from_files(_get('item_id'))
+		if mode == 'furk.myfiles_protect_unprotect':
 			from indexers.furk import myfiles_protect_unprotect
-			myfiles_protect_unprotect(params['action'], params['name'], params['item_id'])
-		else:
-			from modules.utils import manual_function_import
-			function = manual_function_import('indexers.furk', mode.split('.')[-1])
-			function(params)
-	elif 'easynews.' in mode:
-		from modules.utils import manual_function_import
-		function = manual_function_import('indexers.easynews', mode.split('.')[-1])
-		function(params)
-	elif '_play' in mode or 'play_' in mode:
-		if mode == 'play_media':
+			return myfiles_protect_unprotect(_get('action'), _get('name'), _get('item_id'))
+		from indexers import furk
+		return exec('furk.%s(params)' % mode.split('.')[1])
+	if 'easynews.' in mode:
+		from indexers import easynews
+		return exec('easynews.%s(params)' % mode.split('.')[1])
+	if 'playback.' in mode:
+		if mode == 'playback.media':
 			from modules.sources import Sources
-			if 'params' in params:
-				import json
-				params = json.loads(params['params'])
-			Sources().playback_prep(params)
-		elif mode == 'play_display_results':
-			from modules.sources import Sources
-			Sources().display_results()
-		elif mode == 'play_file':
-			from modules.sources import Sources
-			Sources().play_file(params['title'], params['source'])
-		elif mode == 'media_play':
+			return Sources().playback_prep(params)
+		if mode == 'playback.video':
 			from modules.player import FenPlayer
-			FenPlayer().run(params.get('url', None), params.get('media_type', None))
-	elif 'choice' in mode:
+			return FenPlayer().run(_get('url', None), _get('obj', None))
+	if 'choice' in mode:
 		from indexers import dialogs
-		if mode == 'scraper_color_choice':
-			dialogs.scraper_color_choice(params['setting'])
-		elif mode == 'scraper_dialog_color_choice':
-			dialogs.scraper_dialog_color_choice(params['setting'])
-		elif mode == 'scraper_quality_color_choice':
-			dialogs.scraper_quality_color_choice(params['setting'])
-		elif mode == 'imdb_images_choice':
-			dialogs.imdb_images_choice(params['imdb_id'], params['rootname'])
-		elif mode == 'set_quality_choice':
-			dialogs.set_quality_choice(params['quality_setting'])
-		elif mode == 'results_sorting_choice':
-			dialogs.results_sorting_choice()
-		elif mode == 'results_layout_choice':
-			dialogs.results_layout_choice()
-		elif mode == 'options_menu_choice':
-			dialogs.options_menu(params)
-		elif mode == 'meta_language_choice':
-			dialogs.meta_language_choice()
-		elif mode == 'extras_menu_choice':
-			dialogs.extras_menu(params)
-		elif mode == 'enable_scrapers_choice':
-			dialogs.enable_scrapers_choice()
-		elif mode == 'favorites_choice':
-			dialogs.favorites_choice(params)
-		elif mode == 'trakt_manager_choice':
-			dialogs.trakt_manager_choice(params)
-		elif mode == 'folder_scraper_manager_choice':
-			dialogs.folder_scraper_manager_choice()
-		elif mode == 'set_language_filter_choice':
-			dialogs.set_language_filter_choice(params['filter_setting'])
-		elif mode == 'media_extra_info_choice':
-			dialogs.media_extra_info(params['media_type'], params['meta'])
-		elif mode == 'extras_lists_choice':
-			dialogs.extras_lists_choice()
-		elif mode == 'random_choice':
-			dialogs.random_choice(params['tmdb_id'], params['poster'])
-	elif 'trakt.' in mode or 'trakt_' in mode:
-		if 'trakt.list' in mode:
-			from modules.utils import manual_function_import
-			function = manual_function_import('indexers.trakt_lists', mode.split('.')[-1])
-			function(params)
-		elif 'trakt.' in mode:
-			from modules.utils import manual_function_import
-			function = manual_function_import('apis.trakt_api', mode.split('.')[-1])
-			function(params)
-		else:
-			from apis.trakt_api import hide_unhide_trakt_items
-			hide_unhide_trakt_items(params['action'], params['media_type'], params['media_id'], params['section'])
-	elif 'build' in mode:
+		return exec('dialogs.%s(params)' % mode)
+	if 'trakt.' in mode:
+		if '.list' in mode:
+			from indexers import trakt_lists
+			return exec('trakt_lists.%s(params)' % mode.split('.')[2])
+		from apis import trakt_api
+		return exec('trakt_api.%s(params)' % mode.split('.')[1])
+	if 'build' in mode:
 		if mode == 'build_movie_list':
 			from indexers.movies import Movies
-			Movies(params).fetch_list()
-		elif mode == 'build_tvshow_list':
+			return Movies(params).fetch_list()
+		if mode == 'build_tvshow_list':
 			from indexers.tvshows import TVShows
-			TVShows(params).fetch_list()
-		elif mode == 'build_season_list':
+			return TVShows(params).fetch_list()
+		if mode == 'build_season_list':
 			from indexers.seasons import build_season_list
-			build_season_list(params)
-		elif mode == 'build_episode_list':
+			return build_season_list(params)
+		if mode == 'build_episode_list':
 			from indexers.episodes import build_episode_list
-			build_episode_list(params)
-		elif mode == 'build_next_episode':
-			from modules.mixed_episodes import build_next_episode
-			build_next_episode()
-		elif mode == 'build_in_progress_episode':
-			from modules.mixed_episodes import build_in_progress_episode
-			build_in_progress_episode()
-		elif mode == 'build_my_calendar':
-			from modules.mixed_episodes import build_my_calendar
-			build_my_calendar(params)
-		elif mode == 'build_navigate_to_page':
-			from modules.nav_utils import build_navigate_to_page
-			build_navigate_to_page(params)
-		elif mode == 'build_next_episode_manager':
-			from modules.next_episode_tools import build_next_episode_manager
-			build_next_episode_manager()
-		elif mode == 'imdb_build_user_lists':
+			return build_episode_list(params)
+		if mode == 'build_in_progress_episode':
+			from indexers.episodes import build_single_episode
+			return build_single_episode('episode.progress', params)
+		if mode == 'build_recently_watched_episode':
+			from indexers.episodes import build_single_episode
+			return build_single_episode('episode.recently_watched', params)
+		if mode == 'build_next_episode':
+			from indexers.episodes import build_single_episode
+			return build_single_episode('episode.next', params)
+		if mode == 'build_my_calendar':
+			from indexers.episodes import build_single_episode
+			return build_single_episode('episode.trakt', params)
+		if mode == 'build_next_episode_manager':
+			from modules.episode_tools import build_next_episode_manager
+			return build_next_episode_manager()
+		if mode == 'imdb_build_user_lists':
 			from indexers.imdb import imdb_build_user_lists
-			imdb_build_user_lists(params.get('media_type'))
-		elif mode == 'build_popular_people':
+			return imdb_build_user_lists(params)
+		if mode == 'build_popular_people':
 			from indexers.people import popular_people
-			popular_people()
-		elif mode == 'imdb_build_keyword_results':
+			return popular_people()
+		if mode == 'imdb_build_keyword_results':
 			from indexers.imdb import imdb_build_keyword_results
-			imdb_build_keyword_results(params['media_type'], params['query'])
-	elif 'favourites' in mode:
-		from modules.favourites import Favourites
-		exec('Favourites(params).%s()' % mode)
-	elif 'watched_unwatched' in mode:
-		if mode == 'mark_as_watched_unwatched_episode':
-			from modules.watched_status import mark_as_watched_unwatched_episode
-			mark_as_watched_unwatched_episode(params)
-		elif mode == 'mark_as_watched_unwatched_season':
-			from modules.watched_status import mark_as_watched_unwatched_season
-			mark_as_watched_unwatched_season(params)
-		elif mode == 'mark_as_watched_unwatched_tvshow':
-			from modules.watched_status import mark_as_watched_unwatched_tvshow
-			mark_as_watched_unwatched_tvshow(params)
-		elif mode == 'mark_as_watched_unwatched_movie':
-			from modules.watched_status import mark_as_watched_unwatched_movie
-			mark_as_watched_unwatched_movie(params)
-		elif mode == 'watched_unwatched_erase_bookmark':
+			return imdb_build_keyword_results(params)
+	if 'watched_status.' in mode:
+		if mode == 'watched_status.mark_episode':
+			from modules.watched_status import mark_episode
+			return mark_episode(params)
+		if mode == 'watched_status.mark_season':
+			from modules.watched_status import mark_season
+			return mark_season(params)
+		if mode == 'watched_status.mark_tvshow':
+			from modules.watched_status import mark_tvshow
+			return mark_tvshow(params)
+		if mode == 'watched_status.mark_movie':
+			from modules.watched_status import mark_movie
+			return mark_movie(params)
+		if mode == 'watched_status.erase_bookmark':
 			from modules.watched_status import erase_bookmark
-			erase_bookmark(params.get('media_type'), params.get('tmdb_id'), params.get('season', ''), params.get('episode', ''), params.get('refresh', 'false'))
-	elif 'myaccounts' in mode:
-		action = mode.split('.')[1]
-		if action == 'open':
-			from modules.nav_utils import open_MyAccounts
-			open_MyAccounts(params)
-		else:
-			from modules.nav_utils import sync_MyAccounts
-			sync_MyAccounts()
-	elif 'toggle' in mode:
-		if mode == 'toggle_jump_to':
-			from modules.nav_utils import toggle_jump_to
-			toggle_jump_to()
-		elif mode == 'toggle_provider':
-			from modules.utils import toggle_provider
-			toggle_provider()
-		elif mode == 'toggle_language_invoker':
-			from modules.nav_utils import toggle_language_invoker
-			toggle_language_invoker()
-	elif 'history' in mode:
-		if mode == 'search_history':
+			return erase_bookmark(_get('media_type'), _get('tmdb_id'), _get('season', ''), _get('episode', ''), _get('refresh', 'false'))
+	if 'history.' in mode:
+		if mode == 'history.search':
 			from indexers.history import search_history
-			search_history(params)
-		elif mode == 'clear_search_history':
+			return search_history(params)
+		if mode == 'history.clear_search':
 			from modules.history import clear_search_history
-			clear_search_history()
-		elif mode == 'remove_from_history':
+			return clear_search_history()
+		if mode == 'history.remove':
 			from modules.history import remove_from_search_history
-			remove_from_search_history(params)
-	elif 'real_debrid' in mode:
+			return remove_from_search_history(params)
+		if mode == 'history.clear_all':
+			from modules.history import clear_all_history
+			return clear_all_history(_get('setting_id'), _get('refresh', 'false'))
+	if 'real_debrid' in mode:
 		if mode == 'real_debrid.rd_torrent_cloud':
 			from indexers.real_debrid import rd_torrent_cloud
-			rd_torrent_cloud()
+			return rd_torrent_cloud()
 		if mode == 'real_debrid.rd_downloads':
 			from indexers.real_debrid import rd_downloads
-			rd_downloads()
-		elif mode == 'real_debrid.browse_rd_cloud':
+			return rd_downloads()
+		if mode == 'real_debrid.browse_rd_cloud':
 			from indexers.real_debrid import browse_rd_cloud
-			browse_rd_cloud(params['id'])
-		elif mode == 'real_debrid.resolve_rd':
+			return browse_rd_cloud(_get('id'))
+		if mode == 'real_debrid.resolve_rd':
 			from indexers.real_debrid import resolve_rd
-			resolve_rd(params)
-		elif mode == 'real_debrid.rd_account_info':
+			return resolve_rd(params)
+		if mode == 'real_debrid.rd_account_info':
 			from indexers.real_debrid import rd_account_info
-			rd_account_info()
-		elif mode == 'real_debrid.delete':
-			from indexers.real_debrid import rd_delete
-			rd_delete(params.get('id'), params.get('cache_type'))
-		elif mode == 'real_debrid.delete_download_link':
-			from indexers.real_debrid import delete_download_link
-			delete_download_link(params['download_id'])
-	elif 'premiumize' in mode:
+			return rd_account_info()
+		if mode == 'real_debrid.authenticate':
+			from apis.real_debrid_api import RealDebridAPI
+			return RealDebridAPI().auth()
+		if mode == 'real_debrid.revoke_authentication':
+			from apis.real_debrid_api import RealDebridAPI
+			return RealDebridAPI().revoke()
+	if 'premiumize' in mode:
 		if mode == 'premiumize.pm_torrent_cloud':
 			from indexers.premiumize import pm_torrent_cloud
-			pm_torrent_cloud(params.get('id', None), params.get('folder_name', None))
-		elif mode == 'premiumize.pm_transfers':
+			return pm_torrent_cloud(_get('id', None), _get('folder_name', None))
+		if mode == 'premiumize.pm_transfers':
 			from indexers.premiumize import pm_transfers
-			pm_transfers()
-		elif mode == 'premiumize.pm_account_info':
+			return pm_transfers()
+		if mode == 'premiumize.pm_account_info':
 			from indexers.premiumize import pm_account_info
-			pm_account_info()
-		elif mode == 'premiumize.rename':
-			from indexers.premiumize import pm_rename
-			pm_rename(params.get('file_type'), params.get('id'), params.get('name'))
-		elif mode == 'premiumize.delete':
-			from indexers.premiumize import pm_delete
-			pm_delete(params.get('file_type'), params.get('id'))
-	elif 'alldebrid' in mode:
+			return pm_account_info()
+		if mode == 'premiumize.authenticate':
+			from apis.premiumize_api import PremiumizeAPI
+			return PremiumizeAPI().auth()
+		if mode == 'premiumize.revoke_authentication':
+			from apis.premiumize_api import PremiumizeAPI
+			return PremiumizeAPI().revoke()
+	if 'alldebrid' in mode:
 		if mode == 'alldebrid.ad_torrent_cloud':
 			from indexers.alldebrid import ad_torrent_cloud
-			ad_torrent_cloud(params.get('id', None))
-		elif mode == 'alldebrid.browse_ad_cloud':
+			return ad_torrent_cloud(_get('id', None))
+		if mode == 'alldebrid.browse_ad_cloud':
 			from indexers.alldebrid import browse_ad_cloud
-			browse_ad_cloud(params['folder'])
-		elif mode == 'alldebrid.resolve_ad':
+			return browse_ad_cloud(_get('folder'))
+		if mode == 'alldebrid.resolve_ad':
 			from indexers.alldebrid import resolve_ad
-			resolve_ad(params)
-		elif mode == 'alldebrid.ad_account_info':
+			return resolve_ad(params)
+		if mode == 'alldebrid.ad_account_info':
 			from indexers.alldebrid import ad_account_info
-			ad_account_info()
-	elif '_settings' in mode:
-		if mode == 'open_settings':
-			from modules.nav_utils import open_settings
-			open_settings(params.get('query'))
-		elif mode == 'clean_settings':
-			from modules.nav_utils import clean_settings
-			clean_settings()
-		elif mode == 'erase_all_settings':
-			from modules.nav_utils import erase_all_settings
-			erase_all_settings()
-		elif mode == 'external_settings':
-			from modules.nav_utils import open_settings
-			open_settings(params.get('query', '0.0'), params.get('ext_addon'))
-		elif mode == 'clear_settings_window_properties':
-			from modules.kodi_utils import clear_settings_window_properties
-			clear_settings_window_properties()
-	elif '_cache' in mode:
-		from modules import nav_utils
+			return ad_account_info()
+		if mode == 'alldebrid.authenticate':
+			from apis.alldebrid_api import AllDebridAPI
+			return AllDebridAPI().auth()
+		if mode == 'alldebrid.revoke_authentication':
+			from apis.alldebrid_api import AllDebridAPI
+			return AllDebridAPI().revoke()
+	if '_cache' in mode:
+		from caches import base_cache
 		if mode == 'clear_cache':
-			nav_utils.clear_cache(params.get('cache'))
-		elif mode == 'clear_all_cache':
-			nav_utils.clear_all_cache()
-	elif '_image' in mode:
+			return base_cache.clear_cache(_get('cache'))
+		if mode == 'clear_all_cache':
+			return base_cache.clear_all_cache()
+		if mode == 'clean_databases_cache':
+			return base_cache.clean_databases()
+		if mode == 'check_corrupt_databases_cache':
+			return base_cache.check_corrupt_databases()
+	if '_image' in mode:
 		from indexers.images import Images
-		Images().run(params)
-	elif '_text' in mode:
+		return Images().run(params)
+	if '_text' in mode:
 		if mode == 'show_text':
 			from modules.kodi_utils import show_text
-			show_text(params.get('heading'), params.get('text', None), params.get('file', None),
-								params.get('font_size', 'small'), params.get('kodi_log', 'false') == 'true')
-		elif mode == 'show_text_media':
+			return show_text(_get('heading'), _get('text', None), _get('file', None), _get('font_size', 'small'), _get('kodi_log', 'false') == 'true')
+		if mode == 'show_text_media':
 			from modules.kodi_utils import show_text_media
-			show_text(params.get('heading'), params.get('text', None), params.get('file', None), params.get('meta'), {})
-	elif '_view' in mode:
+			return show_text(_get('heading'), _get('text', None), _get('file', None), _get('meta'), {})
+	if '_view' in mode:
 		from modules import kodi_utils
 		if mode == 'choose_view':
-			kodi_utils.choose_view(params['view_type'], params.get('content', ''))
-		elif mode == 'set_view':
-			kodi_utils.set_view(params['view_type'])
+			return kodi_utils.choose_view(_get('view_type'), _get('content', ''))
+		if mode == 'set_view':
+			return kodi_utils.set_view(_get('view_type'))
+	if 'settings_manager.' in mode:
+		from modules import settings_manager
+		return exec('settings_manager.%s(params)' % mode.split('.')[1])
 	##EXTRA modes##
-	elif mode == 'get_search_term':
+	if mode == 'person_direct.search':
+		from indexers.people import person_direct_search
+		return person_direct_search(_get('query'))
+	if mode == 'restart_services':
+		from modules.kodi_utils import restart_services
+		return restart_services()
+	if mode == 'kodi_refresh':
+		from modules.kodi_utils import kodi_refresh
+		return kodi_refresh()
+	if mode == 'get_search_term':
 		from modules.history import get_search_term
-		get_search_term(params)
-	elif 'person_data_dialog' in mode:
+		return get_search_term(params)
+	if mode == 'person_data_dialog':
 		from indexers.people import person_data_dialog
-		person_data_dialog(params)
-	elif mode == 'downloader':
-		from modules.downloader import runner
-		runner(params)
-	elif mode == 'clean_databases':
-		from caches import clean_databases
-		clean_databases()
-	elif mode == 'manual_add_magnet_to_cloud':
+		return person_data_dialog(params)
+	if mode == 'download_manager':
+		from modules.downloader import download_manager
+		return download_manager(params)
+	if mode == 'manual_add_magnet_to_cloud':
 		from modules.debrid import manual_add_magnet_to_cloud
-		manual_add_magnet_to_cloud(params)
-	elif mode == 'debrid.browse_packs':
+		return manual_add_magnet_to_cloud(params)
+	if mode == 'upload_logfile':
+		from modules.kodi_utils import upload_logfile
+		return upload_logfile(params)
+	if mode == 'toggle_language_invoker':
+		from modules.kodi_utils import toggle_language_invoker
+		return toggle_language_invoker()
+	if mode == 'downloader':
+		from modules.downloader import runner
+		return runner(params)
+	if mode == 'debrid.browse_packs':
 		from modules.sources import Sources
-		Sources().debridPacks(params['provider'], params['name'], params['magnet_url'], params['info_hash'], params['highlight'])
-	elif mode == 'upload_logfile':
-		from modules.nav_utils import upload_logfile
-		upload_logfile()
+		return Sources().debridPacks(_get('provider'), _get('name'), _get('magnet_url'), _get('info_hash'))
+	if mode == 'open_settings':
+		from modules.kodi_utils import open_settings
+		return open_settings(_get('query', '0.0'), _get('addon', 'plugin.video.fen'))
+	if mode == 'hide_unhide_progress_items':
+		from modules.watched_status import hide_unhide_progress_items
+		return hide_unhide_progress_items(params)
+	if mode == 'update_check':
+		from modules.updater import update_check
+		return update_check()

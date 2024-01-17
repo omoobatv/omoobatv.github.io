@@ -1,40 +1,24 @@
 # -*- coding: utf-8 -*-
 import re
-import json
-from sys import exit as sysexit
+import time
 from caches.main_cache import cache_object
-from modules.requests_utils import make_session
-from modules.kodi_utils import sleep, confirm_dialog, ok_dialog, monitor, progressDialog, dialog, urlencode, local_string as ls
-from modules.settings_reader import get_setting, set_setting
-# from modules.kodi_utils import logger
+from modules import kodi_utils
+from modules.utils import copy2clip
+# logger = kodi_utils.logger
 
+ls, notification, get_setting, set_setting, requests = kodi_utils.local_string, kodi_utils.notification, kodi_utils.get_setting, kodi_utils.set_setting, kodi_utils.requests
+monitor, progress_dialog, dialog, urlencode, get_icon = kodi_utils.monitor, kodi_utils.progress_dialog, kodi_utils.dialog, kodi_utils.urlencode, kodi_utils.get_icon
+set_temp_highlight, restore_highlight, manage_settings_reset = kodi_utils.set_temp_highlight, kodi_utils.restore_highlight, kodi_utils.manage_settings_reset
+json, sleep, confirm_dialog, ok_dialog, Thread = kodi_utils.json, kodi_utils.sleep, kodi_utils.confirm_dialog, kodi_utils.ok_dialog, kodi_utils.Thread
 base_url = 'https://www.premiumize.me/api/'
 timeout = 20.0
-session = make_session(base_url)
+icon = get_icon('premiumize')
 
 class PremiumizeAPI:
 	def __init__(self):
 		self.client_id = '663882072'
 		self.user_agent = 'Fen for Kodi'
-		self.token = get_setting('pm.token')
-
-	def auth_loop(self):
-		if progressDialog.iscanceled():
-			progressDialog.close()
-			return
-		sleep(5000)
-		url = 'https://www.premiumize.me/token'
-		data = {'grant_type': 'device_code', 'client_id': self.client_id, 'code': self.device_code}
-		response = self._post(url, data)
-		if 'error' in response:
-			return
-		try:
-			progressDialog.close()
-			self.token = str(response['access_token'])
-			set_setting('pm.token', self.token)
-		except:
-			 ok_dialog(text=32574, top_space=True)
-		return
+		self.token = get_setting('fen.pm.token')
 
 	def auth(self):
 		self.token = ''
@@ -42,15 +26,52 @@ class PremiumizeAPI:
 		data = {'response_type': 'device_code', 'client_id': self.client_id}
 		url = 'https://www.premiumize.me/token'
 		response = self._post(url, data)
-		progressDialog.create('Fen', '')
-		progressDialog.update(-1, line % (ls(32517), ls(32700) % response.get('verification_uri'), ls(32701) % response.get('user_code')))
-		self.device_code = response['device_code']
-		while self.token == '':
-			self.auth_loop()
-		if self.token is None: return
-		account_info = self.account_info()
-		set_setting('pm.account_id', str(account_info['customer_id']))
-		ok_dialog(text=32576, top_space=True)
+		user_code = response['user_code']
+		try: copy2clip(user_code)
+		except: pass
+		content = line % (ls(32517), ls(32700) % response.get('verification_uri'), ls(32701) % '[COLOR orangered]%s[/COLOR]' % user_code)
+		current_highlight = set_temp_highlight('orangered')
+		progressDialog = progress_dialog('%s %s' % (ls(32061), ls(32057)), get_icon('pm_qrcode'))
+		progressDialog.update(content, 0)
+		device_code = response['device_code']
+		expires_in = int(response['expires_in'])
+		sleep_interval = int(response['interval'])
+		poll_url = 'https://www.premiumize.me/token'
+		data = {'grant_type': 'device_code', 'client_id': self.client_id, 'code': device_code}
+		start, time_passed = time.time(), 0
+		while not progressDialog.iscanceled() and time_passed < expires_in and not self.token:
+			sleep(1000 * sleep_interval)
+			response = self._post(poll_url, data)
+			if 'error' in response:
+				time_passed = time.time() - start
+				progress = int(100 * time_passed/float(expires_in))
+				progressDialog.update(content, progress)
+				continue
+			try:
+				progressDialog.close()
+				self.token = str(response['access_token'])
+				set_setting('pm.token', self.token)
+			except:
+				 ok_dialog(text=32574)
+				 break
+		try: progressDialog.close()
+		except: pass
+		restore_highlight(current_highlight)
+		if self.token:
+			manage_settings_reset()
+			account_info = self.account_info()
+			set_setting('pm.account_id', str(account_info['customer_id']))
+			set_setting('pm.enabled', 'true')
+			ok_dialog(text=32576)
+			manage_settings_reset(True)
+
+	def revoke(self):
+		manage_settings_reset()
+		set_setting('pm.token', '')
+		set_setting('pm.account_id', '')
+		set_setting('pm.enabled', 'false')
+		notification('Premiumize Authorization Reset', 3000)
+		manage_settings_reset(True)
 
 	def account_info(self):
 		url = 'account/info'
@@ -67,12 +88,6 @@ class PremiumizeAPI:
 		cache_info = self.check_cache(hash_string)['response']
 		return cache_info[0]
 
-	def zip_folder(self, folder_id):
-		url = 'zip/generate'
-		data = {'folders[]': folder_id}
-		response = self._post(url, data)
-		return response
-
 	def unrestrict_link(self, link):
 		data = {'src': link}
 		url = 'transfer/directdl'
@@ -81,13 +96,12 @@ class PremiumizeAPI:
 		except: return None
 
 	def resolve_magnet(self, magnet_url, info_hash, store_to_cloud, title, season, episode):
-		from modules.source_utils import supported_video_extensions, seas_ep_filter, extras_filter
+		from modules.source_utils import supported_video_extensions, seas_ep_filter, EXTRAS
 		try:
 			file_url = None
 			correct_files = []
 			append = correct_files.append
 			extensions = supported_video_extensions()
-			extras_filtering_list = extras_filter()
 			result = self.instant_transfer(magnet_url)
 			if not 'status' in result or result['status'] != 'success': return None
 			valid_results = [i for i in result.get('content') if any(i.get('path').lower().endswith(x) for x in extensions) and not i.get('link', '') == '']
@@ -100,30 +114,16 @@ class PremiumizeAPI:
 					for i in correct_files:
 						compare_link = seas_ep_filter(season, episode, i['path'], split=True)
 						compare_link = re.sub(episode_title, '', compare_link)
-						if not any(x in compare_link for x in extras_filtering_list):
+						if not any(x in compare_link for x in EXTRAS):
 							file_url = i['link']
 							break
 			else:
 				file_url = max(valid_results, key=lambda x: int(x.get('size'))).get('link', None)
 				if not any(file_url.lower().endswith(x) for x in extensions): file_url = None
 			if file_url:
-				if store_to_cloud: self.create_transfer(magnet_url)
+				if store_to_cloud: Thread(target=self.create_transfer, args=(magnet_url,)).start()
 				return self.add_headers_to_url(file_url)
 		except: return None
-
-	def download_link_magnet_zip(self, magnet_url, info_hash):
-		try:
-			result = self.create_transfer(magnet_url)
-			if not 'status' in result or result['status'] != 'success': return None
-			transfer_id = result['id']
-			transfers = self.transfers_list()['transfers']
-			folder_id = [i['folder_id'] for i in transfers if i['id'] == transfer_id][0]
-			result = self.zip_folder(folder_id)
-			if result['status'] == 'success':
-				return result['location']
-			else: return None
-		except:
-			pass
 
 	def display_magnet_pack(self, magnet_url, info_hash):
 		from modules.source_utils import supported_video_extensions
@@ -159,7 +159,7 @@ class PremiumizeAPI:
 			hide_busy_dialog()
 			sleep(500)
 			if cancelled:
-				if confirm_dialog(heading=32733, text=32044, top_space=True): ok_dialog(heading=32733, text=ls(32732) % ls(32061))
+				if confirm_dialog(heading=32733, text=32044): ok_dialog(heading=32733, text=ls(32732) % ls(32061))
 				else: self.delete_transfer(transfer_id)
 			else: ok_dialog(heading=32733, text=message)
 			return False
@@ -172,7 +172,7 @@ class PremiumizeAPI:
 		transfer_info = _transfer_info(transfer_id)
 		if not transfer_info: return _return_failed()
 		if pack:
-			self.clear_cache()
+			self.clear_cache(clear_hashes=False)
 			hide_busy_dialog()
 			ok_dialog(text=ls(32732) % ls(32061))
 			return True
@@ -181,13 +181,14 @@ class PremiumizeAPI:
 		line1 = '%s...' % (ls(32732) % ls(32061))
 		line2 = transfer_info['name']
 		line3 = transfer_info['message']
-		progressDialog.create(ls(32733), line % (line1, line2, line3))
+		progressDialog = progress_dialog(ls(32733), icon)
+		progressDialog.update(line % (line1, line2, line3), 0)
 		while not transfer_info['status'] == 'seeding':
 			sleep(1000 * interval)
 			transfer_info = _transfer_info(transfer_id)
 			line3 = transfer_info['message']
-			progressDialog.update(int(float(transfer_info['progress']) * 100), line % (line1, line2, line3))
-			if monitor.abortRequested() == True: return sysexit()
+			progressDialog.update(line % (line1, line2, line3), int(float(transfer_info['progress']) * 100))
+			if monitor.abortRequested() == True: return
 			try:
 				if progressDialog.iscanceled():
 					return _return_failed(ls(32736), cancelled=True)
@@ -225,13 +226,6 @@ class PremiumizeAPI:
 		url = 'transfer/directdl'
 		data = {'src': magnet_url}
 		return self._post(url, data)
-
-	def rename_cache_item(self, file_type, file_id, new_name):
-		if file_type == 'folder': url = 'folder/rename'
-		else: url = 'item/rename'
-		data = {'id': file_id , 'name': new_name}
-		response = self._post(url, data)
-		return response['status']
 
 	def create_transfer(self, magnet):
 		data = {'src': magnet, 'folder_id': 0}
@@ -280,7 +274,7 @@ class PremiumizeAPI:
 		if self.token == '': return None
 		headers = {'User-Agent': self.user_agent, 'Authorization': 'Bearer %s' % self.token}
 		url = base_url + url
-		response = session.get(url, data=data, headers=headers, timeout=timeout).text
+		response = requests.get(url, data=data, headers=headers, timeout=timeout).text
 		try: return json.loads(response)
 		except: return response
 
@@ -288,16 +282,11 @@ class PremiumizeAPI:
 		if self.token == '' and not 'token' in url: return None
 		headers = {'User-Agent': self.user_agent, 'Authorization': 'Bearer %s' % self.token}
 		if not 'token' in url: url = base_url + url
-		response = session.post(url, data=data, headers=headers, timeout=timeout).text
+		response = requests.post(url, data=data, headers=headers, timeout=timeout).text
 		try: return json.loads(response)
 		except: return response
 
-	def revoke_auth(self):
-		set_setting('pm.account_id', '')
-		set_setting('pm.token', '')
-		ok_dialog(heading=32061, text='%s %s' % (ls(32059), ls(32576)))
-
-	def clear_cache(self):
+	def clear_cache(self, clear_hashes=True):
 		try:
 			from modules.kodi_utils import clear_property, path_exists, database, maincache_db
 			if not path_exists(maincache_db): return True
@@ -336,10 +325,12 @@ class PremiumizeAPI:
 				hoster_links_success = True
 			except: hoster_links_success = False
 			# HASH CACHED STATUS
-			try:
-				debrid_cache.clear_debrid_results('pm')
-				hash_cache_status_success = True
-			except: hash_cache_status_success = False
+			if clear_hashes:
+				try:
+					debrid_cache.clear_debrid_results('pm')
+					hash_cache_status_success = True
+				except: hash_cache_status_success = False
+			else: hash_cache_status_success = True
 		except: return False
 		if False in (user_cloud_success, download_links_success, hoster_links_success, hash_cache_status_success): return False
 		return True

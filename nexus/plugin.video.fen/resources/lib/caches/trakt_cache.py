@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from modules.kodi_utils import sleep, confirm_dialog, close_all_dialog, trakt_db, database
+from modules.kodi_utils import sleep, confirm_dialog, close_all_dialog, trakt_db, database, Thread
 # from modules.kodi_utils import logger
 
-timeout = 60
 SELECT = 'SELECT id FROM trakt_data'
 DELETE = 'DELETE FROM trakt_data WHERE id=?'
 DELETE_LIKE = 'DELETE FROM trakt_data WHERE id LIKE "%s"'
@@ -14,6 +13,7 @@ BASE_DELETE = 'DELETE FROM %s'
 TC_BASE_GET = 'SELECT data FROM trakt_data WHERE id = ?'
 TC_BASE_SET = 'INSERT OR REPLACE INTO trakt_data (id, data) VALUES (?, ?)'
 TC_BASE_DELETE = 'DELETE FROM trakt_data WHERE id = ?'
+timeout = 60
 
 class TraktWatched:
 	def __init__(self):
@@ -101,7 +101,7 @@ def reset_activity(latest_activities):
 	try:
 		dbcon = _cache.connect_database()
 		dbcur = _cache.set_PRAGMAS(dbcon)
-		dbcur.execute('SELECT data FROM trakt_data WHERE id=?', (string,))
+		dbcur.execute(TC_BASE_GET, (string,))
 		cached_data = dbcur.fetchone()
 		if cached_data: cached_data = eval(cached_data[0])
 		else: cached_data = default_activities()
@@ -122,6 +122,7 @@ def clear_trakt_collection_watchlist_data(list_type, media_type):
 	if media_type == 'movies': media_type = 'movie' 
 	if media_type in ('tvshows', 'shows'): media_type = 'tvshow' 
 	string = 'trakt_%s_%s' % (list_type, media_type)
+	if media_type == 'movie': clear_trakt_movie_sets()
 	try:
 		dbcon = _cache.connect_database()
 		dbcur = _cache.set_PRAGMAS(dbcon)
@@ -159,6 +160,14 @@ def clear_trakt_recommendations(media_type):
 		dbcur.execute(DELETE, (string,))
 	except: pass
 
+def clear_trakt_movie_sets():
+	string = 'trakt_movie_sets'
+	try:
+		dbcon = _cache.connect_database()
+		dbcur = _cache.set_PRAGMAS(dbcon)
+		dbcur.execute(DELETE, (string,))
+	except: pass
+
 def clear_all_trakt_cache_data(silent=False, refresh=True):
 	try:
 		start = silent or confirm_dialog()
@@ -168,7 +177,6 @@ def clear_all_trakt_cache_data(silent=False, refresh=True):
 		for table in ('trakt_data', 'progress', 'watched_status'): dbcur.execute(BASE_DELETE % table)
 		dbcur.execute('VACUUM')
 		if refresh:
-			from threading import Thread
 			from apis.trakt_api import trakt_sync_activities
 			Thread(target=trakt_sync_activities).start()
 		return True

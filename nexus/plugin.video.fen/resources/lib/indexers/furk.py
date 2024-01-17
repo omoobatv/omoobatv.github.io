@@ -1,177 +1,128 @@
-import json
-from sys import argv
-from datetime import timedelta
-from urllib.parse import unquote
+# -*- coding: utf-8 -*-
 from apis.furk_api import FurkAPI
-from caches.main_cache import main_cache
 from modules import kodi_utils
 from modules.utils import clean_file_name
-# from modules.kodi_utils import logger
+# logger = kodi_utils.logger
 
-EXPIRES_1_HOUR = timedelta(hours=1)
-ls = kodi_utils.local_string
-build_url = kodi_utils.build_url
-make_listitem = kodi_utils.make_listitem
-default_furk_icon = kodi_utils.translate_path('special://home/addons/script.tikiart/resources/media/furk.png')
-fanart = kodi_utils.translate_path('special://home/addons/plugin.video.fen/fanart.png')
+add_items, set_content, show_text, unquote = kodi_utils.add_items, kodi_utils.set_content, kodi_utils.show_text, kodi_utils.unquote
+show_busy_dialog, hide_busy_dialog, set_view_mode, end_directory = kodi_utils.show_busy_dialog, kodi_utils.hide_busy_dialog, kodi_utils.set_view_mode, kodi_utils.end_directory
+confirm_dialog, notification, kodi_refresh = kodi_utils.confirm_dialog, kodi_utils.notification, kodi_utils.kodi_refresh
+ls, sys, build_url, make_listitem = kodi_utils.local_string, kodi_utils.sys, kodi_utils.build_url, kodi_utils.make_listitem
+furk_icon, fanart = kodi_utils.get_icon('furk'), kodi_utils.addon_fanart
+remove_str, prot_str, unprot_str, speed_str, files_str = ls(32766), ls(32767), ls(32768), ls(32775), ls(32493).upper()
+down_str, add_str = '[B]%s[/B]' % ls(32747), '[B]%s[/B]' % ls(32769)
 Furk = FurkAPI()
-formats = ('.3gp', ''),('.aac', ''),('.flac', ''),('.m4a', ''),('.mp3', ''),('.ogg', ''),('.raw', ''),('.wav', ''),('.wma', ''),('.webm', ''),('.ra', ''),('.rm', '')
+
+def search_furk(params):
+	handle = int(sys.argv[1])
+	query = clean_file_name(unquote(params.get('query')))
+	try:
+		search_method = 'search' if 'accurate_search' in params else 'direct_search'
+		files = Furk.direct_search(query) if search_method == 'direct_search' else Furk.search(query)
+		files = [i for i in files if int(i.get('files_num_video', '0')) > 0 and 'url_dl' in i]
+		furk_folder_browser(files, 'search', handle)
+	except: pass
+	set_content(handle, 'files')
+	end_directory(handle, False)
+	set_view_mode('view.premium')
 
 def my_furk_files(params):
-	__handle__ = int(argv[1])
+	handle = int(sys.argv[1])
 	try:
-		files = eval('Furk.%s()' % params.get('list_type'))
-		if params.get('list_type') in ('file_get_active', 'file_get_failed'): torrent_status_browser(files) 
-		else: furk_file_browser(files, params, 'file_browse', __handle__)
+		files = Furk.file_get_video()
+		furk_folder_browser(files, 'file_browse', handle)
 	except: pass
-	kodi_utils.set_content(__handle__, 'files')
-	kodi_utils.end_directory(__handle__)
-	kodi_utils.set_view_mode('view.premium')
+	set_content(handle, 'files')
+	end_directory(handle)
+	set_view_mode('view.premium')
 
-def torrent_status_browser(files):
+def furk_folder_browser(files, display_mode, handle):
 	def _builder():
 		for count, item in enumerate(files, 1):
 			try:
-				display = '%02d | %s | [COLOR=grey][I]%s | %sGB | %s %% | %s: %s kB/s | (S:%s P:%s)[/I][/COLOR]' \
-							% (count, item['name'].replace('magnet:', '').upper(), item['dl_status'].upper(), str(round(float(item['size'])/1048576000, 1)),
-								item['have'], ls(32775), str(round(float(item['speed'])/1024, 1)), item['seeders'], item['peers'])
-				url_params = {'mode': 'furk.remove_from_downloads', 'item_id': item['id']}
-				url = build_url(url_params)
+				item_get = item.get
+				cm = []
+				cm_append = cm.append
+				name, size, info_hash = clean_file_name(item_get('name')).upper(), item_get('size'), item_get('info_hash')
+				item_id, url_dl, files_num_video, is_protected = item_get('id'), item_get('url_dl'), item_get('files_num_video'), item_get('is_protected')
+				try: thumb = [i for i in item_get('ss_urls', []) if i][0]
+				except: thumb = furk_icon
+				display_size = str(round(float(size)/1048576000, 1))
+				duration = int(int(item['duration'])/60.0)
+				header, footer = ('[COLOR=green]', '[/COLOR]') if is_protected == '1' else ('', '')
+				display = '%02d %s| [B]%sGB | %s %s | %sMINS | %s[/B][I]%s[/I]' % (count, header, display_size, files_num_video, files_str, duration, footer, name)
+				download_archive = build_url({'mode': 'downloader', 'name': name, 'url': url_dl, 'action': 'archive', 'image': furk_icon})
+				add_to_files = build_url({'mode': 'furk.add_to_files', 'item_id': item_id})
+				remove_files = build_url({'mode': 'furk.remove_from_files', 'item_id': item_id})
+				url = build_url({'mode': 'furk.furk_t_file_browser', 'name': name, 'url': url_dl, 'item_id': item_id})
+				cm_append((down_str, 'RunPlugin(%s)' % download_archive))
+				if display_mode == 'search': cm_append((add_str,'RunPlugin(%s)' % add_to_files))
+				else: cm_append((remove_str, 'RunPlugin(%s)' % remove_files))
+				if is_protected == '0':
+					cm_append((prot_str, 'RunPlugin(%s)' % build_url({'mode': 'furk.myfiles_protect_unprotect', 'action': 'protect', 'name': name, 'item_id': item_id})))
+				elif is_protected == '1':
+					cm_append((unprot_str, 'RunPlugin(%s)' % build_url({'mode': 'furk.myfiles_protect_unprotect', 'action': 'unprotect', 'name': name, 'item_id': item_id})))
 				listitem = make_listitem()
 				listitem.setLabel(display)
-				listitem.setArt({'icon': default_furk_icon, 'poster': default_furk_icon, 'thumb': default_furk_icon, 'fanart': fanart, 'banner': default_furk_icon})
+				listitem.addContextMenuItems(cm)
+				listitem.setArt({'icon': thumb, 'poster': thumb, 'thumb': thumb, 'fanart': fanart, 'banner': furk_icon})
+				info_tag = listitem.getVideoInfoTag()
+				info_tag.setMediaType('video')
+				info_tag.setPlot(' ')
+				listitem.setProperty('fen.context_main_menu_params', build_url({'mode': 'menu_editor.edit_menu_external', 'name': name, 'iconImage': furk_icon,
+									'action': 'archive', 'display_mode': display_mode, 'is_protected': is_protected}))
 				yield (url, listitem, True)
 			except: pass
-	kodi_utils.add_items(__handle__, list(_builder()))
-	main_cache.set('furk_active_downloads', [i['info_hash'] for i in files], expiration=EXPIRES_1_HOUR)
+	add_items(handle, list(_builder()))
 
-def search_furk(params):
-	__handle__ = int(argv[1])
-	search_name = clean_file_name(unquote(params.get('query')))
-	try:
-		search_method = 'search' if 'accurate_search' in params else 'direct_search'
-		files = Furk.direct_search(search_name) if search_method == 'direct_search' else Furk.search(search_name)
-		files = [i for i in files if i.get('is_ready', '0') == '1' and i['type'] == 'video']
-		furk_file_browser(files, params, 'search', __handle__)
-	except: pass
-	kodi_utils.set_content(__handle__, 'files')
-	kodi_utils.end_directory(__handle__)
-	kodi_utils.set_view_mode('view.premium')
-
-def furk_tfile_video(params):
+def furk_t_file_browser(params):
 	def _builder():
 		for count, item in enumerate(t_files, 1):
 			try:
 				cm = []
-				url_params = {'mode': 'media_play', 'url': item['url_dl'], 'media_type': 'video'}
+				url_params = {'mode': 'playback.video', 'url': item['url_dl'], 'obj': 'video'}
 				url = build_url(url_params)
 				name = clean_file_name(item['name']).upper()
-				height = int(item['height'])
-				if 1200 < height > 2100: display_res = '4K'
-				elif 1000 < height < 1200: display_res = '1080P'
-				elif 680 < height < 1000: display_res = '720P'
+				width = int(item.get('width', 0))
+				if width > 1920: display_res = '4K'
+				elif 1280 < width <= 1920: display_res = '1080P'
+				elif 720 < width <= 1280: display_res = '720P'
 				else: display_res = 'SD'
-				display_name = '%02d | [B]%s[/B] | [B]%.2f GB[/B] | %smbps | [I]%s[/I]' % \
-				(count, display_res, float(item['size'])/1048576000, str(round(float(item['bitrate'])/1000, 2)), name)
+				display_name = '%02d | [B]%s[/B] | [B]%.2fGB | %sMINS | [/B][I]%s[/I]' % (count, display_res, float(item['size'])/1048576000, int(int(item['length'])/60.0), name)
 				listitem = make_listitem()
 				listitem.setLabel(display_name)
-				down_file_params = {'mode': 'downloader', 'name': item['name'], 'url': item['url_dl'], 'action': 'cloud.furk_direct', 'image': default_furk_icon}
-				cm.append((ls(32747),'RunPlugin(%s)' % build_url(down_file_params)))
+				down_file_params = {'mode': 'downloader', 'name': item['name'], 'url': item['url_dl'], 'action': 'cloud.furk_direct', 'image': furk_icon}
+				cm.append((down_str, 'RunPlugin(%s)' % build_url(down_file_params)))
 				listitem.addContextMenuItems(cm)
-				listitem.setArt({'icon': default_furk_icon, 'poster': default_furk_icon, 'thumb': default_furk_icon, 'fanart': fanart, 'banner': default_furk_icon})
+				listitem.setArt({'icon': furk_icon, 'poster': furk_icon, 'thumb': furk_icon, 'fanart': fanart, 'banner': furk_icon})
+				info_tag = listitem.getVideoInfoTag()
+				info_tag.setMediaType('video')
+				info_tag.setPlot(' ')
+				listitem.setProperty('fen.context_main_menu_params', build_url({'mode': 'menu_editor.edit_menu_external', 'name': name, 'iconImage': furk_icon,
+									'action': 'cloud.furk_direct'}))
 				yield (url, listitem, False)
 			except: pass
-	__handle__ = int(argv[1])
+	handle = int(sys.argv[1])
 	t_files = [i for i in Furk.t_files(params.get('item_id')) if 'video' in i['ct'] and 'bitrate' in i]
-	kodi_utils.add_items(__handle__, list(_builder()))
-	kodi_utils.set_content(__handle__, 'files')
-	kodi_utils.end_directory(__handle__)
-	kodi_utils.set_view_mode('view.premium')
-
-def furk_file_browser(files, params, display_mode, __handle__):
-	def _builder():
-		for count, item in enumerate(files, 1):
-			try:
-				uncached = True if not 'url_dl' in item else False
-				if uncached:
-					active_downloads = get_active_downloads()
-					mode = 'furk.add_uncached_file'
-					if item['info_hash'] in active_downloads: info = '%02d | [COLOR=green][B]%s[/B][/COLOR] |' % (count, active_str)
-					else: info = '%02d | [COLOR=red][B]%s[/B][/COLOR] |' % (count, uncached_str)
-				else: mode = 'furk.furk_tfile_video'
-				name = clean_file_name(item['name']).upper()
-				item_id = item['id'] if not uncached else item['info_hash']
-				url_dl = item['url_dl'] if not uncached else item['info_hash']
-				size = item['size']
-				if not uncached:
-					is_protected = item.get('is_protected')
-					display_size = str(round(float(size)/1048576000, 1))
-					info_unprotected = '[B] %s GB | %s %s | [/B]' % (display_size, item['files_num_video'], files_str)
-					info_protected = '[COLOR=green]%s[/COLOR]' % info_unprotected
-					info_search = '%02d | [B]%s GB[/B] | [B]%s %s[/B] |' % (count, display_size, item['files_num_video'], files_str)
-					info = info_search if display_mode == 'search' else info_protected if is_protected == '1' else info_unprotected if is_protected == '0' else None
-				display = '%s [I] %s [/I]' % (info, name)
-				url_params = {'mode': mode, 'name': name, 'item_id': item_id}
-				url = build_url(url_params)
-				cm = []
-				cm_append = cm.append
-				if not uncached:
-					con_download_archive = {'mode': 'downloader', 'name': item.get('name'), 'url': url_dl, 'action': 'archive', 'image': default_furk_icon}
-					con_remove_files = {'mode': 'furk.remove_from_files', 'item_id': item_id}
-					con_protect_files = {'mode': 'furk.myfiles_protect_unprotect', 'action': 'protect', 'name': name, 'item_id': item_id}
-					con_unprotect_files = {'mode': 'furk.myfiles_protect_unprotect', 'action': 'unprotect', 'name': name, 'item_id': item_id}
-					con_add_to_files = {'mode': 'furk.add_to_files', 'item_id': item_id}
-					if display_mode == 'search': cm_append((add_str,'RunPlugin(%s)' % build_url(con_add_to_files)))
-					cm_append((down_str,'RunPlugin(%s)' % build_url(con_download_archive)))
-					cm_append((remove_str,'RunPlugin(%s)' % build_url(con_remove_files)))
-					if is_protected == '0': cm_append((prot_str,'RunPlugin(%s)' % build_url(con_protect_files)))
-					elif is_protected == '1': cm_append((unprot_str,'RunPlugin(%s)' % build_url(con_unprotect_files)))
-				listitem = make_listitem()
-				listitem.setLabel(display)
-				listitem.addContextMenuItems(cm)
-				listitem.setArt({'icon': default_furk_icon, 'poster': default_furk_icon, 'thumb': default_furk_icon, 'fanart': fanart, 'banner': default_furk_icon})
-				yield (url, listitem, True)
-			except: pass
-	active_str, uncached_str, files_str, down_str, add_str = ls(32489).upper(), ls(32765).upper(), ls(32493).upper(), ls(32747), ls(32769)
-	remove_str, prot_str, unprot_str = ls(32766), ls(32767), ls(32768)
-	kodi_utils.add_items(__handle__, list(_builder()))
-
-def t_file_browser(item_id, filtering_list=None, source=None):
-	t_files = [i for i in Furk.t_files(item_id) if 'video' in i['ct']]
-	name, url_dl, size = filter_furk_tlist(t_files, filtering_list)
-	return [{'name': name, 'url_dl': url_dl, 'size': size}]
-
-def filter_furk_tlist(t_files, filtering_list=None):
-	from modules.utils import clean_title, normalize
-	t_files = [i for i in t_files if 'video' in i['ct'] and any(x in clean_title(normalize(i['name'])) for x in filtering_list) \
-				and not any(x in i['name'].lower() for x in ['furk320', 'sample'])][0] if filtering_list else [i for i in t_files if 'is_largest' in i][0]
-	return t_files['name'], t_files['url_dl'], t_files['size']
+	add_items(handle, list(_builder()))
+	set_content(handle, 'files')
+	end_directory(handle, False)
+	set_view_mode('view.premium')
 
 def add_to_files(item_id):
-	if not kodi_utils.confirm_dialog(text=32580, top_space=True): return
+	if not confirm_dialog(text=32580): return
 	response = Furk.file_link(item_id)
-	if Furk.check_status(response): kodi_utils.notification(32576, 3500)
-	else: kodi_utils.notification(32574, 3500)
+	if Furk.check_status(response): notification(32576, 3500)
+	else: notification(32574, 3500)
 	return (None, None)
 
 def remove_from_files(item_id):
-	if not kodi_utils.confirm_dialog(): return
+	if not confirm_dialog(): return
 	response = Furk.file_unlink(item_id)
 	if Furk.check_status(response):
-		kodi_utils.notification(32576, 3500)
-		kodi_utils.execute_builtin('Container.Refresh')
-	else:
-		kodi_utils.notification(32574, 3500)
-	return (None, None)
-
-def remove_from_downloads(item_id):
-	if not kodi_utils.confirm_dialog(): return
-	response = Furk.download_unlink(item_id)
-	if Furk.check_status(response):
-		main_cache.set('furk_active_downloads', None, expiration=EXPIRES_1_HOUR)
-		kodi_utils.notification(32576, 3500)
-	else:
-		kodi_utils.notification(32574, 3500)
+		notification(32576, 3500)
+		kodi_refresh()
+	else: notification(32574, 3500)
 	return (None, None)
 
 def myfiles_protect_unprotect(action, name, item_id):
@@ -179,35 +130,27 @@ def myfiles_protect_unprotect(action, name, item_id):
 	try:
 		response = Furk.file_protect(item_id, is_protected)
 		if Furk.check_status(response):
-			kodi_utils.execute_builtin('Container.Refresh')
-			return kodi_utils.notification(32576)
-		else:
-			kodi_utils.notification(32574)
+			kodi_refresh()
+			return notification(32576)
+		else: notification(32574)
 	except: return
 
-def get_active_downloads():
-	cache = main_cache.get('furk_active_downloads')
-	if cache != None: result = cache
+def resolve_furk(item_id, media_type, season, episode):
+	from modules.source_utils import seas_ep_filter
+	from modules.utils import clean_title, normalize
+	url = None
+	t_files = [i for i in Furk.t_files(item_id) if 'video' in i['ct'] and not any(x in i['name'].lower() for x in ('furk320', 'sample'))]
+	if media_type == 'movie':
+		try: url = [i['url_dl'] for i in t_files if 'is_largest' in i][0]
+		except: pass
 	else:
-		active_downloads = Furk.file_get_active()
-		result = [i['info_hash'] for i in active_downloads]
-		main_cache.set('furk_active_downloads', result, expiration=EXPIRES_1_HOUR)
-	return result
-
-def add_uncached_file(item_id):
-	if not kodi_utils.confirm_dialog(): return
-	try:
-		response = Furk.add_uncached(item_id)
-		if Furk.check_status(response):
-			main_cache.set('furk_active_downloads', None, expiration=EXPIRES_1_HOUR)
-			return kodi_utils.ok_dialog(text=32576, top_space=True)
-		elif response['status'] == 'error':
-			return kodi_utils.ok_dialog(text=32574, top_space=True)
-	except: return
+		try: url = [i['url_dl'] for i in t_files if seas_ep_filter(season, episode, normalize(i['name']))][0]
+		except: pass
+	return url
 
 def account_info(params):
 	try:
-		kodi_utils.show_busy_dialog()
+		show_busy_dialog()
 		accinfo = Furk.account_info()
 		account_type = accinfo['premium']['name']
 		month_time_left = float(accinfo['premium']['bw_month_time_left'])/60/60/24
@@ -237,8 +180,13 @@ def account_info(params):
 			append('[B]        - %s' % ls(32751) % str(round(total_time_left, 0)))
 			if is_not_last_month == '1': append('        - %s' % ls(32773) % renewal_date)
 			else: append('        - %s' % ls(32774) % renewal_date)
-		kodi_utils.hide_busy_dialog()
-		return kodi_utils.show_text(heading, '\n\n'.join(body), font_size='large')
-	except: kodi_utils.hide_busy_dialog()
+		hide_busy_dialog()
+		return show_text(heading, '\n\n'.join(body), font_size='large')
+	except: hide_busy_dialog()
 
-
+def active_days():
+	try:
+		accinfo = Furk.account_info()
+		days_remaining = int(accinfo['premium']['time_left'])/60/60/24
+	except: days_remaining = 0
+	return days_remaining

@@ -1,27 +1,21 @@
 # -*- coding: utf-8 -*-
 from caches.main_cache import cache_object
 from modules.utils import remove_accents
-from modules.settings_reader import get_setting, set_setting
-from modules.requests_utils import make_session
+from modules.kodi_utils import make_session, clear_property, maincache_db, database, get_setting, set_setting
 # from modules.kodi_utils import logger
 
-base_url = 'https://www.furk.net/api/'
+base_url = 'http://www.furk.net/api/'
 login_url = 'login/login?login=%s&pwd=%s'
 file_get_video_url = 'file/get?api_key=%s&type=video'
 file_link_url = 'file/link?api_key=%s&id=%s'
 file_unlink_url = 'file/unlink?api_key=%s&id=%s'
 file_protect_url = 'file/protect?api_key=%s&id=%s&is_protected=%s'
 tfile_url = 'file/get?api_key=%s&t_files=1&id=%s'
-add_uncached_url = 'dl/add?api_key=%s&info_hash=%s'
-active_dl_url = 'dl/get?api_key=%s&dl_status=active'
-failed_dl_url = 'dl/get?api_key=%s&dl_status=failed'
-remove_dl_url = 'dl/unlink?api_key=%s&id=%s'
 account_info_url = 'account/info?api_key=%s'
-search_url = 'plugins/metasearch?api_key=%s&q=%s&cached=all' \
-						'&match=%s&moderated=%s%s&sort=relevance&type=video&offset=0&limit=200'
+search_url = 'plugins/metasearch?api_key=%s&q=%s&cached=yes' \
+						'&match=%s&moderated=0%s&sort=relevance&type=video&offset=0&limit=200'
 search_direct_url = 'plugins/metasearch?api_key=%s&q=%s&cached=all' \
-						'&sort=cached&type=video&offset=0&limit=200'
-mod_settings = {'0': 'no', '1': 'yes', '2': 'full'}
+						'&sort=cached&type=video&offset=0&limit=700'
 timeout = 20.0
 session = make_session(base_url)
 
@@ -34,27 +28,24 @@ class FurkAPI:
 		return result.get('status', 'not_ok') == 'ok'
 
 	def get_api(self):
-		api_key = get_setting('furk_api_key')
+		api_key = get_setting('fen.furk_api_key', '')
 		if not api_key:
 			try:
-				user_name, user_pass = get_setting('furk_login'), get_setting('furk_password')
+				user_name, user_pass = get_setting('fen.furk_login'), get_setting('fen.furk_password')
 				if not user_name or not user_pass: return
 				url = base_url + login_url % (user_name, user_pass)
 				result = session.post(url, timeout=timeout)
-				result = p.json()
+				result = result.json()
 				if self.check_status(result):
-					from modules.kodi_utils import addon
 					api_key = result['api_key']
 					set_setting('furk_api_key', api_key)
-					addon('script.module.myaccounts').setSetting('furk.api.key', api_key)
 			except: pass
 		return api_key
 
 	def search(self, query, expiration=48):
 		try:
-			if '@files' in query: search_in, mod_level = '', 'no'
-			else: search_in, mod_level = '&attrs=name', mod_settings[get_setting('furk.mod.level', '0')]
-			url = base_url + search_url % (self.api_key, query, 'extended', mod_level, search_in)
+			search_in = '' if '@files' in query else '&attrs=name'
+			url = base_url + search_url % (self.api_key, query, 'extended', search_in)
 			string = 'fen_FURK_SEARCH_%s' % url
 			return cache_object(self._process_files, string, url, json=False, expiration=expiration)
 		except: return
@@ -79,19 +70,6 @@ class FurkAPI:
 			return self._get(url)['files']
 		except: return
 
-	def file_get_active(self):
-		try:
-			url = base_url + active_dl_url % self.api_key
-			return self._get(url)['torrents']
-		except: return
-
-	def file_get_failed(self):
-		try:
-			url = base_url + failed_dl_url % self.api_key
-			return self._get(url)['torrents']
-			return files
-		except: return
-
 	def file_link(self, item_id):
 		try:
 			url = base_url + file_link_url % (self.api_key, item_id)
@@ -104,21 +82,9 @@ class FurkAPI:
 			return self._get(url)
 		except: return
 
-	def download_unlink(self, item_id):
-		try:
-			url = base_url + remove_dl_url % (self.api_key, item_id)
-			return self._get(url)
-		except: return
-
 	def file_protect(self, item_id, is_protected):
 		try:
 			url = base_url + file_protect_url % (self.api_key, item_id, is_protected)
-			return self._get(url)
-		except: return
-
-	def add_uncached(self, item_id):
-		try:
-			url = base_url + add_uncached_url % (self.api_key, item_id)
 			return self._get(url)
 		except: return
 
@@ -131,6 +97,7 @@ class FurkAPI:
 	def _process_files(self, url):
 		result = self._get(url)
 		if not self.check_status(result): return None
+		if not 'files' in result: return []
 		return result['files']
 
 	def _process_tfiles(self, url):
@@ -139,11 +106,13 @@ class FurkAPI:
 		return result['files'][0]['t_files']
 
 	def _get(self, url):
-		result = session.get(url, timeout=timeout)
-		return result.json()
+		try:
+			result = session.get(url, timeout=timeout)
+			return result.json()
+		except: return None
 
 def clear_media_results_database():
-	from modules.kodi_utils import clear_property, maincache_db, database
+	results = []
 	dbcon = database.connect(maincache_db, timeout=40.0, isolation_level=None)
 	dbcur = dbcon.cursor()
 	dbcur.execute('''PRAGMA synchronous = OFF''')
@@ -151,8 +120,17 @@ def clear_media_results_database():
 	dbcur.execute("SELECT id FROM maincache WHERE id LIKE 'fen_FURK_SEARCH_%'")
 	try:
 		furk_results = [str(i[0]) for i in dbcur.fetchall()]
-		if not furk_results: return 'success'
+		if not furk_results: results.append('success')
 		dbcur.execute("DELETE FROM maincache WHERE id LIKE 'fen_FURK_SEARCH_%'")
 		for i in furk_results: clear_property(i)
-		return 'success'
-	except: return 'failed'
+		results.append('success')
+	except: results.append('failed')
+	dbcur.execute("SELECT id FROM maincache WHERE id LIKE 'fen_FURK_SEARCH_DIRECT_%'")
+	try:
+		furk_results = [str(i[0]) for i in dbcur.fetchall()]
+		if not furk_results: results.append('success')
+		dbcur.execute("DELETE FROM maincache WHERE id LIKE 'fen_FURK_SEARCH_DIRECT_%'")
+		for i in furk_results: clear_property(i)
+		results.append('success')
+	except: results.append('failed')
+	return 'failed' if 'failed' in results else 'success'

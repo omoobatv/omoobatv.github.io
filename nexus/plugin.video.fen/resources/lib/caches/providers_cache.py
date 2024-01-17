@@ -4,12 +4,12 @@ from datetime import datetime, timedelta
 from modules.kodi_utils import confirm_dialog, path_exists, database, external_db
 # from modules.kodi_utils import logger
 
-timeout = 240
 SELECT_RESULTS = 'SELECT results, expires FROM results_data WHERE provider = ? AND db_type = ? AND tmdb_id = ? AND title = ? AND year = ? AND season = ? AND episode = ?'
 DELETE_RESULTS = 'DELETE FROM results_data WHERE provider = ? AND db_type = ? AND tmdb_id = ? AND title = ? AND year = ? AND season = ? AND episode = ?'
 INSERT_RESULTS = 'INSERT OR REPLACE INTO results_data VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
 SINGLE_DELETE = 'DELETE FROM results_data WHERE db_type=? AND tmdb_id=?'
 FULL_DELETE = 'DELETE FROM results_data'
+timeout = 240
 
 class ExternalProvidersCache(object):
 	def __init__(self):
@@ -32,7 +32,7 @@ class ExternalProvidersCache(object):
 		try:
 			expiration = timedelta(hours=expire_time)
 			expires = self._get_timestamp(self.time + expiration)
-			self._execute(INSERT_RESULTS, (source, media_type, tmdb_id, title, year, season, episode, repr(results), int(expires)))
+			self._execute(INSERT_RESULTS, (source, media_type, tmdb_id, title, year, season, episode, repr(results or []), int(expires)))
 		except: pass
 
 	def delete(self, source, media_type, tmdb_id, title, season, episode):

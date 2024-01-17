@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from windows import BaseDialog
+from windows.base_window import BaseDialog
 # from modules.kodi_utils import logger
 
 class TextViewer(BaseDialog):
 	def __init__(self, *args, **kwargs):
-		BaseDialog.__init__(self, args)
+		BaseDialog.__init__(self, *args)
 		self.heading = kwargs.get('heading')
 		self.text = kwargs.get('text')
 		self.font_size = kwargs.get('font_size')
@@ -23,6 +23,6 @@ class TextViewer(BaseDialog):
 			self.close()
 
 	def set_properties(self):
-		self.setProperty('tikiskins.text', self.text)
-		self.setProperty('tikiskins.heading', self.heading)
-		self.setProperty('tikiskins.font_size', self.font_size)
+		self.setProperty('text', self.text)
+		self.setProperty('heading', self.heading)
+		self.setProperty('font_size', self.font_size)

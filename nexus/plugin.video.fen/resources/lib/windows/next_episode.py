@@ -1,86 +1,85 @@
 # -*- coding: utf-8 -*-
-from threading import Thread
-from windows import BaseDialog
-from modules.kodi_utils import translate_path
-from modules.settings import get_art_provider
+import time
+from windows.base_window import BaseDialog
+from modules.settings import get_art_provider, avoid_episode_spoilers
 # from modules.kodi_utils import logger
 
-click_actions = {10: 'close', 11: 'play', 12: 'cancel'}
-confirm_actions = {10: True, 11: False}
-
-backup_poster = translate_path('special://home/addons/script.tikiart/resources/media/box_office.png')
+pause_time_before_end, hold_pause_time = 10, 900
+button_actions = {'autoplay_nextep': {10: 'close', 11: 'play', 12: 'cancel'}, 'autoscrape_nextep': {10: 'play', 11: 'close', 12: 'cancel'}}
 
 class NextEpisode(BaseDialog):
 	def __init__(self, *args, **kwargs):
-		BaseDialog.__init__(self, args)
+		BaseDialog.__init__(self, *args)
 		self.closed = False
 		self.meta = kwargs.get('meta')
-		self.function = kwargs.get('function', 'next_ep')# or 'confirm'
-		if self.function == 'next_ep':
-			self.actions = click_actions
-			self.selected = 'close'
-		else:
-			self.actions = confirm_actions
-			self.selected = False
+		self.selected = kwargs.get('default_action', 'cancel')
+		self.play_type = kwargs.get('play_type', 'autoplay_nextep')
+		self.focus_button = kwargs.get('focus_button', 10)
+		self.poster_main, self.poster_backup, self.fanart_main, self.fanart_backup, self.clearlogo_main, self.clearlogo_backup = get_art_provider()
 		self.set_properties()
 
 	def onInit(self):
+		self.setFocusId(self.focus_button)
 		self.monitor()
 
 	def run(self):
 		self.doModal()
 		self.clearProperties()
+		self.clear_modals()
 		return self.selected
 
 	def onAction(self, action):
 		if action in self.closing_actions:
+			self.selected = 'close'
 			self.closed = True
 			self.close()
 
 	def onClick(self, controlID):
+		self.selected = button_actions[self.play_type][controlID]
 		self.closed = True
-		self.selected = self.actions[controlID]
 		self.close()
 
 	def set_properties(self):
-		self.poster_main, self.poster_backup, self.fanart_main, self.fanart_backup = get_art_provider()
-		self.setProperty('tikiskins.title', self.meta['title'])
-		self.setProperty('tikiskins.poster', self.original_poster())
-		self.setProperty('tikiskins.fanart', self.original_fanart())
-		self.setProperty('tikiskins.nextep_function', self.function)
-		if self.function == 'next_ep':
-			self.setProperty('tikiskins.next_episode', '[B]%s - %02dx%02d[/B] - %s' % (self.meta['title'], self.meta['season'], self.meta['episode'], self.meta['ep_name']))
-		else:
-			self.setProperty('tikiskins.title', self.meta['title'])
+		self.setProperty('play_type', self.play_type)
+		self.setProperty('title', self.meta['title'])
+		self.setProperty('thumb', self.get_thumb())
+		self.setProperty('clearlogo', self.original_clearlogo())
+		self.setProperty('next_ep_title', self.meta['title'])
+		self.setProperty('next_ep_season', '%02d' % self.meta['season'])
+		self.setProperty('next_ep_episode', '%02d' % self.meta['episode'])
+		self.setProperty('next_ep_ep_name', self.meta['ep_name'])
 
-	def original_poster(self):
-		self.poster = self.meta.get(self.poster_main) or self.meta.get(self.poster_backup) or backup_poster
-		return self.poster
+	def get_thumb(self):
+		if avoid_episode_spoilers(): thumb = self.original_fanart()
+		else: thumb = self.meta.get('ep_thumb', None) or self.original_fanart()
+		return thumb
 
 	def original_fanart(self):
-		self.fanart = self.meta.get(self.fanart_main) or self.meta.get(self.fanart_backup) or ''
-		return self.fanart
+		return self.meta.get('custom_fanart') or self.meta.get(self.fanart_main) or self.meta.get(self.fanart_backup) or ''
+
+	def original_clearlogo(self):
+		return self.meta.get('custom_clearlogo') or self.meta.get(self.clearlogo_main) or self.meta.get(self.clearlogo_backup) or ''
 
 	def monitor(self):
-		progress_bar = self.getControl(5000)
-		if self.function == 'next_ep':
-			total_time = self.player.getTotalTime()
-			total_remaining = total_time - self.player.getTime()
-			while self.player.isPlaying():
+		total_time = self.player.getTotalTime()
+		while self.player.isPlaying():
+			remaining_time = round(total_time - self.player.getTime())
+			if self.closed: break
+			elif self.play_type == 'autoplay_nextep' and self.selected == 'pause' and remaining_time <= pause_time_before_end:
+				self.player.pause()
+				self.sleep(500)
+				break
+			self.sleep(1000)
+		if self.selected == 'pause':
+			start_time = time.time()
+			end_time = start_time + hold_pause_time
+			current_time = start_time
+			while current_time <= end_time and self.selected == 'pause':
 				try:
-					if self.closed: break
-					current_time = self.player.getTime()
-					remaining = round(total_time - current_time)
-					current_point = (remaining / float(total_remaining)) * 100
-					progress_bar.setPercent(current_point)
+					current_time = time.time()
+					pause_timer = time.strftime('%M:%S', time.gmtime(max(end_time - current_time, 0)))
+					self.setProperty('pause_timer', pause_timer)
 					self.sleep(1000)
-				except: pass
-		else:
-			for current_point in range(100, 0, -5):
-				try:
-					if self.closed: break
-					if current_point == 0: break
-					progress_bar.setPercent(current_point)
-					self.sleep(1000)
-				except: pass
+				except: break
+			if self.selected != 'cancel': self.player.pause()
 		self.close()

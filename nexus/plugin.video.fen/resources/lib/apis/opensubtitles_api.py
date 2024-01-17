@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
-import json
 import shutil
+from zipfile import ZipFile
 from datetime import timedelta
-from urllib.parse import quote
 from caches.main_cache import main_cache
-from modules.requests_utils import make_requests
-from modules.kodi_utils import notification, sleep, delete_file, rename_file
-from modules.zfile import ZipFile
+from modules.kodi_utils import requests, json, notification, sleep, delete_file, rename_file, quote
 # from modules.kodi_utils import logger
 
-base_url = 'https://rest.opensubtitles.org/search'
 user_agent = 'Fen v1.0'
-requests = make_requests()
 
 class OpenSubtitlesAPI:
 	def __init__(self):
@@ -22,10 +17,8 @@ class OpenSubtitlesAPI:
 		if season: cache_name += '_%s_%s' % (season, episode)
 		cache = main_cache.get(cache_name)
 		if cache: return cache
-		url = '/imdbid-%s/query-%s' % (imdb_id, quote(query))
-		if season: url += '/season-%d/episode-%d' % (season, episode)
-		url += '/sublanguageid-%s' % language
-		url = base_url + url
+		url = 'https://rest.opensubtitles.org/search/imdbid-%s/query-%s%s/sublanguageid-%s' \
+				% (imdb_id, quote(query), '/season-%d/episode-%d' % (season, episode) if season else '', language)
 		response = self._get(url, retry=True)
 		response = json.loads(response.text)
 		main_cache.set(cache_name, response, expiration=timedelta(hours=24))
